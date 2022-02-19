@@ -35,18 +35,6 @@ services:
       - django_admin
     restart: unless-stopped
 
-  server:
-    image: server
-    container_name: server
-    build:
-      context: ./dev
-    volumes:
-      - static_data:/vol/static
-      - static_media:/vol/media
-    restart: unless-stopped
-    depends_on:
-      - django_admin
-
 volumes:
 #  databases:
   static_media:
