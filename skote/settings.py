@@ -53,12 +53,9 @@ INSTALLED_APPS = [
     'blog',
     'pages',
     'components',
-<<<<<<< HEAD
     'display',
-=======
     'authentication',
     # 'clinic_mgt'
->>>>>>> sarah
     # Third Party App
     'crispy_forms',
     'django.contrib.sites',
