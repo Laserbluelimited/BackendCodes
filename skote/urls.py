@@ -12,8 +12,11 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    #display
+    path('', include("display.urls")),
+
     # Dashboards View
-    path('',views.DashboardView.as_view(),name='dashboard'),
+    path('dashboard_default',views.DashboardView.as_view(),name='dashboard'),
     path('dashboard_saas',views.SaasView.as_view(),name='dashboard_saas'),
     path('dashboard_crypto',views.CryptoView.as_view(),name='dashboard_crypto'),
     path('dashboard_blog',views.BlogView.as_view(),name='dashboard_blog'),

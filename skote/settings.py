@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'blog',
     'pages',
     'components',
+    'display',
     # Third Party App
     'crispy_forms',
     'django.contrib.sites',
