@@ -53,7 +53,12 @@ INSTALLED_APPS = [
     'blog',
     'pages',
     'components',
+<<<<<<< HEAD
     'display',
+=======
+    'authentication',
+    # 'clinic_mgt'
+>>>>>>> sarah
     # Third Party App
     'crispy_forms',
     'django.contrib.sites',
@@ -64,6 +69,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
 ]
+
+AUTH_USER_MODEL = 'authentication.User'
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -175,6 +183,7 @@ AUTHENTICATION_BACKENDS = [
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
+
 # Provider specific settings
 
 SOCIALACCOUNT_PROVIDERS = {
