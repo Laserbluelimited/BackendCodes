@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     'components',
     'display',
     'authentication',
-    # 'clinic_mgt'
+    'clinic_mgt',
+    'portal',
     # Third Party App
     'crispy_forms',
     'django.contrib.sites',
@@ -213,7 +214,7 @@ ACCOUNT_FORMS = {
 LOGIN_REDIRECT_URL = '/'    
 LOGOUT_REDIRECT_URL = '/'
 # login url
-LOGIN_URL = 'account_login'
+LOGIN_URL = 'auth/login'
 SITE_ID = 2
 
 # ACCOUNT_SIGNUP_REDIRECT_URL = "account_logout"

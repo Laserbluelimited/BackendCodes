@@ -1,5 +1,6 @@
 from lib2to3.pytree import Base
 from django.contrib.auth.base_user import BaseUserManager
+from django.db.models import Manager
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password, **kwargs):

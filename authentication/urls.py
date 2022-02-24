@@ -7,13 +7,15 @@ from django.views.generic import TemplateView
 from .views import MyPasswordSetView ,MyPasswordChangeView
 
 
-
+app_name = 'authentication'
 
 urlpatterns = [
     # Authentication
     #Viewscreen 1
     path('login',views.AuthLoginView.as_view(),name ='authlogin'),
-    path('register',views.AuthRegisterView.as_view(),name ='authregister'),
+    path('logout/', views.AuthLogoutView.as_view(), name='authlogout'),
+    path('clinic/register',views.AuthClinicRegistration.as_view(),name ='clinicregister'),
+    path('doc-register', views.DoctorRegistrationView.as_view(), name='authdocregister'),
     path('lock-screen',views.AuthLockScreenView.as_view(),name ='authlockscreen'),
     path('authrecoverpw',views.AuthRecoverpwView.as_view(),name ='authrecoverpw'),
     path('change-password',views.AuthChangePasswordView.as_view(),name ='passwordchange'),
@@ -21,7 +23,7 @@ urlpatterns = [
     path('email-verificaton',views.AuthEmailVerificationView.as_view(),name ='emailverificaton'),
 
     #allauth
-    path('logout/',TemplateView.as_view(template_name="account/logout-success.html"),name ='pages-logout'),
+    # path('logout/',TemplateView.as_view(template_name="account/logout-success.html"),name ='pages-logout'),
     path('lockscreen/',TemplateView.as_view(template_name="account/lock-screen.html"),name ='pages-lockscreen'),
     #Custum change password done page redirect
     path('accounts/password/change/', login_required(MyPasswordChangeView.as_view()), name="account_change_password"),

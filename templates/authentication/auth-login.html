@@ -42,17 +42,18 @@
                                 </a>
                             </div>
                             <div class="p-2">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" method="post" action="{%url 'authentication:authlogin'%}">
+                                    {% csrf_token %}
     
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Username</label>
-                                        <input type="text" class="form-control" id="username" placeholder="Enter username">
+                                        <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
                                     </div>
             
                                     <div class="mb-3">
                                         <label class="form-label">Password</label>
                                         <div class="input-group auth-pass-inputgroup">
-                                            <input type="password" class="form-control" placeholder="Enter password" aria-label="Password" aria-describedby="password-addon">
+                                            <input type="password" class="form-control" placeholder="Enter password" aria-label="Password" name="password" aria-describedby="password-addon">
                                         </div>
                                     </div>
 
