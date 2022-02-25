@@ -16,7 +16,7 @@ urlpatterns = [
     #display
     path('', include("display.urls")),
     # path('clinic', include("clinic_mgt.urls")),
-    path('portal', include("portal.urls")),
+    path('portal/', include("portal.urls")),
 
     # Dashboards View
     path('dashboard_default',views.DashboardView.as_view(),name='dashboard'),
