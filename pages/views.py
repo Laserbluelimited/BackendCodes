@@ -52,52 +52,52 @@ class ErrorPageExtraView(LoginRequiredMixin,View):
 # Authentication
 class AuthLoginView(LoginRequiredMixin,View):
     def get(self , request):    
-        return render (request,'authentication/auth-login.html')
+        return render (request,'authentication-copy/auth-login.html')
 class AuthRegisterView(LoginRequiredMixin,View):
     def get(self , request):    
-        return render (request,'authentication/auth-register.html')
+        return render (request,'authentication-copy/auth-register.html')
 class AuthRecoverpwView(LoginRequiredMixin,View):
     def get(self , request):    
-        return render (request,'authentication/auth-recoverpw.html')
+        return render (request,'authentication-copy/auth-recoverpw.html')
 class AuthLockScreenView(LoginRequiredMixin,View):
     def get(self , request):    
-        return render (request,'authentication/auth-lock-screen.html')
+        return render (request,'authentication-copy/auth-lock-screen.html')
 class AuthChangePasswordView(LoginRequiredMixin,View):
     def get(self , request):    
-        return render (request,'authentication/auth-password-change.html')
+        return render (request,'authentication-copy/auth-password-change.html')
 class AuthConfirmMailView(LoginRequiredMixin,View):
     def get(self , request):    
-        return render (request,'authentication/auth-confirm-mail.html')
+        return render (request,'authentication-copy/auth-confirm-mail.html')
 class AuthEmailVerificationView(LoginRequiredMixin,View):
     def get(self , request):    
-        return render (request,'authentication/auth-email-verification.html') 
+        return render (request,'authentication-copy/auth-email-verification.html') 
 class AuthTwoStepVerificationView(LoginRequiredMixin,View):
     def get(self , request):    
-        return render (request,'authentication/auth-two-step-verification.html')  
+        return render (request,'authentication-copy/auth-two-step-verification.html')  
 
 
 #Viewscreen 2
 class AuthLogin2View(LoginRequiredMixin,View):
     def get(self , request):    
-        return render (request,'authentication/auth-login-2.html')
+        return render (request,'authentication-copy/auth-login-2.html')
 class AuthRegister2View(LoginRequiredMixin,View):
     def get(self , request):    
-        return render (request,'authentication/auth-register-2.html')
+        return render (request,'authentication-copy/auth-register-2.html')
 class AuthRecoverpw2View(LoginRequiredMixin,View):
     def get(self , request):    
-        return render (request,'authentication/auth-recoverpw-2.html')
+        return render (request,'authentication-copy/auth-recoverpw-2.html')
 class AuthLockScreen2View(LoginRequiredMixin,View):
     def get(self , request):    
-        return render (request,'authentication/auth-lock-screen-2.html')
+        return render (request,'authentication-copy/auth-lock-screen-2.html')
 class AuthChangePassword2View(LoginRequiredMixin,View):
     def get(self , request):    
-        return render (request,'authentication/auth-password-change-2.html')
+        return render (request,'authentication-copy/auth-password-change-2.html')
 class AuthConfirmMail2View(LoginRequiredMixin,View):
     def get(self , request):    
-        return render (request,'authentication/auth-confirm-mail-2.html')
+        return render (request,'authentication-copy/auth-confirm-mail-2.html')
 class AuthEmailVerification2View(LoginRequiredMixin,View):
     def get(self , request):    
-        return render (request,'authentication/auth-email-verification-2.html')   
+        return render (request,'authentication-copy/auth-email-verification-2.html')   
 class AuthTwoStepVerification2View(LoginRequiredMixin,View):
     def get(self , request):    
-        return render (request,'authentication/auth-two-step-verification-2.html')  
+        return render (request,'authentication-copy/auth-two-step-verification-2.html')  

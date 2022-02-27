@@ -1,3 +1,4 @@
+from enum import unique
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from .managers import UserManager
@@ -27,23 +28,23 @@ def phone_id_increment():
 class User(AbstractUser):
     username = models.CharField('Username', unique=True, max_length=20)
     email = models.EmailField("email address", unique=True)
+    first_name = models.CharField('First Name', max_length=20)
+    last_name = models.CharField('Last Name', max_length=20)
 
     objects = UserManager()
 
     def __str__(self):
         return self.username
 
-class Contact(models.Model):
+# class Contact(models.Model):
 
-    id = models.IntegerField('contact_id', unique=True, primary_key=True, default=1110000)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    street = models.CharField('street', max_length=50)
-    address_line1 = models.CharField('Address_Line_1', max_length=100)
-    address_line2 = models.CharField('Address line 2', max_length=100)
-    postal_code = models.CharField('Postal_code', max_length=10)
+#     id = models.IntegerField('contact_id', unique=True, primary_key=True, default=1110000)
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     email = models.EmailField('email')
+#     fb
 
-    def __str__(self):
-        return self.user.email
+#     def __str__(self):
+#         return self.user.email
 
 class Phone(models.Model):
     id = models.IntegerField('phone_id', unique=True, primary_key=True, default=phone_id_increment)

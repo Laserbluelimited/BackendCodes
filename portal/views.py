@@ -9,7 +9,7 @@ class AdminDashboardPageView(LoginRequiredMixin,PermissionRequiredMixin, View):
     login_url = '/auth/login'
     redirect_field_name = 'redirect_to'
     def get(self, request):
-        return render(request, 'dashboard/dashboard-blog.html')
+        return render(request, 'dashboard-actual/dashboard.html')
 
 # class ClinicDashboardPageView(LoginRequiredMixin,PermissionRequiredMixin, View):
 #     permission_required = ('clinic_mgt.can_verify_doctors')

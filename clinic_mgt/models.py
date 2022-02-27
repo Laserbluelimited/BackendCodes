@@ -1,7 +1,8 @@
 from functools import partial
+from operator import mod
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from authentication.models import User,Contact
+from authentication.models import User
 # Create your models here.
 
 
@@ -50,9 +51,8 @@ class Clinic(models.Model):
     id = models.IntegerField('clinic_id', primary_key=True, unique=True)
     name = models.CharField('clinic_name', max_length=100)
     user = models.OneToOneField('authentication.User', on_delete=models.CASCADE)
-    verified = models.BooleanField('verified', default=False)
-    available_to_work = models.BooleanField('available_to_work', default=False)
-    contact = models.ForeignKey('authentication.Contact', on_delete=models.CASCADE)
+    verified = models.BooleanField('verified', default=True)
+    available_to_work = models.BooleanField('available_to_work', default=True)
 
     class Meta:
         permissions = [
@@ -79,14 +79,11 @@ class Clinic(models.Model):
 
 class Doctor(models.Model):
     db_table = 'doctors'
-    first_name = models.CharField('first_name', max_length=20)
-    last_name = models.CharField('last_name', max_length=20)
     id = models.IntegerField('doctor_id', primary_key=True, unique=True)
-    contact = models.OneToOneField('authentication.Contact', on_delete=models.CASCADE)
     user = models.OneToOneField('authentication.User', on_delete=models.CASCADE)
     clinic = models.ForeignKey('Clinic', on_delete=models.CASCADE)
-    verified = models.BooleanField('verified', default=False)
-    available_to_work = models.BooleanField('available_to_work', default=False)
+    verified = models.BooleanField('verified', default=True)
+    available_to_work = models.BooleanField('available_to_work', default=True)
 
 
     def __str__(self):
@@ -111,10 +108,13 @@ class ClinicLocation(models.Model):
     id = models.IntegerField('clinic_location_id', primary_key=True, unique=True)
     clinic = models.OneToOneField('Clinic', on_delete=models.CASCADE)
     postal_code = models.CharField('postal_code', max_length=10)
+    number_street = models.CharField('num_street', max_length=30)
+    locality = models.CharField('locality', max_length=30)
+    post_town = models.CharField('post_town', max_length=30)
 
 
     def __str__(self):
-        return self.clinic.street
+        return self.locality
     
 
 
