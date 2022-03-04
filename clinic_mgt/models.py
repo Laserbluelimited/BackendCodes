@@ -1,8 +1,8 @@
-from functools import partial
 from operator import mod
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from authentication.models import User
+import slugify
+import datetime
 # Create your models here.
 
 
@@ -87,7 +87,7 @@ class Doctor(models.Model):
 
 
     def __str__(self):
-        return 'Dr. ' + self.user.first_name
+        return 'Dr. ' + self.user.first_name + ' ' + self.user.last_name
 
     def verify(self):
         self.verified = True
@@ -107,17 +107,25 @@ class ClinicLocation(models.Model):
     db_table = 'clinic_locations'
     id = models.IntegerField('clinic_location_id', primary_key=True, unique=True)
     clinic = models.OneToOneField('Clinic', on_delete=models.CASCADE)
-    postal_code = models.CharField('postal_code', max_length=10)
-    number_street = models.CharField('num_street', max_length=30)
-    locality = models.CharField('locality', max_length=30)
-    post_town = models.CharField('post_town', max_length=30)
+    postal_code = models.CharField('postal_code', max_length=10,)
+    address = models.CharField('postal_code', max_length=100,)
+    long = models.DecimalField('longitude', max_digits=9, decimal_places=6, null=True)
+    lat = models.DecimalField('latitude', max_digits=9, decimal_places=6, null=True)
 
 
     def __str__(self):
-        return self.locality
+        return self.address
+
+class AppointmentDates(models.Model):
+    db_table = 'appointment_dates'
+    id = models.IntegerField('appointment_date_id', primary_key=True, unique=True)
+    start_time = models.DateTimeField('start_time')
+    end_time = models.DateTimeField('end_time')
+    clinic = models.OneToOneField('Clinic', on_delete=models.CASCADE, unique=False)
+    doctor = models.OneToOneField('Doctor', on_delete=models.CASCADE, unique=False)
     
-
-
+    def __str__(self):
+        return "Appointment start time: " +self.start_time
 
 # what is want to do:
 # 1. create forms

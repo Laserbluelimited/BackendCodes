@@ -1,0 +1,66 @@
+{% extends 'partials-actual/base.html' %}
+{% load static %}
+
+{% block contents %}
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <h4 class="card-title">Doctor Schedule Registration</h4>
+                                        <p class="card-title-desc">This is the doctor schedule form for {{clinic.name}} clinic</p>
+                                        <form method="post" action="{%url 'portal:doc-sche-reg' clinic.id%}">
+                                        {%csrf_token%}
+                                        <div class="mb-3 row">
+                                            {%for error in form.start_time.errors%}
+                                            <label style="color: red;">{{error}}</label>
+                                            {%endfor%}<br>
+
+                                            <label for="example-datetime-local-input" class="col-md-2 col-form-label">Start Time</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" name="start_time" type="datetime-local" value="2019-08-19T13:45:00"
+                                                    id="example-datetime-local-input">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            {%for error in form.end_time.errors%}
+                                            <label style="color: red;">{{error}}</label>
+                                            {%endfor%}<br>
+
+                                            <label for="example-date-input" class="col-md-2 col-form-label">End Time</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" name="end_time" type="datetime-local" value="2019-08-19"
+                                                    id="example-date-input">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            {%for error in form.doctor.errors%}
+                                            <label style="color: red;">{{error}}</label>
+                                            {%endfor%}<br>
+
+                                            <label class="col-md-2 col-form-label">Doctor</label>
+                                            <div class="col-md-10">
+                                                <select class="form-select" name="doctor">
+                                                    <option>Select</option>
+                                                    {%for choice in form.doctor.field.choices%}
+                                                    <option value="{{choice.0}}">DR. {{choice.1}}</option>
+                                                    {%endfor%}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-wrap gap-2">
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light">Save Changes</button>
+                                            <input type="reset" class="btn btn-secondary waves-effect waves-light" value="Cancel">
+                                        </div>
+                                    </form>
+
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                        <!-- end row -->
+                        <!-- end row -->
+                        <!-- end row -->
+{% endblock %}
