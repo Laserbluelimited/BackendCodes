@@ -33,7 +33,32 @@
           </ul>
         </li>
 
-        <li class="menu-title" key="t-apps">Apps</li>
+        <li class="menu-title" key="t-apps">Schedules</li>
+        <li>
+          <a href="javascript: void(0);" class="has-arrow-waves-effect">
+            <i class="bx bx-home-circle"></i
+            ><span class="badge rounded-pill bg-info float-end">04</span>
+            <span key="t-dashboards">Doctor Schedules</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="true">
+            {%for clinic in clinics%}
+            <li><a href="javascript: void(0); " class="has-arrow" key="t-vertical">{{clinic.name}}</a>
+            <ul class="sub-menu" aria-expanded="true">
+              <li>
+                <a href="{% url 'portal:doc-sche-reg' clinic.id %}" key="t-light-sidebar">Register Schedule</a  >
+              </li>
+              <li>
+                <a href="{% url 'portal:doc-sche-cal' clinic.id%}" key="t-compact-sidebar">View Calendar</a>
+              </li>
+              <li>
+                <a href="{% url 'portal:doc-sche-tab' clinic.id%}" key="t-compact-sidebar">View Schedules</a>
+              </li>
+              </ul>
+              </li>
+              {%endfor%}
+            </ul>
+        </li>
+
 
         
 
