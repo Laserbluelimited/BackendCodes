@@ -75,8 +75,8 @@
                                                         <select class="form-control select2" name="clinic">
                                                             <option>Select</option>
                                                             
-                                                            {%for clinic in clinics%}
-                                                            <option value="{{clinic.name}}">{{clinic.name}}</option>
+                                                            {%for choice in form.clinic.field.choices%}
+                                                            <option value="{{choice.0}}">{{choice.1}}</option>
                                                             {%endfor%}
                                                         </select>
                                                     </div>

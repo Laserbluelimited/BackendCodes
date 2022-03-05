@@ -1,8 +1,6 @@
 from operator import mod
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-import slugify
-import datetime
 # Create your models here.
 
 

@@ -1,16 +1,14 @@
 from email import message
 from multiprocessing import context
 from pydoc import doc
-from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from authentication.models import User
 from .models import Clinic, ClinicLocation, Doctor, AppointmentDates
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.views.generic.base import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ClinicRegistrationForm, DoctorRegistrationForm, DoctorScheduleForm
 from .managers import AddressRequest
 from authentication.forms import LoginForm
-import requests
 
 
 def id_increment(model, initial):
@@ -26,17 +24,16 @@ def id_increment(model, initial):
 class ClinicListView(LoginRequiredMixin,View):
     login_url = '/auth/login'
     redirect_field_name = 'redirect_to'
+    
     def get(self, request):
-        clinics=Clinic.objects.all()
-        return render(request, 'clinic/clinic-list.html', context={'clinic_list':clinics})
+        return render(request, 'clinic/clinic-list.html', )
 
 class DoctorListView(LoginRequiredMixin, View):
     login_url = '/auth/login'
     redirect_field_name = 'redirect_to'
     def get(self, request):
-        clinics=Clinic.objects.all()
         doctors = Doctor.objects.all()
-        return render(request, 'clinic/doctor-list.html', context={'doctor_list':doctors, 'clinics':clinics})
+        return render(request, 'clinic/doctor-list.html', context={'doctor_list':doctors})
 
 
 
@@ -49,15 +46,10 @@ class ClinicRegistration(LoginRequiredMixin, View):
 
     def get(self, request):
         form = self.form_class()
-        message=''
-        clinics = Clinic.objects.all()
-
-        return render (request,self.template_name, context={'form':form, 'message':message, 'clinics':clinics})
+        return render (request,self.template_name, context={'form':form})
 
     def post(self, request):
         form = self.form_class(request.POST)
-        message=''
-        clinics = Clinic.objects.all()
 
         if form.is_valid():
             username = form.cleaned_data['username']
@@ -83,7 +75,7 @@ class ClinicRegistration(LoginRequiredMixin, View):
 
             return redirect('portal:clinic-list')
             
-        return render(request, self.template_name, context={'form':form, 'message':message, 'clinics':clinics})
+        return render(request, self.template_name, context={'form':form})
 
 
 
@@ -96,14 +88,25 @@ class DoctorRegistration(LoginRequiredMixin, View):
 
     def get(self, request):
         form = self.form_class()
-        message=''
         clinics = Clinic.objects.all()
-        return render (request,self.template_name, context={'form':form, 'message':message, 'clinics':clinics})
+        CHOICES = []
+        for i in clinics:
+            clinic_obj = (i.name, i.name)
+            CHOICES.append(clinic_obj)
+
+        form.fields['clinic'].choices = CHOICES
+        
+        return render (request,self.template_name, context={'form':form})
 
     def post(self, request):
         form = self.form_class(request.POST)
-        message=''
         clinics = Clinic.objects.all()
+
+        CHOICES = []
+        for i in clinics:
+            clinic_obj = (i.name, i.name)
+            CHOICES.append(clinic_obj)
+        form.fields['clinic'].choices = CHOICES
 
         if form.is_valid():
             username = form.cleaned_data['username']
@@ -123,7 +126,7 @@ class DoctorRegistration(LoginRequiredMixin, View):
 
             return redirect('portal:doctor-list')
             
-        return render(request, self.template_name, context={'form':form, 'message':message, 'clinics':clinics})
+        return render(request, self.template_name, context={'form':form})
 
 
 class DoctorSchedules(LoginRequiredMixin, View):
@@ -132,8 +135,7 @@ class DoctorSchedules(LoginRequiredMixin, View):
     template_name ='calendar-actual.html'    
     def get(self, request, url_para):
         clinic = get_object_or_404(Clinic, id=url_para)
-        clinics = Clinic.objects.all()
-        return render(request, self.template_name, context={'url_para':url_para, 'clinics':clinics})
+        return render(request, self.template_name, context={'url_para':url_para,'clinic':clinic})
 
 class ViewSchedule(LoginRequiredMixin, View):
     login_url = '/auth/login'
@@ -141,9 +143,8 @@ class ViewSchedule(LoginRequiredMixin, View):
     template_name ='schedule/view-schedule.html' 
     def get(self, request, url_para):
         clinic = get_object_or_404(Clinic, id=url_para)
-        clinics = Clinic.objects.all()
         dates = AppointmentDates.objects.filter(clinic=clinic)
-        return render(request, self.template_name, context={'url_para':url_para, 'clinics':clinics, 'dates':dates})
+        return render(request, self.template_name, context={'url_para':url_para,  'dates':dates})
 
 class DoctorSchedulesRegistration(LoginRequiredMixin, View):
     login_url = '/auth/login'
@@ -165,11 +166,9 @@ class DoctorSchedulesRegistration(LoginRequiredMixin, View):
         clinics = Clinic.objects.all()
         doctors = Doctor.objects.filter(clinic=clinic)
 
-        return render(request, self.template_name, context={'url_para':url_para, 'clinics':clinics, 'clinic':clinic, 'doctors':doctors, 'form':form})
+        return render(request, self.template_name, context={'url_para':url_para,  'clinic':clinic, 'doctors':doctors, 'form':form})
         
     def post(self, request, url_para):
-
-
         form = self.form_class(request.POST)
         clinic = get_object_or_404(Clinic, id=url_para)
         
@@ -196,4 +195,4 @@ class DoctorSchedulesRegistration(LoginRequiredMixin, View):
 
             date_obj.save()
             return redirect('portal:doc-sche-tab', url_para=clinic.id)
-        return render(request, self.template_name, context={'url_para':url_para, 'clinics':clinics, 'clinic':clinic, 'doctors':doctors, 'form':form})
+        return render(request, self.template_name, context={'url_para':url_para, 'clinic':clinic, 'doctors':doctors, 'form':form})

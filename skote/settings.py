@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'authentication',
     'clinic_mgt',
     'portal',
+    'prod_mgt',
     # Third Party App
     'crispy_forms',
     'django.contrib.sites',
@@ -97,7 +98,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-            ],
+                'portal.context_processors.portal_context',            ],
         },
     },
 ]

@@ -64,7 +64,21 @@
 
 
 
-        <li class="menu-title" key="t-pages">Pages</li>
+        <li class="menu-title" key="t-pages">Products</li>
+        <li>
+          <a href="javascript: void(0);" class="waves-effect">
+            <i class="bx bx-home-circle"></i
+            ><span class="badge rounded-pill bg-info float-end">04</span>
+            <span key="t-dashboards">Products</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            {%for prod in products%}
+            <li><a href="{% url 'portal:clinic-registration' %}" key="t-default">{{prod.name_of_prod}}</a></li>
+            {%endfor%}
+          </ul>
+        </li>
+
+
 
 
         <li class="menu-title" key="t-components">Components</li>
