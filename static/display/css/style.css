@@ -16,6 +16,8 @@ nav{
 
 * {
     box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
   }
   
   /* Style the search field */
