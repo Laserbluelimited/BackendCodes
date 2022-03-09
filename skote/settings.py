@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'clinic_mgt',
     'portal',
     'prod_mgt',
+    'schedules',
     # Third Party App
     'crispy_forms',
     'django.contrib.sites',
@@ -67,6 +68,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
+    'import_export',
 ]
 
 AUTH_USER_MODEL = 'authentication.User'
@@ -226,3 +228,6 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
 GEOAPIFY_API_KEY = "d4641924f0854b1bbd807ee57d602c8d"
+
+DEFAULT_PASSWORD = "drivermedicals"
+

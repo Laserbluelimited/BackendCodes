@@ -50,6 +50,7 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div id="calendar"></div>
+
                                             </div>
                                         </div>
                                     </div> <!-- end col -->
@@ -115,16 +116,131 @@
                             </div>
                         </div>
 {% endblock %}
+
+
+
+
+
 {% block extra_javascript %}
     <!-- plugin js -->
-    <script src="{% static 'libs/moment/min/moment.min.js' %}"></script>
     <script src="{% static 'libs/jquery-ui-dist/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'libs/moment/min/moment.min.js' %}"></script>
+
     <script src="{% static 'libs/@fullcalendar/core/main.min.js' %}"></script>
     <script src="{% static 'libs/@fullcalendar/bootstrap/main.min.js' %}"></script>
     <script src="{% static 'libs/@fullcalendar/daygrid/main.min.js' %}"></script>
     <script src="{% static 'libs/@fullcalendar/timegrid/main.min.js' %}"></script>
     <script src="{% static 'libs/@fullcalendar/interaction/main.min.js' %}"></script>
-    
     <!-- Calendar init -->
     <script src="{% static 'js/pages/calendars-full.init.js' %}"></script>
-{% endblock %}
+
+<script>
+
+
+$(document).ready(function () {
+    var calendar = $('#calendar').fullCalendar({
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        events: '/all_events',
+        selectable: true,
+        selectHelper: true,
+        editable: true,
+        eventLimit: true,
+        select: function (start, end, allDay) {
+            var title = prompt("Enter Event Title");
+            if (title) {
+                var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
+                var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
+                $.ajax({
+                    type: "GET",
+                    url: '/add_event',
+                    data: {'title': title, 'start': start, 'end': end},
+                    dataType: "json",
+                    success: function (data) {
+                        calendar.fullCalendar('refetchEvents');
+                        alert("Added Successfully");
+                    },
+                    error: function (data) {
+                        alert('There is a problem!!!');
+                    }
+                });
+            }
+        },
+        eventResize: function (event) {
+            var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+            var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+            var title = event.title;
+            var id = event.id;
+            $.ajax({
+                type: "GET",
+                url: '/update',
+                data: {'title': title, 'start': start, 'end': end, 'id': id},
+                dataType: "json",
+                success: function (data) {
+                    calendar.fullCalendar('refetchEvents');
+                    alert('Event Update');
+                },
+                error: function (data) {
+                    alert('There is a problem!!!');
+                }
+            });
+        },
+
+        eventDrop: function (event) {
+            var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+            var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+            var title = event.title;
+            var id = event.id;
+            $.ajax({
+                type: "GET",
+                url: '/update',
+                data: {'title': title, 'start': start, 'end': end, 'id': id},
+                dataType: "json",
+                success: function (data) {
+                    calendar.fullCalendar('refetchEvents');
+                    alert('Event Update');
+                },
+                error: function (data) {
+                    alert('There is a problem!!!');
+                }
+            });
+        },
+
+        eventClick: function (event) {
+            if (confirm("Are you sure you want to remove it?")) {
+                var id = event.id;
+                $.ajax({
+                    type: "GET",
+                    url: '/remove',
+                    data: {'id': id},
+                    dataType: "json",
+                    success: function (data) {
+                        calendar.fullCalendar('refetchEvents');
+                        alert('Event Removed');
+                    },
+                    error: function (data) {
+                        alert('There is a problem!!!');
+                    }
+                });
+            }
+        },
+
+    });
+
+    $('#calendar').fullCalendar({
+            defaultDate: '2022-03-19',
+            editable: true,
+            eventLimit: true, // allow "more" link when too many events
+            events: [
+            {title:"Repeating Event",start:'2022-03-19',end:'2022-03-20'},
+
+            ]
+        });
+
+});
+
+</script>
+    {% endblock %}

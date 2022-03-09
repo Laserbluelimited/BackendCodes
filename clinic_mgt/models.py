@@ -1,51 +1,16 @@
 from operator import mod
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.template.defaultfilters import slugify
+
 # Create your models here.
 
 
-def id_increment(model, initial):
-    # model_class = eval(model)
-    last_value = model.objects.all().order_by('id').last()
-    if not last_value:
-        return initial
-    last_value_id = int(last_value.id)
-    new_value_id = last_value_id + 1
-    return last_value_id
-
-
-def clinic_id_increment():
-    # model_class = eval(model)
-    last_value = Clinic.objects.all().order_by('id').last()
-    if not last_value:
-        return 113000
-    last_value_id = int(last_value.id)
-    new_value_id = last_value_id + 1
-    return last_value_id
-
-def doctor_id_increment():
-    # model_class = eval(model)
-    last_value = Doctor.objects.all().order_by('id').last()
-    if not last_value:
-        return 114000
-    last_value_id = int(last_value.id)
-    new_value_id = last_value_id + 1
-    return last_value_id
-
-def cliniclocation_id_increment():
-    # model_class = eval(model)
-    last_value = ClinicLocation.objects.all().order_by('id').last()
-    if not last_value:
-        return 115000
-    last_value_id = int(last_value.id)
-    new_value_id = last_value_id + 1
-    return last_value_id
 
 
 
 
 class Clinic(models.Model):
-    db_table = 'clinics'
     id = models.IntegerField('clinic_id', primary_key=True, unique=True)
     name = models.CharField('clinic_name', max_length=100)
     user = models.OneToOneField('authentication.User', on_delete=models.CASCADE)
@@ -82,6 +47,12 @@ class Doctor(models.Model):
     clinic = models.ForeignKey('Clinic', on_delete=models.CASCADE)
     verified = models.BooleanField('verified', default=True)
     available_to_work = models.BooleanField('available_to_work', default=True)
+    slug = models.SlugField(max_length=50, help_text='Unique Value for product page URL, created from name.')
+
+
+ 
+
+
 
 
     def __str__(self):
@@ -109,6 +80,7 @@ class ClinicLocation(models.Model):
     address = models.CharField('postal_code', max_length=100,)
     long = models.DecimalField('longitude', max_digits=9, decimal_places=6, null=True)
     lat = models.DecimalField('latitude', max_digits=9, decimal_places=6, null=True)
+    city = models.CharField('city', max_length=100,)
 
 
     def __str__(self):

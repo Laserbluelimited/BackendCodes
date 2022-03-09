@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.views.generic.base import TemplateView
 from clinic_mgt.models import Clinic
 from prod_mgt.models import Product
+from clinic_mgt.managers import AddressRequest
 
 # Create your views here.
 
@@ -23,5 +24,11 @@ class AdminDashboardPageView(LoginRequiredMixin,PermissionRequiredMixin, View):
 class TestingView(View):
     def get(self, request):
         return render(request, 'clinic/testing.html')
+
+    def post(self, request):
+        address = request.form.get('address')
+        address_class = AddressRequest()
+        geodata = address_class.get_geodata(address)
+        
 
 

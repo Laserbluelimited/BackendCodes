@@ -1,9 +1,11 @@
 {%load static%}
 <link href="{% static 'css/testing.css' %}" rel="stylesheet" type="text/css" />
 
-
+<form method="post" action="{%url 'portal:testing'%}">
+    {%csrf_token%}
 <div class="autocomplete-container" id="autocomplete-container"></div>
-
+<button type="submit>">Submit</button>
+</form>
 
 {%block javascript%}
 <script src="{% static 'js/testing.js' %}"></script>    

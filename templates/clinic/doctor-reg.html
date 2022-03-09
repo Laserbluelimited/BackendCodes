@@ -35,27 +35,6 @@
                                                         <label for="productname">Last Name</label>
                                                         <input  name="last_name" type="text" class="form-control"  required>
                                                     </div>
-                                                    <div class="mb-3">
-                                                        {%for error in form.username.errors%}
-                                                        <label style="color: red;">{{error}}</label>
-                                                        {%endfor%}<br>
-                                                        <label for="manufacturername">Username</label>
-                                                        <input id="manufacturername" name="username" required type="text" class="form-control" placeholder="e.g. god_grace">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        {%for error in form.password.errors%}
-                                                        <label style="color: red;">{{error}}</label>
-                                                        {%endfor%}<br>
-                                                        <label for="manufacturerbrand">Password</label>
-                                                        <input id="manufacturerbrand" name="password" type="password" class="form-control" required>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        {%for error in form.password2.errors%}
-                                                        <label style="color: red;">{{error}}</label>
-                                                        {%endfor%}<br>
-                                                        <label for="manufacturerbrand">Password Again</label>
-                                                        <input  name="password2" type="password" class="form-control" required>
-                                                    </div>
                                                 </div>
         
                                                 <div class="col-sm-6">

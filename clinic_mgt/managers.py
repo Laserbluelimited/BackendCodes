@@ -23,7 +23,8 @@ class AddressRequest():
         data= response.json()
         longitude = data['features'][0]['properties']['lon']
         latitude = data['features'][0]['properties']['lat']
+        city = data['features'][0]['properties']['city']
 
-        geo_data = {'latitude':latitude, 'longitude':longitude}
+        geo_data = {'latitude':latitude, 'longitude':longitude, 'city':city}
         return geo_data
 
