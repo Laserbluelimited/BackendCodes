@@ -22,7 +22,6 @@ class AddProductView(LoginRequiredMixin, View):
             price = form.cleaned_data['price']
 
             product_obj = Product.objects.create(name_of_prod=name_of_prod, price=price)
-            product_obj.save()
 
             return redirect('portal:view-product')
         return render (request,self.template_name, context={'form':form})
