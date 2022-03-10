@@ -1,27 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./css/bootstrap.css">
-    <link rel="stylesheet" href="style.css">
-
-
-    <!doctype html>
-    <html lang="en">
-    
-    <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="description" content="">
-      <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-      <meta name="generator" content="Hugo 0.72.0">
-      <title>Carousel Template · Bootstrap</title>
-    
-      <link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/carousel/">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  {%extends 'display/base.html'%}
+  {%load static%}
+{% block extra_css %}
     
     
       <!-- Bootstrap core CSS -->
@@ -152,64 +131,10 @@
         }
       </style>
 
-
-</head>
-
-                   <header style="height: 50%;">
-                      <nav class="navbar navbar-expand-md fixed-top " style="height: 20%;">
-                      <div class="container-fluid" style="margin-left: 2rem;">
-                       <img src="./▶ Home - DRIVERS MEDICALS.UK - Google Chrome 1_26_2022 11_19_25 AM (2).png" alt="" class="img-fluid">
-                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-                         aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                             <span class="navbar-toggler-icon"></span>
-                                
-                              </button>
-                              <div class="collapse navbar-collapse" id="navbarCollapse" style="color: #0ac5a8;">
-                                <ul class="navbar-nav mr-auto mb-2 mb-md-0" style="margin-left: 6rem; justify-content: center; width: 70%; color: #0ac5a8;">
-                                  <li class="nav-item active">
-                                    <a class="nav-link" aria-current="page" href="medical.html">HOME</a>
-                                  </li>
-                                  <li class="nav-item active">
-                                      <a class="nav-link" aria-current="page" href="#">ABOUT US</a>
-                                    </li>
-                                    <div class="dropdown" style="background: transparent;">
-                                      <button class="btn btn-secondary btn-sm dropdown-toggle" type="link" id="dropdownMenuButtonSM" data-bs-toggle="dropdown" aria-expanded="false" style="margin-top: 0.4rem; background-color: transparent; border: none;">
-                                      <span style="color: #0ac5a8;"> SERVICES
-                                      </span>               
-                                    </button>
-                                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonSM">
-                                        <li><a class="dropdown-item" href="#">HGV Medical</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="#">PVC/ Bus Medical</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="#">Taxi Medical</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="#">Business Services</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="#">Other Medical</a></li>
-                                      </ul>
-                                    </div>
-                                    <li class="nav-item active">
-                                      <a class="nav-link" aria-current="page" href="location.html">LOCATION</a>
-                                    </li>
-                                    <li class="nav-item active">
-                                      <a class="nav-link" aria-current="page" href="#">CONTACT US</a>
-                                    </li>
-
-                                  
-                                </ul>
-                                <form class="d-flex">
-                                  <button class="btn btn-outline-success" type="submit" style="background-color: #0ac5a8; border-radius: 10px; margin-right: 0.8rem; color: #fff; border: none; ">BOOK NOW</button>
-                                  <button class="btn btn-outline-success" type="submit" style="border-radius: 9px; color: #0ac5a8; border: 1px #0ac5a8 solid; background-color: transparent; ">LOGIN</button>
-                                </form>
-                              </div>  
-                            </div>
-                          </nav>
-                        </header> 
+{%endblock%}
+{%block content%}
                         
-                        </html>
 
-                        <body>
                         
                           
                         <section class="py-5 text-center container-fluid" style="margin-top: 3rem; background-image: url(./hands-with-laptop-virtual-world-map\ \(1\).jpg); background-size: cover;">
@@ -218,7 +143,8 @@
                                 <h1 class="" style="font-weight:700 ; color: #0ac5a8;">About Us</h1>
                               <div style="display: flex; margin-left: 14rem;">
                                 <p class="lead text-muted" style="margin-right: 1rem;"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
-                                  <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/> <span style="color: black;">Home</span></p>
+                                  <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+                                   <span style="color: black;">Home</span></p>
                                   <p class="lead text-muted"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-record-circle-fill" viewBox="0 0 16 16">
                                     <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-8 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                                   </svg> <span style="color: black;">Pages</span></p>
@@ -375,72 +301,4 @@
 
                  </div>
 
-                 <div class="container-fluid" style="  background-color: rgba(31, 30, 30, 0.993) !important;    margin-top: 2rem; color:#fff ;">
-                  <footer class="py-2">
-                    <div class="row">
-                      <div class="col-2" style="margin-left: 2rem;">
-                        <h5><img src="./▶ Home - DRIVERS MEDICALS.UK - Google Chrome 1_26_2022 11_19_25 AM (2).png" alt=""></h5>
-                        <ul class="nav flex-column">
-                          <li class="nav-item mb-2">All driver medicals are completed by GMC registered doctors in accordancewith current DVLA Group 2 guidelines</li>
-                           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"></a></li>
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"></a></li> 
-                          <li class="nav-item mb-2" style="width: 100%;"><a href="#" class="nav-link p-0 text-muted">TERMS AND CONDITIONS`</a></li>
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">PRIVATE POLICY</a></li>
-                        </ul>
-                      </div>
-                 
-                      <div class="col-2" style="margin-left: 3rem; line-height: 2.3rem;">
-                        <h5>Menu</h5>
-                        <ul class="nav flex-column >
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About Us </a></li>
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Booking D4 Medicals</a></li>
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"> D4 Medicals</a></li>
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Location</a></li>
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">PCO/TAXI MEDICALS </a></li>
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"> Contact </a></li>
-              
-              
-              
-                        </ul>
-                      </div>
-                
-                      <div class="col-2" style="line-height: rem;">
-                        <h5>Contact Info</h5>
-                        <ul class="nav flex-column" style="line-height: 2rem;">
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Call us: 02039639083</a></li>
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Send us a message</a></li>
-                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Follow us</a></li>
-                          <li class="nav-item mb-2" style=""><a href="#" class="nav-link p-0 text-muted"></a> <a href="#" style="margin-right:1rem;"><img src="./facebook 1.png" alt=""></a>    <a href="#" style="margin-right: 1rem;"> <img src="./twitter 1.png" alt=""></a>    <a href="#"><img src="./instagram-sketched 1.png" alt=""></a>    </li>
-                         
-                        </ul>
-                      </div>
-                
-                      <div class="col-4 offset-1">
-                        <form>
-                          <h5>Subscribe to our newsletter</h5>
-                          <p>Monthly digest of whats new and exciting from us.</p>
-                          <div class="d-flex w-100 gap-3">
-                            <label for="newsletter1" class="visually-hidden">Email address</label>
-                            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                            <button class="btn btn-primary" type="button" style="background-color: #0ac5a8; border: none; ">Subscribe</button>
-                           
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                    <!-- <div class="d-flex justify-content-between py-4 my-4 border-top">
-                      <p>.</p>
-                      <ul class="list-unstyled d-flex">
-                        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
-                        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
-                        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
-                      </ul>
-                    </div> -->
-                  </footer>
-                </div>
-                
-                            <script src="./js/bootstrap.bundle.js"></script>
-                        </body>
-
-
-                        </html>
+{%endblock%}

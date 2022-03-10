@@ -7,3 +7,16 @@ from django.views.generic.base import TemplateView
 class HomePageView(View):
     def get(self, request):
         return render(request, 'display/index.html')
+
+
+class AboutPageView(View):
+    def get(self, request):
+        return render(request, 'display/about.html')
+
+class LocationPageView(View):
+    def get(self, request):
+        return render(request, 'display/location.html')
+
+class MedicalPageView(View):
+    def get(self, request):
+        return render(request, 'display/medical.html')

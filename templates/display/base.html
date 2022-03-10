@@ -8,7 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-{% block css %}
+    <link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/carousel/">
+    {% block css %}
     <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}">
     <link rel="stylesheet" href="{%static 'display/css/style.css'%}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -33,7 +34,7 @@
 
     {% block javascript %}
 <!-- JAVASCRIPT -->
-<script src="{% static 'bcss/bootstrap.bundle.js'%}"></script>
+<script src="{% static 'display/bcss/bootstrap.bundle.js'%}"></script>
 <script src="{% static 'display/js/script.js'%}"></script>
 {% block extra_javascript %}
 {% endblock extra_javascript %}

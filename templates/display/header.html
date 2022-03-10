@@ -8,8 +8,8 @@
     <div class="nav" id="nav">
       <div class="header-left">
           <ul class="left-links">
-              <li><a href="#home">Home</a></li>
-              <li><a href="#news">About Us</a></li>
+              <li><a href="{%url 'display:home-page'%}">Home</a></li>
+              <li><a href="{%url 'display:about-page'%}">About Us</a></li>
               <li class="left-links dropdown">
                 <a class="left-links dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Our Services</a>
                 <ul class="dropdown-menu">
@@ -20,7 +20,7 @@
                   <li><a class="dropdown-item" href="#">Other Medicals</a></li>
                 </ul>
               </li>
-              <li><a href="#news">Location</a></li>
+              <li><a href="{%url 'display:location-page'%}">Location</a></li>
               <li><a href="#news">Contact Us</a></li>
             </ul>
       </div>
