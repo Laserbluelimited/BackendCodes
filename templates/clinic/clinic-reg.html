@@ -4,6 +4,8 @@
 {% block extra_css %}
     <!-- select2 css -->
     <link href="{% static 'libs/select2/dist/css/select2.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/testing.css' %}" rel="stylesheet" type="text/css" />
+
 
     <!-- dropzone css -->
     <link href="{% static 'libs/dropzone/dist/min/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
@@ -22,46 +24,43 @@
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="mb-3">
+                                                        {%for error in form.name.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
                                                         <label for="productname">Clinic Name</label>
                                                         <input id="productname" name="name" type="text" class="form-control" placeholder="e.g. God's Grace Clinic">
                                                     </div>
                                                     <div class="mb-3">
+                                                        {%for error in form.email.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+
                                                         <label for="productname">Clinic Email</label>
-                                                        <input id="productname" name="email" type="text" class="form-control" >
+                                                        <input name="email" type="text" class="form-control" >
                                                     </div>
-                                                    <div class="mb-3">
-                                                        <label for="manufacturername">Username</label>
-                                                        <input id="manufacturername" name="username" type="text" class="form-control" placeholder="e.g. god_grace">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="manufacturerbrand">Password</label>
-                                                        <input id="manufacturerbrand" name="password" type="password" class="form-control" >
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="manufacturerbrand">Post Code</label>
-                                                        <input id="manufacturerbrand" name="postal_code" type="text" class="form-control" placeholder="e.g. BH1 1AA">
-                                                    </div>
+
                                                 </div>
         
                                                 <div class="col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label for="manufacturerbrand">Post Code</label>
-                                                        <input id="manufacturerbrand" name="postal_code" type="text" class="form-control" placeholder="e.g. BH1 1AA">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="manufacturername">Number and Street</label>
-                                                        <input id="manufacturerbrand" name="num_street" type="text" class="form-control" placeholder="e.g. 1 Chapel Hill">
-                                                    </div>
+
 
                                                     <div class="mb-3">
-                                                        <label for="manufacturername">Locality</label>
-                                                        <input id="manufacturerbrand" name="locality" type="text" class="form-control" placeholder="e.g. Heswall">
+                                                        {%for error in form.address.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+
+                                                        <label for="manufacturerbrand">Address</label>
+                                                        <div class="autocomplete-container" id="autocomplete-container"></div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {%for error in form.postal_code.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+
+                                                        <label for="manufacturerbrand">Postal Code</label>
+                                                        <input  name="postal_code" type="text" class="form-control" >
                                                     </div>
 
-                                                    <div class="mb-3">
-                                                        <label for="manufacturername">Post Town</label>
-                                                        <input id="manufacturerbrand" name="post_town" type="text" class="form-control" placeholder="e.g. BOURNEMOUTH">
-                                                    </div>
                                                     
                                                 </div>
                                             </div>
@@ -90,5 +89,10 @@
 
     <!-- init js -->
     <script src="{% static 'js/pages/ecommerce-select2.init.js' %}"></script>
+    <!--location js-->
+    <script src="{% static 'js/testing.js' %}"></script>    
+
 
 {% endblock %}
+
+

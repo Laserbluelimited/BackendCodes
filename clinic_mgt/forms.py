@@ -1,6 +1,8 @@
+from genericpath import exists
 from django.db import models
 from django import forms
 from .models import Clinic
+from authentication.models import User
 
 CHOICES = []
 clinics = Clinic.objects.all()
@@ -15,23 +17,33 @@ error_messages = {
 
 class ClinicRegistrationForm(forms.Form):
     #usermodel
-    username = forms.CharField(required=True, max_length=12)
-    password = forms.CharField(required=True, max_length=50)
     email = forms.EmailField(required=True)
     #cliniclocationmodel
-    num_street = forms.CharField(max_length=50)
-    locality = forms.CharField(max_length=50)
-    post_town = forms.CharField(max_length=20)
-    postal_code = forms.CharField(max_length=10)
+    address = forms.CharField(max_length=100, required=False)
+    postal_code = forms.CharField(max_length=10, required=True)
     # clinicmodel
     name = forms.CharField(max_length=50)
 
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError('Email already in use')
+        return email
+
 class DoctorRegistrationForm(forms.Form):
     #usermodel
-    username = forms.CharField(required=True, max_length=12, error_messages=error_messages)
-    first_name = forms.CharField(required=True, max_length=12, error_messages=error_messages)
-    last_name = forms.CharField(required=True, max_length=12, error_messages=error_messages)
-    password = forms.CharField(required=True, max_length=50, error_messages=error_messages)
+    first_name = forms.CharField(required=True, max_length=20, error_messages=error_messages)
+    last_name = forms.CharField(required=True, max_length=20, error_messages=error_messages)
     email = forms.EmailField(required=True, error_messages=error_messages)
+
     #doctormodel
-    # clinic = forms.ChoiceField(choices=CHOICES, required=True, error_messages=error_messages)
+    clinic = forms.ChoiceField(choices=CHOICES, required=True, error_messages=error_messages)
+
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError('Email already in use')
+        return email
+

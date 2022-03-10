@@ -1,53 +1,16 @@
-from functools import partial
 from operator import mod
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from authentication.models import User
+from django.template.defaultfilters import slugify
+
 # Create your models here.
 
 
-def id_increment(model, initial):
-    # model_class = eval(model)
-    last_value = model.objects.all().order_by('id').last()
-    if not last_value:
-        return initial
-    last_value_id = int(last_value.id)
-    new_value_id = last_value_id + 1
-    return last_value_id
-
-
-def clinic_id_increment():
-    # model_class = eval(model)
-    last_value = Clinic.objects.all().order_by('id').last()
-    if not last_value:
-        return 113000
-    last_value_id = int(last_value.id)
-    new_value_id = last_value_id + 1
-    return last_value_id
-
-def doctor_id_increment():
-    # model_class = eval(model)
-    last_value = Doctor.objects.all().order_by('id').last()
-    if not last_value:
-        return 114000
-    last_value_id = int(last_value.id)
-    new_value_id = last_value_id + 1
-    return last_value_id
-
-def cliniclocation_id_increment():
-    # model_class = eval(model)
-    last_value = ClinicLocation.objects.all().order_by('id').last()
-    if not last_value:
-        return 115000
-    last_value_id = int(last_value.id)
-    new_value_id = last_value_id + 1
-    return last_value_id
 
 
 
 
 class Clinic(models.Model):
-    db_table = 'clinics'
     id = models.IntegerField('clinic_id', primary_key=True, unique=True)
     name = models.CharField('clinic_name', max_length=100)
     user = models.OneToOneField('authentication.User', on_delete=models.CASCADE)
@@ -84,10 +47,16 @@ class Doctor(models.Model):
     clinic = models.ForeignKey('Clinic', on_delete=models.CASCADE)
     verified = models.BooleanField('verified', default=True)
     available_to_work = models.BooleanField('available_to_work', default=True)
+    slug = models.SlugField(max_length=50, help_text='Unique Value for product page URL, created from name.')
+
+
+ 
+
+
 
 
     def __str__(self):
-        return 'Dr. ' + self.user.first_name
+        return 'Dr. ' + self.user.first_name + ' ' + self.user.last_name
 
     def verify(self):
         self.verified = True
@@ -107,17 +76,26 @@ class ClinicLocation(models.Model):
     db_table = 'clinic_locations'
     id = models.IntegerField('clinic_location_id', primary_key=True, unique=True)
     clinic = models.OneToOneField('Clinic', on_delete=models.CASCADE)
-    postal_code = models.CharField('postal_code', max_length=10)
-    number_street = models.CharField('num_street', max_length=30)
-    locality = models.CharField('locality', max_length=30)
-    post_town = models.CharField('post_town', max_length=30)
+    postal_code = models.CharField('postal_code', max_length=10,)
+    address = models.CharField('postal_code', max_length=100,)
+    long = models.DecimalField('longitude', max_digits=9, decimal_places=6, null=True)
+    lat = models.DecimalField('latitude', max_digits=9, decimal_places=6, null=True)
+    city = models.CharField('city', max_length=100,)
 
 
     def __str__(self):
-        return self.locality
+        return self.address
+
+class AppointmentDates(models.Model):
+    db_table = 'appointment_dates'
+    id = models.IntegerField('appointment_date_id', primary_key=True, unique=True)
+    start_time = models.DateTimeField('start_time')
+    end_time = models.DateTimeField('end_time')
+    clinic = models.OneToOneField('Clinic', on_delete=models.CASCADE, unique=False)
+    doctor = models.OneToOneField('Doctor', on_delete=models.CASCADE, unique=False)
     
-
-
+    def __str__(self):
+        return "Appointment start time: " +self.start_time
 
 # what is want to do:
 # 1. create forms

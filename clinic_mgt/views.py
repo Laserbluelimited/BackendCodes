@@ -1,12 +1,13 @@
 from email import message
 from multiprocessing import context
-from django.shortcuts import render, redirect
+from pydoc import doc
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from authentication.models import User
-from .models import Clinic, ClinicLocation, Doctor
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.views.generic.base import TemplateView
+from .models import Clinic, ClinicLocation, Doctor, AppointmentDates
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ClinicRegistrationForm, DoctorRegistrationForm
+from .managers import AddressRequest
 from authentication.forms import LoginForm
 
 
@@ -23,9 +24,9 @@ def id_increment(model, initial):
 class ClinicListView(LoginRequiredMixin,View):
     login_url = '/auth/login'
     redirect_field_name = 'redirect_to'
+    
     def get(self, request):
-        clinics=Clinic.objects.all()
-        return render(request, 'clinic/clinic-list.html', context={'clinic_list':clinics})
+        return render(request, 'clinic/clinic-list.html', )
 
 class DoctorListView(LoginRequiredMixin, View):
     login_url = '/auth/login'
@@ -36,34 +37,34 @@ class DoctorListView(LoginRequiredMixin, View):
 
 
 
-class ClinicRegistration(View):
+class ClinicRegistration(LoginRequiredMixin, View):
+    login_url = '/auth/login'
+    redirect_field_name = 'redirect_to'
     template_name ='clinic/clinic-reg.html'
     form_class = ClinicRegistrationForm
-    login_form = LoginForm
 
     def get(self, request):
         form = self.form_class()
-        message=''
-        return render (request,self.template_name, context={'form':form, 'message':message})
+        return render (request,self.template_name, context={'form':form})
 
     def post(self, request):
         form = self.form_class(request.POST)
-        message=''
+
         if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
             email = form.cleaned_data['email']
             name = form.cleaned_data['name']
+            address = form.cleaned_data['address']
             postal_code = form.cleaned_data['postal_code']
-            locality = form.cleaned_data['locality']
-            num_street = form.cleaned_data['num_street']
-            post_town = form.cleaned_data['post_town']
 
-            clinic_user = User.objects.create_user(username=username, password=password, email=email)
-        
+
+            address_class = AddressRequest()
+            geodata = address_class.get_geodata(address)
+
+
+            clinic_user = User.objects.create_user(email=email, first_name=name)
             clinic_obj = Clinic.objects.create(id=id_increment(Clinic, 1130000), user=clinic_user, name =name)
-            
-            clinic_location = ClinicLocation.objects.create(id=id_increment(ClinicLocation, 1160000), clinic=clinic_obj, locality=locality, number_street=num_street, post_town=post_town, postal_code=postal_code)
+            clinic_location = ClinicLocation.objects.create(id=id_increment(ClinicLocation, 1160000), clinic=clinic_obj, address=address,postal_code=postal_code,  long=geodata['longitude'], lat=geodata['latitude'], city=geodata['city'])
+            clinic_obj.location = clinic_location
             
             clinic_user.save()
             clinic_obj.save()
@@ -71,39 +72,47 @@ class ClinicRegistration(View):
 
             return redirect('portal:clinic-list')
             
-        return render(request, self.template_name, context={'form':form, 'message':message})
+        return render(request, self.template_name, context={'form':form})
 
 
 
-class DoctorRegistration(View):
+class DoctorRegistration(LoginRequiredMixin, View):
+    login_url = '/auth/login'
+    redirect_field_name = 'redirect_to'
     template_name ='clinic/doctor-reg.html'
     form_class = DoctorRegistrationForm
-    login_form = LoginForm
 
     def get(self, request):
         form = self.form_class()
-        message=''
         clinics = Clinic.objects.all()
-        part_clinic = Clinic.objects.get(id=1)
-        return render (request,self.template_name, context={'form':form, 'message':message, 'clinics':clinics, 'pc':part_clinic})
+        CHOICES = []
+        for i in clinics:
+            clinic_obj = (i.name, i.name)
+            CHOICES.append(clinic_obj)
+
+        form.fields['clinic'].choices = CHOICES
+        
+        return render (request,self.template_name, context={'form':form})
 
     def post(self, request):
         form = self.form_class(request.POST)
-        message=''
         clinics = Clinic.objects.all()
-        for i in form.errors:
-            print(i)
-        part_clinic = Clinic.objects.get(id=1)
+
+        CHOICES = []
+        for i in clinics:
+            clinic_obj = (i.name, i.name)
+            CHOICES.append(clinic_obj)
+        form.fields['clinic'].choices = CHOICES
 
         if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
             email = form.cleaned_data['email']
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
+            clinic = form.cleaned_data['clinic']
 
-            doctor_user = User.objects.create_user( username=username, password=password, email=email, first_name=first_name, last_name=last_name)
-            doctor_obj = Doctor.objects.create(id=id_increment(Doctor, 1170000), user=doctor_user, clinic=part_clinic)
+            clinic_sel = Clinic.objects.get(name=clinic)
+            doctor_user = User.objects.create_user(email=email, first_name=first_name, last_name=last_name)
+            doctor_obj = Doctor.objects.create(id=id_increment(Doctor, 1170000), user=doctor_user, clinic=clinic_sel)
             
             
             doctor_user.save()
@@ -111,5 +120,15 @@ class DoctorRegistration(View):
 
             return redirect('portal:doctor-list')
             
-        return render(request, self.template_name, context={'form':form, 'message':message, 'clinics':clinics})
+        return render(request, self.template_name, context={'form':form})
 
+
+
+
+class ClinicDetailView(View):
+    login_url = '/auth/login'
+    redirect_field_name = 'redirect_to'
+    template_name ='clinic/clinic-detail.html'
+    def get(self, request, url_para):
+        clinic = get_object_or_404(Clinic, id=url_para)
+        return render(request, self.template_name, context={'clinic':clinic})
