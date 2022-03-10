@@ -1,0 +1,45 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}">
+    <link rel="stylesheet" href="{%static 'display/css/style.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    {% block extra_css %}
+    {% endblock %}
+{%endblock%}
+    <title>Drivers Medical</title>
+</head>
+<body>
+    {% block header %}
+    {% include 'display/header.html' %}
+    {% endblock %}
+
+
+    {%block content%}
+    {%endblock%}
+
+
+    {%block footer%}
+    {%include 'display/footer.html'%}
+    {%endblock%}
+
+    {% block javascript %}
+<!-- JAVASCRIPT -->
+<script src="{% static 'bcss/bootstrap.bundle.js'%}"></script>
+<script src="{% static 'display/js/script.js'%}"></script>
+{% block extra_javascript %}
+{% endblock extra_javascript %}
+
+<script src="{% static 'js/app.js' %}"></script>    
+{% endblock javascript %}
+
+</body>
+</html>
