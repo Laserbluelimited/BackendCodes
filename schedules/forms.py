@@ -17,3 +17,7 @@ class DoctorScheduleForm(forms.Form):
         if start_time1.time()>end_time1.time():
             raise forms.ValidationError("End time must be later than start time")
         return end_time1
+
+
+class ScheduleUploadForm(forms.Form):
+    sheet = forms.FileField()

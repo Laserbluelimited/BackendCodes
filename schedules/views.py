@@ -6,7 +6,7 @@ from django.views import View
 from authentication.models import User
 from clinic_mgt.models import Clinic, ClinicLocation, Doctor, AppointmentDates
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import DoctorScheduleForm
+from .forms import DoctorScheduleForm, ScheduleUploadForm
 from .models import ScheduleDates
 
 # Create your views here.
@@ -87,3 +87,28 @@ class DoctorSchedulesRegistrationView(LoginRequiredMixin, View):
             date_obj.save()
             return redirect('portal:doc-sche-tab')
         return render(request, self.template_name, context={'form':form})
+
+
+# def import_data(request):
+#     if request.method == "POST":
+#         upload_form = ScheduleUploadForm(request.POST, request.FILES)
+
+#         def sche_func(row):
+#             q = Doctor.objects.get(name=row[0])
+#             a = Clinic.objects.get(name=row[1])
+
+#             row[0] = q
+#             row[1] = a
+#             return row
+
+#         if upload_form.is_valid():
+#             request.FILES["file"].save_book_to_database(
+#                 model = ScheduleDates,
+#                 initializers=[None, choice_func],
+#                 mapdicts=[
+#                     ["question_text", "pub_date", "slug"],
+#                 ],
+#             )
+#             return redirect("handson_view")
+#         else:
+#             return HttpResponseBadRequest()
