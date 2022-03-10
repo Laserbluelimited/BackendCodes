@@ -10,18 +10,21 @@ TITLE_CHOICES = (
     ('mrs', 'Mrs.'),
 )
 
+GENDER_CHOICES = (
+    ('agender', 'Agender'),
+    ('androgyne', 'Androgyne'),
+    ('gender_fluid', 'Gender Fluid'),
+    ('male', 'Male'),
+    ('non_binary', 'Non Binary'),
+    ('transgender', 'Transgender'),
+    ('female', 'Female'),
+)
+
+COMPANY_TYPE_CHOICES = ()
+PREFERRED_MODE_CHOICES = ()
 
 class InternetClient(models.Model):
 
-    GENDER_CHOICES = (
-        ('agender', 'Agender'),
-        ('androgyne', 'Androgyne'),
-        ('gender_fluid', 'Gender Fluid'),
-        ('male', 'Male'),
-        ('non_binary', 'Non Binary'),
-        ('transgender', 'Transgender'),
-        ('female', 'Female'),
-    )
 
 
     id = models.IntegerField('client_id', unique=True, primary_key=True)
@@ -69,8 +72,6 @@ class InternetClient(models.Model):
 
 class CorporateClient(models.Model):
 
-    COMPANY_TYPE_CHOICES = ()
-    PREFERRED_MODE_CHOICES = ()
 
     id = models.IntegerField('corporate_client_id', primary_key=True, unique=True)
     user = models.OneToOneField('authentication.User', on_delete=models.CASCADE)

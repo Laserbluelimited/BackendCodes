@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+
+
+    <!doctype html>
+    <html lang="en">
+    
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+      <meta name="generator" content="Hugo 0.72.0">
+      <title>Carousel Template · Bootstrap</title>
+    
+      <link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/carousel/">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    
+      <!-- Bootstrap core CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+        crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    
+      <style>
+        .bd-placeholder-img {
+          font-size: 1.125rem;
+          text-anchor: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        }
+    
+        @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+          }
+        }
+    
+        /* GLOBAL STYLES
+        --------------------------------------------- */
+        /* Padding below the footer and lighter body text */
+    
+        body {
+          padding-top: 3rem;
+          
+          color: #5a5a5a;
+        }
+    
+    header{
+        height: 50%;
+        background-color: #5a5a5a;
+        
+    }
+        /* CUSTOMIZE THE CAROUSEL
+        -------------------------------------------- */
+    
+        /* Carousel base class */
+        .carousel {
+          margin-bottom: 4rem;
+        }
+    
+        /* Since positioning the image, we need to help out the caption */
+        .carousel-caption {
+          bottom: 3rem;
+          z-index: 10;
+        }
+    
+        /* Declare heights because of positioning of img element */
+        .carousel-item {
+          height: 32rem;
+        }
+    
+        .carousel-item>img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          min-width: 100%;
+          height: 32rem;
+        }
+    
+    
+        /* MARKETING CONTENT
+    -------------------------------------------------- */
+    
+        /* Center align the text within the three columns below the carousel */
+        .marketing .col-lg-4 {
+          margin-bottom: 1.5rem;
+          text-align: center;
+        }
+    
+        .marketing h2 {
+          font-weight: 400;
+        }
+    
+        .marketing .col-lg-4 p {
+          margin-right: .75rem;
+          margin-left: .75rem;
+        }
+    
+    
+        /* Featurettes
+    ------------------------- */
+    
+        .featurette-divider {
+          margin: 5rem 0;
+          /* Space out the Bootstrap <hr> more */
+        }
+    
+        /* Thin out the marketing headings */
+        .featurette-heading {
+          font-weight: 300;
+          line-height: 1;
+          letter-spacing: -.05rem;
+        }
+    
+    
+        /* RESPONSIVE CSS
+    -------------------------------------------------- */
+    
+        @media (min-width: 40em) {
+    
+          /* Bump up size of carousel content */
+          .carousel-caption p {
+            margin-bottom: 1.25rem;
+            font-size: 1.25rem;
+            line-height: 1.4;
+          }
+    
+          .featurette-heading {
+            font-size: 50px;
+          }
+        }
+    
+        @media (min-width: 62em) {
+          .featurette-heading {
+            margin-top: 7rem;
+          }
+        }
+      </style>
+
+
+</head>
+
+                   <header style="height: 50%;">
+                      <nav class="navbar navbar-expand-md fixed-top " style="height: 20%;">
+                      <div class="container-fluid" style="margin-left: 2rem;">
+                       <img src="./▶ Home - DRIVERS MEDICALS.UK - Google Chrome 1_26_2022 11_19_25 AM (2).png" alt="" class="img-fluid">
+                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                         aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                             <span class="navbar-toggler-icon"></span>
+                                
+                              </button>
+                              <div class="collapse navbar-collapse" id="navbarCollapse" style="color: #0ac5a8;">
+                                <ul class="navbar-nav mr-auto mb-2 mb-md-0" style="margin-left: 6rem; justify-content: center; width: 70%; color: #0ac5a8;">
+                                  <li class="nav-item active">
+                                    <a class="nav-link" aria-current="page" href="medical.html">HOME</a>
+                                  </li>
+                                  <li class="nav-item active">
+                                      <a class="nav-link" aria-current="page" href="#">ABOUT US</a>
+                                    </li>
+                                    <div class="dropdown" style="background: transparent;">
+                                      <button class="btn btn-secondary btn-sm dropdown-toggle" type="link" id="dropdownMenuButtonSM" data-bs-toggle="dropdown" aria-expanded="false" style="margin-top: 0.4rem; background-color: transparent; border: none;">
+                                      <span style="color: #0ac5a8;"> SERVICES
+                                      </span>               
+                                    </button>
+                                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonSM">
+                                        <li><a class="dropdown-item" href="#">HGV Medical</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="#">PVC/ Bus Medical</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="#">Taxi Medical</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="#">Business Services</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="#">Other Medical</a></li>
+                                      </ul>
+                                    </div>
+                                    <li class="nav-item active">
+                                      <a class="nav-link" aria-current="page" href="location.html">LOCATION</a>
+                                    </li>
+                                    <li class="nav-item active">
+                                      <a class="nav-link" aria-current="page" href="#">CONTACT US</a>
+                                    </li>
+
+                                  
+                                </ul>
+                                <form class="d-flex">
+                                  <button class="btn btn-outline-success" type="submit" style="background-color: #0ac5a8; border-radius: 10px; margin-right: 0.8rem; color: #fff; border: none; ">BOOK NOW</button>
+                                  <button class="btn btn-outline-success" type="submit" style="border-radius: 9px; color: #0ac5a8; border: 1px #0ac5a8 solid; background-color: transparent; ">LOGIN</button>
+                                </form>
+                              </div>  
+                            </div>
+                          </nav>
+                        </header> 
+                        
+                        </html>
+
+                        <body>
+                        
+                          
+                        <section class="py-5 text-center container-fluid" style="margin-top: 3rem; background-image: url(./hands-with-laptop-virtual-world-map\ \(1\).jpg); background-size: cover;">
+                            <div class="row py-lg-5">
+                              <div class="col-lg-6 col-md-8 mx-auto">
+                                <h1 class="" style="font-weight:700 ; color: #0ac5a8;">About Us</h1>
+                              <div style="display: flex; margin-left: 14rem;">
+                                <p class="lead text-muted" style="margin-right: 1rem;"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                                  <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/> <span style="color: black;">Home</span></p>
+                                  <p class="lead text-muted"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-record-circle-fill" viewBox="0 0 16 16">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-8 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                  </svg> <span style="color: black;">Pages</span></p>
+                              </div>   
+                                <p>   
+                                  <a href="#" class="btn my-2" style="background-color: #0ac5a8; color:#fff; width: 11rem; height: 3rem; ">Book Now</a>
+                                  <a href="#" class="btn my-2" style="background-color: #0ac5a8; color:#fff; width: 11rem; height: 3rem; ">Call: 02039639083</a>
+                                </p>
+                              </div>
+                            </div>
+                          </section>
+
+                 <div class="container" style="display: flex; margin-top: 3rem; font-size: 20px;">
+
+                  <div class="col" style="margin-right: 2rem;">
+
+                    <div class="row" style="height: 100%; width: 100%;" >
+                      <img src="./Rectangle 143.png" alt="" style="">
+                    </div>
+                  </div>
+
+                  <div class="col">
+
+                    <div class="row">
+                      <li>Driver Medicals Ltd offers Group 2 (DVLA D4 HGV/LGV, PCV, Minibus), Taxi, Motorsport, Forklift Truck, Crane Operator and Police, Fire, Coastguard, Ambulance & Health Service medicals. Our bookings are flexible , straight forward and we endeavor to meet the highest of standards</li>
+                       <p>We have regular clinics across many locations including appointments during the day, in the evening and on weekends.</p>
+                       <p>Our doctors are experienced and have full GMC (General Medical Council) registration to ensure your medical assessment is completed correctly every time and in accordance with DVLA Group 2 guidelines.</p>
+                       <p>Our services cover Birmingham ,Coventry, Wolverhampton , Stoke , Northampton , Milton Keynes, Luton and Cambridge areas</p>
+                       <p>We follow strict Covid-19 protocols across all our venues to ensure the safety of our doctors and clients.</p>
+                    </div>
+                  </div>
+
+                 </div>
+
+                 <div class="container   text-center text-white bg-dark" style="height: 17rem;">
+                           
+                          
+                  <main class="px-3" style="margin-top:5rem;">
+                    <h1 style="width: 60%; margin-left: 12rem; line-height: 4rem;">Book your drivers medical today! or Call 020 3963 9083</h1>
+                    <p class="lead" style="text-align: center;"> From $55- Same day appointment available upon request - Inc Free Eye Test   </p>
+                    <p class="lead">
+                      <a href="#" class="btn btn-lg btn-secondary fw-bold border-white " style="background-color: #0ac5a8;">Book Now</a>
+                    </p>
+
+                    
+                  </main>
+                
+                
+                </div>
+
+
+                <div class="container" style="display: flex; margin-top: 3rem; font-size: 20px; font-weight:300; ">
+
+                  <div class="col">
+
+                    <div class="row">
+                      <h2 style="font-weight: 600; font-size: 21px; color: #475C83;  ">How to arrange your medical?</h2>
+                      <p> Select your preferred date and time and we will send you an appointment confirmation after completing your booking. Your appointment confirmation will contain relevant information about your appointment</p>
+                      <h2 style="font-weight: 600; font-size: 21px; color: #475C83;">What you need to bring to the medical ?</h2>
+                      <p>We follow strict Covid-19 protocols across all our venues to ensure the safety of our doctors and clients.</p>
+                    </div>
+
+                    <li>Drivermedicals.uk Medical form <a href="#" style="color: #0ac5a8;">(Click To Download Form)</a></li>
+                    <li> Driving license or passport</li>
+                    <li> Driving glasses and recent prescription from optician</li>
+                    <li> List of current medication including dose and start date</li>
+                    <li> Any relevant hospital notes and discharge summaries</li>
+                    <li> Full medical records (For Taxi Medicals Only)</li>
+                  </div>
+                  
+                  
+
+
+                  <div class="col" style="margin-right: 2rem;">
+
+                    <div class="row" style="height: 100%; width: 100%;" >
+                     <img src="./Rectangle 144.png" alt="" style="transform: translate(10% , 0%);">
+                    </div>
+                  </div>
+
+                 </div>
+
+                 <div class="container   mx-auto flex-column text-center text-white bg-dark" style="height: 16rem;">
+                           
+                          
+                  <main class="px-3" style="display: flex; justify-content: center; margin: 3rem; margin-left: 2rem; padding: 2rem; margin: top 4rem; " >
+                    <div class="first-div" style="margin-right: 3rem;">
+                      <img src="./trustpilot_logo_white 1.png" alt="">
+                    </div>
+
+                    <div class="second-div">
+                      <h2 style="color: #0ac5a8; font-size: 500;">50,000+</h2>
+                      <p style="font-weight: 300; font-size: 1.6rem; ">Drivers have chosen drivermedicals.uk 
+                        to date, join them today!</p>
+                    </div>
+
+                    <div class="third-div" style="display: grid; margin-left: 4rem; ">
+                      <a href="#" class="btn btn-lg btn-secondary fw-bold border-white " style="background-color: #0ac5a8; margin-bottom: 1.3rem;  ">Call: 02039639083</a>
+                      <a href="#" class="btn btn-lg btn-secondary fw-bold border-white " style="background-color: #0ac5a8;">Book Now</a>
+                      
+                    </div>
+                   
+
+
+                  </main>
+                
+
+                </div>
+
+
+                <div class="container" style="display: flex; margin-top: 3rem; font-size: 20px; font-weight:300; ">
+
+                  <div class="col" style="margin-right: 2rem;" >
+
+                    <div class="row">
+                      <h2 style="font-weight: 600; font-size: 21px; color: #475C83;  ">What will happen at the medical ?</h2>
+                      <p style="margin-top: 2rem;"> Our doctor will confirm your identity and conduct a full D4 medical during your appointment.</p>
+                      <p style="margin-top: 2rem;"> Your medical will include a thorough medical history and an assessment of your physical health. The doctor will take a blood pressure reading which complies with DVLA criteria and conduct a visual acuity test using a DVLA approved Snellen chart</p>
+                    </div>
+
+                    <h2 style="font-weight: 600; font-size: 21px; color: #475C83; margin-top:4rem; ">What will happen at the medical ?</h2>
+
+                    <li>Please send your completed application forms (D4 form and D2 form) to the DVLA using the return envelope provided.</li>
+                    
+                  </div>
+                  
+                   <div  >
+                      <img src="./Vector 23.png" alt="">
+                    </div>
+                  <div class="col" style="margin-right: 2rem;">
+
+                    <div class="col" style="margin-left: 3rem;" >
+
+                      <div class="row">
+                        <h2 style="font-weight: 600; font-size: 21px; color:#0ac5a8 ;  ">Low Cost HGV/PCV & Bus Medical including 
+                          free Eye Test</h2>
+                        <p style="margin-top: 1rem;"> HGV AND PCV drivers require medicals throughout their career.</p>
+                        <h2 style="font-weight: 600; font-size: 21px; color:#0ac5a8 ; margin-top: 2rem; ">New Drivers</h2>
+                      </div>
+  
+                      <p style=" font-size: 21px;  margin-top: 0.2rem; ">You need a medical to obtain your provisional license.</p>
+  
+                      <h2 style="font-weight: 600; font-size: 21px; color:#0ac5a8 ; margin-top: 3rem; ">45 years and older</h2>
+
+                    <p style=" font-size: 21px;  margin-top: 0.2rem; ">You need a medical every 5 years until the age of 65.</p>
+                      
+                    <h2 style="font-weight: 600; font-size: 21px; color:#0ac5a8 ; margin-top: 3rem; ">65 years and older</h2>
+                  
+
+                  <p style=" font-size: 21px; margin-top: 0.2rem; ">You need a medical annually from the the age of 65.</p>
+
+                    </div>
+                  </div>
+
+                 </div>
+
+                 <div class="container-fluid" style="  background-color: rgba(31, 30, 30, 0.993) !important;    margin-top: 2rem; color:#fff ;">
+                  <footer class="py-2">
+                    <div class="row">
+                      <div class="col-2" style="margin-left: 2rem;">
+                        <h5><img src="./▶ Home - DRIVERS MEDICALS.UK - Google Chrome 1_26_2022 11_19_25 AM (2).png" alt=""></h5>
+                        <ul class="nav flex-column">
+                          <li class="nav-item mb-2">All driver medicals are completed by GMC registered doctors in accordancewith current DVLA Group 2 guidelines</li>
+                           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"></a></li>
+                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"></a></li> 
+                          <li class="nav-item mb-2" style="width: 100%;"><a href="#" class="nav-link p-0 text-muted">TERMS AND CONDITIONS`</a></li>
+                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">PRIVATE POLICY</a></li>
+                        </ul>
+                      </div>
+                 
+                      <div class="col-2" style="margin-left: 3rem; line-height: 2.3rem;">
+                        <h5>Menu</h5>
+                        <ul class="nav flex-column >
+                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About Us </a></li>
+                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Booking D4 Medicals</a></li>
+                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"> D4 Medicals</a></li>
+                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Location</a></li>
+                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">PCO/TAXI MEDICALS </a></li>
+                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"> Contact </a></li>
+              
+              
+              
+                        </ul>
+                      </div>
+                
+                      <div class="col-2" style="line-height: rem;">
+                        <h5>Contact Info</h5>
+                        <ul class="nav flex-column" style="line-height: 2rem;">
+                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Call us: 02039639083</a></li>
+                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Send us a message</a></li>
+                          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Follow us</a></li>
+                          <li class="nav-item mb-2" style=""><a href="#" class="nav-link p-0 text-muted"></a> <a href="#" style="margin-right:1rem;"><img src="./facebook 1.png" alt=""></a>    <a href="#" style="margin-right: 1rem;"> <img src="./twitter 1.png" alt=""></a>    <a href="#"><img src="./instagram-sketched 1.png" alt=""></a>    </li>
+                         
+                        </ul>
+                      </div>
+                
+                      <div class="col-4 offset-1">
+                        <form>
+                          <h5>Subscribe to our newsletter</h5>
+                          <p>Monthly digest of whats new and exciting from us.</p>
+                          <div class="d-flex w-100 gap-3">
+                            <label for="newsletter1" class="visually-hidden">Email address</label>
+                            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                            <button class="btn btn-primary" type="button" style="background-color: #0ac5a8; border: none; ">Subscribe</button>
+                           
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <!-- <div class="d-flex justify-content-between py-4 my-4 border-top">
+                      <p>.</p>
+                      <ul class="list-unstyled d-flex">
+                        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
+                        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+                        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+                      </ul>
+                    </div> -->
+                  </footer>
+                </div>
+                
+                            <script src="./js/bootstrap.bundle.js"></script>
+                        </body>
+
+
+                        </html>
