@@ -1,76 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/bootstrap.css">
-    <link rel="stylesheet" href="/static/display/css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <title>Drivers Medical</title>
-</head>
-<body>
-  <header class="header-content">
-    <div class="logo">
-      <a href="index.html"><img src="/static/display/img/DriverMEDICAL LOGO 1.png" alt=""></a>
-    </div>
-    <div class="nav" id="nav">
-      <div class="header-left">
-          <ul class="left-links">
-              <li><a href="#home">Home</a></li>
-              <li><a href="#news">About Us</a></li>
-              <li class="left-links dropdown">
-                <a class="left-links dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Our Services</a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">HGV Medical</a></li>
-                  <li><a class="dropdown-item" href="#">PVC/Bus Medical</a></li>
-                  <li><a class="dropdown-item" href="#">Taxi Medical</a></li>
-                  <li><a class="dropdown-item" href="#">Business Services</a></li>
-                  <li><a class="dropdown-item" href="#">Other Medicals</a></li>
-                </ul>
-              </li>
-              <li><a href="#news">Location</a></li>
-              <li><a href="#news">Contact Us</a></li>
-            </ul>
-      </div>
+{%extends 'display/base.html'%}
 
-      <div class="header-right">
-          <ul class="right">
-              <li class="right-links">
-                  <a class="booknow" href="">Book Now</a>
-              </li>
-              <li class="right-links dropdown">
-                <a class="login dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Login</a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">HGV Medical</a></li>
-                  <li><a class="dropdown-item" href="#">PVC/Bus Medical</a></li>
-                  <li><a class="dropdown-item" href="#">Taxi Medical</a></li>
-                  <li><a class="dropdown-item" href="#">Business Services</a></li>
-                  <li><a class="dropdown-item" href="#">Other Medicals</a></li>
-                </ul>
-              </li>                         
-          </ul>
-      </div>
-  </div>
-
-  <div class="icon-wrapper">
-      <button href="" class="icon" id="icon">
-          <i class="fa fa-bars"></i>
-          <img src="" alt="">
-  </div>
-  </header>
-
+{%load static%}
+{%block content%}
   <div class="body">
     <div id="demo" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="/static/display/img/hero.png" alt="Los Angeles" class="d-block w-100">
+          <img src="{% static 'display/img/hero.png'%}" alt="Los Angeles" class="d-block w-100">
         </div>
         <div class="carousel-item">
-          <img src="/static/display/img/hero2.png" alt="Los Angeles" class="d-block w-100">
+          <img src="{%static 'display/img/hero2.png'%}" alt="Los Angeles" class="d-block w-100">
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
@@ -102,7 +41,7 @@
           </li>
         </div>
         <div class="text-chat">
-          <img src="/Images/chat.png" alt="">
+          <img src="{%static 'img/chat.png'%}" alt="">
         </div>
       </div>
     </div>
@@ -120,7 +59,7 @@
             <div class="card-info">
               <div class="easy-image">
                 <div class="card-image">
-                  <img src="/static/display/img/calendar.png" alt="">
+                  <img src="{%static 'display/img/calendar.png'%}" alt="">
                 </div>
                 <h1>01</h1>
               </div>
@@ -134,7 +73,7 @@
           <div class="card-info">
             <div class="easy-image">
               <div class="card-image">
-                <img src="/static/display/img/Doctor.png" alt="">
+                <img src="{%static 'display/img/Doctor.png'%}" alt="">
               </div>
               <h1>02</h1>
             </div>
@@ -148,7 +87,7 @@
         <div class="card-info">
           <div class="easy-image">
             <div class="card-image">
-              <img src="/static/display/img/note.png" alt="">
+              <img src="{% static 'display/img/note.png'%}" alt="">
             </div>
             <h1>03</h1>
           </div>
@@ -180,7 +119,7 @@
   <div class="about">
     <div class="about-content">
       <div class="about-image">
-        <img src="/static/display/img/hero3.png" alt="">
+        <img src="{% static 'display/img/hero3.png'%}" alt="">
       </div>
       <div class="about-texts">
         <div class="atexts">
@@ -205,15 +144,15 @@
       <div class="services-card">
         <div class="scard">
           <div class="scard-image">
-            <img src="/static/display/img/Doctor.png" alt="">
-            <img src="/static/display/img/dash.png" alt="">
+            <img src="{%static 'display/img/Doctor.png'%}" alt="">
+            <img src="{%static 'display/img/dash.png'%}" alt="">
           </div>
           <h1>HGV Medical</h1>               
         </div>
         <div class="scard2">
           <div class="scard2-image">
-            <img src="/static/display/img/bus.png" alt="">
-            <img src="/static/display/img/dash.png" alt="">
+            <img src="{%static 'display/img/bus.png'%}" alt="">
+            <img src="{% static 'display/img/dash.png'%}" alt="">
           </div>
           <h1>HGV Medical</h1>               
         </div>              
@@ -221,15 +160,15 @@
       <div class="services-card2">
         <div class="scard3">
           <div class="scard-image">
-            <img src="/static/display/img/taxi.png" alt="">
-            <img src="/static/display/img/dash.png" alt="">
+            <img src="{%static 'display/img/taxi.png'%}" alt="">
+            <img src="{%static 'display/img/dash.png'%}" alt="">
           </div>
           <h1>Taxi Medical</h1>               
         </div>
         <div class="scard4">
           <div class="scard2-image">
-            <img src="/static/display/img/note.png" alt="">
-            <img src="/static/display/img/dash.png" alt="">
+            <img src="{%static 'display/img/note.png'%}" alt="">
+            <img src="{% static 'display/img/dash.png'%}" alt="">
           </div>
           <h1>Business Services</h1>               
         </div>              
@@ -254,11 +193,11 @@
   <div class="trust">
     <div class="trust-headline">
       <div class="trust-image">
-        <img src="/static/display/img/hero4.png" alt="">
+        <img src="{%static 'display/img/hero4.png'%}" alt="">
       </div>
       <div class="trust-content">
         <div class="trust-pilot">
-          <img src="/static/display/img/trustpilot_logo_white 1.png" alt="">
+          <img src="{%static 'display/img/trustpilot_logo_white 1.png'%}" alt="">
         </div>
         <div class="trust-texts">
           <h1>50,000+</h1>
@@ -275,67 +214,4 @@
       </div>
     </div>
   </div>
-
-  <div class="footer">
-    <div class="footer-content">
-        <div class="footer-left">
-            <div class="footer-logo">
-              <a href="index.html"><img src="/static/display/img/DriverMEDICAL LOGO 2.png" alt=""></a>
-            </div>
-            <p>All driver medicals are completed by GMC registered doctors in accordance with current DVLA Group 2 guidelines.</p>
-            <div class="footer-icons">
-                <a href=""><i class="fab fa-linkedin"></i></a>
-                <a href=""><i class="fab fa-instagram"></i></a>
-                <a href=""><i class="fab fa-twitter"></i></a>
-            </div>
-        </div>
-
-        <div class="footer-right">
-            <ul class="footer-links">
-                <li class="footer-link">
-                    <p>Menu</p>
-                    <div class="footer-list">
-                        <a href="">About Us</a>
-                        <a href="">Our Services</a>
-                        <a href="">Locations</a>
-                    </div>
-                </li>
-                <li class="footer-link">
-                    <p>Quick Links</p>
-                    <div class="footer-list">
-                        <a href="">HGV Medical</a>
-                        <a href="">PVC/Bus Medical</a>
-                        <a href="">Taxi Medical</a>
-                        <a href="">Business Services</a>
-                    </div>
-                </li>
-                <li class="footer-link">
-                    <p>Contact Us</p>
-                    <div class="footer-list">
-                      <p><span class="fas fa-map-marker-alt"></span>United Kingdom</p>
-                      <p><span class="fas fa-phone-alt"></span>0203 963 9083</p>
-                      <p><span class="fas fa-envelope"></span>Bookings@drivermedicals.uk</p>
-                        
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-  </div>
-
-  <footer class="footer-footer">
-    <div class="footer-wrapper">
-        <div class="wrapper-end">
-            <p>Drivermedicals.uk © 2022. All Rights Reserved</p>
-        </div>
-    </div>
-</footer>
-
-  
-  
-
-
-  <script src="/bcss/bootstrap.bundle.js"></script>
-  <script src="/static/display/js/script.js"></script>
-</body>
-</html>
+{%endblock%}

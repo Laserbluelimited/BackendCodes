@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'portal',
     'prod_mgt',
     'schedules',
+    'client_mgt',
     # Third Party App
     'crispy_forms',
     'django.contrib.sites',
