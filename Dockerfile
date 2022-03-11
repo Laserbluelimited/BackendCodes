@@ -32,7 +32,7 @@ COPY ./entrypoint.sh /
 RUN mkdir -p /vol/web/media
 RUN mkdir -p /vol/web/static
 
-EXPOSE 9194
+EXPOSE 9193
 
 ENTRYPOINT ["sh", "entrypoint.sh"]
 
