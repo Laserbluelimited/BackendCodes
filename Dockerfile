@@ -4,6 +4,8 @@ COPY ./requirements.txt .
 
 RUN pip install --upgrade pip
 
+WORKDIR /usr/src/bic
+
 RUN apk update \
     && apk add --update --no-cache --virtual build-deps gcc python3 musl-dev \
     && apk add postgresql \
@@ -20,11 +22,7 @@ RUN apk update \
 
 RUN pip install -r /requirements.txt
 
-RUN mkdir /usr/src/bic
-
 COPY ./ /usr/src/bic
-
-WORKDIR /usr/src/bic
 
 COPY ./skote /
 
