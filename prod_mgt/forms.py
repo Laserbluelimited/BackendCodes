@@ -4,9 +4,11 @@ from .models import Product
 
 
 
-class AddProductForm(forms.Form):
-    name_of_prod = forms.CharField(required=True, max_length=30)
-    price = forms.IntegerField(required=True)
+class AddProductForm(forms.ModelForm):
+
+    class Meta:
+        model = Product
+        exclude = ['slug', 'currency', 'image', 'is_active', 'id']
 
     def clean_name_of_prod(self):
         name_of_prod = self.cleaned_data['name_of_prod']

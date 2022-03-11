@@ -17,11 +17,14 @@ class AddProductView(LoginRequiredMixin, View):
 
     def post(self, request):
         form = self.form_class(request.POST)
+        for i in form.errors:
+            print(i)
         if form.is_valid():
-            name_of_prod = form.cleaned_data['name_of_prod']
-            price = form.cleaned_data['price']
+            # name_of_prod = form.cleaned_data['name_of_prod']
+            # price = form.cleaned_data['price']
+            product_obj = form.save(commit=False)
 
-            product_obj = Product.objects.create(name_of_prod=name_of_prod, price=price)
+            product_obj.save()
 
             return redirect('portal:view-product')
         return render (request,self.template_name, context={'form':form})

@@ -17,7 +17,7 @@
                                             </div>
                                             <div class="col-sm-8">
                                                 <div class="text-sm-end">
-                                                    <a href="{%url 'portal:clinic-registration'%}"><button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> Add New Clinic</button></a>
+                                                    <a href="{%url 'portal:intrnt-cli-reg'%}"><button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> Add New Client</button></a>
                                                 </div>
                                             </div><!-- end col-->
                                         </div>
@@ -32,17 +32,18 @@
                                                                 <label class="form-check-label" for="checkAll"></label>
                                                             </div>
                                                         </th>
-                                                        <th class="align-middle">Clinic ID</th>
-                                                        <th class="align-middle">Clinic Name</th>
-                                                        <th class="align-middle">City</th>
-                                                        <th class="align-middle">Available to work</th>
+                                                        <th class="align-middle">Client ID</th>
+                                                        <th class="align-middle"> Name</th>
+                                                        <th class="align-middle">Phone Number</th>
+                                                        <th class="align-middle">Address</th>
+                                                        
                                                         <th class="align-middle">View details</th>
                                                         <th class="align-middle">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
 
-                                                        {%for clinic in clinics%}
+                                                        {%for c in clients%}
                                                     <tr>
                                                         <td>
                                                             <div class="form-check font-size-16">
@@ -50,13 +51,13 @@
                                                                 <label class="form-check-label" for="orderidcheck01"></label>
                                                             </div>
                                                         </td>
-                                                        <td><a href="javascript: void(0);" class="text-body fw-bold">#{{clinic.id}}</a> </td>
-                                                        <td>{{clinic.name}}</td>
+                                                        <td><a href="javascript: void(0);" class="text-body fw-bold">#{{c.id}}</a> </td>
+                                                        <td>{{c.get_name}}</td>
                                                         <td>
-                                                            {{clinic.cliniclocation.city}}
+                                                            {{c.get_phone}}
                                                         </td>
                                                         <td>
-                                                            <span class="badge badge-pill badge-soft-success font-size-12">{{clinic.available_to_work}}</span>
+                                                            <span class="badge badge-pill badge-soft-success font-size-12">{{c.get_address}}</span>
                                                         </td>
                                                         <td>
                                                             <!-- Button trigger modal -->

@@ -83,7 +83,19 @@
         </li>
 
 
+        <li class="menu-title" key="t-menu">Client Management</li>
 
+        <li>
+          <a href="javascript: void(0);" class="waves-effect">
+            <i class="bx bx-home-circle"></i
+            ><span class="badge rounded-pill bg-info float-end">04</span>
+            <span key="t-dashboards">Client Management</span>
+          </a>
+            <ul class="sub-menu" aria-expanded="false">
+            <li><a href="{% url 'portal:intrnt-cli-list' %}" key="t-default">Internet Clients</a></li>
+            <li><a href="{% url 'portal:crprt-cli-list' %}" key="t-default">Corporate Clients</a></li>
+            </ul>
+        </li>
 
         <li class="menu-title" key="t-components">Components</li>
 

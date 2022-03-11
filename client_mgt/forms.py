@@ -1,6 +1,6 @@
 from django import forms
 from authentication.models import User
-from BackendCodes.client_mgt.models import COMPANY_TYPE_CHOICES, GENDER_CHOICES, TITLE_CHOICES, CorporateClient, InternetClient
+from client_mgt.models import COMPANY_TYPE_CHOICES, GENDER_CHOICES, TITLE_CHOICES, CorporateClient, InternetClient
 
 
 
@@ -39,17 +39,16 @@ class InternetClientRegistrationForm(forms.Form):
 
 class CorporateClientRegistrationForm(forms.ModelForm):
     #usermodel
-    first_name = forms.CharField(required=True, max_length=20)
-    last_name = forms.CharField(required=True, max_length=20)
-    email = forms.EmailField(required=True)
+    main_contact_email = forms.EmailField(required=True)
     username = forms.CharField(required=True, max_length=20)
     password1 = forms.CharField(required=True)
     password2 = forms.CharField(required=True)
+    address = forms.CharField(required=True)
 
     #clientmodel
     class Meta:
         model = CorporateClient
-        exclude = ['id', 'user', 'slug', 'city', 'long', 'lat', 'country']
+        exclude = ['id', 'user', 'slug','addres', 'city', 'long', 'lat', 'country', 'auth_prsnl_first_name', 'auth_prsnl_last_name', 'auth_prsnl_title', ]
 
     
 

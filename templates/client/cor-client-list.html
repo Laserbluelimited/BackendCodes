@@ -17,7 +17,7 @@
                                             </div>
                                             <div class="col-sm-8">
                                                 <div class="text-sm-end">
-                                                    <a href="{%url 'portal:clinic-registration'%}"><button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> Add New Clinic</button></a>
+                                                    <a href="{%url 'portal:crprt-cli-reg'%}"><button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> Add New Client</button></a>
                                                 </div>
                                             </div><!-- end col-->
                                         </div>
@@ -32,17 +32,24 @@
                                                                 <label class="form-check-label" for="checkAll"></label>
                                                             </div>
                                                         </th>
-                                                        <th class="align-middle">Clinic ID</th>
-                                                        <th class="align-middle">Clinic Name</th>
-                                                        <th class="align-middle">City</th>
-                                                        <th class="align-middle">Available to work</th>
+                                                        <th class="align-middle">Corporate Client ID</th>
+                                                        <th class="align-middle"> Name</th>
+                                                        <th class="align-middle">Email</th>
+                                                        <th class="align-middle">Phone</th>
+                                                        <th class="align-middle">Type</th>
+                                                        <th class="align-middle">Nature</th>
+                                                        <th class="align-middle">Industry Sector</th>
+                                                        <th class="align-middle">VAT Registration Number</th>
+                                                        <th class="align-middle">Number of Employees</th>
+                                                        <th class="align-middle">Created At</th>
+                                                        <th class="align-middle">Address</th>
                                                         <th class="align-middle">View details</th>
                                                         <th class="align-middle">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
 
-                                                        {%for clinic in clinics%}
+                                                        {%for c in clients%}
                                                     <tr>
                                                         <td>
                                                             <div class="form-check font-size-16">
@@ -50,17 +57,24 @@
                                                                 <label class="form-check-label" for="orderidcheck01"></label>
                                                             </div>
                                                         </td>
-                                                        <td><a href="javascript: void(0);" class="text-body fw-bold">#{{clinic.id}}</a> </td>
-                                                        <td>{{clinic.name}}</td>
+                                                        <td><a href="javascript: void(0);" class="text-body fw-bold">#{{c.id}}</a> </td>
+                                                        <td>{{c.get_name}}</td>
                                                         <td>
-                                                            {{clinic.cliniclocation.city}}
+                                                            {{c.get_email}}
                                                         </td>
+                                                        <td>{{c.get_phone}}</td>
+                                                        <td>{{c.get_type}}</td>
+                                                        <td>{{c.get_nature}}</td>
+                                                        <td>{{c.get_industry}}</td>
+                                                        <td>{{c.get_vat}}</td>
+                                                        <td>{{c.get_employees}}</td>
                                                         <td>
-                                                            <span class="badge badge-pill badge-soft-success font-size-12">{{clinic.available_to_work}}</span>
+                                                            <span class="badge badge-pill badge-soft-success font-size-12">{{c.created_at}}</span>
                                                         </td>
+                                                        <td>{{c.get_address}}</td>
                                                         <td>
                                                             <!-- Button trigger modal -->
-                                                            <a href="{%url 'portal:clinic-detail' clinic.id%}" >
+                                                            <a href="" >
                                                             <button type="button" class="btn btn-primary btn-sm btn-rounded" data-bs-toggle="modal" >
                                                                  View Details
                                                             </button>

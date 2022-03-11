@@ -1,8 +1,11 @@
+from unicodedata import name
 from django.urls import path
+
 from . import views
 from clinic_mgt import views as clinic_views
 from prod_mgt import views as prod_views
 from schedules import views as sche_views
+from client_mgt import views as client_views
 
 
 app_name='portal'
@@ -19,7 +22,13 @@ urlpatterns = [
     path('doc-sche-reg', sche_views.DoctorSchedulesRegistrationView.as_view(), name='doc-sche-reg'),
     path('testing', views.TestingView.as_view(), name='testing'),
     path('add-product', prod_views.AddProductView.as_view(), name='add-product'),
-    path('view-products', prod_views.ViewProductView.as_view(), name='view-product'),
-    path('product/<slug>', prod_views.ProductDetailView.as_view(), name='product-detail')
+    path('view-products', prod_views.ViewProductView.as_view(), name='view-product'), 
+    path('product/<slug>', prod_views.ProductDetailView.as_view(), name='product-detail'),
+
+    #client Management
+    path('internet-clients-list', client_views.InternetClientTableView.as_view(), name='intrnt-cli-list'),
+    path('corporate-client-list', client_views.CorporateClientTableView.as_view(), name='crprt-cli-list'),
+    path('internet-client-reg', client_views.InternetClientRegistrationView.as_view(), name='intrnt-cli-reg'),
+    path('corporate-client-reg', client_views.CorporateClientRegistrationView.as_view(), name='crprt-cli-reg')
 
 ]

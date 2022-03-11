@@ -20,8 +20,20 @@ GENDER_CHOICES = (
     ('female', 'Female'),
 )
 
-COMPANY_TYPE_CHOICES = ()
-PREFERRED_MODE_CHOICES = ()
+COMPANY_TYPE_CHOICES =(
+    ('miss', 'Miss'),
+    ('mr', 'Mr.'),
+    ('mrs', 'Mrs.'),
+)
+PREFERRED_MODE_CHOICES =  (
+    ('agender', 'Agender'),
+    ('androgyne', 'Androgyne'),
+    ('gender_fluid', 'Gender Fluid'),
+    ('male', 'Male'),
+    ('non_binary', 'Non Binary'),
+    ('transgender', 'Transgender'),
+    ('female', 'Female'),
+)
 
 class InternetClient(models.Model):
 
@@ -95,8 +107,8 @@ class CorporateClient(models.Model):
     bill_name = models.CharField('billing_name', max_length=255, unique=True, null=True)
     bill_phone = models.IntegerField('billing_phone', unique=True, null=True)
     bill_email = models.EmailField('company_email', unique=True, null=True)
-    auth_prsnl_first_name = models.CharField('auth_personel_frst_name', max_length=100)
-    auth_prsnl_last_name = models.CharField('auth_personel_last_name', max_length=100)
+    auth_prsnl_first_name = models.CharField('auth_personel_frst_name', max_length=100, null=True)
+    auth_prsnl_last_name = models.CharField('auth_personel_last_name', max_length=100, null=True)
     auth_prsnl_title = models.CharField('auth_personel_title', max_length=20, choices=TITLE_CHOICES, null=True)
     preferred_mode = models.CharField('preferred_mode', max_length=100, choices=PREFERRED_MODE_CHOICES)
     sub_newsletter = models.BooleanField('sub_newsletter', default=True)
@@ -108,8 +120,35 @@ class CorporateClient(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name_of_prod)
+            self.slug = slugify(self.company_name)
         return super(CorporateClient,self).save(*args, **kwargs)
+
+    def get_name(self):
+        return self.company_name
+
+    def get_type(self):
+        return self.company_type
+
+    def get_email(self):
+        return self.main_contact_email
+
+    def get_phone(self):
+        return self.main_contact_number
+
+    def get_address(self):
+        return self.address
+
+    def get_nature(self):
+        return self.nature_of_business
+
+    def get_industry(self):
+        return self.industry_sector
+
+    def get_employees(self):
+        return self.no_of_employees
+
+    def get_vat(self):
+        return self.vat_reg_no
 
     class Meta:
         db_table = 'corporate_client'

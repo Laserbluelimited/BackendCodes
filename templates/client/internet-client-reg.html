@@ -1,0 +1,143 @@
+{% extends 'partials-actual/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <!-- select2 css -->
+    <link href="{% static 'libs/select2/dist/css/select2.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/testing.css' %}" rel="stylesheet" type="text/css" />
+
+
+    <!-- dropzone css -->
+    <link href="{% static 'libs/dropzone/dist/min/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block contents %}
+
+            <form method="post" action="{%url 'portal:crprt-cli-reg'%}">
+                    {%csrf_token%}
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+        
+                                        <h4 class="card-title">Basic Information</h4>
+                                        <p class="card-title-desc">Fill all information below</p>
+        
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        {%for error in form.company_name.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+                                                        <label for="productname">Business Name</label>
+                                                        <input id="productname" name="company_name" type="text" class="form-control" placeholder="Enter Business Name">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {%for error in form.main_contact_email.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+
+                                                        <label for="productname">Business Email</label>
+                                                        <input name="main_contact_email" type="email" class="form-control" >
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {%for error in form.main_contact_number.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+
+                                                        <label for="productname">Business Phone</label>
+                                                        <input name="main_contact_number" type="text" class="form-control" >
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        {%for error in form.username.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+
+                                                        <label for="productname">Business Username</label>
+                                                        <input name="username" type="text" class="form-control" >
+                                                    </div>
+
+
+                                                </div>
+        
+                                                <div class="col-sm-6">
+
+
+                                                    <div class="mb-3">
+                                                        {%for error in form.address.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+
+                                                        <label for="manufacturerbrand">Address</label>
+                                                        <div class="autocomplete-container" id="autocomplete-container"></div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {%for error in form.postal_code.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+
+                                                        <label for="manufacturerbrand">Postal Code</label>
+                                                        <input  name="postal_code" type="text" class="form-control" >
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {%for error in form.password1.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+
+                                                        <label for="manufacturerbrand">Password</label>
+                                                        <input  name="password1" type="password" class="form-control" >
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {%for error in form.password2.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+
+                                                        <label for="manufacturerbrand">Password again</label>
+                                                        <input  name="password2" type="password" class="form-control" >
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+        
+        
+                                    </div>
+                                </div>
+
+        
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+                        <div class="d-flex flex-wrap gap-2">
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Save Changes</button>
+                            <input type="reset" class="btn btn-secondary waves-effect waves-light" value="Cancel">
+                        </div>
+        </form>
+                        <!-- end row -->
+{% endblock %}
+
+{% block extra_javascript %}
+    <!-- select 2 plugin -->
+    <script src="{% static 'libs/select2/dist/js/select2.min.js' %}"></script>
+
+    <!-- dropzone plugin -->
+    <script src="{% static 'libs/dropzone/dist/min/dropzone.min.js' %}"></script>
+
+    <!-- init js -->
+    <script src="{% static 'js/pages/ecommerce-select2.init.js' %}"></script>
+    <!--location js-->
+    <script src="{% static 'js/testing.js' %}"></script>    
+
+
+{% endblock %}
+
+

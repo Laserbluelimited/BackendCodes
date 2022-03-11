@@ -17,7 +17,7 @@
                                             </div>
                                             <div class="col-sm-8">
                                                 <div class="text-sm-end">
-                                                    <button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i><a style="color: white;" href="{%url 'portal:doctor-registration'%}"> Add New Clinic</a></button>
+                                                    <a href="{%url 'portal:add-product'%}"><button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> Add New Product</button></a>
                                                 </div>
                                             </div><!-- end col-->
                                         </div>
@@ -35,6 +35,8 @@
                                                         <th class="align-middle">Product ID</th>
                                                         <th class="align-middle">Product Name</th>
                                                         <th class="align-middle">Product Price</th>
+                                                        <th class="align-middle">Product Description</th>
+                                                        <th class="align-middle">Created At</th>
                                                         <th class="align-middle">Details</th>
                                                         <th class="align-middle">Action</th>
                                                     </tr>
@@ -54,6 +56,8 @@
                                                         <td>
                                                             {{prod.price}}
                                                         </td>
+                                                        <td>{{prod.description}}</td>
+                                                        <td>{{prod.created_at}}</td>
                                                         <td>
                                                             <!-- Button trigger modal -->
                                                             <a href="{%url 'portal:product-detail' prod.slug%}" >
