@@ -92,13 +92,24 @@
             <span key="t-dashboards">Client Management</span>
           </a>
             <ul class="sub-menu" aria-expanded="false">
-            <li><a href="{% url 'portal:intrnt-cli-list' %}" key="t-default">Internet Clients</a></li>
-            <li><a href="{% url 'portal:crprt-cli-list' %}" key="t-default">Corporate Clients</a></li>
+            <li><a href="{% url 'portal:intrnt-cli-list' %}" key="t-default">Individual</a></li>
+            <li><a href="{% url 'portal:crprt-cli-list' %}" key="t-default">Corporate</a></li>
             </ul>
         </li>
 
-        <li class="menu-title" key="t-components">Components</li>
-
+        <li class="menu-title" key="t-components">Appointments</li>
+        <li>
+          <a href="javascript: void(0);" class="waves-effect">
+            <i class="bx bx-home-circle"></i
+            ><span class="badge rounded-pill bg-info float-end">04</span>
+            <span key="t-dashboards">Appointments</span>
+          </a>
+            <ul class="sub-menu" aria-expanded="false">
+            <li><a href="{% url 'portal:app-tab' %}" key="t-default">View Appointments</a></li>
+            <li><a href="{% url 'portal:app-reg' %}" key="t-default">Add Appointments</a></li>
+            <li><a href="{% url 'portal:app-cal' %}" key="t-default">Appointment Calendar</a></li>
+            </ul>
+        </li>
 
 
           </ul>

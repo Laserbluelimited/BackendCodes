@@ -5,24 +5,20 @@ from client_mgt.models import COMPANY_TYPE_CHOICES, GENDER_CHOICES, TITLE_CHOICE
 
 
 
-class InternetClientRegistrationForm(forms.Form):
+class InternetClientRegistrationForm(forms.ModelForm):
     #usermodel
     first_name = forms.CharField(required=True, max_length=20)
     last_name = forms.CharField(required=True, max_length=20)
+    username = forms.CharField(max_length=20,required=True)
     email = forms.EmailField(required=True)
     password1 = forms.CharField(required=True)
     password2 = forms.CharField(required=True)
+    address = forms.CharField(required=True)
 
-    #clientmodel
-    # title = forms.ChoiceField(choices=TITLE_CHOICES, required=True, )
-    # phone = forms.IntegerField(required=True)
-    # dob = forms.DateField()
-    # gender = forms.ChoiceField(choices=GENDER_CHOICES, required=True)
-    # address = forms.CharField(required=True)
-    # postal_code = forms.CharField(required=True)
+
     class Meta:
         model = InternetClient
-        fields = ['title', 'phone', 'dob', 'gender', 'address', 'postal_code']
+        fields = ['title', 'phone', 'dob', 'gender', 'postal_code']
 
 
     def clean_username(self):
@@ -35,6 +31,13 @@ class InternetClientRegistrationForm(forms.Form):
         if User.objects.filter(username=email).exists():
             raise forms.ValidationError('username already exists')
         return email
+    def clean_password2(self):
+        password2 = self.cleaned_data['password2']
+        password1 = self.cleaned_data['password1']
+        if password2 != password1:
+            raise forms.ValidationError('Passwords must be the same')
+        return password2
+
 
 
 class CorporateClientRegistrationForm(forms.ModelForm):
@@ -44,13 +47,12 @@ class CorporateClientRegistrationForm(forms.ModelForm):
     password1 = forms.CharField(required=True)
     password2 = forms.CharField(required=True)
     address = forms.CharField(required=True)
-
+    pur_system = forms.ChoiceField(required=True,choices=[(True, 'Yes'), (False, 'No')])
+    sub_newsletter = forms.ChoiceField(required=True,choices=[(True, 'Yes'), (False, 'No')])
     #clientmodel
     class Meta:
         model = CorporateClient
-        exclude = ['id', 'user', 'slug','addres', 'city', 'long', 'lat', 'country', 'auth_prsnl_first_name', 'auth_prsnl_last_name', 'auth_prsnl_title', ]
-
-    
+        exclude = ['id', 'user', 'slug','address', 'city', 'long', 'lat', 'country', 'sub_newsletter', 'pur_system']
 
 
     def clean_username(self):
@@ -59,7 +61,12 @@ class CorporateClientRegistrationForm(forms.ModelForm):
             raise forms.ValidationError('username already exists')
         return user
     def clean_email(self):
-        email = self.cleaned_data['username']
+        email = self.cleaned_data['email']
         if User.objects.filter(username=email).exists():
             raise forms.ValidationError('username already exists')
-        return email
+    def clean_password2(self):
+        password2 = self.cleaned_data['password2']
+        password1 = self.cleaned_data['password1']
+        if password2 != password1:
+            raise forms.ValidationError('Passwords must be the same')
+        return password2

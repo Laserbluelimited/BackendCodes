@@ -33,8 +33,8 @@
     
                                             <div class="col-xl-6">
                                                 <div class="mt-4 mt-xl-3">
-                                                    <a href="javascript: void(0);" class="text-primary">{{clinic.name}}</a>
-                                                    <h4 class="mt-1 mb-3">{{clinic.name}}</h4>
+                                                    <a href="javascript: void(0);" class="text-primary">{{doctor}}</a>
+                                                    <h4 class="mt-1 mb-3">{{doctor}}</h4>
     
                                                     <p class="text-muted float-start me-3">
                                                         <span class="bx bxs-star text-warning"></span>
@@ -59,34 +59,21 @@
                                                 <table class="table mb-0 table-bordered">
                                                     <tbody>
                                                         <tr>
-                                                            <th scope="row" style="width: 400px;">Name of Clinic</th>
-                                                            <td>{{clinic.name}}</td>
+                                                            <th scope="row" style="width: 400px;">Name of Doctor</th>
+                                                            <td>{{doctor}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th scope="row">Email</th>
-                                                            <td>{{clinic.user.email}}</td>
+                                                            <td>{{doctor.user.email}}</td>
                                                         </tr>
+                                                        <!-- <tr>
+                                                            <th scope="row">Joined At</th>
+                                                            <td>{{doctor.user.created_at}}</td>
+                                                        </tr> -->
                                                         <tr>
-                                                            <th scope="row">Created At</th>
-                                                            <td>{{clinic.user.created_at}}</td>
+                                                            <th scope="row">Username</th>
+                                                            <td>{{doctor.user.username}}</td>
                                                         </tr>
-                                                        <tr>
-                                                            <th scope="row">Live?</th>
-                                                            <td>{{clinic.verified}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">Location</th>
-                                                            <td>{{clinic.cliniclocation.address}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">City</th>
-                                                            <td>{{clinic.cliniclocation.city}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">Postal Code</th>
-                                                            <td>{{clinic.cliniclocation.postal_code}}</td>
-                                                        </tr>
-                                                    </tbody>
                                                 </table>
                                             </div>
                                         </div>
@@ -104,7 +91,7 @@
                             <div class="col-xl-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title mb-4">Line Chart</h4>
+                                        <h4 class="card-title mb-4">Amount made</h4>
                                         <div id="line-chart" class="e-charts"></div>
                                     </div>
                                 </div>
@@ -112,7 +99,7 @@
                             <div class="col-xl-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title mb-4">Mix Line-Bar</h4>
+                                        <h4 class="card-title mb-4">Successful appointments</h4>
                                         <div id="mix-line-bar" class="e-charts"></div>
                                     </div>
                                 </div>

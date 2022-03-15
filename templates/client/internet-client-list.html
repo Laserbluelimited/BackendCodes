@@ -35,6 +35,8 @@
                                                         <th class="align-middle">Client ID</th>
                                                         <th class="align-middle"> Name</th>
                                                         <th class="align-middle">Phone Number</th>
+                                                        <th class="align-middle">Email</th>
+                                                        <th class="align-middle">Postal Code</th>
                                                         <th class="align-middle">Address</th>
                                                         
                                                         <th class="align-middle">View details</th>
@@ -56,12 +58,14 @@
                                                         <td>
                                                             {{c.get_phone}}
                                                         </td>
+                                                        <td>{{c.get_email}}</td>
+                                                        <td>{{c.get_postal_code}}</td>
                                                         <td>
-                                                            <span class="badge badge-pill badge-soft-success font-size-12">{{c.get_address}}</span>
+                                                            {{c.get_address}}
                                                         </td>
                                                         <td>
                                                             <!-- Button trigger modal -->
-                                                            <a href="{%url 'portal:clinic-detail' clinic.id%}" >
+                                                            <a href="" >
                                                             <button type="button" class="btn btn-primary btn-sm btn-rounded" data-bs-toggle="modal" >
                                                                  View Details
                                                             </button>

@@ -12,7 +12,7 @@
 {% endblock %}
 {% block contents %}
 
-            <form method="post" action="{%url 'portal:crprt-cli-reg'%}">
+            <form method="post" action="{%url 'portal:intrnt-cli-reg'%}">
                     {%csrf_token%}
 
                         <div class="row">
@@ -26,44 +26,77 @@
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="mb-3">
-                                                        {%for error in form.company_name.errors%}
+                                                        {%for error in form.first_name.errors%}
                                                         <label style="color: red;">{{error}}</label>
                                                         {%endfor%}<br>
-                                                        <label for="productname">Business Name</label>
-                                                        <input id="productname" name="company_name" type="text" class="form-control" placeholder="Enter Business Name">
+                                                        <label for="productname">First Name</label>
+                                                        <input id="productname" name="first_name" type="text" class="form-control" placeholder="Enter First Name">
                                                     </div>
                                                     <div class="mb-3">
-                                                        {%for error in form.main_contact_email.errors%}
+                                                        {%for error in form.last_name.errors%}
                                                         <label style="color: red;">{{error}}</label>
                                                         {%endfor%}<br>
 
-                                                        <label for="productname">Business Email</label>
-                                                        <input name="main_contact_email" type="email" class="form-control" >
+                                                        <label for="productname">Last Name</label>
+                                                        <input name="last_name" type="text" class="form-control" >
                                                     </div>
                                                     <div class="mb-3">
-                                                        {%for error in form.main_contact_number.errors%}
+                                                        {%for error in form.title.errors%}
                                                         <label style="color: red;">{{error}}</label>
                                                         {%endfor%}<br>
-
-                                                        <label for="productname">Business Phone</label>
-                                                        <input name="main_contact_number" type="text" class="form-control" >
+                                                        <label class="control-label">Title</label><br>
+                                                        <select class="form-control select2" name="title">
+                                                            <option>Select</option>
+                                                            
+                                                            {%for choice in form.title.field.choices%}
+                                                            <option value="{{choice.0}}">{{choice.1}}</option><p>{{choice}}</p>
+                                                            {%endfor%}
+                                                        </select>
                                                     </div>
 
                                                     <div class="mb-3">
-                                                        {%for error in form.username.errors%}
+                                                        {%for error in form.gender.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+                                                        <label class="control-label">Gender</label><br>
+                                                        <select class="form-control select2" name="gender">
+                                                            <option>Select</option>
+                                                            
+                                                            {%for choice in form.gender.field.choices%}
+                                                            <option value="{{choice.0}}">{{choice.1}}</option>
+                                                            {%endfor%}
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        {%for error in form.email.errors%}
                                                         <label style="color: red;">{{error}}</label>
                                                         {%endfor%}<br>
 
-                                                        <label for="productname">Business Username</label>
-                                                        <input name="username" type="text" class="form-control" >
+                                                        <label for="productname">Email</label>
+                                                        <input name="email" type="email" class="form-control" >
                                                     </div>
+                                                    <div class="mb-3">
+                                                        {%for error in form.phone.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
 
+                                                        <label for="productname">Phone Number</label>
+                                                        <input name="phone" type="text" class="form-control" >
+                                                    </div>
 
                                                 </div>
         
                                                 <div class="col-sm-6">
-
-
+                                                    <div class="mb-3 row">
+                                                        {%for error in form.dob.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+                                                        <label for="productname" class=" col-form-label">Date of Birth</label><br>
+                                                            <input class="form-control" type="date" value="" name="dob"
+                                                                id="example-date-input">
+                                                    </div>
+            
                                                     <div class="mb-3">
                                                         {%for error in form.address.errors%}
                                                         <label style="color: red;">{{error}}</label>
@@ -80,6 +113,16 @@
                                                         <label for="manufacturerbrand">Postal Code</label>
                                                         <input  name="postal_code" type="text" class="form-control" >
                                                     </div>
+
+                                                    <div class="mb-3">
+                                                        {%for error in form.username.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+
+                                                        <label for="productname">Username</label>
+                                                        <input name="username" type="text" class="form-control" >
+                                                    </div>
+
                                                     <div class="mb-3">
                                                         {%for error in form.password1.errors%}
                                                         <label style="color: red;">{{error}}</label>

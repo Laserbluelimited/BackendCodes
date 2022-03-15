@@ -1,13 +1,14 @@
 from random import choices
+import string
 from xml.parsers.expat import model
 from django.db import models
 from django.template.defaultfilters import slugify
 
 # Create your models here.
 TITLE_CHOICES = (
-    ('miss', 'Miss'),
-    ('mr', 'Mr.'),
-    ('mrs', 'Mrs.'),
+    ('Miss', 'Miss'),
+    ('Mr', 'Mr.'),
+    ('Mrs', 'Mrs.'),
 )
 
 GENDER_CHOICES = (
@@ -53,6 +54,8 @@ class InternetClient(models.Model):
     country = models.CharField('country', max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    crprt_client = models.ForeignKey('CorporateClient', null=True, on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=255, help_text='Unique Value for product page URL, created from name.')
 
     class Meta:
         db_table = 'internet_client'
@@ -60,8 +63,17 @@ class InternetClient(models.Model):
     def __str__(self):
         return self.title + ' ' + self.user.first_name + self.user.last_name
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            name = self.user.first_name + str(self.user.id)
+            self.slug = slugify(name)
+        return super(CorporateClient,self).save(*args, **kwargs)
+
     def get_name(self):
         return self.title + ' ' + self.user.first_name + self.user.last_name
+
+    def get_email(self):
+        return self.user.email
 
     def get_phone(self):
         return self.phone
@@ -104,9 +116,9 @@ class CorporateClient(models.Model):
     postal_code = models.CharField('postal_code', max_length=20)
     country = models.CharField('country', max_length=50)
     pur_system = models.BooleanField('pur_order_sy')
-    bill_name = models.CharField('billing_name', max_length=255, unique=True, null=True)
-    bill_phone = models.IntegerField('billing_phone', unique=True, null=True)
-    bill_email = models.EmailField('company_email', unique=True, null=True)
+    bill_name = models.CharField('billing_name', max_length=255, null=True)
+    bill_phone = models.IntegerField('billing_phone', null=True)
+    bill_email = models.EmailField('company_email', null=True)
     auth_prsnl_first_name = models.CharField('auth_personel_frst_name', max_length=100, null=True)
     auth_prsnl_last_name = models.CharField('auth_personel_last_name', max_length=100, null=True)
     auth_prsnl_title = models.CharField('auth_personel_title', max_length=20, choices=TITLE_CHOICES, null=True)
@@ -125,6 +137,18 @@ class CorporateClient(models.Model):
 
     def get_name(self):
         return self.company_name
+
+    def get_bill_name(self):
+        return self.bill_name
+
+    def get_bill_email(self):
+        return self.bill_email
+
+    def get_bill_phone(self):
+        return self.bill_phone
+
+    def get_pos(self):
+        return self.pur_system
 
     def get_type(self):
         return self.company_type
@@ -149,6 +173,13 @@ class CorporateClient(models.Model):
 
     def get_vat(self):
         return self.vat_reg_no
+
+    def get_apn(self):
+        if self.auth_prsnl_first_name and self.auth_prsnl_last_name and self.auth_prsnl_title:
+            return self.auth_prsnl_title + ' ' + self.auth_prsnl_first_name + ' ' + self.auth_prsnl_last_name
+        else:
+            return None
+
 
     class Meta:
         db_table = 'corporate_client'

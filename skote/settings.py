@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'prod_mgt',
     'schedules',
     'client_mgt',
+    'booking',
     # Third Party App
     'crispy_forms',
     'django.contrib.sites',

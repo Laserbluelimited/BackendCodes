@@ -2,7 +2,6 @@ from enum import unique
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from .managers import UserManager, GenerateUsername
-from skote.settings import DEFAULT_PASSWORD
 
 
 
@@ -26,15 +25,8 @@ class User(AbstractUser):
             self.username = user_obj.generate_username()
         return super().save(*args, **kwargs)
 
-# class Contact(models.Model):
 
-#     id = models.IntegerField('contact_id', unique=True, primary_key=True, default=1110000)
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     email = models.EmailField('email')
-#     fb
 
-#     def __str__(self):
-#         return self.user.email
 
 class Phone(models.Model):
     id = models.IntegerField('phone_id', unique=True, primary_key=True)

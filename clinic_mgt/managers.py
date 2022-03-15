@@ -3,14 +3,6 @@ import requests
 from skote.settings import GEOAPIFY_API_KEY
 
 
-# class ClinicManager(Manager):
-#     def verify(self):
-#         self.verified = True
-#         return self.verified
-#     def make_available(self):
-#         self.available_to_work = True
-#         return 
-
 class AddressRequest():
 
     def get_geodata(self, address):
@@ -24,7 +16,8 @@ class AddressRequest():
         longitude = data['features'][0]['properties']['lon']
         latitude = data['features'][0]['properties']['lat']
         city = data['features'][0]['properties']['city']
+        country = data['features'][0]['properties']['country']
 
-        geo_data = {'latitude':latitude, 'longitude':longitude, 'city':city}
+        geo_data = {'latitude':latitude, 'longitude':longitude, 'city':city, 'country':country}
         return geo_data
 

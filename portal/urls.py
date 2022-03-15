@@ -1,11 +1,14 @@
 from unicodedata import name
 from django.urls import path
 
+
+
 from . import views
 from clinic_mgt import views as clinic_views
 from prod_mgt import views as prod_views
 from schedules import views as sche_views
 from client_mgt import views as client_views
+from booking import views as booking_views
 
 
 app_name='portal'
@@ -14,7 +17,7 @@ urlpatterns = [
     path('', views.AdminDashboardPageView.as_view(), name='dashboard'),
     path('clinic-list', clinic_views.ClinicListView.as_view(), name='clinic-list'),
     path('clinic-registration', clinic_views.ClinicRegistration.as_view(), name='clinic-registration'),
-    path('clinic-detail/<url_para>', clinic_views.ClinicDetailView.as_view(), name='clinic-detail'),
+    path('doctor-detail/<slug>', clinic_views.DoctorDetailView.as_view(), name='doctor-detail'),
     path('doctor-registration', clinic_views.DoctorRegistration.as_view(), name='doctor-registration'),
     path('doctor-list', clinic_views.DoctorListView.as_view(), name='doctor-list'),
     path('doctor-sche-calendar',sche_views.DoctorScheduleCalendarView.as_view(), name='doc-sche-cal'),
@@ -29,6 +32,14 @@ urlpatterns = [
     path('internet-clients-list', client_views.InternetClientTableView.as_view(), name='intrnt-cli-list'),
     path('corporate-client-list', client_views.CorporateClientTableView.as_view(), name='crprt-cli-list'),
     path('internet-client-reg', client_views.InternetClientRegistrationView.as_view(), name='intrnt-cli-reg'),
-    path('corporate-client-reg', client_views.CorporateClientRegistrationView.as_view(), name='crprt-cli-reg')
+    path('corporate-client-reg', client_views.CorporateClientRegistrationView.as_view(), name='crprt-cli-reg'),
+    path('crprt-client-detail/<slug>', client_views.CorporateDetailView.as_view(), name='crprt-cli-det'),
+    path('int-client-detail/<slug>', client_views.InternetDetailView.as_view(), name='intrnt-cli-det'),
+
+    #appointment
+    path('appointment-reg', booking_views.AppointmentRegistrationView.as_view(), name='app-reg'),
+    path('appointment-table', booking_views.AppointmentTableView.as_view(), name='app-tab'),
+    path('appointment-calendar', booking_views.AppointmentCalendarView.as_view(), name='app-cal'),
+
 
 ]

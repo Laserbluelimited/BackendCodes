@@ -43,6 +43,11 @@
                                                         <th class="align-middle">Number of Employees</th>
                                                         <th class="align-middle">Created At</th>
                                                         <th class="align-middle">Address</th>
+                                                        <th class="align-middle">Authorised Personnel Name</th>
+                                                        <th class="align-middle">Account Name</th>
+                                                        <th class="align-middle">Account Email</th>
+                                                        <th class="align-middle">Account Phone</th>
+                                                        <th class="align-middle">POS</th>
                                                         <th class="align-middle">View details</th>
                                                         <th class="align-middle">Action</th>
                                                     </tr>
@@ -72,6 +77,11 @@
                                                             <span class="badge badge-pill badge-soft-success font-size-12">{{c.created_at}}</span>
                                                         </td>
                                                         <td>{{c.get_address}}</td>
+                                                        <td>{{c.get_apn}}</td>
+                                                        <td>{{c.get_bill_name}}</td>
+                                                        <td>{{c.get_bill_email}}</td>
+                                                        <td>{{c.get_bill_phone}}</td>
+                                                        <td>{{c.get_pos}}</td>
                                                         <td>
                                                             <!-- Button trigger modal -->
                                                             <a href="" >

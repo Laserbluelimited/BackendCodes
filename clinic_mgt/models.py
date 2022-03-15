@@ -47,10 +47,17 @@ class Doctor(models.Model):
     clinic = models.ForeignKey('Clinic', on_delete=models.CASCADE)
     verified = models.BooleanField('verified', default=True)
     available_to_work = models.BooleanField('available_to_work', default=True)
-    slug = models.SlugField(max_length=50, help_text='Unique Value for product page URL, created from name.')
+    slug = models.SlugField(max_length=255, help_text='Unique Value for product page URL, created from name.')
 
 
- 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            name = self.user.first_name + str(self.user.id)
+            self.slug = slugify(name)
+        return super(Doctor,self).save(*args, **kwargs)
+
+    def __str__(self):
+        return 'Dr. ' + self.user.first_name + ' ' + self.user.last_name
 
 
 
@@ -86,30 +93,3 @@ class ClinicLocation(models.Model):
     def __str__(self):
         return self.address
 
-class AppointmentDates(models.Model):
-    db_table = 'appointment_dates'
-    id = models.IntegerField('appointment_date_id', primary_key=True, unique=True)
-    start_time = models.DateTimeField('start_time')
-    end_time = models.DateTimeField('end_time')
-    clinic = models.OneToOneField('Clinic', on_delete=models.CASCADE, unique=False)
-    doctor = models.OneToOneField('Doctor', on_delete=models.CASCADE, unique=False)
-    
-    def __str__(self):
-        return "Appointment start time: " +self.start_time
-
-# what is want to do:
-# 1. create forms
-# 2. enable registration in views:
-#     a. first of all save the user part
-#     b. then save the clinic/doctor part
-# 3. test
-
-"""
-    Note to self:
-    When a clinic registers, the user name and email is added to the user table
-    The other clinic information is added to Clinic table
-    The Contacts: address, social media handle is added the contact table
-    The phone number of clinic is added to the phone number table
-    The location of clinic is added to ClinicLocation table
-
-"""

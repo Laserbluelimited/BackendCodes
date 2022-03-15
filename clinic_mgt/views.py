@@ -4,11 +4,11 @@ from pydoc import doc
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from authentication.models import User
-from .models import Clinic, ClinicLocation, Doctor, AppointmentDates
+from .models import Clinic, ClinicLocation, Doctor
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ClinicRegistrationForm, DoctorRegistrationForm
 from .managers import AddressRequest
-from authentication.forms import LoginForm
+
 
 
 def id_increment(model, initial):
@@ -125,10 +125,10 @@ class DoctorRegistration(LoginRequiredMixin, View):
 
 
 
-class ClinicDetailView(View):
+class DoctorDetailView(View):
     login_url = '/auth/login'
     redirect_field_name = 'redirect_to'
-    template_name ='clinic/clinic-detail.html'
-    def get(self, request, url_para):
-        clinic = get_object_or_404(Clinic, id=url_para)
-        return render(request, self.template_name, context={'clinic':clinic})
+    template_name ='clinic/doctor-detail.html'
+    def get(self, request,slug):
+        doctor = get_object_or_404(Doctor, slug=slug)
+        return render(request, self.template_name, context={'doctor':doctor})

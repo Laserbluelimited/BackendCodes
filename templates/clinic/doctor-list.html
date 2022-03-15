@@ -60,30 +60,11 @@
                                                         </td>
                                                         <td>
                                                             <!-- Button trigger modal -->
-                                                            <button type="button" class="btn btn-primary btn-sm btn-rounded" data-bs-toggle="modal" data-bs-target=".orderdetailsModal{{doc.id}}">
+                                                            <a href="{%url 'portal:doctor-detail' doc.slug%}" ><button type="button" class="btn btn-primary btn-sm btn-rounded" data-bs-toggle="modal" data-bs-target=".orderdetailsModal{{doc.id}}">
                                                                 View Details
-                                                            </button>
+                                                            </button></a>
 
 
-                                                            <div class="modal fade orderdetailsModal{{doc.id}}"  role="dialog" aria-labelledby="orderdetailsModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="orderdetailsModalLabel">Details</h5>
-                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <p class="mb-2">Doctor id: <span class="text-primary">{{doc.id}}</span></p>
-                                                                            <p class="mb-4">Doctor Name: <span class="text-primary">Dr. {{doc.user.first_name}} {{doc.user.last_name}}</span></p>
-    
-    
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
                                                             
                                                         </td>
                                                         <td>

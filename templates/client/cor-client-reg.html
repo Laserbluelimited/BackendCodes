@@ -162,8 +162,6 @@
                                                 </div>
         
                                                 <div class="col-sm-6">
-
-
                                                     <div class="mb-3">
                                                         {%for error in form.no_of_employees.errors%}
                                                         <label style="color: red;">{{error}}</label>
@@ -186,16 +184,14 @@
                                                         {%for error in form.pur_system.errors%}
                                                         <label style="color: red;">{{error}}</label>
                                                         {%endfor%}<br>
-                                                        <label class="d-block mb-3">Do you use a Purchase Order System :</label>
-
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="pur_system" id="inlineRadio1" value="Yes">
-                                                            <label class="form-check-label" for="inlineRadio1">Yes</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="pur_system" id="inlineRadio2" value="No">
-                                                            <label class="form-check-label" for="inlineRadio2">No</label>
-                                                        </div>                                                          
+                                                        <label class="control-label">Do you use a Purchase System</label><br>
+                                                        <select class="form-control select2" name="pur_system">
+                                                            <option>Select</option>
+                                                            
+                                                            {%for choice in form.pur_system.field.choices%}
+                                                            <option value="{{choice.0}}">{{choice.1}}</option>
+                                                            {%endfor%}
+                                                        </select>
                                                     </div>
                                                     <div class="mb-3">
                                                         {%for error in form.preferred_mode.errors%}
@@ -255,8 +251,6 @@
                                                 </div>
         
                                                 <div class="col-sm-6">
-
-
                                                     <div class="mb-3">
                                                         {%for error in form.bill_phone.errors%}
                                                         <label style="color: red;">{{error}}</label>
@@ -264,21 +258,6 @@
 
                                                         <label for="manufacturerbrand">Account Phone</label>
                                                         <input  name="bill_phone" type="text" class="form-control" >
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        {%for error in form.sub_newsletter.errors%}
-                                                        <label style="color: red;">{{error}}</label>
-                                                        {%endfor%}<br>
-                                                        <label class="d-block mb-3">Would you like to subscribe tou our news letter</label>
-
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="sub_newsletter" id="inlineRadio1" value="Yes">
-                                                            <label class="form-check-label" for="inlineRadio1">Yes</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="sub_newsletter" id="inlineRadio2" value="No">
-                                                            <label class="form-check-label" for="inlineRadio2">No</label>
-                                                        </div>                                                          
                                                     </div>
                                                     
                                                 </div>
@@ -292,7 +271,71 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+        
+                                        <h4 class="card-title">Authorised Personnel Information</h4>
+                                        <p class="card-title-desc">Fill all information below</p>
+        
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        {%for error in form.auth_prsnl_first_name.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+                                                        <label for="productname">Authorised Personnel First Name</label>
+                                                        <input id="productname" name="auth_prsnl_first_name" type="text" class="form-control" placeholder="">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {%for error in form.auth_prsnl_last_name.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
 
+                                                        <label for="productname">Authorised Personnel Last Name</label>
+                                                        <input name="auth_prsnl_last_name" type="text" class="form-control" >
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        {%for error in form.auth_prsnl_title.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+                                                        <label class="control-label">Authorised Personnel Title</label><br>
+                                                        <select class="form-control select2" name="auth_prsnl_title">
+                                                            <option>Select</option>
+                                                            
+                                                            {%for choice in form.auth_prsnl_title.field.choices%}
+                                                            <option value="{{choice.0}}">{{choice.1}}</option>
+                                                            {%endfor%}
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {%for error in form.sub_newsletter.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+                                                        <label class="control-label">Would you like to subscribe to our newsletter</label><br>
+                                                        <select class="form-control select2" name="sub_newsletter">
+                                                            <option>Select</option>
+                                                            
+                                                            {%for choice in form.sub_newsletter.field.choices%}
+                                                            <option value="{{choice.0}}">{{choice.1}}</option>
+                                                            {%endfor%}
+                                                        </select>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+        
+        
+                                    </div>
+                                </div>
+
+        
+                            </div>
+                        </div>
 
 
                         <div class="d-flex flex-wrap gap-2">

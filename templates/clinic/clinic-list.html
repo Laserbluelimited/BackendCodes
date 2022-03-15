@@ -34,6 +34,8 @@
                                                         </th>
                                                         <th class="align-middle">Clinic ID</th>
                                                         <th class="align-middle">Clinic Name</th>
+                                                        <th class="align-middle">Clinic Address</th>
+                                                        <th class="align-middle">Postal Code</th>
                                                         <th class="align-middle">City</th>
                                                         <th class="align-middle">Available to work</th>
                                                         <th class="align-middle">View details</th>
@@ -52,6 +54,8 @@
                                                         </td>
                                                         <td><a href="javascript: void(0);" class="text-body fw-bold">#{{clinic.id}}</a> </td>
                                                         <td>{{clinic.name}}</td>
+                                                        <td>{{clinic.cliniclocation.address}}</td>
+                                                        <td>{{clinic.cliniclocation.postal_code}}</td>
                                                         <td>
                                                             {{clinic.cliniclocation.city}}
                                                         </td>
@@ -60,7 +64,7 @@
                                                         </td>
                                                         <td>
                                                             <!-- Button trigger modal -->
-                                                            <a href="{%url 'portal:clinic-detail' clinic.id%}" >
+                                                            <a href="" >
                                                             <button type="button" class="btn btn-primary btn-sm btn-rounded" data-bs-toggle="modal" >
                                                                  View Details
                                                             </button>
