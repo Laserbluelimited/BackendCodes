@@ -25,4 +25,4 @@ django-upload-validator>=1.1.5,<1.1.9
 #uWSGI>=2.0.19.1,<2.1
 django-embed-video>=1.4.1,<1.4.6
 django-crispy-forms>=1.14.0,<1.14.6
-###foo
+django-import-export>=2.7.1,<2.7.7
