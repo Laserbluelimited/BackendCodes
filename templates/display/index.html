@@ -13,55 +13,58 @@
     <title>Drivers Medical</title>
 </head>
 <body>
-  <header class="header-content">
-    <div class="logo">
-      <a href="index.html"><img src="/static/display/img/DriverMEDICAL LOGO 1.png" alt=""></a>
-    </div>
-    <div class="nav" id="nav">
-      <div class="header-left">
-          <ul class="left-links">
-              <li><a href="#home">Home</a></li>
-              <li><a href="#news">About Us</a></li>
-              <li class="left-links dropdown">
-                <a class="left-links dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Our Services</a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">HGV Medical</a></li>
-                  <li><a class="dropdown-item" href="#">PVC/Bus Medical</a></li>
-                  <li><a class="dropdown-item" href="#">Taxi Medical</a></li>
-                  <li><a class="dropdown-item" href="#">Business Services</a></li>
-                  <li><a class="dropdown-item" href="#">Other Medicals</a></li>
-                </ul>
-              </li>
-              <li><a href="#news">Location</a></li>
-              <li><a href="#news">Contact Us</a></li>
+  <nav class="navbar navbar-expand-md">
+    <div class="container-fluid">
+      <a class="logo" href="index.html"><img src="/static/display/img/DriverMEDICAL LOGO 1.png" alt=""></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About Us</a>
+          </li>
+          <li class="nav-items dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Our Services</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="hgvmedical.html">HGV Medical</a></li>
+              <li><a class="dropdown-item" href="pvcmedical.html">PVC/Bus Medical</a></li>
+              <li><a class="dropdown-item" href="taxi.html">Taxi Medical</a></li>
+              <li><a class="dropdown-item" href="#">Business Services</a></li>
+              <li><a class="dropdown-item" href="#">Other Medicals</a></li>
             </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Location</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact Us</a>
+          </li>
+        </ul>
+        <ul class="endbar-nav">
+          <li class="end-item">
+            <a href="booking.html">
+              <button type="button" class="btn">Book Now</a></button>
+            </a>
+          </li>
+          <li class="end-items dropdown dropstart">
+            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+            Login</button>            
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">HGV Medical</a></li>
+              <li><a class="dropdown-item" href="#">PVC/Bus Medical</a></li>
+              <li><a class="dropdown-item" href="#">Taxi Medical</a></li>
+              <li><a class="dropdown-item" href="#">Business Services</a></li>
+              <li><a class="dropdown-item" href="#">Other Medicals</a></li>
+            </ul>
+          </li>
+        </ul>
       </div>
-
-      <div class="header-right">
-          <ul class="right">
-              <li class="right-links">
-                  <a class="booknow" href="">Book Now</a>
-              </li>
-              <li class="right-links dropdown">
-                <a class="login dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Login</a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">HGV Medical</a></li>
-                  <li><a class="dropdown-item" href="#">PVC/Bus Medical</a></li>
-                  <li><a class="dropdown-item" href="#">Taxi Medical</a></li>
-                  <li><a class="dropdown-item" href="#">Business Services</a></li>
-                  <li><a class="dropdown-item" href="#">Other Medicals</a></li>
-                </ul>
-              </li>                         
-          </ul>
-      </div>
-  </div>
-
-  <div class="icon-wrapper">
-      <button href="" class="icon" id="icon">
-          <i class="fa fa-bars"></i>
-          <img src="" alt="">
-  </div>
-  </header>
+    </div>
+  </nav>
 
   <div class="body">
     <div id="demo" class="carousel slide" data-bs-ride="carousel">
@@ -118,42 +121,42 @@
       <div class="easy-card">
         <div class="card">
             <div class="card-info">
-              <div class="easy-image">
-                <div class="card-image">
+              <div class="easy-box">
+                <div class="box-image">
                   <img src="/static/display/img/calendar.png" alt="">
                 </div>
                 <h1>01</h1>
               </div>
               <div class="card-texts">
-                <h2 class="cbook">Book Your Location, Date & Time.</h2>
-                <p>Set time zone automatically using current location, click a location, Set your date.</p>
+                <h2>Book Your Location, Date & Time.</h2>
+                <p>Set time zone automatically using current location, click a location, set your date.</p>
               </div>
             </div>                
          </div>
          <div class="card">
           <div class="card-info">
-            <div class="easy-image">
-              <div class="card-image">
+            <div class="easy-box">
+              <div class="box-image">
                 <img src="/static/display/img/Doctor.png" alt="">
               </div>
               <h1>02</h1>
             </div>
             <div class="card-texts">
-              <h2 class="meet">Meet your Doctor</h2>
-              <p>Meet your doctor at your own schedule time and at your prefered clinic.</p>
+              <h2>Meet your Doctor</h2>
+              <p class="meet">Meet your doctor at your own schedule time and at your prefered clinic.</p>
             </div>
           </div>                
        </div>
        <div class="card">
         <div class="card-info">
-          <div class="easy-image">
-            <div class="card-image">
+          <div class="easy-box">
+            <div class="box-image">
               <img src="/static/display/img/note.png" alt="">
             </div>
             <h1>03</h1>
           </div>
-          <div class="card-texts">
-            <h2 class="submit">Submit your completed medical assessment.</h2>
+          <div class="card-texts2">
+            <h2>Submit your completed medical assessment.</h2>
             <p>All completed medical examination reports must be submitted to drivermedicals.uk to facilitate prompt validation of the licence.</p>
           </div>
         </div>                
@@ -219,14 +222,14 @@
         </div>              
       </div>
       <div class="services-card2">
-        <div class="scard3">
+        <div class="scard2">
           <div class="scard-image">
             <img src="/static/display/img/taxi.png" alt="">
             <img src="/static/display/img/dash.png" alt="">
           </div>
           <h1>Taxi Medical</h1>               
         </div>
-        <div class="scard4">
+        <div class="scard">
           <div class="scard2-image">
             <img src="/static/display/img/note.png" alt="">
             <img src="/static/display/img/dash.png" alt="">
@@ -276,50 +279,59 @@
     </div>
   </div>
 
-  <div class="footer">
-    <div class="footer-content">
-        <div class="footer-left">
-            <div class="footer-logo">
-              <a href="index.html"><img src="/static/display/img/DriverMEDICAL LOGO 2.png" alt=""></a>
-            </div>
-            <p>All driver medicals are completed by GMC registered doctors in accordance with current DVLA Group 2 guidelines.</p>
-            <div class="footer-icons">
-                <a href=""><i class="fab fa-linkedin"></i></a>
-                <a href=""><i class="fab fa-instagram"></i></a>
-                <a href=""><i class="fab fa-twitter"></i></a>
-            </div>
+  <div class="hfooter">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3">
+          <a href="index.html"><img class="img-fluid mb-2" src="/static/display/img/DriverMEDICAL LOGO 2.png" alt="New York"></a>
+          <p>All driver medicals are completed by GMC registered doctors in accordance with current DVLA Group 2 guidelines.</p>
+          <a href=""><i class="fab fa-linkedin"></i></a>
+          <a href=""><i class="fab fa-instagram"></i></a>
+          <a href=""><i class="fab fa-twitter"></i></a>
         </div>
-
-        <div class="footer-right">
-            <ul class="footer-links">
-                <li class="footer-link">
-                    <p>Menu</p>
-                    <div class="footer-list">
-                        <a href="">About Us</a>
-                        <a href="">Our Services</a>
-                        <a href="">Locations</a>
-                    </div>
-                </li>
-                <li class="footer-link">
-                    <p>Quick Links</p>
-                    <div class="footer-list">
-                        <a href="">HGV Medical</a>
-                        <a href="">PVC/Bus Medical</a>
-                        <a href="">Taxi Medical</a>
-                        <a href="">Business Services</a>
-                    </div>
-                </li>
-                <li class="footer-link">
-                    <p>Contact Us</p>
-                    <div class="footer-list">
-                      <p><span class="fas fa-map-marker-alt"></span>United Kingdom</p>
-                      <p><span class="fas fa-phone-alt"></span>0203 963 9083</p>
-                      <p><span class="fas fa-envelope"></span>Bookings@drivermedicals.uk</p>
-                        
-                    </div>
-                </li>
-            </ul>
+        <div class="col-sm-3">
+          <h2>Ouick Links</h2>
+          <ul class="nav flex-column">
+            <li class="hnav-item">
+              <a class="hnav-link" href="#">About Us</a>
+            </li>
+            <li class="hnav-item">
+              <a class="hnav-link" href="#">Our Services</a>
+            </li>
+            <li class="hnav-item">
+              <a class="hnav-link" href="#">Locations</a>
+            </li>
+          </ul>
         </div>
+        <div class="col-sm-3">
+          <h2>Ouick Links</h2>
+          <ul class="nav flex-column">
+            <li class="hnav-item">
+              <a class="hnav-link" href="#">HGV Medical</a>
+            </li>
+            <li class="hnav-item">
+              <a class="hnav-link" href="#">PVC/Bus Medical</a>
+            </li>
+            <li class="hnav-item">
+              <a class="hnav-link" href="#">Taxi Medical</a>
+            </li>
+            <li class="hnav-item">
+              <a class="hnav-link" href="#">Business Services</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-3">
+          <div class="hend">
+            <h2>Ouick Links</h2> 
+            <span class="fas fa-map-marker-alt"></span>       
+            <p>United Kingdom</p>
+            <span class="fas fa-phone-alt"></span>
+            <p>0203 963 9083</p>
+            <span class="fas fa-envelope"></span>
+            <p class="text-break">Bookings@drivermedicals.uk</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -337,5 +349,6 @@
 
   <script src="/bcss/bootstrap.bundle.js"></script>
   <script src="/static/display/js/script.js"></script>
+
 </body>
 </html>
