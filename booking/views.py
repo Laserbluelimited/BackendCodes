@@ -5,6 +5,7 @@ from multiprocessing import context
 from pydoc import doc
 from time import time
 from urllib import response
+from django import views
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
@@ -149,3 +150,21 @@ def getTimes(request):
     return JsonResponse(response_data)
 
 
+class CBookingView(views.View):
+    def get(self, request):
+        return render(request, 'display/booking.html')
+
+
+class CCouponView(views.View):
+    def get(self, request):
+        return render(request, 'display/coupon.html')
+
+
+class CServiceView(views.View):
+    def get(self, request):
+        return render(request, 'display/service.html')
+
+
+class CUserView(views.View):
+    def get(self, request):
+        return render(request, 'display/user.html')

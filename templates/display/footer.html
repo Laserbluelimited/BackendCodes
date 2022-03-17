@@ -1,82 +1,67 @@
 {% load static %}
 {% block footer %}
-<div class="trust">
-    <div class="trust-headline">
-      <div class="trust-image">
-        <img src="{%static 'display/img/hero4.png'%}" alt="">
+<div class="hfooter">
+  <div class="container-fluid mt-5">
+    <div class="row">
+      <div class="col-sm-3">
+        <a href="index.html"><img class="img-fluid mb-2" src="/static/display/img/DriverMEDICAL LOGO 2.png" alt="New York"></a>
+        <p>All driver medicals are completed by GMC registered doctors in accordance with current DVLA Group 2 guidelines.</p>
+        <a href=""><i class="fab fa-linkedin"></i></a>
+        <a href=""><i class="fab fa-instagram"></i></a>
+        <a href=""><i class="fab fa-twitter"></i></a>
       </div>
-      <div class="trust-content">
-        <div class="trust-pilot">
-          <img src="{%static 'display/img/trustpilot_logo_white 1.png'%}" alt="">
-        </div>
-        <div class="trust-texts">
-          <h1>50,000+</h1>
-          <p>Drivers have chosen drivermedicals.uk to date, join them today!</p>
-        </div>
-        <div class="trust-btn">
-          <li>
-            <button type="button" class="btn">Call: 02039639083</button>
+      <div class="col-sm-3">
+        <h2>Ouick Links</h2>
+        <ul class="nav flex-column">
+          <li class="hnav-item">
+            <a class="hnav-link" href="#">About Us</a>
           </li>
-          <li>
-            <button type="button" class="tbtn">Book Now</button>
+          <li class="hnav-item">
+            <a class="hnav-link" href="#">Our Services</a>
           </li>
+          <li class="hnav-item">
+            <a class="hnav-link" href="#">Locations</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-3">
+        <h2>Ouick Links</h2>
+        <ul class="nav flex-column">
+          <li class="hnav-item">
+            <a class="hnav-link" href="#">HGV Medical</a>
+          </li>
+          <li class="hnav-item">
+            <a class="hnav-link" href="#">PVC/Bus Medical</a>
+          </li>
+          <li class="hnav-item">
+            <a class="hnav-link" href="#">Taxi Medical</a>
+          </li>
+          <li class="hnav-item">
+            <a class="hnav-link" href="#">Business Services</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-3">
+        <div class="hend">
+          <h2>Ouick Links</h2> 
+          <span class="fas fa-map-marker-alt"></span>       
+          <p>United Kingdom</p>
+          <span class="fas fa-phone-alt"></span>
+          <p>0203 963 9083</p>
+          <span class="fas fa-envelope"></span>
+          <p class="text-break">Bookings@drivermedicals.uk</p>
         </div>
       </div>
     </div>
   </div>
-<div class="footer">
-    <div class="footer-content">
-        <div class="footer-left">
-            <div class="footer-logo">
-              <a href="index.html"><img src="/static/display/img/DriverMEDICAL LOGO 2.png" alt=""></a>
-            </div>
-            <p>All driver medicals are completed by GMC registered doctors in accordance with current DVLA Group 2 guidelines.</p>
-            <div class="footer-icons">
-                <a href=""><i class="fab fa-linkedin"></i></a>
-                <a href=""><i class="fab fa-instagram"></i></a>
-                <a href=""><i class="fab fa-twitter"></i></a>
-            </div>
-        </div>
+</div>
 
-        <div class="footer-right">
-            <ul class="footer-links">
-                <li class="footer-link">
-                    <p>Menu</p>
-                    <div class="footer-list">
-                        <a href="">About Us</a>
-                        <a href="">Our Services</a>
-                        <a href="">Locations</a>
-                    </div>
-                </li>
-                <li class="footer-link">
-                    <p>Quick Links</p>
-                    <div class="footer-list">
-                        <a href="">HGV Medical</a>
-                        <a href="">PVC/Bus Medical</a>
-                        <a href="">Taxi Medical</a>
-                        <a href="">Business Services</a>
-                    </div>
-                </li>
-                <li class="footer-link">
-                    <p>Contact Us</p>
-                    <div class="footer-list">
-                      <p><span class="fas fa-map-marker-alt"></span>United Kingdom</p>
-                      <p><span class="fas fa-phone-alt"></span>0203 963 9083</p>
-                      <p><span class="fas fa-envelope"></span>Bookings@drivermedicals.uk</p>
-                        
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
+<footer class="footer-footer">
+  <div class="footer-wrapper">
+      <div class="wrapper-end">
+          <p>Drivermedicals.uk © 2022. All Rights Reserved</p>
+      </div>
   </div>
-
-  <footer class="footer-footer">
-    <div class="footer-wrapper">
-        <div class="wrapper-end">
-            <p>Drivermedicals.uk © 2022. All Rights Reserved</p>
-        </div>
-    </div>
 </footer>
 
 {%endblock%}

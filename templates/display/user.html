@@ -1,0 +1,52 @@
+{%extends 'display/base.html'%}
+
+{%load static%}
+{%block content%}
+
+
+
+  <div class="uform">
+    <div class="container-sm">
+      <form id="regForm" action="">
+        <h1 class="text-center">User Information</h1>
+        <h3 class="text-center">Please Fill The Form</h3>
+        <div class="tab">
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="firstName" class="form-label">First Name</label>
+              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+            </div>
+            <div class="col-sm-6">
+              <label for="username" class="form-label"> Last Name </label>
+              <div class="input-group has-validation">   
+                <input type="text" class="form-control" id="username" placeholder="" required>
+                <div class="invalid-feedback">required</div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label for="username" class="form-label"> Email Address </label> 
+              <div class="input-group has-validation">
+                <input type="text" class="form-control" id="username" placeholder="" required>
+                  <div class="invalid-feedback">required</div>
+              </div>
+            </div>                              
+            <hr class="my-4">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="same-address">
+              <label class="form-check-label" for="same-address">I agree to the Terms & Conditions</label>
+            </div>
+        
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="save-info">
+              <label class="form-check-label" for="save-info">I agree to the Privacy Policy</label>
+            </div>
+          </div>
+            <p><a href="#">*Click here to read our terms and conditions</a></p>   
+            <p><a href="#"> *Click here to read our privacy policy</a></p>   
+            <a href="#" class="w-20 btn" type="submit" style="margin-top: 1rem;">Submit</a>    
+        </div>
+      </form>
+    </div>
+  </div>
+
+{%endblock%}

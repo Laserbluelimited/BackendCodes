@@ -1,0 +1,60 @@
+{%extends 'display/base.html'%}
+
+{%load static%}
+{%block content%}
+
+
+<div class="sform">
+    <div class="container-sm">
+      <form id="regForm" action="">
+        <h1>Account application</h1>
+        <h3 class="text-center">Please Enter Your Details</h3>
+        <div class="tab">
+          <div class="row g-3">
+           <div class="col-sm-6">
+            <label for="lastName" class="form-label">Service</label>
+            <select class="form-select" id="services" required>
+              <option value="">Choose...</option>
+              <option>HGV/PCV Medical (DVLA D4)</option>
+              <option>Taxi/Private Hire & PCO(TFL) Medical</option>
+              <option>Coach Medical</option>
+              <option>Bus Medical</option>
+              <option>Pre-employment Medical</option>
+              <option>Ambulance Driver Medical</option>
+              <option>Motorhome Medical</option>
+              <option>Motorsport Medical</option>
+              <option>Forklift Medical</option>
+            </select>
+            <div class="invalid-feedback">
+              Valid last name is required.
+            </div>
+           </div>
+           <div class="col-sm-6">
+            <label for="username" class="form-label">Prices</label>
+            <div class="input-group has-validation">
+            <input type="text" class="form-control" id="username" placeholder="" required>
+            <div class="invalid-feedback">
+            Nature of business is required.
+            </div>
+            </div>
+           </div>
+           <div class="col-sm-6">
+             <label for="username" class="form-label">Date</label>
+             <input type="date" name="" id="input" class="form-control" value="" required="required" title="">
+           </div>
+           <div class="col-sm-6">
+             <label for="username" class="form-label">Time</label>
+             <input type="time" name="" id="input" class="form-control" value="" required="required" title="">
+           </div>
+           <div class="container text-center">
+             <a href="{% url 'portal:user'%}" class="w-20 btn-lg" type="submit" style="margin-top: 2rem;">Continue as guest</a>    
+             <a href="{% url 'portal:coupon'%}" class="w-20 btn-lg" type="submit" style="margin-top: 2rem;">Continue to checkout</a>    
+             <a href="{% url 'portal:booking'%}" class="w-20 btn-lg" type="submit" style="margin-top: 2rem;"> Previous</a>    
+           </div>                                                   
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+{%endblock%}

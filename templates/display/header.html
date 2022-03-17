@@ -1,53 +1,56 @@
 {% load static %}
 {% block header%}
 
-<header class="header-content">
-    <div class="logo">
-      <a href=""><img src="{%static 'display/img/DriverMEDICAL LOGO 1.png'%}" alt=""></a>
-    </div>
-    <div class="nav" id="nav">
-      <div class="header-left">
-          <ul class="left-links">
-              <li><a href="{%url 'display:home-page'%}">Home</a></li>
-              <li><a href="{%url 'display:about-page'%}">About Us</a></li>
-              <li class="left-links dropdown">
-                <a class="left-links dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Our Services</a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">HGV Medical</a></li>
-                  <li><a class="dropdown-item" href="#">PVC/Bus Medical</a></li>
-                  <li><a class="dropdown-item" href="#">Taxi Medical</a></li>
-                  <li><a class="dropdown-item" href="#">Business Services</a></li>
-                  <li><a class="dropdown-item" href="#">Other Medicals</a></li>
-                </ul>
-              </li>
-              <li><a href="{%url 'display:location-page'%}">Location</a></li>
-              <li><a href="#news">Contact Us</a></li>
-            </ul>
-      </div>
-
-      <div class="header-right">
-          <ul class="right">
-              <li class="right-links">
-                  <a class="booknow" href="">Book Now</a>
-              </li>
-              <li class="right-links dropdown">
-                <a class="login dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Login</a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">HGV Medical</a></li>
-                  <li><a class="dropdown-item" href="#">PVC/Bus Medical</a></li>
-                  <li><a class="dropdown-item" href="#">Taxi Medical</a></li>
-                  <li><a class="dropdown-item" href="#">Business Services</a></li>
-                  <li><a class="dropdown-item" href="#">Other Medicals</a></li>
-                </ul>
-              </li>                         
+<nav class="navbar navbar-expand-md">
+  <div class="container-fluid">
+    <a class="logo" href="index.html"><img src="/static/display/img/DriverMEDICAL LOGO 1.png" alt=""></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About Us</a>
+        </li>
+        <li class="nav-items dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Our Services</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="hgvmedical.html">HGV Medical</a></li>
+            <li><a class="dropdown-item" href="pvcmedical.html">PVC/Bus Medical</a></li>
+            <li><a class="dropdown-item" href="taxi.html">Taxi Medical</a></li>
+            <li><a class="dropdown-item" href="#">Business Services</a></li>
+            <li><a class="dropdown-item" href="#">Other Medicals</a></li>
           </ul>
-      </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Location</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact Us</a>
+        </li>
+      </ul>
+      <ul class="endbar-nav">
+        <li class="end-item">
+          <a href="{% url 'portal:booking'%}">
+            <button type="button" class="btn">Book Now</a></button>
+          </a>
+        </li>
+        <li class="end-items dropdown dropstart">
+          <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+          Login</button>            
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">HGV Medical</a></li>
+            <li><a class="dropdown-item" href="#">PVC/Bus Medical</a></li>
+            <li><a class="dropdown-item" href="#">Taxi Medical</a></li>
+            <li><a class="dropdown-item" href="#">Business Services</a></li>
+            <li><a class="dropdown-item" href="#">Other Medicals</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </div>
-
-  <div class="icon-wrapper">
-      <button href="" class="icon" id="icon">
-          <i class="fa fa-bars"></i>
-          <img src="" alt="">
-  </div>
-  </header>
+</nav>
 {%endblock%}
