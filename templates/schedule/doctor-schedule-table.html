@@ -54,24 +54,24 @@
                                                             </div>
                                                         </td>
                                                         <td><a href="javascript: void(0);" class="text-body fw-bold">#{{sche.id}}</a> </td>
-                                                        <td>{{sche.clinic.cliniclocation.city}}</td>
+                                                        <td>{{sche.clinic.city}}</td>
                                                         <td>
-                                                            Dr. {{sche.doctor}}
+                                                            {{sche.get_doctor}}
                                                         </td>
                                                         <td>
-                                                            <span class="badge badge-pill badge-soft-success font-size-12">{{sche.date}}</span>
-                                                        </td>
-
-                                                        <td>
-                                                            <span class="badge badge-pill badge-soft-success font-size-12">{{sche.day_of_week}}</span>
+                                                            <span class="badge badge-pill badge-soft-success font-size-12">{{sche.get_date}}</span>
                                                         </td>
 
                                                         <td>
-                                                            <span class="badge badge-pill badge-soft-success font-size-12">{{sche.s_time}}</span>
+                                                            <span class="badge badge-pill badge-soft-success font-size-12">{{sche.get_day_of_week}}</span>
                                                         </td>
 
                                                         <td>
-                                                            <span class="badge badge-pill badge-soft-success font-size-12">{{sche.e_time}}</span>
+                                                            <span class="badge badge-pill badge-soft-success font-size-12">{{sche.get_start_time}}</span>
+                                                        </td>
+
+                                                        <td>
+                                                            <span class="badge badge-pill badge-soft-success font-size-12">{{sche.get_end_time}}</span>
                                                         </td>
                                                         <td>
                                                             <!-- Button trigger modal -->

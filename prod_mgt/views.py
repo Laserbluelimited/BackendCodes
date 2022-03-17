@@ -5,6 +5,15 @@ from .forms import AddProductForm
 from .models import Product
 
 # Create your views here.
+def id_increment(model, initial):
+    last_value = model.objects.all().order_by('id').last()
+    if not last_value:
+        new_id = initial
+    else:
+        new_id = last_value.id + 1
+    return new_id
+
+
 class AddProductView(LoginRequiredMixin, View):
     login_url = '/auth/login'
     redirect_field_name = 'redirect_to'
@@ -23,6 +32,7 @@ class AddProductView(LoginRequiredMixin, View):
             # name_of_prod = form.cleaned_data['name_of_prod']
             # price = form.cleaned_data['price']
             product_obj = form.save(commit=False)
+            product_obj.id = id_increment(Product, 1110000)
 
             product_obj.save()
 

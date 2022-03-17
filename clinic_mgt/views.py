@@ -1,10 +1,8 @@
-from email import message
 from multiprocessing import context
-from pydoc import doc
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from authentication.models import User
-from .models import Clinic, ClinicLocation, Doctor
+from .models import Clinic, Doctor
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ClinicRegistrationForm, DoctorRegistrationForm
 from .managers import AddressRequest
@@ -51,24 +49,17 @@ class ClinicRegistration(LoginRequiredMixin, View):
         form = self.form_class(request.POST)
 
         if form.is_valid():
-            email = form.cleaned_data['email']
             name = form.cleaned_data['name']
             address = form.cleaned_data['address']
-            postal_code = form.cleaned_data['postal_code']
 
 
             address_class = AddressRequest()
             geodata = address_class.get_geodata(address)
 
 
-            clinic_user = User.objects.create_user(email=email, first_name=name)
-            clinic_obj = Clinic.objects.create(id=id_increment(Clinic, 1130000), user=clinic_user, name =name)
-            clinic_location = ClinicLocation.objects.create(id=id_increment(ClinicLocation, 1160000), clinic=clinic_obj, address=address,postal_code=postal_code,  long=geodata['longitude'], lat=geodata['latitude'], city=geodata['city'])
-            clinic_obj.location = clinic_location
+            clinic_obj = Clinic.objects.create(id=id_increment(Clinic, 1130000), name =name, address=address,postal_code=geodata['postal_code'],  long=geodata['longitude'], lat=geodata['latitude'], city=geodata['city'])
             
-            clinic_user.save()
             clinic_obj.save()
-            clinic_location.save()
 
             return redirect('portal:clinic-list')
             
@@ -84,35 +75,20 @@ class DoctorRegistration(LoginRequiredMixin, View):
 
     def get(self, request):
         form = self.form_class()
-        clinics = Clinic.objects.all()
-        CHOICES = []
-        for i in clinics:
-            clinic_obj = (i.name, i.name)
-            CHOICES.append(clinic_obj)
-
-        form.fields['clinic'].choices = CHOICES
         
         return render (request,self.template_name, context={'form':form})
 
     def post(self, request):
         form = self.form_class(request.POST)
-        clinics = Clinic.objects.all()
 
-        CHOICES = []
-        for i in clinics:
-            clinic_obj = (i.name, i.name)
-            CHOICES.append(clinic_obj)
-        form.fields['clinic'].choices = CHOICES
 
         if form.is_valid():
             email = form.cleaned_data['email']
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
-            clinic = form.cleaned_data['clinic']
 
-            clinic_sel = Clinic.objects.get(name=clinic)
-            doctor_user = User.objects.create_user(email=email, first_name=first_name, last_name=last_name)
-            doctor_obj = Doctor.objects.create(id=id_increment(Doctor, 1170000), user=doctor_user, clinic=clinic_sel)
+            doctor_user = User.objects.create_user(email=email)
+            doctor_obj = Doctor.objects.create(id=id_increment(Doctor, 1170000), user=doctor_user, email=email, first_name=first_name, last_name=last_name)
             
             
             doctor_user.save()

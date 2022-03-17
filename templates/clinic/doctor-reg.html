@@ -46,19 +46,6 @@
                                                         <input  name="email" type="text" class="form-control" placeholder="e.g. sarahunoke@gmail.com" required>
                                                     </div>
 
-                                                    <div class="mb-3">
-                                                        {%for error in form.clinic.errors%}
-                                                        <label style="color: red;">{{error}}</label>
-                                                        {%endfor%}<br>
-                                                        <label class="control-label">Clinics</label>
-                                                        <select class="form-control select2" name="clinic">
-                                                            <option>Select</option>
-                                                            
-                                                            {%for choice in form.clinic.field.choices%}
-                                                            <option value="{{choice.0}}">{{choice.1}}</option>
-                                                            {%endfor%}
-                                                        </select>
-                                                    </div>
 
 
                                                     

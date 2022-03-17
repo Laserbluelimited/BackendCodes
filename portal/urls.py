@@ -40,6 +40,8 @@ urlpatterns = [
     path('appointment-reg', booking_views.AppointmentRegistrationView.as_view(), name='app-reg'),
     path('appointment-table', booking_views.AppointmentTableView.as_view(), name='app-tab'),
     path('appointment-calendar', booking_views.AppointmentCalendarView.as_view(), name='app-cal'),
+    path('appointment/ajax/filter-dates', booking_views.getDates, name='ajax-dates'),
+    path('appointment/ajax/filter-times', booking_views.getTimes, name="ajax-times")
 
 
 ]

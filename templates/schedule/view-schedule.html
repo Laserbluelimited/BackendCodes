@@ -35,10 +35,10 @@
                                                 {%for date in dates%}
                                             <tr>
                                                 <td>{{date.id}}</td>
-                                                <td>{{date.doctor}}</td>
-                                                <td>{{date.start_time}}</td>
-                                                <td>{{date.end_time}}</td>
-                                                <td>{{date.clinic}}</td>
+                                                <td>{{date.get_doctor}}</td>
+                                                <td>{{date.get_start_time}}</td>
+                                                <td>{{date.get_end_time}}</td>
+                                                <td>{{date.get_clinic}}</td>
                                             </tr>
                                             {%endfor%}
                                             </tbody>

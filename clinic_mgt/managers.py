@@ -17,7 +17,9 @@ class AddressRequest():
         latitude = data['features'][0]['properties']['lat']
         city = data['features'][0]['properties']['city']
         country = data['features'][0]['properties']['country']
+        postal_code = data['features'][0]['properties']['postcode']
+        
 
-        geo_data = {'latitude':latitude, 'longitude':longitude, 'city':city, 'country':country}
+        geo_data = {'latitude':latitude, 'longitude':longitude, 'city':city, 'country':country, 'postal_code':postal_code}
         return geo_data
 

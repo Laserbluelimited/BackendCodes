@@ -1,6 +1,3 @@
-from random import choices
-import string
-from xml.parsers.expat import model
 from django.db import models
 from django.template.defaultfilters import slugify
 
@@ -65,16 +62,16 @@ class InternetClient(models.Model):
         db_table = 'internet_client'
 
     def __str__(self):
-        return self.title + ' ' + self.user.first_name + self.user.last_name
+        return self.title + ' ' + self.first_name + self.last_name
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            name = self.user.first_name + str(self.user.id)
+            name = self.first_name + str(self.user.id)
             self.slug = slugify(name)
         return super(CorporateClient,self).save(*args, **kwargs)
 
     def get_name(self):
-        return self.title + ' ' + self.user.first_name + self.user.last_name
+        return self.title + ' ' + self.first_name + self.last_name
 
     def get_email(self):
         return self.user.email

@@ -7,8 +7,6 @@ from client_mgt.models import COMPANY_TYPE_CHOICES, GENDER_CHOICES, TITLE_CHOICE
 
 class InternetClientRegistrationForm(forms.ModelForm):
     #usermodel
-    first_name = forms.CharField(required=True, max_length=20)
-    last_name = forms.CharField(required=True, max_length=20)
     username = forms.CharField(max_length=20,required=True)
     email = forms.EmailField(required=True)
     password1 = forms.CharField(required=True)
@@ -18,13 +16,13 @@ class InternetClientRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = InternetClient
-        fields = ['title', 'phone', 'dob', 'gender', 'postal_code']
+        fields = ['title', 'phone', 'dob', 'gender', 'postal_code', 'first_name', 'last_name']
 
 
     def clean_username(self):
         user = self.cleaned_data['username']
         if User.objects.filter(username=user).exists():
-            raise forms.ValidationError('username already exists')
+            raise forms.ValisdationError('username already exists')
         return user
     def clean_email(self):
         email = self.cleaned_data['username']
