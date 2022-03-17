@@ -1,7 +1,6 @@
 from genericpath import exists
-from django.db import models
 from django import forms
-from .models import Clinic
+from .models import Clinic, Doctor
 from authentication.models import User
 
 CHOICES = []
@@ -16,20 +15,23 @@ error_messages = {
 }
 
 class ClinicRegistrationForm(forms.Form):
-    #usermodel
-    email = forms.EmailField(required=True)
     #cliniclocationmodel
     address = forms.CharField(max_length=100, required=False)
-    postal_code = forms.CharField(max_length=10, required=True)
     # clinicmodel
     name = forms.CharField(max_length=50)
 
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        if User.objects.filter(email=email).exists():
+        if Clinic.objects.filter(email=email).exists():
             raise forms.ValidationError('Email already in use')
         return email
+
+    def clean_name(self):
+        name = self.cleaned_data['name']
+        if Clinic.objects.filter(name=name).exists():
+            raise forms.ValidationError('Name already in use')
+        return name
 
 class DoctorRegistrationForm(forms.Form):
     #usermodel
@@ -38,12 +40,11 @@ class DoctorRegistrationForm(forms.Form):
     email = forms.EmailField(required=True, error_messages=error_messages)
 
     #doctormodel
-    clinic = forms.ChoiceField(choices=CHOICES, required=True, error_messages=error_messages)
 
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        if User.objects.filter(email=email).exists():
+        if User.objects.filter(email=email).exists() and Doctor.objects.filter(email=email):
             raise forms.ValidationError('Email already in use')
         return email
 

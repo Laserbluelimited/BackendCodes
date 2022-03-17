@@ -49,9 +49,6 @@ class InternetClientRegistrationView(View):
     def post(self, request):
         form = self.form_class(request.POST)
         clients = InternetClient.objects.all()
-        print('post')
-        for e in form.errors:
-            print(e)
 
         if form.is_valid():
             print('valid')
@@ -59,7 +56,6 @@ class InternetClientRegistrationView(View):
             last_name = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
             password1 = form.cleaned_data['password1']
-            password2 = form.cleaned_data['password2']
             address = form.cleaned_data['address']
             username = form.cleaned_data['username']
 
@@ -67,7 +63,7 @@ class InternetClientRegistrationView(View):
 
             address_class = AddressRequest()
             geodata = address_class.get_geodata(address)
-            user_obj = User.objects.create_user(email=email, password=password1, username=username, first_name=first_name, last_name=last_name)
+            user_obj = User.objects.create_user(email=email, password=password1, username=username)
             client_obj = form.save(commit=False)
             client_obj.id = id_increment(InternetClient, 1120000)
             client_obj.user = user_obj
@@ -96,9 +92,6 @@ class CorporateClientRegistrationView(LoginRequiredMixin, View):
     def post(self, request):
         form = self.form_class(request.POST)
         clients = CorporateClient.objects.all()
-        print('post')
-        for e in form.errors:
-            print(e)
 
         if form.is_valid():
             print('valid')

@@ -4,6 +4,17 @@
 {% block extra_css %}
 <link href="{% static 'libs/select2/dist/css/select2.min.css' %}" rel="stylesheet" type="text/css" />
 <link href="{% static 'libs/dropzone/dist/min/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{%static 'libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'%}" rel="stylesheet" type="text/css"/>
+<link href="{%static 'libs/bootstrap-timepicker/css/bootstrap-timepicker.min.css'%}" rel="stylesheet" type="text/css"/>
+
+<style type="text/css">
+    .datepicker.dropdown-menu {
+        color: #000;
+    }
+    .datepicker table tr td.disabled{
+        color: #b8b8b757;
+    }
+</style>
 {% endblock %}
 
 {% block contents %}
@@ -17,21 +28,6 @@
                                         <form method="post" action="{%url 'portal:app-reg'%}">
                                         {%csrf_token%}
 
-                                        <div class="mb-3 row">
-                                            {%for error in form.doctor.errors%}
-                                            <label style="color: red;">{{error}}</label>
-                                            {%endfor%}<br>
-
-                                            <label class="col-md-2 col-form-label">Doctor</label>
-                                            <div class="col-md-10">
-                                                <select class="form-control select2" name="doctor">
-                                                    <option>Select</option>
-                                                    {%for choice in form.doctor.field.choices%}
-                                                    <option value="{{choice.0}}">{{choice.1}}</option>
-                                                    {%endfor%}
-                                                </select>
-                                            </div>
-                                        </div>
 
                                         <div class="mb-3 row">
                                             {%for error in form.clinic.errors%}
@@ -40,7 +36,7 @@
 
                                             <label class="col-md-2 col-form-label">Clinic</label>
                                             <div class="col-md-10">
-                                                <select class="form-control select2" name="clinic">
+                                                <select class="form-control select2" name="clinic" id="location">
                                                     <option>Select</option>
                                                     {%for choice in form.clinic.field.choices%}
                                                     <option value="{{choice.0}}">{{choice.1}}</option>
@@ -66,14 +62,14 @@
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            {%for error in form.time.errors%}
+                                            {%for error in form.date.errors%}
                                             <label style="color: red;">{{error}}</label>
                                             {%endfor%}<br>
 
-                                            <label for="example-date-input" class="col-md-2 col-form-label">Start Time</label>
+                                            <label for="example-datetime-local-input" class="col-md-2 col-form-label">Date Time</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="start_time" type="datetime-local" 
-                                                    >
+                                                <input class="form-control" name="date" type="text" placeholder="07/10/02" 
+                                                    id="datepicker">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -81,18 +77,10 @@
                                             <label style="color: red;">{{error}}</label>
                                             {%endfor%}<br>
 
-                                            <label for="example-date-input" class="col-md-2 col-form-label">End Time</label>
+                                            <label for="example-datetime-local-input" class="col-md-2 col-form-label">Time</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" name="end_time" type="datetime-local" 
-                                                    id="example-date-input">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            {%for error in form.notes.errors%}
-                                            <label style="color: red;">{{error}}</label>
-                                            {%endfor%}<br>
-                                            <label for="productname">Appointment Notes</label>
-                                            <textarea  required name="notes" type="text" rows="2" class="form-control" placeholder="e.g. Taxi/Private Medical"></textarea>
+                                                <select class="form-control select2" name="time" id="time">
+                                                </div>
                                         </div>
                             <div class="d-flex flex-wrap gap-2">
                                             <button type="submit" class="btn btn-primary waves-effect waves-light">Save Changes</button>
@@ -144,5 +132,65 @@
 {% block extra_javascript %}
         <!-- Plugins js -->
         <script src="{% static 'libs/dropzone/dist/min/dropzone.min.js' %}"></script>
+        <script src="{%static 'libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'%}"></script>
+        <script src="{%static 'libs/bootstrap-timepicker/js/bootstrap-timepicker.min.js'%}"></script>
+
+        <script type="text/javascript">
+            var enableDays =[];
+            function change(data){
+                enableDays=data
+            }
+
+            document.getElementById('location').addEventListener("change", function (){
+                $.ajax({
+                    type:'GET',
+                    url: 'appointment/ajax/filter-dates',
+                    data:{
+                        'clinic' : $("#location").val(),
+
+                    },
+                    dataType:'json',
+
+                    success:function(response){
+                        change(response.dates)
+
+                    jQuery(function(){
+                        
+                        function enableAllTheseDays(date){
+                            var sdate = date.getDate() + "-" + (date.getMonth()+1)+"-"+date.getFullYear();
+                            if(enableDays.indexOf(sdate) != -1){
+                                return true;
+                            }
+                            else{
+                            return false;}
+                        }
+                        $("#datepicker").datepicker({dateFormat:'dd-mm-yy', beforeShowDay:enableAllTheseDays})
+                    })
+                    }
+                })
+            })
+            $("#datepicker").on("change.dp", function(){
+                $.ajax({
+                    type:'GET',
+                    url:'appointment/ajax/filter-times',
+                    data:{
+                        'clinic':$('#location').val(),
+                        'date':$('#datepicker').val(),
+                    },
+                    dataType:'json',
+                    success:function(response){
+                        var select = document.getElementById('time');
+                        for (var i=0;i<response.times.length;i++){
+                            var option = document.createElement('option');
+                            option.value = response.times[i]['id'];
+                            option.innerHTML = response.times[i]['time'];
+                            select.appendChild(option)
+                        }
+                    }
+                })
+            })
+            
+
+        </script>
 
 {% endblock %}

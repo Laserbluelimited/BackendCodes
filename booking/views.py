@@ -1,17 +1,21 @@
 from cmath import e
 from email import message
+import email
 from multiprocessing import context
 from pydoc import doc
 from time import time
+from urllib import response
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from authentication.models import User
 from clinic_mgt.models import Clinic, Doctor
-from schedules.models import ScheduleDates
+from schedules.models import ScheduleDates, TimeSlot
 from client_mgt.models import InternetClient
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import AppointmentForm
 from .models import Appointment
+import datetime
 
 # Create your views here.
 class AppointmentCalendarView(LoginRequiredMixin, View):
@@ -76,14 +80,13 @@ class AppointmentRegistrationView(LoginRequiredMixin, View):
         CHOICES2 = []
         CHOICES3 = []
         for i in doctors:
-            doctor_obj = (i.user.email, i)
+            doctor_obj = (i.email, i)
             CHOICES.append(doctor_obj)
-        print(CHOICES)
         for p in clinics:
             clinic_obj = (p.name, p.name)
             CHOICES2.append(clinic_obj)
         for i in clients:
-            client_obj = (i.user.email, i)
+            client_obj = (i.email, i)
             CHOICES3.append(client_obj)
         
 
@@ -101,16 +104,48 @@ class AppointmentRegistrationView(LoginRequiredMixin, View):
             notes = form.cleaned_data['notes']
 
 
-            doctor_user = User.objects.get(email=doctor_email)
-            client_user = User.objects.get(email=client_obj)
-            doctor = Doctor.objects.get(user = doctor_user)
+            doctor = Doctor.objects.get(email=doctor_email)
             clinic = Clinic.objects.get(name=clinic_name)
-            client = InternetClient.objects.get(user=client_user)
+            client = InternetClient.objects.get(email=client_obj)
 
             app_obj = Appointment(doctor=doctor, client=client, clinic=clinic, notes=notes, start_time=start_time, end_time=end_time)
 
             app_obj.save()
             return redirect('portal:app-tab')
         return render(request, self.template_name, context={'form':form})
+
+def getDates(request):
+    location = request.GET.get('clinic')
+    clinic = Clinic.objects.get(name=location)
+    def gen():
+        for i in ScheduleDates.objects.filter(clinic=clinic):
+            m = i.date.strftime("%#d-%#m-%Y")
+            yield m
+    dates = list(gen())
+    response_data = {
+        'dates':dates
+    }
+    # print(response_data['dates'])
+    return JsonResponse(response_data)
+
+def getTimes(request):
+    location = request.GET.get('clinic')
+    location= Clinic.objects.get(name=location)
+    date = request.GET.get('date')
+    date = datetime.datetime.strptime(date, '%m/%d/%Y').strftime('%Y-%m-%d')
+    def gen():
+        for i in ScheduleDates.objects.filter(date=date, clinic=location):
+            time_obj = TimeSlot.objects.filter(schedule=i)
+            for p in time_obj:
+                l=p.id
+                k =p.avail_times
+                yield {"id":l, "time":k}
+
+    time_obj = list(gen())
+    response_data = {
+        'times':time_obj
+    }
+    print(response_data['times'])
+    return JsonResponse(response_data)
 
 

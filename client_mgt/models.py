@@ -1,6 +1,3 @@
-from random import choices
-import string
-from xml.parsers.expat import model
 from django.db import models
 from django.template.defaultfilters import slugify
 
@@ -41,6 +38,9 @@ class InternetClient(models.Model):
 
 
     id = models.IntegerField('client_id', unique=True, primary_key=True)
+    first_name = models.CharField('first_name', max_length=100)
+    last_name = models.CharField('last_name', max_length=100)
+    email = models.EmailField('email', unique=True)
     user = models.OneToOneField('authentication.User', on_delete=models.CASCADE)
     title = models.CharField('title', max_length=20, choices=TITLE_CHOICES, null=True)
     phone = models.IntegerField('phone_number', unique=True)
@@ -56,21 +56,22 @@ class InternetClient(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     crprt_client = models.ForeignKey('CorporateClient', null=True, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=255, help_text='Unique Value for product page URL, created from name.')
+    verified = models.BooleanField(default=False)
 
     class Meta:
         db_table = 'internet_client'
 
     def __str__(self):
-        return self.title + ' ' + self.user.first_name + self.user.last_name
+        return self.title + ' ' + self.first_name + self.last_name
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            name = self.user.first_name + str(self.user.id)
+            name = self.first_name + str(self.user.id)
             self.slug = slugify(name)
         return super(CorporateClient,self).save(*args, **kwargs)
 
     def get_name(self):
-        return self.title + ' ' + self.user.first_name + self.user.last_name
+        return self.title + ' ' + self.first_name + self.last_name
 
     def get_email(self):
         return self.user.email

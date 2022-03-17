@@ -11,9 +11,6 @@ from .managers import UserManager, GenerateUsername
 class User(AbstractUser):
     username = models.CharField('Username', unique=True, max_length=20)
     email = models.EmailField("email address", unique=True, null=True)
-    first_name = models.CharField('First Name', max_length=20)
-    last_name = models.CharField('Last Name', max_length=20)
-
     objects = UserManager()
 
     def __str__(self):

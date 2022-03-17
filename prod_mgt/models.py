@@ -3,12 +3,13 @@ from django.template.defaultfilters import slugify
 
 # Create your models here.
 
+
+
 class Product(models.Model):
 
     id = models.IntegerField('product_id',primary_key=True, unique=True)
     name_of_prod = models.CharField('name_of_product',max_length=50, unique=True)
     slug = models.SlugField(max_length=50, help_text='Unique Value for product page URL, created from name.')
-
     price = models.DecimalField('price', max_digits=9, decimal_places=2)
     currency = models.CharField('currency', max_length=10, default='euros')
     image = models.ImageField()

@@ -7,8 +7,8 @@ from authentication.models import User
 from clinic_mgt.models import Clinic, Doctor
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import DoctorScheduleForm, ScheduleUploadForm
-from .models import ScheduleDates
-
+from .models import ScheduleDates, TimeSlot
+import datetime
 # Create your views here.
 class DoctorScheduleCalendarView(LoginRequiredMixin, View):
     login_url = '/auth/login'
@@ -39,7 +39,7 @@ class DoctorSchedulesRegistrationView(LoginRequiredMixin, View):
         CHOICES = []
         CHOICES2 = []
         for i in doctors:
-            doctor_obj = (i.user.first_name, i)
+            doctor_obj = (i.first_name, i.first_name + ' ' + i.last_name)
             CHOICES.append(doctor_obj)
         print(CHOICES)
         for p in clinics:
@@ -61,7 +61,7 @@ class DoctorSchedulesRegistrationView(LoginRequiredMixin, View):
         CHOICES = []
         CHOICES2 = []
         for i in doctors:
-            doctor_obj = (i.user.first_name, i)
+            doctor_obj = (i.first_name, i.first_name + ' ' + i.last_name)
             CHOICES.append(doctor_obj)
         print(CHOICES)
         for p in clinics:
@@ -72,19 +72,28 @@ class DoctorSchedulesRegistrationView(LoginRequiredMixin, View):
         form.fields['clinic'].choices = CHOICES2
 
         if form.is_valid():
+            date = form.cleaned_data['date']
             start_time = form.cleaned_data['start_time']
             end_time = form.cleaned_data['end_time']
             doctor_name = form.cleaned_data['doctor']
             clinic_name = form.cleaned_data['clinic']
 
 
-            doctor_user = User.objects.get(first_name=doctor_name)
-            doctor = Doctor.objects.get(user = doctor_user)
+            doctor = Doctor.objects.get(first_name = doctor_name)
             clinic = Clinic.objects.get(name=clinic_name)
 
-            date_obj = ScheduleDates(start_time=start_time, end_time=end_time,clinic=clinic,doctor=doctor)
+            date_obj = ScheduleDates.objects.create(start_time=start_time, end_time=end_time,clinic=clinic,doctor=doctor, date=date)
 
-            date_obj.save()
+            def gen_time_slots(start, end):
+                a = start
+                while a <=end:
+                    b = a.strftime('%H:%M')
+                    yield TimeSlot(avail_times=b, schedule=date_obj)
+                    a = (datetime.datetime.combine(datetime.date.today(), a)+datetime.timedelta(minutes=15)).time()
+            
+            slots = list(gen_time_slots(start_time, end_time))
+            TimeSlot.objects.bulk_create(slots)
+
             return redirect('portal:doc-sche-tab')
         return render(request, self.template_name, context={'form':form})
 
