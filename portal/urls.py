@@ -44,11 +44,6 @@ urlpatterns = [
     path('appointment/ajax/filter-dates', booking_views.getDates, name='ajax-dates'),
     path('appointment/ajax/filter-times', booking_views.getTimes, name="ajax-times"),
 
-    #booking
-    path('booking/location', views.CBookingView.as_view(), name='booking'),
-    path('booking/coupon', views.CCouponView.as_view(), name='coupon')
-    ,path('booking/service', views.CServiceView.as_view(), name='service'),
-    path('booking/user', views.CUserView.as_view(), name='user')
 
 
 ]

@@ -29,8 +29,6 @@ class AddProductView(LoginRequiredMixin, View):
         for i in form.errors:
             print(i)
         if form.is_valid():
-            # name_of_prod = form.cleaned_data['name_of_prod']
-            # price = form.cleaned_data['price']
             product_obj = form.save(commit=False)
             product_obj.id = id_increment(Product, 1110000)
 

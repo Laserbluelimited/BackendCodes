@@ -1,19 +1,12 @@
 from cmath import e
 from email import message
-import email
 from multiprocessing import context
-from pydoc import doc
-from time import time
-from tracemalloc import start
-from urllib import response
 from django import views
 from django.http import JsonResponse
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.views import View
-from authentication.models import User
-from clinic_mgt.models import Clinic, Doctor
+from clinic_mgt.models import Clinic
 from schedules.models import ScheduleDates, TimeSlot
-from client_mgt.models import InternetClient
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import OrderForm
 from .models import Appointment, ICOrders
@@ -41,7 +34,7 @@ class AppointmentCalendarView(LoginRequiredMixin, View):
 class AppointmentTableView(LoginRequiredMixin, View):
     login_url = '/auth/login'
     redirect_field_name = 'redirect_to'
-    template_name ='appointment/appointment-table.html' 
+    template_name ='orders/appointment-table.html' 
     def get(self, request):
         appntments = Appointment.objects.all()
 
@@ -56,51 +49,6 @@ class ICOrderTableView(LoginRequiredMixin, View):
         orders = ICOrders.objects.all()
 
         return render(request, self.template_name, context={'orders':orders})
-
-
-
-
-
-
-
-
-
-
-
-def getDates(request):
-    location = request.GET.get('clinic')
-    clinic = Clinic.objects.get(name=location)
-    def gen():
-        for i in ScheduleDates.objects.filter(clinic=clinic):
-            m = i.date.strftime("%#d-%#m-%Y")
-            yield m
-    dates = list(gen())
-    response_data = {
-        'dates':dates
-    }
-    return JsonResponse(response_data)
-
-def getTimes(request):
-    location = request.GET.get('clinic')
-    location= Clinic.objects.get(name=location)
-    date = request.GET.get('date')
-    date = datetime.datetime.strptime(date, '%m/%d/%Y').strftime('%Y-%m-%d')
-    def gen():
-        for i in ScheduleDates.objects.filter(date=date, clinic=location):
-            time_obj = TimeSlot.objects.filter(schedule=i)
-            for p in time_obj:
-                l=p.id
-                k =p.avail_times
-                yield {"id":l, "time":k}
-
-    time_obj = list(gen())
-    response_data = {
-        'times':time_obj
-    }
-    print(response_data['times'])
-    return JsonResponse(response_data)
-
-
 
 class PlaceOrderAdminView(LoginRequiredMixin, views.View):
     login_url = '/auth/login'
@@ -132,5 +80,48 @@ class PlaceOrderAdminView(LoginRequiredMixin, views.View):
             order_obj.appointment = app_obj
             order_obj.save()
 
-            return redirect('portal:app-tab')
+            return redirect('portal:icorder-list')
         return render(request, self.template_name, context={'form':form})    
+
+
+
+
+
+
+
+#ajax request
+
+def getDates(request):
+    location = request.GET.get('clinic')
+    clinic = Clinic.objects.get(name=location)
+    def gen():
+        for i in ScheduleDates.objects.filter(clinic=clinic):
+            m = i.date.strftime("%#d-%#m-%Y")
+            yield m
+    dates = list(gen())
+    response_data = {
+        'dates':dates
+    }
+    return JsonResponse(response_data)
+
+def getTimes(request):
+    location = request.GET.get('clinic')
+    location= Clinic.objects.get(name=location)
+    date = request.GET.get('date')
+    date = datetime.datetime.strptime(date, '%m/%d/%Y').strftime('%Y-%m-%d')
+    def gen():
+        for i in ScheduleDates.objects.filter(date=date, clinic=location):
+            time_obj = TimeSlot.objects.filter(schedule=i)
+            for p in time_obj:
+                l=p.id
+                k =p.avail_times
+                yield {"id":l, "time":k}
+
+    time_obj = list(gen())
+    response_data = {
+        'times':time_obj
+    }
+    return JsonResponse(response_data)
+
+
+

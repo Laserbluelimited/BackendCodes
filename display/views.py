@@ -20,3 +20,28 @@ class LocationPageView(View):
 class MedicalPageView(View):
     def get(self, request):
         return render(request, 'display/medical.html')
+
+
+class CBookingView(View):
+    def get(self, request):
+        return render(request, 'display/booking.html')
+
+
+class CCouponView(View):
+    def get(self, request):
+        return render(request, 'display/coupon.html')
+
+
+class CServiceView(View):
+    def get(self, request):
+        return render(request, 'display/service.html')
+
+
+class CUserView(View):
+    def get(self, request):
+        return render(request, 'display/user.html')
+
+
+class hhhhView(View):
+    def get(self, request):
+        return render(request, 'display/hhhh.html')
