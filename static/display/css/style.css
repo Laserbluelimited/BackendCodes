@@ -634,7 +634,6 @@ p span{
 /* SUBSCRIBE */
 /* --------------------------------------------------------------------------------------------------------------------------------------- */
 
-
 .subscribe{
   width: 100%;
   background: #EFFDFB42;
@@ -683,6 +682,89 @@ p span{
 .wrapper-end p{
   color: #fff;
   font-size: 1.4rem;
+}
+
+/* -------------------------------------------------------------------------------------------------------------------------------------------- */
+/* MODAL */
+/* -------------------------------------------------------------------------------------------------------------------------------------------- */
+
+#parent_popup{
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+}
+  
+#parent_popup .container-sm{
+  margin: 10% auto;
+  padding: .5rem 2rem 1.3rem 2rem;
+  border: 1rem solid #0AC5A8;
+  position: relative;
+  box-shadow: 0rem 0rem 2rem #000;
+  border-radius: 1.5rem;
+}
+
+.modal-headline{
+  margin: 3rem;
+  text-align: center;
+}
+
+.modal-text{
+  font-family: 'Work Sans', sans-serif;
+  color: #14171F;
+}
+
+.modal-headline input{
+  font-family: 'Work Sans', sans-serif;
+  padding: .7rem 2rem;
+  width: 100%;
+  text-align: center;
+  border-radius: .4rem;
+  box-shadow: 0 .7rem .7rem rgba(0, 0, 0, 0.219);
+}
+
+.close{
+  background-color: #14171F;;
+  color: #fff;
+  border: .2rem solid #ccc;
+  height: 2.4rem;
+  position: absolute;
+  bottom: .5rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.4rem;
+  text-shadow: 0 -.1rem rgba(0, 0, 0, 0.9);
+  width: 2.4rem;
+  border-radius: 1.5rem;
+  box-shadow: .1rem .1rem .3rem #000;
+  transition: .3s;
+}
+
+.close:hover{
+  background-color: #0AC5A8;;
+  color: #fff;
+}
+
+.modal-headline .btn{
+  font-size: 1.8rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  background-color: #0AC5A8;
+  border-radius: .7rem;
+  border: .3rem solid #0AC5A8;
+  margin: 2rem 0;
+}
+
+.modal-headline .btn:hover{
+  background-color: #fff;
+  color: #0AC5A8;
 }
 
 
@@ -1061,12 +1143,12 @@ p span{
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
 .sform{
-  height: 60vh;
   background: #0AC5A8;
 }
 
 .sform .container-sm{
-  padding-top: 7rem;
+  padding-top: 6rem;
+  padding-bottom: 4rem;
 }
 
 .sform form label{
@@ -1115,12 +1197,12 @@ p span{
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
 .uform{
-  height: 80vh;
   background: #0AC5A8;
 }
 
-.uform .container-sm{
-  padding-top: 7rem;
+.uform .container-md{
+  padding-top: 6rem;
+  padding-bottom: 4rem;
 }
 
 .uform .tab{

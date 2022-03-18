@@ -10,19 +10,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <title>Drivers Medical</title>
 </head>
 <body>
+
   <nav class="navbar navbar-expand-md">
     <div class="container-fluid">
-      <a class="logo" href="index2.html"><img src="/static/display/img/DriverMEDICAL LOGO 1.png" alt=""></a>
+      <a class="logo" href="index.html"><img src="/static/display/img/DriverMEDICAL LOGO 1.png" alt=""></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link" href="index2.html">Home</a>
+            <a class="nav-link" href="index.html">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">About Us</a>
@@ -50,7 +52,7 @@
               <button type="button" class="btn">Book Now</a></button>
             </a>
           </li>
-          <li class="end-items dropdown dropstart">
+          <li class="end-items dropdown">
             <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
             Login</button>            
             <ul class="dropdown-menu">
@@ -283,7 +285,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3">
-          <a href="index2.html"><img class="img-fluid mb-2" src="/static/display/img/DriverMEDICAL LOGO 2.png" alt="New York"></a>
+          <a href="index.html"><img class="img-fluid mb-2" src="/static/display/img/DriverMEDICAL LOGO 2.png" alt="New York"></a>
           <p>All driver medicals are completed by GMC registered doctors in accordance with current DVLA Group 2 guidelines.</p>
           <a href=""><i class="fab fa-linkedin"></i></a>
           <a href=""><i class="fab fa-instagram"></i></a>
@@ -343,12 +345,32 @@
     </div>
 </footer>
 
+<div id="modal">
+  <div id="parent_popup">
+    <div class="container-sm bg-white">
+        <div class="modal-headline">
+          <div class="modal-text">
+            <h1 class="fs-1 fw-bold">Newsletter Subscription</h1>
+            <p class="fs-3">Subscribe to our newsletter to get latest updates and notifications</p>
+            <input class="fs-1" type="text" placeholder="Enter your email" name="email" id="email" required>
+              <button type="button" class="btn">Subscribe</a></button>
+          </div>
+        </div>
+
+      <a class="close" title="close" onclick="document.getElementById('modal').style.display='none';">X</a>
+    </div>
+  </div>
+</div>
+
+
+
   
   
 
 
   <script src="/bcss/bootstrap.bundle.js"></script>
   <script src="/static/display/js/script.js"></script>
+  <script ENGINE="text/javascript">var delay_popup = 10000;setTimeout("document.getElementById('parent_popup').style.display='block'", delay_popup);</script>
 
 </body>
 </html>
