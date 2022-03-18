@@ -1,0 +1,241 @@
+{% extends 'partials-actual/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link href="{% static 'libs/select2/dist/css/select2.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'libs/dropzone/dist/min/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{%static 'libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'%}" rel="stylesheet" type="text/css"/>
+<link href="{%static 'libs/bootstrap-timepicker/css/bootstrap-timepicker.min.css'%}" rel="stylesheet" type="text/css"/>
+
+<style type="text/css">
+    .datepicker.dropdown-menu {
+        color: #000;
+    }
+    .datepicker table tr td.disabled{
+        color: #b8b8b757;
+    }
+</style>
+{% endblock %}
+
+{% block contents %}
+                    <form method="post" action="{%url 'portal:app-reg'%}">
+                    {%csrf_token%}
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <h4 class="card-title">Appointment Registration</h4>
+                                        <p class="card-title-desc">This is an appointment form</p>
+
+                                        <div class="mb-3 row">
+                                            {%for error in form.client.errors%}
+                                            <label style="color: red;">{{error}}</label>
+                                            {%endfor%}<br>
+
+                                            <label class="col-md-2 col-form-label">Client</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control select2" name="client">
+                                                    <option>Select</option>
+                                                    {%for choice in form.client.field.choices%}
+                                                    <option value="{{choice.0}}">{{choice.1}}</option>
+                                                    {%endfor%}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 row">
+                                            {%for error in form.clinic.errors%}
+                                            <label style="color: red;">{{error}}</label>
+                                            {%endfor%}<br>
+
+                                            <label class="col-md-2 col-form-label">Clinic</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control select2" name="clinic" id="location">
+                                                    <option>Select</option>
+                                                    {%for choice in form.clinic.field.choices%}
+                                                    <option value="{{choice.0}}">{{choice.1}}</option>
+                                                    {%endfor%}
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="mb-3 row">
+                                            {%for error in form.date.errors%}
+                                            <label style="color: red;">{{error}}</label>
+                                            {%endfor%}<br>
+
+                                            <label for="example-datetime-local-input" class="col-md-2 col-form-label">Date</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" name="date" type="text" placeholder="07/10/02" 
+                                                    id="datepicker">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            {%for error in form.time_slot.errors%}
+                                            <label style="color: red;">{{error}}</label>
+                                            {%endfor%}<br>
+
+                                            <label for="example-datetime-local-input" class="col-md-2 col-form-label">Time</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control select2" name="time_slot" id="time"></select>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 row">
+                                            {%for error in form.product.errors%}
+                                            <label style="color: red;">{{error}}</label>
+                                            {%endfor%}<br>
+
+                                            <label for="example-datetime-local-input" class="col-md-2 col-form-label">Product</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control select2" name="product" >
+                                                    <option>Select</option>
+                                                    {%for choice in form.product.field.choices%}
+                                                    <option value="{{choice.0}}">{{choice.1}}</option>
+                                                    {%endfor%}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-3 row">
+                                            {%for error in form.quantity.errors%}
+                                            <label style="color: red;">{{error}}</label>
+                                            {%endfor%}<br>
+
+                                            <label for="example-datetime-local-input" class="col-md-2 col-form-label">Quantity</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" name="quantity" type="number" >
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 row">
+                                            {%for error in form.payment_status.errors%}
+                                            <label style="color: red;">{{error}}</label>
+                                            {%endfor%}<br>
+
+                                            <label for="example-datetime-local-input" class="col-md-2 col-form-label">Payment Status</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control select2" name="payment_status" >
+                                                    <option>Select</option>
+                                                    {%for choice in form.payment_status.field.choices%}
+                                                    <option value="{{choice.0}}">{{choice.1}}</option>
+                                                    {%endfor%}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 row">
+                                            {%for error in form.payment_medium.errors%}
+                                            <label style="color: red;">{{error}}</label>
+                                            {%endfor%}<br>
+
+                                            <label for="example-datetime-local-input" class="col-md-2 col-form-label">Payment Medium</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control select2" name="payment_medium" >
+                                                    <option>Select</option>
+                                                    {%for choice in form.payment_medium.field.choices%}
+                                                    <option value="{{choice.0}}">{{choice.1}}</option>
+                                                    {%endfor%}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 row">
+                                            {%for error in form.order_medium.errors%}
+                                            <label style="color: red;">{{error}}</label>
+                                            {%endfor%}<br>
+
+                                            <label for="example-datetime-local-input" class="col-md-2 col-form-label">Order Medium</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control select2" name="order_medium" >
+                                                    <option>Select</option>
+                                                    {%for choice in form.order_medium.field.choices%}
+                                                    <option value="{{choice.0}}">{{choice.1}}</option>
+                                                    {%endfor%}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="d-flex flex-wrap gap-2">
+                            <input type="submit" class="btn btn-primary waves-effect waves-light" value="Save">
+                            <input type="reset" class="btn btn-secondary waves-effect waves-light" value="Cancel">
+                            </div>
+                        </div>
+
+                    </form>
+
+{% endblock %}
+{% block extra_javascript %}
+        <!-- Plugins js -->
+        <script src="{% static 'libs/dropzone/dist/min/dropzone.min.js' %}"></script>
+        <script src="{%static 'libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'%}"></script>
+        <script src="{%static 'libs/bootstrap-timepicker/js/bootstrap-timepicker.min.js'%}"></script>
+
+        <script type="text/javascript">
+            var enableDays =[];
+            function change(data){
+                enableDays=data
+            }
+
+            document.getElementById('location').addEventListener("change", function (){
+                $.ajax({
+                    type:'GET',
+                    url: 'appointment/ajax/filter-dates',
+                    data:{
+                        'clinic' : $("#location").val(),
+
+                    },
+                    dataType:'json',
+
+                    success:function(response){
+                        change(response.dates)
+
+                    jQuery(function(){
+                        
+                        function enableAllTheseDays(date){
+                            var sdate = date.getDate() + "-" + (date.getMonth()+1)+"-"+date.getFullYear();
+                            if(enableDays.indexOf(sdate) != -1){
+                                return true;
+                            }
+                            else{
+                            return false;}
+                        }
+                        $("#datepicker").datepicker({dateFormat:'dd-mm-yy', beforeShowDay:enableAllTheseDays})
+                    })
+                    }
+                })
+            })
+            $("#datepicker").on("change.dp", function(){
+                $.ajax({
+                    type:'GET',
+                    url:'appointment/ajax/filter-times',
+                    data:{
+                        'clinic':$('#location').val(),
+                        'date':$('#datepicker').val(),
+                    },
+                    dataType:'json',
+                    success:function(response){
+                        var select = document.getElementById('time');
+                        for (var i=0;i<response.times.length;i++){
+                            var option = document.createElement('option');
+                            option.value = response.times[i]['id'];
+                            option.innerHTML = response.times[i]['time'];
+                            select.appendChild(option)
+                        }
+                    }
+                })
+            })
+            
+
+        </script>
+
+{% endblock %}

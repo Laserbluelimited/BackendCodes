@@ -29,6 +29,25 @@ class Product(models.Model):
     def __str__(self):
         return self.name_of_prod
 
+    def get_name(self):
+        return self.name_of_prod
+
+    def get_price(self):
+        return self.price
+
+    def get_image(self):
+        return self.image
+
+    def get_description(self):
+        return self.description
+
+    def get_meta_description(self):
+        return self.meta_description
+
+    def get_meta_keywords(self):
+        return self.meta_keywords
+
+
 
     class Meta:
         db_table ='products'

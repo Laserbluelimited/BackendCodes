@@ -22,10 +22,10 @@ class InternetClientRegistrationForm(forms.ModelForm):
     def clean_username(self):
         user = self.cleaned_data['username']
         if User.objects.filter(username=user).exists():
-            raise forms.ValisdationError('username already exists')
+            raise forms.ValidationError('username already exists')
         return user
     def clean_email(self):
-        email = self.cleaned_data['username']
+        email = self.cleaned_data['email']
         if User.objects.filter(username=email).exists():
             raise forms.ValidationError('username already exists')
         return email

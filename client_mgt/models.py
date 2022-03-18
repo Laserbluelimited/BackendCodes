@@ -68,7 +68,7 @@ class InternetClient(models.Model):
         if not self.slug:
             name = self.first_name + str(self.user.id)
             self.slug = slugify(name)
-        return super(CorporateClient,self).save(*args, **kwargs)
+        return super(InternetClient,self).save(*args, **kwargs)
 
     def get_name(self):
         return self.title + ' ' + self.first_name + self.last_name

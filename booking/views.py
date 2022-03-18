@@ -4,6 +4,7 @@ import email
 from multiprocessing import context
 from pydoc import doc
 from time import time
+from tracemalloc import start
 from urllib import response
 from django import views
 from django.http import JsonResponse
@@ -14,11 +15,20 @@ from clinic_mgt.models import Clinic, Doctor
 from schedules.models import ScheduleDates, TimeSlot
 from client_mgt.models import InternetClient
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import AppointmentForm
-from .models import Appointment
+from .forms import OrderForm
+from .models import Appointment, ICOrders
 import datetime
-
 # Create your views here.
+
+def id_increment(model, initial):
+    last_value = model.objects.all().order_by('id').last()
+    if not last_value:
+        new_id = initial
+    else:
+        new_id = last_value.id + 1
+    return new_id
+
+
 class AppointmentCalendarView(LoginRequiredMixin, View):
     login_url = '/auth/login'
     redirect_field_name = 'redirect_to'
@@ -37,83 +47,25 @@ class AppointmentTableView(LoginRequiredMixin, View):
 
         return render(request, self.template_name, context={'appointments':appntments})
  
-class AppointmentRegistrationView(LoginRequiredMixin, View):
+
+class ICOrderTableView(LoginRequiredMixin, View):
     login_url = '/auth/login'
     redirect_field_name = 'redirect_to'
-    template_name ='appointment/appointment-form.html'
-    form_class = AppointmentForm
+    template_name ='orders/order-list.html' 
     def get(self, request):
-        form = self.form_class()
-        clinics = Clinic.objects.all()
-        doctors = Doctor.objects.all()
-        clients = InternetClient.objects.all()
+        orders = ICOrders.objects.all()
 
-        CHOICES = []
-        CHOICES2 = []
-        CHOICES3 = []
-        for i in doctors:
-            doctor_obj = (i.user.first_name, i)
-            CHOICES.append(doctor_obj)
-        print(CHOICES)
-        for p in clinics:
-            clinic_obj = (p.name, p.name)
-            CHOICES2.append(clinic_obj)
-        for i in clients:
-            client_obj = (i.user.email, i)
-            CHOICES3.append(client_obj)
-        
-
-        form.fields['doctor'].choices = CHOICES
-        form.fields['clinic'].choices = CHOICES2
-        form.fields['client'].choices = CHOICES3
+        return render(request, self.template_name, context={'orders':orders})
 
 
-        return render(request, self.template_name, context={'form':form})
-        
-    def post(self, request):
-        form = self.form_class(request.POST)
-
-        clinics = Clinic.objects.all()
-        doctors = Doctor.objects.all()
-        clients = InternetClient.objects.all()
-
-        CHOICES = []
-        CHOICES2 = []
-        CHOICES3 = []
-        for i in doctors:
-            doctor_obj = (i.email, i)
-            CHOICES.append(doctor_obj)
-        for p in clinics:
-            clinic_obj = (p.name, p.name)
-            CHOICES2.append(clinic_obj)
-        for i in clients:
-            client_obj = (i.email, i)
-            CHOICES3.append(client_obj)
-        
-
-        form.fields['doctor'].choices = CHOICES
-        form.fields['clinic'].choices = CHOICES2
-        form.fields['client'].choices = CHOICES3
 
 
-        if form.is_valid():
-            start_time = form.cleaned_data['start_time']
-            end_time = form.cleaned_data['end_time']
-            doctor_email = form.cleaned_data['doctor']
-            clinic_name = form.cleaned_data['clinic']
-            client_obj = form.cleaned_data['client']
-            notes = form.cleaned_data['notes']
 
 
-            doctor = Doctor.objects.get(email=doctor_email)
-            clinic = Clinic.objects.get(name=clinic_name)
-            client = InternetClient.objects.get(email=client_obj)
 
-            app_obj = Appointment(doctor=doctor, client=client, clinic=clinic, notes=notes, start_time=start_time, end_time=end_time)
 
-            app_obj.save()
-            return redirect('portal:app-tab')
-        return render(request, self.template_name, context={'form':form})
+
+
 
 def getDates(request):
     location = request.GET.get('clinic')
@@ -126,7 +78,6 @@ def getDates(request):
     response_data = {
         'dates':dates
     }
-    # print(response_data['dates'])
     return JsonResponse(response_data)
 
 def getTimes(request):
@@ -150,21 +101,36 @@ def getTimes(request):
     return JsonResponse(response_data)
 
 
-class CBookingView(views.View):
+
+class PlaceOrderAdminView(LoginRequiredMixin, views.View):
+    login_url = '/auth/login'
+    redirect_field_name = 'redirect_to'
+    template_name ='orders/order-form.html'
+    form_class = OrderForm
+
     def get(self, request):
-        return render(request, 'display/booking.html')
+        form = self.form_class()
+        return render(request, self.template_name, context={'form':form})
 
+    def post(self, request):
+        form = self.form_class(request.POST)
+        print(form.errors)
+        if form.is_valid():
+            clinic = form.cleaned_data['clinic']
+            client = form.cleaned_data['client']
+            product = form.cleaned_data['product']
+            date = form.cleaned_data['date']
+            time_slot = form.cleaned_data['time_slot']
 
-class CCouponView(views.View):
-    def get(self, request):
-        return render(request, 'display/coupon.html')
+            time_obj = TimeSlot.objects.get(id=time_slot)
+            start_time = (datetime.datetime.strptime(time_obj.avail_times, '%H:%M')).time()
+            doctor = time_obj.schedule.doctor
 
+            app_obj = Appointment.objects.create(id=id_increment(Appointment, 114000),  doctor=doctor, clinic=clinic, client=client, date=date, start_time=start_time)
+            print(app_obj.id)
+            order_obj = form.save(commit=False)
+            order_obj.appointment = app_obj
+            order_obj.save()
 
-class CServiceView(views.View):
-    def get(self, request):
-        return render(request, 'display/service.html')
-
-
-class CUserView(views.View):
-    def get(self, request):
-        return render(request, 'display/user.html')
+            return redirect('portal:app-tab')
+        return render(request, self.template_name, context={'form':form})    

@@ -37,17 +37,18 @@ urlpatterns = [
     path('int-client-detail/<slug>', client_views.InternetDetailView.as_view(), name='intrnt-cli-det'),
 
     #appointment
-    path('appointment-reg', booking_views.AppointmentRegistrationView.as_view(), name='app-reg'),
+    path('place-icorder', booking_views.PlaceOrderAdminView.as_view(), name='place-order'),
+    path('icorder-list', booking_views.ICOrderTableView.as_view(), name='icorder-list'),
     path('appointment-table', booking_views.AppointmentTableView.as_view(), name='app-tab'),
     path('appointment-calendar', booking_views.AppointmentCalendarView.as_view(), name='app-cal'),
     path('appointment/ajax/filter-dates', booking_views.getDates, name='ajax-dates'),
     path('appointment/ajax/filter-times', booking_views.getTimes, name="ajax-times"),
 
     #booking
-    path('booking/location', booking_views.CBookingView.as_view(), name='booking'),
-    path('booking/coupon', booking_views.CCouponView.as_view(), name='coupon')
-    ,path('booking/service', booking_views.CServiceView.as_view(), name='service'),
-    path('booking/user', booking_views.CUserView.as_view(), name='user')
+    path('booking/location', views.CBookingView.as_view(), name='booking'),
+    path('booking/coupon', views.CCouponView.as_view(), name='coupon')
+    ,path('booking/service', views.CServiceView.as_view(), name='service'),
+    path('booking/user', views.CUserView.as_view(), name='user')
 
 
 ]

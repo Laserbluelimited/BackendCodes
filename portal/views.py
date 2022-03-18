@@ -20,6 +20,26 @@ class AdminDashboardPageView(LoginRequiredMixin,PermissionRequiredMixin, View):
     def get(self, request):
         return render(request, 'dashboard-actual/dashboard.html')
 
+class CBookingView(View):
+    def get(self, request):
+        return render(request, 'display/booking.html')
+
+
+class CCouponView(View):
+    def get(self, request):
+        return render(request, 'display/coupon.html')
+
+
+class CServiceView(View):
+    def get(self, request):
+        return render(request, 'display/service.html')
+
+
+class CUserView(View):
+    def get(self, request):
+        return render(request, 'display/user.html')
+
+
 
 class TestingView(View):
     def get(self, request):

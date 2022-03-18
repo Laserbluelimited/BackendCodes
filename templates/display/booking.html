@@ -1,72 +1,7 @@
-{%load static%}   
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}">
-    <link rel="stylesheet" href="{%static 'display/css/style.css'%}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <title>Drivers Medical</title>
-</head>
-<body>
-  <nav class="navbar navbar-expand-md">
-    <div class="container-fluid">
-      <a class="logo" href="index.html"><img src="/static/display/img/DriverMEDICAL LOGO 1.png" alt=""></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About Us</a>
-          </li>
-          <li class="nav-items dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Our Services</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="hgvmedical.html">HGV Medical</a></li>
-              <li><a class="dropdown-item" href="pvcmedical.html">PVC/Bus Medical</a></li>
-              <li><a class="dropdown-item" href="taxi.html">Taxi Medical</a></li>
-              <li><a class="dropdown-item" href="#">Business Services</a></li>
-              <li><a class="dropdown-item" href="#">Other Medicals</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Location</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact Us</a>
-          </li>
-        </ul>
-        <ul class="endbar-nav">
-          <li class="end-item">
-            <a href="booking.html">
-              <button type="button" class="btn">Book Now</a></button>
-            </a>
-          </li>
-          <li class="end-items dropdown dropstart">
-            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
-            Login</button>            
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">HGV Medical</a></li>
-              <li><a class="dropdown-item" href="#">PVC/Bus Medical</a></li>
-              <li><a class="dropdown-item" href="#">Taxi Medical</a></li>
-              <li><a class="dropdown-item" href="#">Business Services</a></li>
-              <li><a class="dropdown-item" href="#">Other Medicals</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+{%extends 'display/base.html'%}
+
+{%load static%}
+{%block content%}
 
   <div class="bform">
     <div class="container-sm">
@@ -76,81 +11,10 @@
         <div class="tab">
         <input placeholder="Select your location" autofocus class="animated-search-filter">
         <ul class="animated-search-filter"></ul>
-        <a href="service.html" class="btn btn-lg" type="submit"> Next</a>    
+        <a href="{%url 'portal:service'%}" class="btn btn-lg" type="submit"> Next</a>    
         </div>
       </form>
     </div>
   </div>
 
-  <div class="hfooter">
-    <div class="container-fluid mt-5">
-      <div class="row">
-        <div class="col-sm-3">
-          <a href="index.html"><img class="img-fluid mb-2" src="/static/display/img/DriverMEDICAL LOGO 2.png" alt="New York"></a>
-          <p>All driver medicals are completed by GMC registered doctors in accordance with current DVLA Group 2 guidelines.</p>
-          <a href=""><i class="fab fa-linkedin"></i></a>
-          <a href=""><i class="fab fa-instagram"></i></a>
-          <a href=""><i class="fab fa-twitter"></i></a>
-        </div>
-        <div class="col-sm-3">
-          <h2>Ouick Links</h2>
-          <ul class="nav flex-column">
-            <li class="hnav-item">
-              <a class="hnav-link" href="#">About Us</a>
-            </li>
-            <li class="hnav-item">
-              <a class="hnav-link" href="#">Our Services</a>
-            </li>
-            <li class="hnav-item">
-              <a class="hnav-link" href="#">Locations</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-sm-3">
-          <h2>Ouick Links</h2>
-          <ul class="nav flex-column">
-            <li class="hnav-item">
-              <a class="hnav-link" href="#">HGV Medical</a>
-            </li>
-            <li class="hnav-item">
-              <a class="hnav-link" href="#">PVC/Bus Medical</a>
-            </li>
-            <li class="hnav-item">
-              <a class="hnav-link" href="#">Taxi Medical</a>
-            </li>
-            <li class="hnav-item">
-              <a class="hnav-link" href="#">Business Services</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-sm-3">
-          <div class="hend">
-            <h2>Ouick Links</h2> 
-            <span class="fas fa-map-marker-alt"></span>       
-            <p>United Kingdom</p>
-            <span class="fas fa-phone-alt"></span>
-            <p>0203 963 9083</p>
-            <span class="fas fa-envelope"></span>
-            <p class="text-break">Bookings@drivermedicals.uk</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <footer class="footer-footer">
-    <div class="footer-wrapper">
-        <div class="wrapper-end">
-            <p>Drivermedicals.uk © 2022. All Rights Reserved</p>
-        </div>
-    </div>
-</footer>
-
-  
-  
-
-
-<script src="{% static 'display/bcss/bootstrap.bundle.js'%}"></script>
-<script src="{% static 'display/js/script.js'%}"></script>
-</body>
-</html>
+{%endblock%}
