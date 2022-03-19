@@ -37,7 +37,7 @@ urlpatterns = [
     path('int-client-detail/<slug>', client_views.InternetDetailView.as_view(), name='intrnt-cli-det'),
 
     #appointment
-    path('place-icorder', booking_views.PlaceOrderAdminView.as_view(), name='place-order'),
+    path('place-icorder', booking_views.ICPlaceOrderAdminView.as_view(), name='place-order'),
     path('icorder-list', booking_views.ICOrderTableView.as_view(), name='icorder-list'),
     path('appointment-table', booking_views.AppointmentTableView.as_view(), name='app-tab'),
     path('appointment-calendar', booking_views.AppointmentCalendarView.as_view(), name='app-cal'),

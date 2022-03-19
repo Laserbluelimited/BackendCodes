@@ -1,10 +1,5 @@
-from ast import Pass
-from ctypes import addressof
-from multiprocessing import context
-from re import template
 from django.shortcuts import render, redirect
 from django.views import View
-from allauth.account.views import PasswordSetView,PasswordChangeView
 from django.urls import reverse_lazy
 from .forms import LoginForm
 from django.contrib.auth import authenticate, login, logout

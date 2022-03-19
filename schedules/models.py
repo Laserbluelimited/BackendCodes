@@ -11,6 +11,7 @@ class ScheduleDates(models.Model):
     day_of_week = models.CharField('day_of_week', max_length=10, null=True)
     start_time = models.TimeField('actual_star_time')
     end_time = models.TimeField('actual_end_time')
+    status = models.CharField('status', max_length=10, choices=[(0, 'not booked'),(1, 'temporarily booked'), ('2', 'paid for')])
 
     def get_start_time(self):
         return self.start_time
@@ -34,8 +35,6 @@ class ScheduleDates(models.Model):
         return self.duration/60000000
 
     
-    def __str__(self):
-        return "Appointment start time: " +self.start_time
 
     def save(self, *args, **kwargs):
         if not self.duration:
@@ -43,9 +42,3 @@ class ScheduleDates(models.Model):
         self.day_of_week = self.date.strftime('%A')
         return super(ScheduleDates,self).save(*args, **kwargs)
         
-class TimeSlot(models.Model):
-    avail_times = models.CharField('time', max_length=10)
-    schedule = models.ForeignKey('ScheduleDates', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.avail_times + ' ' + self.schedule.clinic.name
