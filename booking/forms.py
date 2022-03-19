@@ -17,7 +17,7 @@ class AppointmentForm(forms.Form):
 
 class OrderForm(forms.ModelForm):
     client = forms.ModelChoiceField(queryset=InternetClient.objects.all())
-    clinic = forms.ModelChoiceField(queryset=Clinic.objects.all(), to_field_name='name')
+    clinic = forms.ModelChoiceField(queryset=Clinic.objects.all())
     product = forms.ModelChoiceField(queryset=Product.objects.all())
     notes = forms.Textarea()
     date = forms.DateField(required=True)
@@ -26,4 +26,22 @@ class OrderForm(forms.ModelForm):
 
     class Meta:
         model = ICOrders
-        exclude = ['id', 'order_number', 'appointment', 'fulfilled', 'total_price']
+        exclude = ['id', 'order_number', 'appointment', 'fulfilled', 'total_price', 'product']
+
+
+class CartForm(forms.Form):
+    clinic = forms.ModelChoiceField(queryset=Clinic.objects.all())
+    product = forms.ModelChoiceField(queryset=Product.objects.all())
+    notes = forms.Textarea()
+    date = forms.DateField(required=True)
+    time_slot = forms.CharField(required=True)
+    first_name = forms.CharField(max_length=100)
+    last_name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    phone = forms.CharField(max_length=15)
+
+
+
+    class Meta:
+        model = ICOrders
+        exclude = ['id', 'order_number', 'appointment', 'fulfilled', 'total_price', 'product']

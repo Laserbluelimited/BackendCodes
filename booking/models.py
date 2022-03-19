@@ -1,55 +1,45 @@
-from venv import create
 from django.db import models
-import datetime
 
 # Create your models here.
 
 class Appointment(models.Model):
     id = models.IntegerField('appointment_id', primary_key=True)
-    doctor = models.ForeignKey('clinic_mgt.Doctor', on_delete=models.CASCADE)
-    clinic = models.ForeignKey('clinic_mgt.Clinic', on_delete=models.CASCADE)
     client = models.ForeignKey('client_mgt.InternetClient', on_delete=models.CASCADE)
-    date = models.DateField('date', null=True)
-    day_of_week = models.CharField('day_of_week', max_length=10, null=True)
-    start_time = models.TimeField('actual_start_time', null=True)
-    end_time = models.TimeField('actual_end_time', null=True)
+    schedule = models.OneToOneField('schedules.ScheduleDates', on_delete=models.CASCADE)
     notes = models.TextField('notes', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    status = models.CharField('status', max_length=20, choices=[(0, 'not paid'), (1, 'paid')])
 
     def __str__(self):
-        return str(self.start_time) + ' ' + str(self.doctor)
+        return str(self.schedule.start_time) + ' ' + str(self.schedule.doctor)
     def get_start_time(self):
-        return self.start_time
+        return self.schedule.start_time
 
     def get_end_time(self):
-        return self.end_time
+        return self.schedule.end_time
 
         
     def get_day_of_week(self):
-        return self.day_of_week
+        return self.schedule.day_of_week
 
     def get_date(self):
-        return self.date
+        return self.schedule.date
 
     def get_doctor(self):
-        return self.doctor
+        return self.schedule.doctor
 
     def get_clinic(self):
-        return self.clinic
+        return self.schedule.clinic
 
 
     def get_start_moment(self):
-        return self.start_time.isoformat()
+        return self.schedule.start_time.isoformat()
 
     def get_end_moment(self):
-        return self.end_time.isoformat()
+        return self.schedule.end_time.isoformat()
     
 
-    def save(self, *args, **kwargs):
-        self.day_of_week = self.date.strftime('%A')
-        self.end_time = (datetime.datetime.combine(datetime.date.today(), self.start_time)+datetime.timedelta(minutes=15)).time()
-        return super(Appointment,self).save(*args, **kwargs)
 
 
 class ICOrders(models.Model):
@@ -109,3 +99,13 @@ class ICOrders(models.Model):
 
     def get_fulfilled(self):
         return self.fulfilled
+
+class Cart(models.Model):
+    cart_id = models.IntegerField('cart_id', primary_key=True)
+    client = models.ForeignKey('client_mgt.InternetClient', on_delete=models.CASCADE)
+    appointment = models.ForeignKey('Appointment', on_delete=models.CASCADE)
+    product = models.ForeignKey('prod_mgt.Product', on_delete=models.CASCADE)
+    quantity = models.IntegerField('quantity', default=1)
+
+    def __str__(self):
+        return self.cart_id
