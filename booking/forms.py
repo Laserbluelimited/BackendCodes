@@ -40,8 +40,14 @@ class CartForm(forms.Form):
     email = forms.EmailField()
     phone = forms.CharField(max_length=15)
 
+    # def __init__(self, request=None, *args, **kwargs):
+    #     self.request = request
+    #     super(CartForm, self).__init__(*args, **kwargs)
+    
+    # def clean(self):
+    #     if self.request:
+    #         print('yes')
+    #         if not self.request.session.test_cookie_worked():
+    #             raise forms.ValidationError("Cookies must be enabled.")
+    #         return self.cleaned_data
 
-
-    class Meta:
-        model = ICOrders
-        exclude = ['id', 'order_number', 'appointment', 'fulfilled', 'total_price', 'product']

@@ -101,7 +101,7 @@ class ICOrders(models.Model):
         return self.fulfilled
 
 class Cart(models.Model):
-    cart_id = models.IntegerField('cart_id', primary_key=True)
+    cart_id = models.CharField('cart_id', primary_key=True, max_length=100)
     client = models.ForeignKey('client_mgt.InternetClient', on_delete=models.CASCADE)
     appointment = models.ForeignKey('Appointment', on_delete=models.CASCADE)
     product = models.ForeignKey('prod_mgt.Product', on_delete=models.CASCADE)
@@ -109,3 +109,21 @@ class Cart(models.Model):
 
     def __str__(self):
         return self.cart_id
+
+    def get_quantity(self):
+        return self.quantity
+
+    def get_product(self):
+        return self.product.name_of_prod
+
+    def get_name(self):
+        return self.client.first_name + ' ' + self.client.last_name
+
+    def get_date(self):
+        return self.appointment.schedule.date
+
+    def get_location(self):
+        return self.appointment.schedule.clinic.address
+
+    def get_price(self):
+        return self.product.price

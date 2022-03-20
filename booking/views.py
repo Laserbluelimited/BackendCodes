@@ -5,8 +5,11 @@ from django.views import View
 from schedules.models import ScheduleDates
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import OrderForm, CartForm
-from .models import Appointment, ICOrders
+from .models import Appointment, Cart, ICOrders
 import datetime
+from client_mgt.models import InternetClient
+from booking import cart
+from payment import stripe
 # Create your views here.
 
 
@@ -115,6 +118,8 @@ class ICPlaceOrderAdminView(LoginRequiredMixin, views.View):
             order_obj.save()
 
             return redirect('portal:icorder-list')
+
+
         return render(request, self.template_name, context={'form':form})
 
 
@@ -122,23 +127,88 @@ class ICPlaceOrderAdminView(LoginRequiredMixin, views.View):
 class ICPlaceOrderView(LoginRequiredMixin, View):
     login_url = '/auth/login'
     redirect_field_name = 'redirect_to'
-    template_name ='orders/order-form.html'
+    template_name ='orders/testic-order.html'
     form_class = CartForm
 
     def get(self, request):
         form = self.form_class()
+        request.session.set_test_cookie()
+
         return render(request, self.template_name, context={'form':form})
 
     def post(self, request):
         form = self.form_class(request.POST)
-        if form.is_valid():
-            #if form is valid, do the following
-            #1. save individual client
-            #2. book appointment
-            #3. add to cart
-            #4. add cart id to session
-            return redirect('portal:icorder-checkout')
+        if request.session.test_cookie_worked():
+            print(form.errors)
+            if form.is_valid():
+                #if form is valid, do the following'
+                #1. get form data
+                #2. save individual client if not save already with a status of 0
+                #3. get schedule object, book appointment
+                #4. add to cart and add cart id to session
+                #5. redirect to checkout page
+
+
+                #1.
+                first_name = form.cleaned_data['first_name']
+                last_name = form.cleaned_data['last_name']
+                phone = form.cleaned_data['phone']
+                email = form.cleaned_data['email']
+                clinic = form.cleaned_data['clinic']
+                # notes = form.cleaned_data['notes']
+                time_slot = form.cleaned_data['time_slot']
+                product = form.cleaned_data['product']
+
+
+                #2
+                if InternetClient.objects.filter(email=email).exists():
+                    client_obj = InternetClient.objects.get(email=email)
+                else:
+                    client_obj = InternetClient.objects.create(id=id_increment(InternetClient, 1120000),status=0, first_name=first_name, phone=phone, last_name=last_name, email=email)
+
+                #3
+                sche_obj = ScheduleDates.objects.get(id=time_slot)
+                app_obj = book_appointment(Appointment, schedule=sche_obj, status=0, client=client_obj)
+
+                #4
+                print(client_obj,app_obj, product)
+                cart.add_to_cart(request, client=client_obj, appointment=app_obj, product=product)
+                print(request.session['cart_id'])
+                if request.session.test_cookie_worked():
+                    request.session.delete_test_cookie()
+
+                #5
+                return redirect('portal:test-checkout')
+        else:
+            print('cookie not present')
+
         return render(request, self.template_name, context={'form':form})
+
+
+
+class ICOrderCheckoutView(View):
+    login_url = '/auth/login'
+    redirect_field_name = 'redirect_to'
+    template_name ='orders/testic-checkout.html'
+
+    def get(self, request):
+        if request.session['cart_id']:
+            cart_id = request.session['cart_id']
+            cart_obj = Cart.objects.get(cart_id=cart_id)
+        else:
+            return redirect('portal:test-order')
+        return render(request, self.template_name, context={ 'cart':cart_obj})
+
+    def post(self, request):
+        if request.session['cart_id']:
+            cart_id = request.session['cart_id']
+            cart_obj = Cart.objects.get(cart_id=cart_id)
+            return stripe.iccheckout_stripe(cart_id=cart_obj)
+            print('jo')
+        else:
+            return redirect('portal:test-order')
+
+        return render(request, self.template_name, context={ 'cart':cart_obj})
 
 
 
