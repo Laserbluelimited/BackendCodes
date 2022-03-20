@@ -34,39 +34,36 @@ PREFERRED_MODE_CHOICES =  (
 )
 
 class InternetClient(models.Model):
-
-
-
     id = models.IntegerField('client_id', unique=True, primary_key=True)
     first_name = models.CharField('first_name', max_length=100)
     last_name = models.CharField('last_name', max_length=100)
     email = models.EmailField('email', unique=True)
-    user = models.OneToOneField('authentication.User', on_delete=models.CASCADE)
+    user = models.OneToOneField('authentication.User', on_delete=models.CASCADE, null=True)
     title = models.CharField('title', max_length=20, choices=TITLE_CHOICES, null=True)
-    phone = models.IntegerField('phone_number', unique=True)
-    dob = models.DateField('date_of_birth')
-    gender = models.CharField('gender', choices=GENDER_CHOICES, max_length=50)
-    address = models.CharField('address', max_length=255)
-    city = models.CharField('city', max_length=100)
+    phone = models.IntegerField('phone_number', unique=False)
+    dob = models.DateField('date_of_birth', null=True)
+    gender = models.CharField('gender', choices=GENDER_CHOICES, max_length=50, null=True)
+    address = models.CharField('address', max_length=255, null=True)
+    city = models.CharField('city', max_length=100, null=True)
     long = models.DecimalField('longitude', max_digits=9, decimal_places=6, null=True)
     lat = models.DecimalField('latitude', max_digits=9, decimal_places=6, null=True)
-    postal_code = models.CharField('postal_code', max_length=20)
+    postal_code = models.CharField('postal_code', max_length=20, null=True)
     country = models.CharField('country', max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     crprt_client = models.ForeignKey('CorporateClient', null=True, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=255, help_text='Unique Value for product page URL, created from name.')
-    verified = models.BooleanField(default=False)
+    status = models.CharField('status', max_length=20, choices=[(0,'visitor'),(1, 'unverified customer'), (2, 'verified customer')], default=0)
 
     class Meta:
         db_table = 'internet_client'
 
     def __str__(self):
-        return self.title + ' ' + self.first_name + self.last_name
+        return self.first_name + self.last_name
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            name = self.first_name + str(self.user.id)
+            name = self.first_name + str(self.phone)
             self.slug = slugify(name)
         return super(InternetClient,self).save(*args, **kwargs)
 

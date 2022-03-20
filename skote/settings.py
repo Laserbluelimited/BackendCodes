@@ -42,17 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     # Local App
-    'layout',
-    'ecommerce',
-    'crypto',
-    'e_mail',
-    'invoices',
-    'projects',
-    'tasks',
-    'contacts',
-    'blog',
-    'pages',
-    'components',
     'display',
     'authentication',
     'clinic_mgt',
@@ -61,6 +50,7 @@ INSTALLED_APPS = [
     'schedules',
     'client_mgt',
     'booking',
+    # 'payment',
     # Third Party App
     'crispy_forms',
     'django.contrib.sites',
@@ -233,3 +223,4 @@ GEOAPIFY_API_KEY = "d4641924f0854b1bbd807ee57d602c8d"
 
 DEFAULT_PASSWORD = "drivermedicals"
 
+STRIPE_API_KEY = 'sk_test_51KfF8SHQiFLHp4SA2oHWts22RDTHCuPh2CGs5Ry4kqMpUbp4z3rVX4IBiwMyIe7GElxRjGNserGeTu8EpRDypF4V00aXtdXyKT'

@@ -1,6 +1,5 @@
-from unicodedata import name
 from django.urls import path
-
+from django.views.decorators.csrf import csrf_exempt
 
 
 from . import views
@@ -9,7 +8,7 @@ from prod_mgt import views as prod_views
 from schedules import views as sche_views
 from client_mgt import views as client_views
 from booking import views as booking_views
-
+from payment import stripe as payment_views
 
 app_name='portal'
 
@@ -38,6 +37,10 @@ urlpatterns = [
 
     #appointment
     path('place-icorder', booking_views.ICPlaceOrderAdminView.as_view(), name='place-order'),
+    path('test-order', booking_views.ICPlaceOrderView.as_view(), name='test-order'),
+    path('test-checkout', csrf_exempt(booking_views.ICOrderCheckoutView.as_view()), name='test-checkout'),
+    path('payment-success', payment_views.PaymentSuccessView.as_view(), name='payment-success'),
+    path('payment-success', payment_views.PaymentCancelView.as_view(), name='payment-cancel'),
     path('icorder-list', booking_views.ICOrderTableView.as_view(), name='icorder-list'),
     path('appointment-table', booking_views.AppointmentTableView.as_view(), name='app-tab'),
     path('appointment-calendar', booking_views.AppointmentCalendarView.as_view(), name='app-cal'),
