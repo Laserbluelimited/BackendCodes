@@ -58,7 +58,6 @@ class ClinicRegistration(LoginRequiredMixin, View):
 
 
             clinic_obj = Clinic.objects.create(id=id_increment(Clinic, 1130000), name =name, address=address,postal_code=geodata['postal_code'],  long=geodata['longitude'], lat=geodata['latitude'], city=geodata['city'])
-            
             clinic_obj.save()
 
             return redirect('portal:clinic-list')

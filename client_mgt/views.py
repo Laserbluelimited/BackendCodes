@@ -7,8 +7,13 @@ from clinic_mgt.managers import AddressRequest
 from authentication.models import User
 # Create your views here.
 
-
+#functions
 def id_increment(model, initial):
+    """
+    This model is to increment ids of models
+    model: model
+    initial: first value of record if no record
+    """
     last_value = model.objects.all().order_by('id').last()
     if not last_value:
         new_id = initial
@@ -17,7 +22,7 @@ def id_increment(model, initial):
     return new_id
 
 
-
+#to display list of internet clients
 class InternetClientTableView(LoginRequiredMixin, View):
     login_url = '/auth/login'
     redirect_field_name = 'redirect_to'
@@ -26,6 +31,8 @@ class InternetClientTableView(LoginRequiredMixin, View):
         clients = InternetClient.objects.all()
         return render(request, 'client/internet-client-list.html', context={'clients':clients})
 
+
+#to display list of corporate clients
 class CorporateClientTableView(View):
     login_url = '/auth/login'
     redirect_field_name = 'redirect_to'
@@ -36,6 +43,7 @@ class CorporateClientTableView(View):
         return render(request, 'client/cor-client-list.html', context={'clients':clients})
 
 
+#to register internet clients in the admin portal
 class InternetClientRegistrationView(View):
     login_url = '/auth/login'
     redirect_field_name = 'redirect_to'
@@ -51,19 +59,23 @@ class InternetClientRegistrationView(View):
         clients = InternetClient.objects.all()
 
         if form.is_valid():
-            print('valid')
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
+            #if form is valid, do the following:
+            #1. get form data
+            #2. call Address object to get the city, longitude, latitude and postcode of address inputed
+            #3. save the client to the authentication model, User
+            #4. save client to internetclient model
+
+
             email = form.cleaned_data['email']
             password1 = form.cleaned_data['password1']
             address = form.cleaned_data['address']
             username = form.cleaned_data['username']
 
-
-
             address_class = AddressRequest()
             geodata = address_class.get_geodata(address)
+
             user_obj = User.objects.create_user(email=email, password=password1, username=username)
+
             client_obj = form.save(commit=False)
             client_obj.id = id_increment(InternetClient, 1120000)
             client_obj.user = user_obj
@@ -78,8 +90,10 @@ class InternetClientRegistrationView(View):
             return redirect('portal:intrnt-cli-list')
         return render(request, 'client/internet-client-reg.html', context={'clients':clients, 'form':form})
 
+
+
+#to regeister corporate client in the admin portal
 class CorporateClientRegistrationView(LoginRequiredMixin, View):
-    
     login_url = '/auth/login'
     redirect_field_name = 'redirect_to'
     form_class = CorporateClientRegistrationForm
@@ -94,17 +108,23 @@ class CorporateClientRegistrationView(LoginRequiredMixin, View):
         clients = CorporateClient.objects.all()
 
         if form.is_valid():
-            print('valid')
+            #if form is valid, do the following:
+            #1. get form data
+            #2. call Address object to get the city, longitude, latitude and postcode of address inputed
+            #3. save the client to the authentication model, User
+            #4. save client to corporateclient model
+            
             email = form.cleaned_data['main_contact_email']
             password1 = form.cleaned_data['password1']
-            password2 = form.cleaned_data['password2']
             address = form.cleaned_data['address']
             username = form.cleaned_data['username']
 
 
             address_class = AddressRequest()
             geodata = address_class.get_geodata(address)
+
             user_obj = User.objects.create_user(email=email, password=password1, username=username)
+
             company_obj = form.save(commit=False)
             company_obj.user = user_obj
             company_obj.id = id_increment(CorporateClient, 1140000)
@@ -120,6 +140,9 @@ class CorporateClientRegistrationView(LoginRequiredMixin, View):
             return redirect('portal:crprt-cli-list')
         return render(request, 'client/cor-client-reg.html', context={'clients':clients, 'form':form})
 
+
+
+#to display corporate client specific details
 class CorporateDetailView(View):
     login_url = '/auth/login'
     redirect_field_name = 'redirect_to'
@@ -128,6 +151,9 @@ class CorporateDetailView(View):
         company = get_object_or_404(CorporateClient, slug=slug)
         return render(request, self.template_name, context={'client':company})
 
+
+
+#to display internet client specific details
 class InternetDetailView(View):
     login_url = '/auth/login'
     redirect_field_name = 'redirect_to'

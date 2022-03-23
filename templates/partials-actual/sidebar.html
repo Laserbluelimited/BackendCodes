@@ -97,6 +97,19 @@
             </ul>
         </li>
 
+        <li class="menu-title" key="t-components"> Sales</li>
+        <li>
+          <a href="javascript: void(0);" class="waves-effect">
+            <i class="bx bx-home-circle"></i
+            ><span class="badge rounded-pill bg-info float-end">04</span>
+            <span key="t-dashboards">Orders</span>
+          </a>
+            <ul class="sub-menu" aria-expanded="false">
+              <li><a href="{% url 'portal:icorder-list' %}" key="t-default">Individual Orders</a></li>
+              <li><a key="t-default">Corporate Orders</a></li>
+            </ul>
+        </li>
+
         <li class="menu-title" key="t-components">Appointments</li>
         <li>
           <a href="javascript: void(0);" class="waves-effect">
@@ -105,15 +118,12 @@
             <span key="t-dashboards">Appointments</span>
           </a>
             <ul class="sub-menu" aria-expanded="false">
-            <li><a href="{% url 'portal:app-tab' %}" key="t-default">View Appointments</a></li>
-            <li><a href="{% url 'portal:place-order' %}" key="t-default">Place Order</a></li>
-            <li><a href="{% url 'portal:icorder-list' %}" key="t-default">View Orders</a></li>
-            <li><a href="{% url 'portal:app-cal' %}" key="t-default">Appointment Calendar</a></li>
+            <li><a href="{% url 'portal:app-tab' %}" key="t-default">Individual</a></li>
+            <li><a  key="t-default">Corporate</a></li>
             </ul>
         </li>
 
-
-          </ul>
+      </ul>
         </div>
         <!-- Sidebar -->
       </div>
