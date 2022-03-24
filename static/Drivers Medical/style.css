@@ -1,0 +1,1494 @@
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------- */
+/* HEAD */
+/* --------------------------------------------------------------------------------------------------------------------------------------- */
+
+.navbar{
+    background-color: #fff;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.219);
+  }
+
+.logo{
+  margin-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.navbar-nav{
+    margin-left: 2rem;
+}
+
+.nav-link{
+    color: #14171F;
+    font-size: 1.8rem;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+  
+  .nav-link:hover{
+    color: #0AC5A8;
+  }
+
+  .dropdown-menu li{
+    font-size: 1.8rem;
+    font-weight: 400;
+    padding: .5rem;
+  }
+
+  .nav-end{
+    display: flex;
+  }
+
+  .nav-end a{
+    margin-right: 2rem;
+    font-size: 1.8rem;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    background-color: #0AC5A8;
+    color: #fff;
+    border-radius: .7rem;
+    border: .3rem solid #0AC5A8;
+    transition: .3s;
+  }
+
+  .nav-end a:hover{
+    background-color: #fff;
+    color: #0AC5A8;
+  }
+
+  .nav-end button{
+    font-size: 1.8rem;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    color: #0AC5A8;
+    border-radius: .7rem;
+    border: .3rem solid #0AC5A8;
+    transition: .3s;
+  }
+
+  .nav-end button:hover{
+    background-color: #0AC5A8;
+    color: #fff;
+  }
+
+  /* --------------------------------------------------------------------------------------------------------------------------------------- */
+/* BODY */
+/* --------------------------------------------------------------------------------------------------------------------------------------- */
+
+.body{
+  width: 100%;
+  position: relative;
+}
+
+.carousel-control-prev{
+  z-index: 10;
+}
+
+.carousel-control-next{
+  z-index: 10;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  background-image: linear-gradient(90deg, rgb(255, 255, 255), rgba(0, 0, 0, 0.281));
+}
+
+.body-content{
+  position: absolute;
+  top: 30%;
+  margin-left: 7%;
+  z-index: 10;
+  width: 60%;
+}
+
+.postal{
+  width: 100%;
+  display: flex;
+}
+
+.postal-buttons{
+  font-size: 1.5rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  margin-right: 3rem;
+}
+
+.button1{
+  background-color: #0AC5A8;
+  color: #fff;
+  border-radius: .7rem;
+  border: none;
+  padding: .7rem 2rem;
+  transition: 0.3s;
+}
+
+.button1:hover{
+  background-color: #fff;
+  color: #0AC5A8;
+}
+
+.button1{
+  background-color: #0AC5A8;
+  color: #fff;
+  border-radius: .7rem;
+  border: none;
+  padding: .7rem 2rem;
+  transition: 0.3s;
+}
+
+.button1:hover{
+  background-color: #fff;
+  color: #0AC5A8;
+}
+
+form{
+  font-size: 1.5rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+}
+
+.input-container{
+  position: relative;
+}
+
+input{
+  border-radius: .7rem;
+  background-color: #fff;
+  border: none;
+  width: 100%;
+  padding: .7rem 4rem;
+  color: #14171F;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.219);
+}
+
+.input-container i{
+  position: absolute;
+  color: #0AC5A8;
+  top: 1.3rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+.body-texts{
+  position: absolute;
+  top: 6rem;
+  width: 100%;
+}
+
+.text-content h1{
+  font-family: 'Work Sans', sans-serif;
+  font-size: 7rem;
+  font-weight: 900;
+  word-spacing: .3rem;
+  color: #14171F;
+}
+
+.text-content p{
+  font-size: 1.7rem;
+  color: #0AC5A8;
+}
+
+h1 span{
+  color: #0AC5A8;
+}
+
+p span{
+  color: #14171F;
+}
+
+.button2{
+  font-size: 1.8rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  color: #0AC5A8;
+  border-radius: .7rem;
+  border: .3rem solid #0AC5A8;
+  padding: .7rem 2rem;
+  transition: 0.3s;
+}
+
+.button2:hover{
+  background-color: #0AC5A8;
+  color: #fff;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------- */
+/* EASY */
+/* --------------------------------------------------------------------------------------------------------------------------------------- */
+
+.easy{
+  width: 100%;
+}
+
+.headline-text h1, .sheadline-text h1{
+  padding-top: 10rem;
+  font-size: 4rem;
+  font-weight: 700;
+  color: #14171F;
+  text-align: center;
+}
+
+.easy .row{
+  width: 100%;
+}
+
+.easy-box{
+  display: flex;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: space-between;
+}
+
+.box-image{
+  margin-top: 1rem;
+}
+
+.easy-box h1{
+  font-size: 5rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  color: #0AC5A8;
+  opacity: .1;
+}
+
+.card{
+  border-radius: .5rem;
+  border: .1rem solid rgb(180, 180, 180);
+}
+
+.card-texts, .card-texts2{
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  color: #14171F;
+  margin-top: 2rem;
+  font-family: 'Work Sans', sans-serif;
+}
+
+.card-texts h2{
+  font-weight: 600;
+}
+
+.card-texts p{
+  font-style: italic;
+}
+
+.meet{
+  margin-top: 3rem;
+}
+
+.card-texts2 h2{
+  font-weight: 600;
+  width: 100%;
+}
+
+.card-texts2 p{
+  font-style: italic;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------- */
+/* SUBSCRIBE */
+/* --------------------------------------------------------------------------------------------------------------------------------------- */
+
+.subscribe{
+  width: 100%;
+  background: #EFFDFB42;
+}
+
+.subscribe .container{
+  padding-bottom: 10rem;
+  text-align: center;
+}
+
+.sheadline-text p{
+  font-weight: 400;
+  font-family: 'Work Sans', sans-serif;
+}
+
+.sheadline-text input{
+  font-size: 1.5rem;
+  font-family: 'Work Sans', sans-serif;
+  padding: .7rem 2rem;
+  width: 50%;
+  text-align: center;
+  border-radius: .4rem;
+  box-shadow: 0 .7rem .7rem rgba(0, 0, 0, 0.219);
+}
+
+.subscribe .btn{
+  font-size: 1.8rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  color: #fff;
+  background-color: #0AC5A8;
+  border-radius: .7rem;
+  border: .3rem solid #0AC5A8;
+  transition: .3s;
+}
+
+.subscribe .btn:hover{
+  background-color: #fff;
+  color: #0AC5A8;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------- */
+/* ABOUT */
+/* --------------------------------------------------------------------------------------------------------------------------------------- */
+
+.about{
+  width: 100%;
+  margin-top: 10rem;
+}
+
+.about-content{
+  position: relative;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-image{
+  width: 75%;
+}
+
+.about-image img{
+  width: 100%;
+}
+
+.about-texts{
+  background-color: #0AC5A8;
+  position: absolute;
+  top: 10rem;
+  right: 0;
+  width: 40%;
+}
+
+.atexts{
+  width: 80%;
+  margin: 2rem auto;
+}
+
+.atexts h1{
+  color: #fff;
+  font-size: 3rem;
+  font-weight: 600;
+  font-family: 'Work Sans', sans-serif;
+}
+
+.atexts p{
+  color: #fff;
+  font-size: 1.8rem;
+  font-family: 'Work Sans', sans-serif;
+  width: 80%;
+}
+
+.atexts span{
+  color: #fff;
+}
+
+.about .btn{
+  font-size: 1.8rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  color: #0AC5A8;
+  background-color: #fff;
+  border-radius: .7rem;
+  border: .3rem solid #0AC5A8;
+  transition: .3s;
+}
+
+.about .btn:hover{
+  background-color: #0AC5A8;
+  border: .3rem solid #fff;
+  color: #fff;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------- */
+/* SERVICES */
+/* --------------------------------------------------------------------------------------------------------------------------------------- */
+
+.services{
+  margin-top: 10rem;
+  width: 100%;
+  height: 110vh;
+  background: #EFFDFB42;
+}
+
+.services-content{
+  width: 80%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.services-card, .services-card2{
+  margin-top: 5rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.scard{
+  width: 34.9rem;
+  height: 23.2rem;
+  background-color: #fff;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.219);
+  text-align: center;
+}
+
+.scard-image{
+  width: 20%;
+  margin: 5rem auto;
+}
+
+.scard-image img{
+  margin-bottom: 1rem;
+  width: 50%;
+
+}
+
+.scard2{
+  width: 34.9rem;
+  height: 23.2rem;
+  background-color: #0AC5A8;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.219);
+  text-align: center;
+}
+
+.scard2-image{
+  width: 20%;
+  margin: 5rem auto;
+}
+
+.scard2-image img{
+  margin-bottom: 1rem;
+  width: 50%;
+}
+
+.scard2 h1{
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: 'Work Sans', sans-serif;
+}
+
+* --------------------------------------------------------------------------------------------------------------------------------------- */
+/* BOOK */
+/* --------------------------------------------------------------------------------------------------------------------------------------- */
+
+.book, .mbook{
+  width: 100%;
+  margin-top: 10rem;
+}
+
+.book-content, .mbook-content{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.book-headline{
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bheadline-text h1{
+  font-size: 4rem;
+  font-weight: 500;
+  color: #14171F;
+}
+
+.bheadline-text p{
+  color: #14171F;
+  font-weight: 500;
+  font-size: 2rem;
+}
+
+.bheadline-text span{
+  color: #0AC5A8;
+}
+
+.bheadline-text button{
+  font-size: 1.8rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  background-color: #0AC5A8;
+  color: #fff;
+  border-radius: .7rem;
+  border: .3rem solid #0AC5A8;
+  padding: .7rem 2rem;
+  transition: 0.3s;
+  margin-top: 3rem;
+}
+
+.bheadline-text button:hover{
+  background-color: #fff;
+  color: #0AC5A8;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------- */
+/* TRUST */
+/* --------------------------------------------------------------------------------------------------------------------------------------- */
+
+.trust{
+  width: 100%;
+  margin-top: 15rem;
+  position: relative;
+}
+
+.trust-image{
+  width: 100%;
+  background-color: #000000d8;
+  
+}
+
+.trust-image img{
+  width: 100%;
+  opacity: .2;
+}
+
+.trust-content{
+  position: absolute;
+  display: flex;
+  width: 80%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  justify-content: space-between;
+}
+
+.trust-pilot{
+  width: 15%;
+}
+
+.trust-pilot img{
+  width: 100%;
+}
+
+.trust-texts h1{
+  color: #0AC5A8;
+  font-size: 3rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+}
+
+.trust-texts p{
+  width: 80%;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: normal;
+  font-family: 'Work Sans', sans-serif;
+}
+
+.trust-btn button{
+  font-size: 1.8rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  color: #0AC5A8;
+  border-radius: .7rem;
+  border: .3rem solid #fff;
+  padding: .7rem 2rem;
+  transition: 0.3s;
+}
+
+.trust-btn button:hover{
+  color: #fff;
+  border: .3rem solid #0AC5A8;
+}
+
+.trust-btn .tbtn{
+  margin-top: 2rem;
+  background-color: #0AC5A8;
+  color: #fff;
+  border: .3rem solid #0AC5A8;
+  padding: .7rem 6rem;
+}
+
+.trust-btn .tbtn:hover{
+  margin-top: 2rem;
+  background-color: #fff;
+  color: #0AC5A8;
+  border: .3rem solid #0AC5A8;
+}
+
+/* -------------------------------------------------------------------------------------------------------------------------------------------- */
+/* FOOTER */
+/* -------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.footer-footer{
+  background-color: #0AC5A8;
+  width: 100%;
+  margin-top: 10rem;
+  overflow: hidden;
+  bottom: 0;
+}
+
+.footer-wrapper{
+  text-align: center;
+}
+
+.footer i{
+  margin-right: 1rem;
+  color: #14171F;
+  transition: .3s;
+}
+
+.footer .end{
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+}
+
+.footer i:hover{
+  color: #0AC5A8;
+}
+
+.wrapper-end p{
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+/* -------------------------------------------------------------------------------------------------------------------------------------------- */
+/* MODAL */
+/* -------------------------------------------------------------------------------------------------------------------------------------------- */
+
+#parent_popup{
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+}
+  
+#parent_popup .container-sm{
+  margin: 10% auto;
+  padding: .5rem 2rem 1.3rem 2rem;
+  border: 1rem solid #0AC5A8;
+  position: relative;
+  box-shadow: 0rem 0rem 2rem #000;
+  border-radius: 1.5rem;
+}
+
+.modal-headline{
+  margin: 3rem;
+  text-align: center;
+}
+
+.modal-text{
+  font-family: 'Work Sans', sans-serif;
+  color: #14171F;
+}
+
+.modal-headline input{
+  font-family: 'Work Sans', sans-serif;
+  padding: .7rem 2rem;
+  width: 100%;
+  text-align: center;
+  border-radius: .4rem;
+  box-shadow: 0 .7rem .7rem rgba(0, 0, 0, 0.219);
+}
+
+.close{
+  background-color: #14171F;;
+  color: #fff;
+  border: .2rem solid #ccc;
+  height: 2.4rem;
+  position: absolute;
+  bottom: .5rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.4rem;
+  text-shadow: 0 -.1rem rgba(0, 0, 0, 0.9);
+  width: 2.4rem;
+  border-radius: 1.5rem;
+  box-shadow: .1rem .1rem .3rem #000;
+  transition: .3s;
+}
+
+.close:hover{
+  background-color: #0AC5A8;;
+  color: #fff;
+}
+
+.modal-headline .btn{
+  font-size: 1.8rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  background-color: #0AC5A8;
+  border-radius: .7rem;
+  border: .3rem solid #0AC5A8;
+  margin: 2rem 0;
+}
+
+.modal-headline .btn:hover{
+  background-color: #fff;
+  color: #0AC5A8;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------ */
+/* HGVMEDICALS*/
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.hfooter{
+  margin-top: 10rem;
+}
+
+.hfooter .col-sm-3 p{
+  font-size: 1.5rem;
+  margin-top: 2rem;
+}
+
+.hfooter .col-sm-3 i{
+  color: #0AC5A8;
+  font-size: 3rem;
+  margin-right: 2rem;
+  margin-top: 2rem;
+}
+
+.hfooter .col-sm-3 ul, .hend{
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.hfooter .col-sm-3 h2{
+  color: #14171F;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.hfooter .col-sm-3 .hnav-item{
+  margin-top: 2rem;
+}
+
+.hfooter .col-sm-3 .hnav-link{
+  color: #14171F;
+  font-size: 1.5rem;
+}
+
+.hfooter .col-sm-3 span{
+  color: #0AC5A8;
+  font-size: 1.4rem;
+  margin-top: 2rem;
+}
+
+.hend p{
+  color: #14171F;
+}
+
+.med-body .container-fluid{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.76),rgba(0, 0, 0, 0.76)), url(/img/hero.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50vh;
+}
+
+.med-body .container-fluid h1{
+  color: #0AC5A8;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding-top: 12rem;
+  font-size: 4rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+}
+
+.med-links{
+  width: 100%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.med-btns{
+  width: 30%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.med-body .container-fluid a{
+  color: #0AC5A8;
+  font-size: 1.5rem;
+  font-family: 'Work Sans', sans-serif;
+  margin-right: 1rem;
+  transition: .3s;
+}
+
+.med-body .container-fluid a:hover{
+  color: #fff;
+}
+
+.med-body .container-fluid i{
+  margin-right: .5rem;
+}
+
+.med-btns{
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.med-btns .btn, .med-btn{
+  font-size: 1.5rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  color: #0AC5A8;
+  border-radius: .7rem;
+  border: .3rem solid #fff;
+  padding: .7rem 2rem;
+  transition: 0.3s;
+}
+
+.med-btns .btn:hover{
+  color: #fff;
+  border: .3rem solid #0AC5A8;
+}
+
+.med-btn{
+  background-color: #0AC5A8;
+  color: #fff;
+  border: .3rem solid #0AC5A8;
+  padding: .7rem 2rem;
+}
+
+.med-btn:hover{
+  background-color: #fff;
+  color: #0AC5A8;
+  border: .3rem solid #0AC5A8;
+}
+
+.mbus, .mend{
+  margin-top: 5rem;
+}
+
+.mbus .row{
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mbus h2, .mend-text h2{
+  color: #0AC5A8;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.mbus p, .mend p, .tend p{
+  color: #14171F;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.5rem;
+}
+
+.mbus ul, .mend ul, .tend ul{
+  margin-left: 0;
+}
+
+.mbus li, .mend li, .tend li{
+  list-style: disc;
+  color: #14171F;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.5rem;
+}
+
+.mbook{
+  height: 50vh;
+  position: relative;
+  background: #effdfb6b;
+  }
+
+.mbook-content{
+  padding-top: 5rem;
+}
+
+.mend .row, .tend .row{
+  position: relative;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mend h2{
+  color: #14171F;
+}
+
+.mend-text h2, .tend h2{
+  color: #0AC5A8;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------ */
+/* BOOKING*/
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.bform{
+  height: 50vh;
+  background: #0AC5A8;
+}
+
+.bform .container-sm{
+  padding-top: 10rem;
+}
+
+.bform form, .sform form{
+  text-align: center;
+}
+
+.bform form h1, .sform form h1, .uform form h1{
+  font-family: 'Work Sans', sans-serif;
+  font-size: 4rem;
+  font-weight: 600;
+  color: #14171F;
+}
+
+.bform form h3, .sform form h3, .uform form h3{
+  font-family: 'Work Sans', sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  color: #14171F;
+}
+
+.bform form input{
+  width: 50%;
+}
+
+.bform form .btn{
+  font-size: 1.8rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  background-color: #14171F;
+  color: #fff;
+  border-radius: .7rem;
+  border: .3rem solid #14171F;
+  transition: .3s;
+}
+
+.bform form .btn:hover{
+  background-color: #fff;
+  color: #14171F;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------ */
+/* SERVICE*/
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.sform{
+  background: #0AC5A8;
+}
+
+.sform .container-sm{
+  padding-top: 6rem;
+  padding-bottom: 4rem;
+}
+
+.sform form label{
+  font-family: 'Work Sans', sans-serif;
+  font-size: 2rem;
+  color: #14171F;
+  margin-top: 1rem;
+}
+
+.sform form option{
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.5rem;
+  color: #14171F;
+}
+
+.sform form select{
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.5rem;
+  color: #14171F;
+}
+
+.col-sm-6 input{
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.5rem;
+  color: #14171F;
+}
+
+.sform a{
+  font-size: 1.8rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  background-color: #14171F;
+  color: #fff;
+  border-radius: .7rem;
+  border: .3rem solid #14171F;
+  transition: .3s;
+}
+
+.sform a:hover{
+  background-color: #fff;
+  color: #14171F;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------ */
+/* USER*/
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.uform{
+  background: #0AC5A8;
+}
+
+.uform .container-md{
+  padding-top: 6rem;
+  padding-bottom: 4rem;
+}
+
+.uform .tab{
+  border-radius: .7rem;
+  background-color: aliceblue;
+  margin-top: 2rem;
+  width: 60%;
+  padding: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.uform form label{
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.5rem;
+  color: #14171F;
+}
+
+.form-check-input{
+  width: 10%;
+  margin-right: 1rem;
+}
+
+.uform .btn{
+  font-size: 1.8rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  background-color: #14171F;
+  color: #fff;
+  border-radius: .7rem;
+  border: .3rem solid #14171F;
+  transition: .3s;
+}
+
+.uform .btn:hover{
+  background-color: #fff;
+  color: #14171F;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------ */
+/* COUPON*/
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.cform{
+  background: #0AC5A8;
+}
+
+.cform .container-sm{
+  padding-top: 7rem;
+}
+
+.cform form h1{
+  font-family: 'Work Sans', sans-serif;
+  font-size: 4rem;
+  font-weight: 600;
+  color: #14171F;
+}
+
+.cform form h3{
+  font-family: 'Work Sans', sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #14171F;
+}
+
+.cform .row{
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.cform .row .input-group{
+  margin-top: 2rem;
+}
+
+.cform .row h2{
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #14171F;
+}
+
+.cform .row .form-control, .btn{
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #14171F;
+}
+
+.cform .row .btn{
+  background-color: #14171F;
+}
+
+.payment{
+  padding: 1rem;
+  background-color: white;
+}
+
+.payment .form-check{
+  font-family: 'Work Sans', sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #14171F;
+}
+
+.cform .btn{
+  font-family: 'Work Sans', sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------ */
+/* APPLICATION*/
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+
+.biz{
+  background-color: #0AC5A8;
+}
+
+.biz .container{
+  background-color: rgb(255, 255, 255);
+  padding: 5rem;
+}
+
+form h1{
+  text-align: center;
+  font-size: 4rem;
+  font-family: 'Work Sans', sans-serif;
+}
+
+input.invalid {
+  background-color: #ffdddd;
+}
+
+.tab {
+  display: none;
+}
+
+.step {
+  height: 1.5rem;
+  width: 1.5rem;
+  margin: 0 .2rem;
+  background-color: #0AC5A8;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+.step.finish {
+  background-color: #14171F;
+}
+
+.biz .btn {
+  font-size: 1.8rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  background-color: #14171F;
+  color: #fff;
+  border-radius: .7rem;
+  border: .3rem solid #14171F;
+  transition: .3s;
+}
+
+.biz .btn:hover{
+  background-color: #fff;
+  color: #14171F;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------ */
+/* CLIENT*/
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.client{
+  background-color: #0AC5A8;
+}
+
+.client button{
+  font-size: 1.8rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  background-color: #14171F;
+  color: #fff;
+  border-radius: .7rem;
+  border: .3rem solid #14171F;
+  transition: .3s;
+}
+
+.client button:hover{
+  background-color: #fff;
+  color: #14171F;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------ */
+/* DASHBOARD*/
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.dashboard{
+  background-color: #0AC5A8;
+}
+
+.dashboard .container{
+  background-color: #fff;
+  font-family: 'Work Sans', sans-serif;
+}
+
+
+
+
+
+
+
+
+
+
+

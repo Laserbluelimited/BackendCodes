@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Drivers Medical</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-md">
+    <div class="container-fluid">
+        <a class="logo" href="index.html"><img src="/img/DriverMEDICAL LOGO 2.png" alt=""></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarh">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+      <div class="collapse navbar-collapse" id="navbarh">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About Us</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="#" data-bs-toggle="dropdown">Our Services</a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="hgvmedical.html">HGV Medical</a></li>
+                <li><a class="dropdown-item" href="pvcmedical.html">PVC/Bus Medical</a></li>
+                <li><a class="dropdown-item" href="taxi.html">Taxi Medical</a></li>
+                <li><a class="dropdown-item" href="#">Business Services</a></li>
+                <li><a class="dropdown-item" href="#">Other Medicals</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Location</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="business.html">Business Clients</a>
+          </li>
+        </ul>
+        <div class="nav-end">
+          <a class="btn" href="booking.html" role="button">Book Now</a>
+          <button type="button" class="btn">Login</button>            
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="biz">
+    <div class="container">
+      <form id="regForm" action="">
+        <h1 class="mb-5">Business Client Application</h1>
+        <div class="tab fs-3 mt-5">
+          <div class="row g-5">
+            <div class="col-sm-6">
+              <label for="location" class="form-label">Location</label>
+              <input type="text" class="form-control" id="location" placeholder="" value="" required>
+              <ul class="animated-search-filter"></ul>
+              <div class="invalid-feedback">Required.</div>
+            </div>
+          
+            <div class="col-sm-6">
+              <label for="date" class="form-label">Date</label>
+              <input type="date" class="form-control" id="date" placeholder="" value="" required>
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>
+          
+            <div class="col-sm-6">
+              <label for="username" class="form-label">Driver's Name</label>
+              <div class="input-group has-validation">
+                <input type="text" class="form-control" id="username" placeholder="" required>
+                <div class="invalid-feedback">
+                  Required.
+                </div>
+              </div>
+            </div>
+          
+            <div class="col-sm-6">
+              <label for="email" class="form-label">Driver's Email</label>
+              <input type="email" class="form-control" id="email" placeholder="" required>
+              <div class="invalid-feedback">
+                Please enter a valid email industry sector
+              </div>
+            </div>
+          
+            <div class="col-sm-6">
+              <label for="address2" class="form-label">Driver's Phone Number </label>
+              <input type="text" class="form-control" id="address2" placeholder="">
+            </div>
+
+            <div class="col-sm-6">
+              <label for="email" class="form-label">Company Email</label>
+              <input type="email" class="form-control" id="email" placeholder="">
+            </div>
+
+            <div class="col-sm-6">
+              <label for="lastName" class="form-label">Service</label>
+              <select class="form-select fs-4" id="country" required>
+                <option value="">Choose...</option>
+                <option>HGV/PCV Medical (DVLA D4)</option>
+                <option>Taxi/Private Hire & PCO(TFL) Medical</option>
+                <option>Coach Medical</option>
+                <option>Bus Medical</option>
+                <option>Pre-employment Medical</option>
+                <option>Ambulance Driver Medical</option>
+                <option>Motorhome Medical</option>
+                <option>Motorsport Medical</option>
+                <option>Forklift Medical</option>
+              </select>
+              <div class="invalid-feedback">
+                Required.
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="number" class="form-label">Price</label>
+              <input type="number" class="form-control" id="number" placeholder="">
+            </div>
+
+
+            <div class="col-sm-6">
+              <label for="time" class="form-label">Scheduled Time</label>
+              <input type="time" class="form-control" id="time" placeholder="">
+            </div>
+
+
+            <div class="col-sm-6">
+              <label for="date" class="form-label">Scheduled Date</label>
+              <input type="date" class="form-control" id="date" placeholder="" value="" required>
+              <div class="invalid-feedback">
+                Required.
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="comment" class="form-label">Doctor</label>
+              <input type="text" class="form-control" id="address2" placeholder="">
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-5">
+          <button type="button" class="btn">Save</button>
+          <button type="button" class="btn">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+                         
+    <div class="footer">
+      <div class="container-fluid mt-5">
+        <div class="row">
+          <div class="col-sm-3">
+            <a href="index.html"><img class="img-fluid mb-2" src="img/DriverMEDICAL LOGO 2.png" alt="Drivers Medicals"></a>
+            <p class="h4">All driver medicals are completed by GMC registered doctors in accordance with current DVLA Group 2 guidelines.</p>
+            <a class="fs-2" href=""><i class="fab fa-linkedin"></i></a>
+            <a class="fs-2" href=""><i class="fab fa-instagram"></i></a>
+            <a class="fs-2" href=""><i class="fab fa-twitter"></i></a>
+          </div>
+          <div class="col-sm-3">
+            <h2>Ouick Links</h2>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="#">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Our Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Locations</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm-3">
+            <h2>Ouick Links</h2>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="#">HGV Medical</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">PVC/Bus Medical</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Taxi Medical</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Business Services</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm-3">
+            <div class="end fs-4">
+              <h2>Contact Us</h2> 
+              <span class="fas fa-map-marker-alt"></span>       
+              <p>United Kingdom</p>
+              <span class="fas fa-phone-alt"></span>
+              <p>0203 963 9083</p>
+              <span class="fas fa-envelope"></span>
+              <p class="text-break">Bookings@drivermedicals.uk</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <footer class="footer-footer">
+      <div class="footer-wrapper">
+          <div class="wrapper-end">
+              <p>Drivermedicals.uk © 2022. All Rights Reserved</p>
+          </div>
+      </div>
+    </footer>
+
+                
+    <script src="/animated-search-filter.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/script.js"></script>
+  </body>
+  </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
