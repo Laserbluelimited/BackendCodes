@@ -1375,9 +1375,120 @@ p span{
   color: #14171F;
 }
 
-.payment .btn{
+.cform .btn{
   font-family: 'Work Sans', sans-serif;
   font-size: 2rem;
   font-weight: 600;
+  color: #fff;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------ */
+/* APPLICATION*/
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+
+.biz{
+  background-color: #0AC5A8;
+}
+
+.biz .container{
+  background-color: rgb(255, 255, 255);
+  padding: 5rem;
+}
+
+form h1{
+  text-align: center;
+  font-size: 4rem;
+  font-family: 'Work Sans', sans-serif;
+}
+
+input.invalid {
+  background-color: #ffdddd;
+}
+
+.tab {
+  display: none;
+}
+
+.step {
+  height: 1.5rem;
+  width: 1.5rem;
+  margin: 0 .2rem;
+  background-color: #0AC5A8;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+.step.finish {
+  background-color: #14171F;
+}
+
+.biz .btn {
+  font-size: 1.8rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  background-color: #14171F;
+  color: #fff;
+  border-radius: .7rem;
+  border: .3rem solid #14171F;
+  transition: .3s;
+}
+
+.biz .btn:hover{
+  background-color: #fff;
   color: #14171F;
 }
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------ */
+/* CLIENT*/
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.client{
+  background-color: #0AC5A8;
+}
+
+.client button{
+  font-size: 1.8rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  background-color: #14171F;
+  color: #fff;
+  border-radius: .7rem;
+  border: .3rem solid #14171F;
+  transition: .3s;
+}
+
+.client button:hover{
+  background-color: #fff;
+  color: #14171F;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------ */
+/* DASHBOARD*/
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.dashboard{
+  background-color: #0AC5A8;
+}
+
+.dashboard .container{
+  background-color: #fff;
+  font-family: 'Work Sans', sans-serif;
+}
+
+
+
+
+
+
+
+
+
+
+
