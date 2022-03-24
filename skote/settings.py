@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
     'import_export',
+    'payment',
 ]
 
 AUTH_USER_MODEL = 'authentication.User'

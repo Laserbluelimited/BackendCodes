@@ -22,7 +22,7 @@ class MedicalPageView(View):
         return render(request, 'display/medical.html')
 
 
-class CBookingView(View):
+class ICBookingView(View):
     def get(self, request):
         return render(request, 'display/booking.html')
 

@@ -1,15 +1,14 @@
 *{
-  margin: 0;
-  padding: 0;
-  outline: none;
-  box-sizing: border-box;
-  list-style: none;
-  text-decoration: none;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
 }
 
 html{
-  font-size: 62.5%;
-  font-family: 'Work Sans', sans-serif;
+    font-size: 62.5%;
 }
 
 /* --------------------------------------------------------------------------------------------------------------------------------------- */
@@ -17,98 +16,74 @@ html{
 /* --------------------------------------------------------------------------------------------------------------------------------------- */
 
 .navbar{
-  background-color: #fff;
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.219);
-}
+    background-color: #fff;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.219);
+  }
 
 .logo{
-  width: 20%;
   margin-top: 2.5rem;
-  margin-left: 5rem;
   padding-bottom: 2.5rem;
-
 }
 
-.logo img{
-  width: 100%;
-}
-
-ul{
-  margin-left: 3rem;
-}
-
-.nav-item, .nav-items{
-  margin-left: 1rem;
+.navbar-nav{
+    margin-left: 2rem;
 }
 
 .nav-link{
-  color: #14171F;
-  font-size: 1.8rem;
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 600;
-  transition: 0.3s;
-}
+    color: #14171F;
+    font-size: 1.8rem;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+  
+  .nav-link:hover{
+    color: #0AC5A8;
+  }
 
-.nav-link:hover{
-  color: #0AC5A8;
-}
+  .dropdown-menu li{
+    font-size: 1.8rem;
+    font-weight: 400;
+    padding: .5rem;
+  }
 
-.dropdown-menu li{
-  font-size: 1.8rem;
-  font-weight: 400;
-  padding: .5rem;
-}
+  .nav-end{
+    display: flex;
+  }
 
-.endbar-nav{
-  display: flex;
-}
+  .nav-end a{
+    margin-right: 2rem;
+    font-size: 1.8rem;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    background-color: #0AC5A8;
+    color: #fff;
+    border-radius: .7rem;
+    border: .3rem solid #0AC5A8;
+    transition: .3s;
+  }
 
-.end-item, .end-items{
-  margin-right: 1rem;
-}
+  .nav-end a:hover{
+    background-color: #fff;
+    color: #0AC5A8;
+  }
 
-.end-item a{
-  color: #fff;
-}
+  .nav-end button{
+    font-size: 1.8rem;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    color: #0AC5A8;
+    border-radius: .7rem;
+    border: .3rem solid #0AC5A8;
+    transition: .3s;
+  }
 
-.end-item a:hover{
-  color: #0AC5A8;
-}
+  .nav-end button:hover{
+    background-color: #0AC5A8;
+    color: #fff;
+  }
 
-.end-item .btn{
-  font-size: 1.8rem;
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 600;
-  background-color: #0AC5A8;
-  border-radius: .7rem;
-  border: .3rem solid #0AC5A8;
-}
-
-.end-item .btn:hover{
-  background-color: #fff;
-  color: #0AC5A8;
-}
-
-.end-items .btn{
-  font-size: 1.8rem;
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 600;
-  color: #0AC5A8;
-  border-radius: .7rem;
-  border: .3rem solid #0AC5A8;
-}
-
-.end-items .btn:hover{
-  color: #fff;
-  background-color: #0AC5A8;
-}
-
-.navbar-toggler{
-  background-color: #0AC5A8;
-  font-size: 2rem;
-}
-
-/* --------------------------------------------------------------------------------------------------------------------------------------- */
+  /* --------------------------------------------------------------------------------------------------------------------------------------- */
 /* BODY */
 /* --------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -137,10 +112,10 @@ ul{
 
 .body-content{
   position: absolute;
-  top: 20rem;
-  margin-left: 5rem;
+  top: 30%;
+  margin-left: 7%;
   z-index: 10;
-  width: 65%;
+  width: 60%;
 }
 
 .postal{
@@ -153,6 +128,20 @@ ul{
   font-family: 'Work Sans', sans-serif;
   font-weight: 600;
   margin-right: 3rem;
+}
+
+.button1{
+  background-color: #0AC5A8;
+  color: #fff;
+  border-radius: .7rem;
+  border: none;
+  padding: .7rem 2rem;
+  transition: 0.3s;
+}
+
+.button1:hover{
+  background-color: #fff;
+  color: #0AC5A8;
 }
 
 .button1{
@@ -248,41 +237,16 @@ p span{
   width: 100%;
 }
 
-.easy-content{
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.headline{
-  width: 50%;
+.headline-text h1, .sheadline-text h1{
   padding-top: 10rem;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-
-.headline-text h1{
   font-size: 4rem;
   font-weight: 700;
   color: #14171F;
+  text-align: center;
 }
 
-.easy-card{
-  margin-top: 5rem;
-  display: flex;
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.card{
-  margin-left: auto;
-  margin-right: auto;
-  width: 30%;
-  height: 25rem;
-  border-radius: .5rem;
-  border: .1rem solid rgb(180, 180, 180);
+.easy .row{
+  width: 100%;
 }
 
 .easy-box{
@@ -305,6 +269,11 @@ p span{
   opacity: .1;
 }
 
+.card{
+  border-radius: .5rem;
+  border: .1rem solid rgb(180, 180, 180);
+}
+
 .card-texts, .card-texts2{
   width: 90%;
   margin-left: auto;
@@ -315,13 +284,10 @@ p span{
 }
 
 .card-texts h2{
-  font-size: 2rem;
   font-weight: 600;
-  width: 70%;
 }
 
 .card-texts p{
-  font-size: 1.3rem;
   font-style: italic;
 }
 
@@ -330,16 +296,58 @@ p span{
 }
 
 .card-texts2 h2{
-  font-size: 2rem;
   font-weight: 600;
   width: 100%;
 }
 
 .card-texts2 p{
-  font-size: 1.3rem;
   font-style: italic;
 }
 
+/* --------------------------------------------------------------------------------------------------------------------------------------- */
+/* SUBSCRIBE */
+/* --------------------------------------------------------------------------------------------------------------------------------------- */
+
+.subscribe{
+  width: 100%;
+  background: #EFFDFB42;
+}
+
+.subscribe .container{
+  padding-bottom: 10rem;
+  text-align: center;
+}
+
+.sheadline-text p{
+  font-weight: 400;
+  font-family: 'Work Sans', sans-serif;
+}
+
+.sheadline-text input{
+  font-size: 1.5rem;
+  font-family: 'Work Sans', sans-serif;
+  padding: .7rem 2rem;
+  width: 50%;
+  text-align: center;
+  border-radius: .4rem;
+  box-shadow: 0 .7rem .7rem rgba(0, 0, 0, 0.219);
+}
+
+.subscribe .btn{
+  font-size: 1.8rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  color: #fff;
+  background-color: #0AC5A8;
+  border-radius: .7rem;
+  border: .3rem solid #0AC5A8;
+  transition: .3s;
+}
+
+.subscribe .btn:hover{
+  background-color: #fff;
+  color: #0AC5A8;
+}
 
 /* --------------------------------------------------------------------------------------------------------------------------------------- */
 /* ABOUT */
@@ -396,21 +404,21 @@ p span{
   color: #fff;
 }
 
-.atext-btn button{
+.about .btn{
   font-size: 1.8rem;
   font-family: 'Work Sans', sans-serif;
   font-weight: 600;
   color: #0AC5A8;
+  background-color: #fff;
   border-radius: .7rem;
   border: .3rem solid #0AC5A8;
-  padding: .7rem 2rem;
-  transition: 0.3s;
+  transition: .3s;
 }
 
-.atext-btn button:hover{
+.about .btn:hover{
   background-color: #0AC5A8;
-  color: #fff;
   border: .3rem solid #fff;
+  color: #fff;
 }
 
 /* --------------------------------------------------------------------------------------------------------------------------------------- */
@@ -453,6 +461,7 @@ p span{
 .scard-image img{
   margin-bottom: 1rem;
   width: 50%;
+
 }
 
 .scard2{
@@ -462,7 +471,6 @@ p span{
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.219);
   text-align: center;
 }
-
 
 .scard2-image{
   width: 20%;
@@ -481,7 +489,7 @@ p span{
   font-family: 'Work Sans', sans-serif;
 }
 
-/* --------------------------------------------------------------------------------------------------------------------------------------- */
+* --------------------------------------------------------------------------------------------------------------------------------------- */
 /* BOOK */
 /* --------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -622,39 +630,6 @@ p span{
   border: .3rem solid #0AC5A8;
 }
 
-/* --------------------------------------------------------------------------------------------------------------------------------------- */
-/* SUBSCRIBE */
-/* --------------------------------------------------------------------------------------------------------------------------------------- */
-
-.subscribe{
-  width: 100%;
-  background: #EFFDFB42;
-}
-
-.subscribe-content{
-  width: 80%;
-  padding: 10rem 0rem;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-
-.subscribe-headline p{
-  font-size: 2rem;
-  font-weight: 400;
-  font-family: 'Work Sans', sans-serif;
-}
-
-.subscribe-headline input{
-  font-size: 1.5rem;
-  font-family: 'Work Sans', sans-serif;
-  padding: .7rem 2rem;
-  width: 35%;
-  text-align: center;
-  border-radius: .4rem;
-  box-shadow: 0 .7rem .7rem rgba(0, 0, 0, 0.219);
-}
-
 /* -------------------------------------------------------------------------------------------------------------------------------------------- */
 /* FOOTER */
 /* -------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -669,6 +644,21 @@ p span{
 
 .footer-wrapper{
   text-align: center;
+}
+
+.footer i{
+  margin-right: 1rem;
+  color: #14171F;
+  transition: .3s;
+}
+
+.footer .end{
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+}
+
+.footer i:hover{
+  color: #0AC5A8;
 }
 
 .wrapper-end p{
@@ -816,6 +806,97 @@ p span{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ------------------------------------------------------------------------------------------------------------------------------------------ */
 /* HGVMEDICALS*/
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -868,7 +949,7 @@ p span{
 }
 
 .med-body .container-fluid{
-  background-image: linear-gradient(rgba(0, 0, 0, 0.76),rgba(0, 0, 0, 0.76)), url(/static/display/img/hero.png);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.76),rgba(0, 0, 0, 0.76)), url(/img/hero.png);
   background-repeat: no-repeat;
   background-size: cover;
   height: 50vh;
@@ -1009,11 +1090,6 @@ p span{
 .mend-text h2, .tend h2{
   color: #0AC5A8;
 }
-
-
-
-
-
 
 
 
@@ -1305,249 +1381,3 @@ p span{
   font-weight: 600;
   color: #14171F;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ------------------------------------------------------------------------------------------------------------------------------------------ */
-/* MEDIA-QUERIES*/
-/* ------------------------------------------------------------------------------------------------------------------------------------------- */
-
-/* Small phones: from 1201 to 1400px*/
-
-@media only screen and (max-width: 1300px){
-  
-  .card-texts h2{
-    width: 80%;
-  }
-  
-  }
-
-@media only screen and (max-width: 1200px){
- 
-  .atexts p{
-    width: 100%;
-  }
-  
-  }
-
-@media only screen and (max-width: 1100px){
-  /* --------------------------------------------------------------------------------------------------------------------------------------- */
-  /* HEAD */
-  /* --------------------------------------------------------------------------------------------------------------------------------------- */
-
-  .nav-item, .nav-items{
-    margin-left: .8rem;
-  }
-    
-  .nav-link{
-    font-size: 1.6rem;
-  }
-
-  .dropdown-menu li{
-    font-size: 1.6rem;
-    padding: .4rem;
-  }
-    
-  .end-item, .end-items{
-     margin-right: .8rem;
-  }
-    
-  .end-item .btn{
-    font-size: 1.6rem;
-  }
-
-  .body-content{
-    top: 15rem;
-  }
-
-  .card-texts h2{
-    width: 100%;
-  }
-
-  .end-items .btn{
-    font-size: 1.6rem;
-  }
-    
-  }
-
-    @media only screen and (max-width: 1000px){
- 
-      .logo{
-        margin-left: 2rem;
-      }
-
-      ul{
-        margin-left: 2rem;
-      }
-
-      .nav-item, .nav-items{
-        margin-left: .6rem;
-      }
-      
-      .nav-link{
-        font-size: 1.4rem;
-      }
-  
-      .dropdown-menu li{
-        font-size: 1.4rem;
-      }
-      
-      .end-item, .end-items{
-        margin-right: .6rem;
-      }
-      
-      .end-item .btn{
-        font-size: 1.4rem;
-      }
-
-      .body-content{
-        top: 12rem;
-      }
-
-      .text-content h1{
-        font-size: 5rem;
-      }
-      
-      .text-content p{
-        font-size: 1.5rem;
-      }
-
-      .easy-card{
-        display: grid;
-      }
-
-      .card{
-        width: 50%;
-      }
-
-      .about-texts{
-        width: 45%;
-      }
-
-      .atexts h1{
-        font-size: 2.8rem;
-      }
-      
-      .atexts p{
-        font-size: 1.5rem;
-      }
-
-      .scard, .scard2{
-        width: 30.9rem;
-        height: 23.2rem;
-      }
-
-      .bheadline-text h1{
-        font-size: 3rem;
-      }
-      
-      .bheadline-text p{
-        font-size: 1.5rem;
-      }
-
-      .trust-content{
-        width: 90%;
-      }
-
-      .trust-texts{
-        width: 50%;
-      }
-      
-      }
-
-@media only screen and (max-width: 839px){
- 
-  .logo{
-    margin-left: 0rem;
-  }
-
-  ul{
-    margin-left: 1rem;
-  }
-
-  .nav-item, .nav-items{
-    margin-left: 0rem;
-  }
-
-  .body-content{
-    top: 7rem;
-  }
-
-  .about-texts{
-    width: 50%;
-  }
-
-  .atexts h1{
-    font-size: 2.6rem;
-  }
-  
-  .atexts p{
-    font-size: 1.3rem;
-  }
-
-  .scard, .scard2{
-    width: 28.9rem;
-  }
-        
-  }
-
-
-
-      
-
-      

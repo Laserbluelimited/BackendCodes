@@ -1,170 +1,201 @@
-<<<<<<< HEAD
 {%extends 'display/base.html'%}
-
 {%load static%}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{%static 'display/booking/fonts/material-icon/css/material-design-iconic-font.min.css'%}">
+<link rel="stylesheet" href="{%static 'display/booking/css/style.css'%}" type="text/css">
+<link href="{%static 'libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'%}" rel="stylesheet" type="text/css"/>
+
+<style type="text/css">
+    .datepicker.dropdown-menu {
+        color: #000;
+    }
+    .datepicker table tr td.disabled{
+        color: #b8b8b757;
+    }
+
+
+    
+</style>
+{% endblock %}
+
 {%block content%}
-=======
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/bootstrap.css">
-    <link rel="stylesheet" href="/static/display/css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <title>Drivers Medical</title>
-</head>
-<body>
-  <nav class="navbar navbar-expand-md">
-    <div class="container-fluid">
-      <a class="logo" href="index.html"><img src="/static/display/img/DriverMEDICAL LOGO 1.png" alt=""></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About Us</a>
-          </li>
-          <li class="nav-items dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Our Services</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="hgvmedical.html">HGV Medical</a></li>
-              <li><a class="dropdown-item" href="pvcmedical.html">PVC/Bus Medical</a></li>
-              <li><a class="dropdown-item" href="taxi.html">Taxi Medical</a></li>
-              <li><a class="dropdown-item" href="#">Business Services</a></li>
-              <li><a class="dropdown-item" href="#">Other Medicals</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Location</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact Us</a>
-          </li>
-        </ul>
-        <ul class="endbar-nav">
-          <li class="end-item">
-            <a href="booking.html">
-              <button type="button" class="btn">Book Now</a></button>
-            </a>
-          </li>
-          <li class="end-items dropdown dropstart">
-            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
-            Login</button>            
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">HGV Medical</a></li>
-              <li><a class="dropdown-item" href="#">PVC/Bus Medical</a></li>
-              <li><a class="dropdown-item" href="#">Taxi Medical</a></li>
-              <li><a class="dropdown-item" href="#">Business Services</a></li>
-              <li><a class="dropdown-item" href="#">Other Medicals</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
->>>>>>> newhomepage
+<div class="main">
 
-  <div class="bform">
-    <div class="container-sm">
-      <form id="regForm" action="">
-        <h1>Account application</h1>
-        <h3 class="text-center">Select Your Location</h3>
-        <div class="tab">
-        <input placeholder="Select your location" autofocus class="animated-search-filter">
-        <ul class="animated-search-filter"></ul>
-<<<<<<< HEAD
-        <a href="{%url 'display:service'%}" class="btn btn-lg" type="submit"> Next</a>    
-=======
-        <a href="service.html" class="btn btn-lg" type="submit"> Next</a>    
->>>>>>> newhomepage
-        </div>
-      </form>
-    </div>
-  </div>
+  <div class="container">
+      <form method="POST" id="signup-form" class="signup-form" action="#">
+          <div>
+              <h3>Personal info</h3>
+              <fieldset>
+                  <h2>Personal information</h2>
+                  <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
+                  <div class="fieldset-content">
+                      <div class="form-row">
+                          <label class="form-label">Name</label>
+                          <div class="form-flex">
+                              <div class="form-group">
+                                  <input type="text" name="first_name" id="first_name" />
+                                  <span class="text-input">First</span>
+                              </div>
+                              <div class="form-group">
+                                  <input type="text" name="last_name" id="last_name" />
+                                  <span class="text-input">Last</span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="email" class="form-label">Email</label>
+                          <input type="email" name="email" id="email" />
+                          <span class="text-input">Example  :<span>  Jeff@gmail.com</span></span>
+                      </div>
+                      <div class="form-group">
+                          <label for="phone" class="form-label">Phone</label>
+                          <input type="text" name="phone" id="phone" />
+                      </div>
+                      <div class="form-date">
+                          <label for="birth_date" class="form-label">Birth Date</label>
+                          <div class="form-date-group">
+                              <div class="form-date-item">
+                                  <select id="birth_month" name="birth_month"></select>
+                                  <span class="text-input">MM</span>
+                              </div>
+                              <div class="form-date-item">
+                                  <select id="birth_date" name="birth_date"></select>
+                                  <span class="text-input">DD</span>
+                              </div>
+                              <div class="form-date-item">
+                                  <select id="birth_year" name="birth_year"></select>
+                                  <span class="text-input">YYYY</span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="ssn" class="form-label">SSN</label>
+                          <input type="text" name="ssn" id="ssn" />
+                      </div>
+                  </div>
+              </fieldset>
 
-<<<<<<< HEAD
-{%endblock%}
-=======
-  <div class="hfooter">
-    <div class="container-fluid mt-5">
-      <div class="row">
-        <div class="col-sm-3">
-          <a href="index.html"><img class="img-fluid mb-2" src="/static/display/img/DriverMEDICAL LOGO 2.png" alt="New York"></a>
-          <p>All driver medicals are completed by GMC registered doctors in accordance with current DVLA Group 2 guidelines.</p>
-          <a href=""><i class="fab fa-linkedin"></i></a>
-          <a href=""><i class="fab fa-instagram"></i></a>
-          <a href=""><i class="fab fa-twitter"></i></a>
-        </div>
-        <div class="col-sm-3">
-          <h2>Ouick Links</h2>
-          <ul class="nav flex-column">
-            <li class="hnav-item">
-              <a class="hnav-link" href="#">About Us</a>
-            </li>
-            <li class="hnav-item">
-              <a class="hnav-link" href="#">Our Services</a>
-            </li>
-            <li class="hnav-item">
-              <a class="hnav-link" href="#">Locations</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-sm-3">
-          <h2>Ouick Links</h2>
-          <ul class="nav flex-column">
-            <li class="hnav-item">
-              <a class="hnav-link" href="#">HGV Medical</a>
-            </li>
-            <li class="hnav-item">
-              <a class="hnav-link" href="#">PVC/Bus Medical</a>
-            </li>
-            <li class="hnav-item">
-              <a class="hnav-link" href="#">Taxi Medical</a>
-            </li>
-            <li class="hnav-item">
-              <a class="hnav-link" href="#">Business Services</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-sm-3">
-          <div class="hend">
-            <h2>Ouick Links</h2> 
-            <span class="fas fa-map-marker-alt"></span>       
-            <p>United Kingdom</p>
-            <span class="fas fa-phone-alt"></span>
-            <p>0203 963 9083</p>
-            <span class="fas fa-envelope"></span>
-            <p class="text-break">Bookings@drivermedicals.uk</p>
+              <h3>Connect Bank Account</h3>
+              <fieldset>
+                  <h2>Connect Bank Account</h2>
+                  <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
+                  <div class="fieldset-content">
+                      <div class="form-group">
+                          <label for="find_bank" class="form-label">Find Your Bank</label>
+                          <div class="form-find">
+                              <input type="text" name="find_bank" id="find_bank" placeholder="Ex. Techcombank" />
+                              <input type="submit" value="Search" class="submit">
+                              <span class="form-icon"><i class="zmdi zmdi-search"></i></span>
+                          </div>
+                      </div>
+                      <div class="choose-bank">
+                          <p class="choose-bank-desc">Or choose from these popular bank</p>
+                          <div class="form-radio-flex">
+                              <div class="form-radio-item">
+                                  <input type="radio" name="choose_bank" id="bank_1" value="bank_1" checked="checked" />
+                                  <label for="bank_1"><img src="images/bank-1.jpg" alt=""></label>
+                              </div>
+
+                              <div class="form-radio-item">
+                                  <input type="radio" name="choose_bank" id="bank_2" value="bank_2" />
+                                  <label for="bank_2"><img src="images/bank-2.jpg" alt=""></label>
+                              </div>
+
+                              <div class="form-radio-item">
+                                  <input type="radio" name="choose_bank" id="bank_3" value="bank_3" />
+                                  <label for="bank_3"><img src="images/bank-3.jpg" alt=""></label>
+                              </div>
+
+                              <div class="form-radio-item">
+                                  <input type="radio" name="choose_bank" id="bank_4" value="bank_4" />
+                                  <label for="bank_4"><img src="images/bank-4.jpg" alt=""></label>
+                              </div>
+
+                              <div class="form-radio-item">
+                                  <input type="radio" name="choose_bank" id="bank_5" value="bank_5" />
+                                  <label for="bank_5"><img src="images/bank-5.jpg" alt=""></label>
+                              </div>
+
+                              <div class="form-radio-item">
+                                  <input type="radio" name="choose_bank" id="bank_6" value="bank_6" />
+                                  <label for="bank_6"><img src="images/bank-6.jpg" alt=""></label>
+                              </div>
+                              
+                              <div class="form-radio-item">
+                                  <input type="radio" name="choose_bank" id="bank_7" value="bank_7" />
+                                  <label for="bank_7"><img src="images/bank-7.jpg" alt=""></label>
+                              </div>
+
+                              <div class="form-radio-item">
+                                  <input type="radio" name="choose_bank" id="bank_8" value="bank_8" />
+                                  <label for="bank_8"><img src="images/bank-8.jpg" alt=""></label>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </fieldset>
+
+              <h3>Set Financial Goals</h3>
+              <fieldset>
+                  <h2>Set Financial Goals</h2>
+                  <p class="desc">Set up your money limit to reach the future plan</p>
+                  <div class="fieldset-content">
+                      <div class="donate-us">
+                          <div class="price_slider ui-slider ui-slider-horizontal">
+                              <div id="slider-margin"></div>
+                              <p class="your-money">
+                                  Your money you can spend per month :
+                                  <span class="money" id="value-lower"></span>
+                                  <span class="money" id="value-upper"></span>
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+              </fieldset>
           </div>
-        </div>
-      </div>
-    </div>
+      </form>
   </div>
 
-  <footer class="footer-footer">
-    <div class="footer-wrapper">
-        <div class="wrapper-end">
-            <p>Drivermedicals.uk © 2022. All Rights Reserved</p>
-        </div>
-    </div>
-</footer>
+</div>
+{%endblock%}
 
-  
-  
+{% block extra_javascript %}
+<!-- jquery step -->
+<script src="{%static 'display/booking/vendor/jquery/jquery.min.js'%}"></script>
+<script src="{%static 'display/booking/vendor/jquery-validation/dist/jquery.validate.min.js'%}"></script>
+<script src="{%static 'display/booking/vendor/jquery-validation/dist/additional-methods.min.js'%}"></script>
+<script src="{% static 'libs/jquery-steps/build/jquery.steps.min.js' %}"></script>
+
+<script src="{%static 'display/booking/js/main.js'%}"></script>
+<!-- form wizard init -->
+<script src="{%static 'libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'%}"></script>
+
+<script type="text/javascript">
+    $("#datepicker").on("change.dp", function(){
+        $.ajax({
+            type:'GET',
+            url:'appointment/ajax/filter-times',
+            data:{
+                'clinic':$('#location').val(),
+                'date':$('#datepicker').val(),
+            },
+            dataType:'json',
+            success:function(response){
+                var select = document.getElementById('time');
+                for (var i=0;i<response.times.length;i++){
+                    var option = document.createElement('option');
+                    option.value = response.times[i]['id'];
+                    option.innerHTML = response.times[i]['time'];
+                    select.appendChild(option)
+                }
+            }
+        })
+    })
+
+    
+    
+</script>
 
 
-  <script src="/bcss/bootstrap.bundle.js"></script>
-  <script src="/static/display/js/script.js"></script>
-  <script src="/static/display/js/animated-search-filter.js"></script>
-</body>
-</html>
->>>>>>> newhomepage
+{% endblock %}
