@@ -55,16 +55,184 @@
 
   <div class="bform">
     <div class="container-sm">
-      <form id="regForm" action="">
-        <h1>Account application</h1>
-        <h3 class="text-center">Select Your Location</h3>
-        <div class="tab">
-        <input placeholder="Select your location" autofocus class="animated-search-filter">
-        <ul class="animated-search-filter"></ul>
-        <a href="service.html" class="btn btn-lg" type="submit"> Next</a>
+      <div class="tab">
+        <form id="regForm" action="">
+          <h1 class="fw-bold mb-5">Locations Near You</h1>
+          <h2></h2>
+          <input type="search" id="myInput" onkeyup="myFunction()" placeholder="Search for locations">
+          <ul id="myUL">
+            <li>
+              <a href="#" role="button" onclick="">
+                <h2 class="fw-bold">Brentford London </h2>
+                <p class="text-muted">(TW8 0BB)</p>
+                <p class="text-muted fs-5">Premier Inn - 52 High Street Brentford, Greater London TW8 0BB</p>
+                <img src="/img/location1.png" alt="">
+              </a>
+            </li>
+
+            <li>
+              <a href="#" role="button" onclick="">
+                <h2 class="fw-bold">Luton</h2>
+                <p class="text-muted">(B1 3AX)</p>
+                <p class="text-muted fs-5">Premier Inn - 52 High Street Brentford, Greater London TW8 0BB</p>
+                <img src="/img/location2.png" alt="">
+              </a>
+            </li>
+
+            <li>
+              <a href="#" role="button" onclick="">
+                <h2 class="fw-bold">Milton Keynes</h2>
+                <p class="text-muted">(B1 3AX)</p>
+                <p class="text-muted fs-5">Premier Inn - 52 High Street Brentford, Greater London TW8 0BB</p>
+                <img src="/img/location3.png" alt="">
+              </a>
+            </li>
+
+            <li>
+              <a href="#" role="button" onclick="">
+                <h2 class="fw-bold">Bedford</h2>
+                <p class="text-muted">(B1 3AX)</p>
+                <p class="text-muted fs-5">Premier Inn - 52 High Street Brentford, Greater London TW8 0BB</p>
+                <img src="/img/location1.png" alt="">
+              </a>
+            </li>
+
+            <li>
+              <a href="#" role="button" onclick="">
+                <h2 class="fw-bold">Peterborough</h2>
+                <p class="text-muted">(B1 3AX)</p>
+                <p class="text-muted fs-5">Premier Inn - 52 High Street Brentford, Greater London TW8 0BB</p>
+                <img src="/img/location2.png" alt="">
+              </a>
+            </li>
+          </ul>
+        </form>
+      </div>
+
+      <div class="tab">
+        <form id="regForm" action="">
+          <h1 class=" fw-bold mb-5" style="color: #0AC5A8;">Account Application</h1>
+          <h2 class=" fw-bold mb-5 text-center">Please Enter Your Details</h2>
+            <div class="row g-3 fs-3">
+              <div class="col-sm-6">
+                <label for="username" class="form-label">Name</label>
+                <input type="text" name="" id="username" class="has-validation form-control fs-3" value="" required="required">
+              </div>
+              <div class="col-sm-6">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="" id="email" class=" has-validation form-control fs-3" value="" required="required">
+              </div>
+              <div class="col-sm-6">
+                <label for="number" class="form-label">Phone Number</label>
+                <input type="number" name="" id="number" class="has-validation form-control fs-3" value="" required="required">
+              </div>
+             <div class="col-sm-6">
+              <label for="lastName" class="form-label">Service</label>
+              <select class="form-select fs-3" id="services" required>
+                <option value="">Choose...</option>
+                <option>HGV/PCV Medical (DVLA D4)</option>
+                <option>Taxi/Private Hire & PCO(TFL) Medical</option>
+                <option>Coach Medical</option>
+                <option>Bus Medical</option>
+                <option>Pre-employment Medical</option>
+                <option>Ambulance Driver Medical</option>
+                <option>Motorhome Medical</option>
+                <option>Motorsport Medical</option>
+                <option>Forklift Medical</option>
+              </select>
+              <div class="invalid-feedback">
+              </div>
+             </div>
+             <div class="col-sm-6">
+              <label for="username" class="form-label">Price</label>
+              <div class="input-group has-validation">
+              <input type="number" class="form-control fs-3" id="username" placeholder="" required>
+              <div class="invalid-feedback"></div>
+              </div>
+             </div>
+             <div class="col-sm-6">
+               <label for="username" class="form-label">Date</label>
+               <input type="date" name="" id="input" class="form-control fs-3" value="" required="required" title="">
+             </div>
+             <div class="col-sm-6">
+               <label for="username" class="form-label">Time</label>
+               <input type="time" name="" id="input" class="form-control fs-3" value="" required="required" title="">
+             </div>                                                  
+            </div>
+        </form>
+      </div>
+
+      <div class="tab">
+        <div class="container-sm">
+          <form id="regForm" action="">
+            <h1 class=" fw-bold mb-5" style="color: #0AC5A8;">Confirm Details</h1>
+            <h2 class=" fw-bold mb-5 text-center">Kindly Confirm Your Details</h2>
+            <div class="row">
+              
+              <div class="col-md">
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <h2>Date & Time</h2>
+                    <p class="text-muted">20/03/2022 / 14:00-14:15</p>
+                  </li>
+                  <li class="list-group-item">
+                    <h2>Location</h2>
+                    <p class="text-muted">Brentford London (TW8 0BB)</p>
+                  </li>
+                  <li class="list-group-item">
+                    <h2>Confirm Location</h2>
+                    <p class="text-muted">Premier Inn - 52 High Street, Brentford, Greater London, TW8 0BB</p>
+                  </li>
+                  <li class="list-group-item">
+                    <h2>Services</h2>
+                    <p class="text-muted">HGV/PCV Medical (DVLA D4)</p>
+                  </li>
+                  <li class="list-group-item">
+                    <h2>HGV/PCV Medical (DVLA D4)</h2>
+                    <p class="text-muted">£55.00</p>
+                  </li>
+                  <div class="input-group mt-3">
+                    <input type="text" class="form-control fs-3" placeholder="Coupon">
+                    <button type="submit" class="btn">Redeem</button>
+                  </div>
+                </ul>
+              </div>
+              
+            </div>
+            <div class="col-md mt-5">
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <h2>Select Your Payment Method</h2>
+                  <div class="form-check mt-5">
+                    <input type="checkbox" class="form-check-input p-2" id="check1" name="option1" value="something">
+                    <label class="form-check-label" for="check1">Stripe</label>
+                  </div>
+                  <div class="form-check mt-2">
+                    <input type="checkbox" class="form-check-input p-2" id="check1" name="option1" value="something">
+                    <label class="form-check-label" for="check1">Credit Card</label>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            
+          </form>
         </div>
-      </form>
+      </div>
+
+      <div style="overflow:auto;">
+        <div class="text-center">
+          <button class="btn btn-lg mt-5" type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+          <button class="btn btn-lg mt-5" type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+        </div>
+      </div>
+      
+      <div style="text-align:center;margin-top:40px;">
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+      </div>
     </div>
+      
   </div>
 
   <div class="footer">

@@ -179,3 +179,123 @@
 <script src="/script.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="tab">
+  <h1 class="fs-2 fw-bold mb-5" style="color: #0AC5A8;">Locations Near You</h1>
+  <h2></h2>
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+  <ul id="myUL">
+    <li><a href="">Brentford London (TW8 0BB)</a></li>
+    <li><a href="">Birmingham</a></li>
+
+    <li><a href="">Luton</a></li>
+    <li><a href="">Milton Keynes</a></li>
+
+    <li><a href="">Bedford</a></li>
+    <li><a href="">Peterborough</a></li>
+  </ul>
+</div>
+
+<div class="tab">
+  <form id="regForm" action="">
+    <h1 class=" fw-bold mb-5" style="color: #0AC5A8;">Account Application</h1>
+    <h3 class="fs-3 fw-bold mb-5 text-center">Please Enter Your Details</h3>
+      <div class="row g-3">
+       <div class="col-sm-6">
+        <label for="lastName" class="form-label">Service</label>
+        <select class="form-select" id="services" required>
+          <option value="">Choose...</option>
+          <option>HGV/PCV Medical (DVLA D4)</option>
+          <option>Taxi/Private Hire & PCO(TFL) Medical</option>
+          <option>Coach Medical</option>
+          <option>Bus Medical</option>
+          <option>Pre-employment Medical</option>
+          <option>Ambulance Driver Medical</option>
+          <option>Motorhome Medical</option>
+          <option>Motorsport Medical</option>
+          <option>Forklift Medical</option>
+        </select>
+        <div class="invalid-feedback">
+          Valid last name is required.
+        </div>
+       </div>
+       <div class="col-sm-6">
+        <label for="username" class="form-label">Prices</label>
+        <div class="input-group has-validation">
+        <input type="text" class="form-control" id="username" placeholder="" required>
+        <div class="invalid-feedback">
+        Nature of business is required.
+        </div>
+        </div>
+       </div>
+       <div class="col-sm-6">
+         <label for="username" class="form-label">Date</label>
+         <input type="date" name="" id="input" class="form-control" value="" required="required" title="">
+       </div>
+       <div class="col-sm-6">
+         <label for="username" class="form-label">Time</label>
+         <input type="time" name="" id="input" class="form-control" value="" required="required" title="">
+       </div>                                                  
+      </div>
+  </form>
+</div>
+
+<div class="tab">Birthday:
+  <p><input placeholder="dd" oninput="this.className = ''"></p>
+  <p><input placeholder="mm" oninput="this.className = ''"></p>
+  <p><input placeholder="yyyy" oninput="this.className = ''"></p>
+</div>
+
+<div style="overflow:auto;">
+  <div class="text-center">
+    <button class="btn btn-lg" type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+    <button class="btn btn-lg" type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+  </div>
+</div>
+<!-- Circles which indicates the steps of the form: -->
+<div style="text-align:center;margin-top:40px;">
+  <span class="step"></span>
+  <span class="step"></span>
+  <span class="step"></span>
+  <span class="step"></span>
+</div>
