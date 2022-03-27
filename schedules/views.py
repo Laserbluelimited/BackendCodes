@@ -1,13 +1,22 @@
-from email import message
-from multiprocessing import context
-from pydoc import doc
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import DoctorScheduleForm, ScheduleUploadForm
-from .models import ScheduleDates
+from .forms import DoctorScheduleForm
+from .models import ScheduleDates, TimeSlots
 import datetime
 # Create your views here.
+
+
+def id_increment(model, initial):
+    last_value = model.objects.all().order_by('id').last()
+    if not last_value:
+        new_id = initial
+    else:
+        new_id = last_value.id + 1
+    return new_id
+
+
+
 class DoctorScheduleCalendarView(LoginRequiredMixin, View):
     login_url = '/auth/login'
     redirect_field_name = 'redirect_to'
@@ -44,19 +53,19 @@ class DoctorSchedulesRegistrationView(LoginRequiredMixin, View):
             clinic = form.cleaned_data['clinic']
 
 
-
+            schedule_obj = ScheduleDates.objects.create(id=id_increment(ScheduleDates, 2110000), start_time=start_time, end_time=end_time, clinic=clinic, doctor=doctor, date=date)
             def gen_time_slots(start, end):
                 a = start
                 
                 while a <=end:
                     e = (datetime.datetime.combine(datetime.date.today(), a)+datetime.timedelta(minutes=15)).time()
-                    duration = datetime.datetime.combine(date.min, end_time) - datetime.datetime.combine(date.min, start_time)
-                    yield ScheduleDates(start_time=a, end_time=e, clinic=clinic, doctor=doctor, date=date, duration=duration, day_of_week=date.strftime('%A') )
+                    duration = datetime.timedelta(minutes=15)
+                    yield TimeSlots( start_time=a, end_time=e, schedule=schedule_obj, status=0, duration=duration)
                     a = e
                     
             
             slots = list(gen_time_slots(start_time, end_time))
-            ScheduleDates.objects.bulk_create(slots)
+            TimeSlots.objects.bulk_create(slots)
 
             return redirect('portal:doc-sche-tab')
         return render(request, self.template_name, context={'form':form})

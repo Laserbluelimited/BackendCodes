@@ -2,7 +2,7 @@ from django import views
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
-from schedules.models import ScheduleDates
+from schedules.models import ScheduleDates, TimeSlots
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import OrderForm, CartForm
 from .models import Appointment, Cart, ICOrders
@@ -24,12 +24,12 @@ def id_increment(model, initial):
     return new_id
 
 #function to book appointment
-def book_appointment(model, schedule, client, status=0, notes=None):
+def book_appointment(model, time_slot, client, status=0, notes=None):
 
     """
     This function basically helps to book an appointment
     model: Appointment model
-    schedule: schedule object/instance
+    schedule: time slot object/instance
     client: internet client object/instance
     status: 0 if it has not been paid for, 1 if it has been paid for
 
@@ -38,13 +38,13 @@ def book_appointment(model, schedule, client, status=0, notes=None):
     
     
     """
-    app_obj = model.objects.create(id=id_increment(Appointment, 114000), schedule=schedule, client=client, status=status, notes=notes )
+    app_obj = model.objects.create(id=id_increment(Appointment, 114000), time_slot=time_slot, client=client, status=status, notes=notes )
     if status == 0:
-        schedule.status = 1
-        schedule.save()
+        time_slot.status = 1
+        time_slot.save()
     elif status == 1:
-        schedule.status = 2
-        schedule.save()
+        time_slot.status = 2
+        time_slot.save()
     return app_obj
 
 
@@ -104,10 +104,10 @@ class ICPlaceOrderAdminView(LoginRequiredMixin, views.View):
             time_slot = form.cleaned_data['time_slot']
 
             #get schedule object from time slot
-            sche_obj = ScheduleDates.objects.get(id=time_slot)
+            time_slot = TimeSlots.objects.get(id=time_slot)
 
             #book appointment
-            app_obj = book_appointment(Appointment, schedule=sche_obj, client=client, status=1)
+            app_obj = book_appointment(Appointment, time_slot=time_slot, client=client, status=1)
 
             #place order
             order_obj = form.save(commit=False)
@@ -132,6 +132,9 @@ class ICPlaceOrderView(LoginRequiredMixin, View):
 
     def get(self, request):
         form = self.form_class()
+        # if request.session['cart_id']:
+        #     return redirect('portal:test-checkout')
+        # else:
         request.session.set_test_cookie()
 
         return render(request, self.template_name, context={'form':form})
@@ -154,7 +157,6 @@ class ICPlaceOrderView(LoginRequiredMixin, View):
                 last_name = form.cleaned_data['last_name']
                 phone = form.cleaned_data['phone']
                 email = form.cleaned_data['email']
-                clinic = form.cleaned_data['clinic']
                 # notes = form.cleaned_data['notes']
                 time_slot = form.cleaned_data['time_slot']
                 product = form.cleaned_data['product']
@@ -167,13 +169,11 @@ class ICPlaceOrderView(LoginRequiredMixin, View):
                     client_obj = InternetClient.objects.create(id=id_increment(InternetClient, 1120000),status=0, first_name=first_name, phone=phone, last_name=last_name, email=email)
 
                 #3
-                sche_obj = ScheduleDates.objects.get(id=time_slot)
-                app_obj = book_appointment(Appointment, schedule=sche_obj, status=0, client=client_obj)
+                sche_obj = TimeSlots.objects.get(id=time_slot)
+                app_obj = book_appointment(Appointment, time_slot=sche_obj, status=0, client=client_obj)
 
                 #4
-                print(client_obj,app_obj, product)
                 cart.add_to_cart(request, client=client_obj, appointment=app_obj, product=product)
-                print(request.session['cart_id'])
                 if request.session.test_cookie_worked():
                     request.session.delete_test_cookie()
 
@@ -204,11 +204,9 @@ class ICOrderCheckoutView(View):
             cart_id = request.session['cart_id']
             cart_obj = Cart.objects.get(cart_id=cart_id)
             return stripe.iccheckout_stripe(cart_id=cart_obj)
-            print('jo')
         else:
             return redirect('portal:test-order')
 
-        return render(request, self.template_name, context={ 'cart':cart_obj})
 
 
 
@@ -235,7 +233,7 @@ def getDates(request):
 
 
     location = request.GET.get('clinic')
-    dates = ScheduleDates.objects.filter(clinic=location, status=0).values_list('date', flat=True).distinct()
+    dates = ScheduleDates.objects.filter(clinic=location).values_list('date', flat=True).distinct()
     date_list = list(gen())
     response_data = {
         'dates':date_list
@@ -248,10 +246,11 @@ def getTimes(request):
     This ajax request function basically returns times available based on a particular location and date.
     """
     def gen():
-        for i in ScheduleDates.objects.filter(date=date, clinic=location, status=0):
-            l=i.id
-            k =i.start_time.strftime('%H:%M') + ' - ' + i.end_time.strftime('%H:%M')
-            yield {"id":l, "time":k}
+        for i in ScheduleDates.objects.filter(date=date, clinic=location):
+            for p in TimeSlots.objects.filter(schedule=i, status=0):
+                l = p.id
+                k =p.start_time.strftime('%H:%M') + ' - ' + p.end_time.strftime('%H:%M')
+                yield {"id":l, "time":k}
     
     location = request.GET.get('clinic')
     date = request.GET.get('date')

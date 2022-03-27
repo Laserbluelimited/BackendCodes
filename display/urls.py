@@ -9,7 +9,7 @@ urlpatterns = [
     path('about', views.AboutPageView.as_view(), name="about-page"),
     path('location', views.LocationPageView.as_view(), name='location-page'),
     #booking
-    path('booking/location', views.CBookingView.as_view(), name='booking'),
+    path('booking', views.ICBookingView.as_view(), name='booking'),
     path('booking/coupon', views.CCouponView.as_view(), name='coupon')
     ,path('booking/service', views.CServiceView.as_view(), name='service'),
     path('booking/user', views.CUserView.as_view(), name='user'),

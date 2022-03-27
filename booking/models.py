@@ -5,39 +5,39 @@ from django.db import models
 class Appointment(models.Model):
     id = models.IntegerField('appointment_id', primary_key=True)
     client = models.ForeignKey('client_mgt.InternetClient', on_delete=models.CASCADE)
-    schedule = models.OneToOneField('schedules.ScheduleDates', on_delete=models.CASCADE)
+    time_slot = models.OneToOneField('schedules.Timeslots', on_delete=models.CASCADE)
     notes = models.TextField('notes', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField('status', max_length=20, choices=[(0, 'not paid'), (1, 'paid')])
 
     def __str__(self):
-        return str(self.schedule.start_time) + ' ' + str(self.schedule.doctor)
+        return str(self.time_slot.schedule.start_time) + ' ' + str(self.time_slot.schedule.doctor)
     def get_start_time(self):
-        return self.schedule.start_time
+        return self.time_slot.schedule.start_time
 
     def get_end_time(self):
-        return self.schedule.end_time
+        return self.time_slot.schedule.end_time
 
         
     def get_day_of_week(self):
-        return self.schedule.day_of_week
+        return self.time_slot.schedule.day_of_week
 
     def get_date(self):
-        return self.schedule.date
+        return self.time_slot.schedule.date
 
     def get_doctor(self):
-        return self.schedule.doctor
+        return self.time_slot.schedule.doctor
 
     def get_clinic(self):
-        return self.schedule.clinic
+        return self.time_slot.schedule.clinic
 
 
     def get_start_moment(self):
-        return self.schedule.start_time.isoformat()
+        return self.time_slot.schedule.start_time.isoformat()
 
     def get_end_moment(self):
-        return self.schedule.end_time.isoformat()
+        return self.time_slot.schedule.end_time.isoformat()
     
 
 
@@ -120,10 +120,10 @@ class Cart(models.Model):
         return self.client.first_name + ' ' + self.client.last_name
 
     def get_date(self):
-        return self.appointment.schedule.date
+        return self.appointment.time_slot.schedule.date
 
     def get_location(self):
-        return self.appointment.schedule.clinic.address
+        return self.appointment.time_slot.schedule.clinic.address
 
     def get_price(self):
         return self.product.price

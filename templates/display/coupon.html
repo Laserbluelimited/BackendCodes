@@ -1,17 +1,11 @@
-<<<<<<< HEAD
-{%extends 'display/base.html'%}
-
-{%load static%}
-{%block content%}
-=======
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/bootstrap.css">
-    <link rel="stylesheet" href="/static/display/css/style.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -19,59 +13,48 @@
     <title>Drivers Medical</title>
 </head>
 <body>
-  <nav class="navbar navbar-expand-md">
-    <div class="container-fluid">
-      <a class="logo" href="index.html"><img src="/static/display/img/DriverMEDICAL LOGO 1.png" alt=""></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About Us</a>
-          </li>
-          <li class="nav-items dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Our Services</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="hgvmedical.html">HGV Medical</a></li>
-              <li><a class="dropdown-item" href="pvcmedical.html">PVC/Bus Medical</a></li>
-              <li><a class="dropdown-item" href="taxi.html">Taxi Medical</a></li>
-              <li><a class="dropdown-item" href="#">Business Services</a></li>
-              <li><a class="dropdown-item" href="#">Other Medicals</a></li>
+    <nav class="navbar navbar-expand-md">
+        <div class="container-fluid">
+            <a class="logo" href="index.html"><img src="/img/DriverMEDICAL LOGO 2.png" alt=""></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarh">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+          <div class="collapse navbar-collapse" id="navbarh">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About Us</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="#" data-bs-toggle="dropdown">Our Services</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="hgvmedical.html">HGV Medical</a></li>
+                    <li><a class="dropdown-item" href="pvcmedical.html">PVC/Bus Medical</a></li>
+                    <li><a class="dropdown-item" href="taxi.html">Taxi Medical</a></li>
+                    <li><a class="dropdown-item" href="#">Business Services</a></li>
+                    <li><a class="dropdown-item" href="#">Other Medicals</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Location</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="business.html">Business Clients</a>
+              </li>
             </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Location</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact Us</a>
-          </li>
-        </ul>
-        <ul class="endbar-nav">
-          <li class="end-item">
-            <a href="booking.html">
-              <button type="button" class="btn">Book Now</a></button>
-            </a>
-          </li>
-          <li class="end-items dropdown dropstart">
-            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
-            Login</button>            
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">HGV Medical</a></li>
-              <li><a class="dropdown-item" href="#">PVC/Bus Medical</a></li>
-              <li><a class="dropdown-item" href="#">Taxi Medical</a></li>
-              <li><a class="dropdown-item" href="#">Business Services</a></li>
-              <li><a class="dropdown-item" href="#">Other Medicals</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
->>>>>>> newhomepage
+            <div class="nav-end">
+              <a class="btn" href="booking.html" role="button">Book Now</a>
+              <button type="button" class="btn">Login</button>            
+            </div>
+          </div>
+        </div>
+    </nav>
 
   <div class="cform">
     <div class="container-sm">
@@ -101,21 +84,13 @@
                 <h2>HGV/PCV Medical (DVLA D4)</h2>
                 <p class="text-muted">£55.00</p>
               </li>
-<<<<<<< HEAD
-              <div class="input-group p-2">
-=======
               <div class="input-group mb-3">
->>>>>>> newhomepage
                 <input type="text" class="form-control" placeholder="Coupon">
                 <button type="submit" class="btn btn-secondary">Redeem</button>
               </div>
             </ul>
           </div>
-<<<<<<< HEAD
-          <div class="col-md-7">
-=======
-          <div class="col-md-7 mt-3">
->>>>>>> newhomepage
+          <div class="col-md-7 ">
             <div class="payment">
               <h2>Payment Method</h2>
               <div class="form-check">
@@ -172,53 +147,50 @@
     </div>
   </div>
 
-<<<<<<< HEAD
-{%endblock%}
-=======
-  <div class="hfooter">
+  <div class="footer">
     <div class="container-fluid mt-5">
       <div class="row">
         <div class="col-sm-3">
-          <a href="index.html"><img class="img-fluid mb-2" src="/static/display/img/DriverMEDICAL LOGO 2.png" alt="New York"></a>
-          <p>All driver medicals are completed by GMC registered doctors in accordance with current DVLA Group 2 guidelines.</p>
-          <a href=""><i class="fab fa-linkedin"></i></a>
-          <a href=""><i class="fab fa-instagram"></i></a>
-          <a href=""><i class="fab fa-twitter"></i></a>
+          <a href="index.html"><img class="img-fluid mb-2" src="img/DriverMEDICAL LOGO 2.png" alt="Drivers Medicals"></a>
+          <p class="h4">All driver medicals are completed by GMC registered doctors in accordance with current DVLA Group 2 guidelines.</p>
+          <a class="fs-2" href=""><i class="fab fa-linkedin"></i></a>
+          <a class="fs-2" href=""><i class="fab fa-instagram"></i></a>
+          <a class="fs-2" href=""><i class="fab fa-twitter"></i></a>
         </div>
         <div class="col-sm-3">
           <h2>Ouick Links</h2>
           <ul class="nav flex-column">
-            <li class="hnav-item">
-              <a class="hnav-link" href="#">About Us</a>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About Us</a>
             </li>
-            <li class="hnav-item">
-              <a class="hnav-link" href="#">Our Services</a>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Our Services</a>
             </li>
-            <li class="hnav-item">
-              <a class="hnav-link" href="#">Locations</a>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Locations</a>
             </li>
           </ul>
         </div>
         <div class="col-sm-3">
           <h2>Ouick Links</h2>
           <ul class="nav flex-column">
-            <li class="hnav-item">
-              <a class="hnav-link" href="#">HGV Medical</a>
+            <li class="nav-item">
+              <a class="nav-link" href="#">HGV Medical</a>
             </li>
-            <li class="hnav-item">
-              <a class="hnav-link" href="#">PVC/Bus Medical</a>
+            <li class="nav-item">
+              <a class="nav-link" href="#">PVC/Bus Medical</a>
             </li>
-            <li class="hnav-item">
-              <a class="hnav-link" href="#">Taxi Medical</a>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Taxi Medical</a>
             </li>
-            <li class="hnav-item">
-              <a class="hnav-link" href="#">Business Services</a>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Business Services</a>
             </li>
           </ul>
         </div>
         <div class="col-sm-3">
-          <div class="hend">
-            <h2>Ouick Links</h2> 
+          <div class="end fs-4">
+            <h2>Contact Us</h2> 
             <span class="fas fa-map-marker-alt"></span>       
             <p>United Kingdom</p>
             <span class="fas fa-phone-alt"></span>
@@ -243,8 +215,8 @@
   
 
 
-  <script src="/bcss/bootstrap.bundle.js"></script>
-  <script src="/static/display/js/script.js"></script>
+<script src="/animated-search-filter.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/script.js"></script>
 </body>
 </html>
->>>>>>> newhomepage

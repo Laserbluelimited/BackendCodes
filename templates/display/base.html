@@ -8,11 +8,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/carousel/">
     {% block css %}
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}">
-    <link rel="stylesheet" href="{%static 'display/css/style.css'%}">
+    <link href="{% static 'display/bcss/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{%static 'display/css/style.css'%}">
+
+    
     {% block extra_css %}
     {% endblock %}
 {%endblock%}
@@ -34,12 +35,13 @@
 
     {% block javascript %}
 <!-- JAVASCRIPT -->
-<script src="{% static 'display/bcss/bootstrap.bundle.js'%}"></script>
-<script src="{% static 'display/js/script.js'%}"></script>
+<script src="{%static 'display/js/animated-search-filter.js'%}"></script>
+<script src="{%static 'display/bjs/bootstrap.js'%}"></script>
+<script src="{%static 'display/js/script.js'%}"></script>
+<!-- JAVASCRIPT -->
 {% block extra_javascript %}
 {% endblock extra_javascript %}
-
 {% endblock javascript %}
 
 </body>
-</html>
+</html> 
