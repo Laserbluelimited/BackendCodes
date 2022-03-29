@@ -132,10 +132,10 @@ class ICPlaceOrderView(LoginRequiredMixin, View):
 
     def get(self, request):
         form = self.form_class()
-        # if request.session['cart_id']:
-        #     return redirect('portal:test-checkout')
-        # else:
-        request.session.set_test_cookie()
+        if "cart_id" in request.session:
+            return redirect('portal:test-checkout')
+        else:
+            request.session.set_test_cookie()
 
         return render(request, self.template_name, context={'form':form})
 
@@ -192,7 +192,7 @@ class ICOrderCheckoutView(View):
     template_name ='orders/testic-checkout.html'
 
     def get(self, request):
-        if request.session['cart_id']:
+        if "cart_id" in request.session:
             cart_id = request.session['cart_id']
             cart_obj = Cart.objects.get(cart_id=cart_id)
         else:

@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.views.generic.base import TemplateView
 from clinic_mgt.models import Clinic
 from prod_mgt.models import Product
-from clinic_mgt.managers import AddressRequest
+from clinic_mgt.managers import AddressRequest 
 
 # Create your views here.
 

@@ -1,0 +1,43 @@
+{% extends 'partials-actual/base.html' %}
+{% load static %}
+
+{% block contents %}
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card card-body">
+            <h4 class="card-title">Send an Email</h4>
+            <p class="card-text">With supporting text below as a natural lead-in to additional
+                content.</p>
+            <a href="javascript: void(0);" class="btn btn-primary waves-effect waves-light">Send</a>
+        </div>
+    </div>
+    {%for email in emails%}
+    <div class="col-lg-4 ">
+        <div class="card card-body text-center">
+            <h4 class="card-title">Edit {{email.get_title}} Email</h4>
+            <p class="card-text">{{email.get_description}}</p>
+            <a href="{%url 'portal:email-edit' email.get_slug%}" class="btn btn-primary waves-effect waves-light">Edit</a>
+        </div>
+    </div>
+    {%endfor%}
+
+    <div class="col-lg-4">
+        <div class="card card-body">
+            <h4 class="card-title">Create Custom Email</h4>
+            <p class="card-text">Create a custom e-mail</p>
+            <a href="{%url 'portal:email-create'%}" class="btn btn-primary waves-effect waves-light">Create</a>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+{%endblock%}
+{% block extra_javascript %}
+    <!-- masonry pkgd -->
+    <script src="{% static 'libs/masonry-layout/dist/masonry.pkgd.min.js' %}"></script>
+
+{% endblock %}

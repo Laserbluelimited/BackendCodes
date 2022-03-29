@@ -1,9 +1,55 @@
+from ast import mod
 from django.db import models
 
 # Create your models here.
 
+def increment_app_id():
+    last_app = Appointment.objects.all().order_by('id').last()
+    if not last_app:
+        return 'DMAPP0000001'
+    app_id = last_app.appointment_id
+    app_int = int(app_id.split('DMAPP')[-1])
+    width = 7
+    new_app_int = app_int + 1
+    formatted = (width - len(str(new_app_int))) * "0" + str(new_app_int)
+    new_app_no = 'DMAPP' + str(formatted)
+    return new_app_no  
+
+
+
+def increment_invoice_number():
+    last_invoice = ICInvoice.objects.all().order_by('id').last()
+    if not last_invoice:
+        return 'DMINV0000001'
+    invoice_no = last_invoice.invoice_number
+    invoice_int = int(invoice_no.split('DMINV')[-1])
+    width = 7
+    new_invoice_int = invoice_int + 1
+    formatted = (width - len(str(new_invoice_int))) * "0" + str(new_invoice_int)
+    new_invoice_no = 'DMINV' + str(formatted)
+    return new_invoice_no  
+
+
+
+def increment_ico_id():
+    last_ico = ICOrders.objects.all().order_by('id').last()
+    if not last_ico:
+        return 'DMICO0000001'
+    ico_id = last_ico.order_number
+    ico_int = int(ico_id.split('DMICO')[-1])
+    width = 7
+    new_ico_int = ico_int + 1
+    formatted = (width - len(str(new_ico_int))) * "0" + str(new_ico_int)
+    new_ico_no = 'DMICO' + str(formatted)
+    return new_ico_no  
+
+
+
+
+
 class Appointment(models.Model):
     id = models.IntegerField('appointment_id', primary_key=True)
+    appointment_id = models.CharField('appointment_id', max_length=20, default=increment_app_id)
     client = models.ForeignKey('client_mgt.InternetClient', on_delete=models.CASCADE)
     time_slot = models.OneToOneField('schedules.Timeslots', on_delete=models.CASCADE)
     notes = models.TextField('notes', null=True)
@@ -13,11 +59,18 @@ class Appointment(models.Model):
 
     def __str__(self):
         return str(self.time_slot.schedule.start_time) + ' ' + str(self.time_slot.schedule.doctor)
+
+    def update_status(self, status):
+        self.status = status
+        self.save()
+
+
     def get_start_time(self):
         return self.time_slot.schedule.start_time
 
     def get_end_time(self):
         return self.time_slot.schedule.end_time
+    
 
         
     def get_day_of_week(self):
@@ -41,10 +94,10 @@ class Appointment(models.Model):
     
 
 
-
+#internet client orders
 class ICOrders(models.Model):
-    id = models.IntegerField('order_id', primary_key=True)
-    order_number = models.IntegerField('order_number', null=True)
+    id = models.AutoField('order_id', primary_key=True)
+    order_number = models.CharField('order_number', max_length=20, default=increment_ico_id)
     client = models.ForeignKey('client_mgt.InternetClient', on_delete=models.CASCADE)
     appointment = models.ForeignKey('Appointment', on_delete=models.CASCADE)
     product = models.ForeignKey('prod_mgt.Product', on_delete=models.CASCADE)
@@ -100,6 +153,8 @@ class ICOrders(models.Model):
     def get_fulfilled(self):
         return self.fulfilled
 
+
+
 class Cart(models.Model):
     cart_id = models.CharField('cart_id', primary_key=True, max_length=100)
     client = models.ForeignKey('client_mgt.InternetClient', on_delete=models.CASCADE)
@@ -127,3 +182,32 @@ class Cart(models.Model):
 
     def get_price(self):
         return self.product.price
+
+
+class ICInvoice(models.Model):
+    id = models.IntegerField('id', primary_key=True)
+    invoice_number = models.CharField('invoice_number', max_length=20, default=increment_invoice_number)
+    order = models.OneToOneField('ICOrders', on_delete=models.CASCADE)
+    payment = models.OneToOneField('payment.Payment', on_delete=models.CASCADE)
+    issued_at = models.DateTimeField('issued_at', auto_now_add=True)
+
+    def __str__(self):
+        return self.invoice_number
+
+    def get_issued_at(self):
+        return self.issued_at
+
+    def get_client(self):
+        return self.order.client
+
+    def get_product(self):
+        return self.order.product
+
+    def get_price(self):
+        return self.order.total_price
+
+    def get_product(self):
+        return self.order.product
+
+    def get_payment(self):
+        return self.payment

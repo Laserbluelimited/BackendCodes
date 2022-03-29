@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -9,6 +9,7 @@ from schedules import views as sche_views
 from client_mgt import views as client_views
 from booking import views as booking_views
 from payment import stripe as payment_views
+from e_mail import views as email_views
 
 app_name='portal'
 
@@ -39,6 +40,7 @@ urlpatterns = [
     path('place-icorder', booking_views.ICPlaceOrderAdminView.as_view(), name='place-order'),
     path('test-order', booking_views.ICPlaceOrderView.as_view(), name='test-order'),
     path('test-checkout', csrf_exempt(booking_views.ICOrderCheckoutView.as_view()), name='test-checkout'),
+    path('webhook', payment_views.my_webhook_view, name='stripe-webhook'),
     path('payment-success', payment_views.PaymentSuccessView.as_view(), name='payment-success'),
     path('payment-success', payment_views.PaymentCancelView.as_view(), name='payment-cancel'),
     path('icorder-list', booking_views.ICOrderTableView.as_view(), name='icorder-list'),
@@ -46,6 +48,11 @@ urlpatterns = [
     path('appointment-calendar', booking_views.AppointmentCalendarView.as_view(), name='app-cal'),
     path('appointment/ajax/filter-dates', booking_views.getDates, name='ajax-dates'),
     path('appointment/ajax/filter-times', booking_views.getTimes, name="ajax-times"),
+
+    #email
+    path('email-home', email_views.EmailHomeView.as_view(), name='email-home'),
+    path('email-create', email_views.CreateEmailView.as_view(), name='email-create'),
+    path('email-edit/<slug>', email_views.EditEmailView.as_view(), name='email-edit')
 
 
 

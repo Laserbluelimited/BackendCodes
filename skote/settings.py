@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'schedules',
     'client_mgt',
     'booking',
-    # 'payment',
+    'payment',
+    'e_mail',
     # Third Party App
     'crispy_forms',
     'django.contrib.sites',
@@ -60,8 +61,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
-    'import_export',
-    'payment',
+    'stripe',
+    'tinymce',
 ]
 
 AUTH_USER_MODEL = 'authentication.User'

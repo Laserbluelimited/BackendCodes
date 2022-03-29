@@ -10,6 +10,10 @@ class TimeSlots(models.Model):
     end_time = models.TimeField('actual_end_time')
     status = models.CharField('status', max_length=10, choices=[(0, 'not booked'),(1, 'temporarily booked'), ('2', 'paid for')])
 
+    def update_status(self, status):
+        self.status = status
+        self.save()
+
     def get_start_time(self):
         return self.start_time
 

@@ -67,6 +67,10 @@ class InternetClient(models.Model):
             self.slug = slugify(name)
         return super(InternetClient,self).save(*args, **kwargs)
 
+    def update_status(self, status):
+        self.status=status
+        self.save()
+
     def get_name(self):
         return self.title + ' ' + self.first_name + self.last_name
 

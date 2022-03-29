@@ -50,7 +50,6 @@
               </ul>
         </li>
 
-        <li class="menu-title" key="t-apps">Schedules</li>
         <li>
           <a href="javascript: void(0);" class="waves-effect">
             <i class="bx bx-home-circle"></i
@@ -69,7 +68,6 @@
 
 
 
-        <li class="menu-title" key="t-pages">Products</li>
         <li>
           <a href="javascript: void(0);" class="waves-effect">
             <i class="bx bx-home-circle"></i
@@ -83,7 +81,6 @@
         </li>
 
 
-        <li class="menu-title" key="t-menu">Client Management</li>
 
         <li>
           <a href="javascript: void(0);" class="waves-effect">
@@ -97,7 +94,6 @@
             </ul>
         </li>
 
-        <li class="menu-title" key="t-components"> Sales</li>
         <li>
           <a href="javascript: void(0);" class="waves-effect">
             <i class="bx bx-home-circle"></i
@@ -110,7 +106,6 @@
             </ul>
         </li>
 
-        <li class="menu-title" key="t-components">Appointments</li>
         <li>
           <a href="javascript: void(0);" class="waves-effect">
             <i class="bx bx-home-circle"></i
@@ -123,9 +118,35 @@
             </ul>
         </li>
 
+
+        <li>
+          <a href="javascript: void(0);" class="waves-effect">
+            <i class="bx bx-home-circle"></i
+            ><span class="badge rounded-pill bg-info float-end">04</span>
+            <span key="t-dashboards">Invoice</span>
+          </a>
+            <ul class="sub-menu" aria-expanded="false">
+              <li><a href="{% url 'portal:icorder-list' %}" key="t-default">Individual</a></li>
+              <li><a key="t-default">Corporate </a></li>
+            </ul>
+        </li>
+    
+        
+        <li>
+          <a href="{%url 'portal:email-home'%}" class="waves-effect">
+            <i class="bx bx-home-circle"></i
+            ><span class="badge rounded-pill bg-info float-end">04</span>
+           <span key="t-dashboards">Emails</span>
+          </a>
+            <!-- <ul class="sub-menu" aria-expanded="false">
+              <li><a href="{% url 'portal:icorder-list' %}" key="t-default">Individual Orders</a></li>
+              <li><a key="t-default">Corporate Orders</a></li>
+            </ul> -->
+        </li>
+        
+
       </ul>
         </div>
-        <!-- Sidebar -->
       </div>
     </div>
     <!-- Left Sidebar End -->

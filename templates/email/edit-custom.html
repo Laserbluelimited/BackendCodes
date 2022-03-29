@@ -1,0 +1,67 @@
+{% extends 'partials-actual/base.html' %}
+{% load static %}
+
+{% block contents %}
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+        
+                                        <h4 class="card-title">Create Custom Email</h4>
+                                        <p class="card-title-desc">Bootstrap-wysihtml5 is a javascript
+                                            plugin that makes it easy to create simple, beautiful wysiwyg editors
+                                            with the help of wysihtml5 and Twitter Bootstrap.</p>
+        
+                                        <form method="post" action="{%url 'portal:email-create'%}">
+                                            {%csrf_token%}
+                                            <div class="mb-3">
+                                                {%for error in form.title.errors%}
+                                                <label style="color: red;">{{error}}</label>
+                                                {%endfor%}<br>
+                                                <label for="productname">Title</label>
+                                                <input id="productname" name="title" type="text" class="form-control" >
+                                            </div>
+
+                                            <div class="mb-3">
+                                                {%for error in form.description.errors%}
+                                                <label style="color: red;">{{error}}</label>
+                                                {%endfor%}<br>
+                                                <label for="productname">Description</label>
+                                                <input id="productname" name="description" type="text" class="form-control" >
+                                            </div>
+
+                                            <div class="mb-3">
+                                                {%for error in form.subject.errors%}
+                                                <label style="color: red;">{{error}}</label>
+                                                {%endfor%}<br>
+                                                <label for="productname">Subject</label>
+                                                <input id="productname" name="subject" type="text" class="form-control" >
+                                            </div>
+
+                                            <div class="mb-3">
+                                                {%for error in form.body_html.errors%}
+                                                <label style="color: red;">{{error}}</label>
+                                                {%endfor%}<br>
+                                                <label for="productname">Content</label>
+                                                <textarea id="elm1" name="body_html"></textarea>
+                                            </div>
+
+                                            <div class="d-flex flex-wrap gap-2">
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light">Save Changes</button>
+                                                <input type="reset" class="btn btn-secondary waves-effect waves-light" value="Cancel">
+                                            </div>
+                                        </form>
+        
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+{% endblock %}
+
+{% block extra_javascript %}
+        <!--tinymce js-->
+        <script src="{% static 'libs/tinymce/tinymce.min.js' %}"></script>
+
+        <!-- init js -->
+        <script src="{% static 'js/pages/form-editor.init.js' %}"></script>
+{% endblock %}
