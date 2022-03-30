@@ -1,73 +1,48 @@
 {% load static %}
 {% block footer %}
 
-<div class="trust">
-  <div class="trust-headline">
-    <div class="trust-image">
-      <img src="{%static 'display/img/hero4.png'%}" alt="">
-    </div>
-    <div class="trust-content">
-      <div class="trust-pilot">
-        <img src="{%static 'display/img/trustpilot_logo_white 1.png'%}" alt="">
-      </div>
-      <div class="trust-texts">
-        <h1>50,000+</h1>
-        <p>Drivers have chosen drivermedicals.uk to date, join them today!</p>
-      </div>
-      <div class="trust-btn">
-        <li>
-          <button type="button" class="btn">Call: 02039639083</button>
-        </li>
-        <li>
-          <button type="button" class="tbtn">Book Now</button>
-        </li>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="footer">
-  <div class="container-fluid mt-5">
+  <div class="container-md mt-5">
     <div class="row">
-      <div class="col-sm-3">
-        <a href="index.html"><img class="img-fluid mb-2" src="{%static 'display/img/DriverMEDICAL LOGO 2.png'%}" alt="Drivers Medicals"></a>
+      <div class="col-md-3">
+        <a href="{%url 'display:home-page'%}"><img class="img-fluid mb-2" src="{%static 'display/img/DriverMEDICAL LOGO 2.png'%}" alt="Drivers Medicals"></a>
         <p class="h4">All driver medicals are completed by GMC registered doctors in accordance with current DVLA Group 2 guidelines.</p>
         <a class="fs-2" href=""><i class="fab fa-linkedin"></i></a>
         <a class="fs-2" href=""><i class="fab fa-instagram"></i></a>
         <a class="fs-2" href=""><i class="fab fa-twitter"></i></a>
       </div>
-      <div class="col-sm-3">
+      <div class="col-md-3">
         <h2>Ouick Links</h2>
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link" href="#">About Us</a>
+            <a class="nav-link" href="{%url 'display:about-page'%}">About Us</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Our Services</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Locations</a>
+            <a class="nav-link" href="{%url 'display:location-page'%}">Locations</a>
           </li>
         </ul>
       </div>
-      <div class="col-sm-3">
+      <div class="col-md-3">
         <h2>Ouick Links</h2>
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link" href="#">HGV Medical</a>
+            <a class="nav-link" href="{%url 'display:hgv'%}">HGV Medical</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">PVC/Bus Medical</a>
+            <a class="nav-link" href="{%url 'display:pvc'%}">PVC/Bus Medical</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Taxi Medical</a>
+            <a class="nav-link" href="{%url 'display:taxi'%}">Taxi Medical</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Business Services</a>
+            <a class="nav-link" href="{%url 'display:business-clients'%}">Business Services</a>
           </li>
         </ul>
       </div>
-      <div class="col-sm-3">
+      <div class="col-md-3">
         <div class="end fs-4">
           <h2>Contact Us</h2> 
           <span class="fas fa-map-marker-alt"></span>       

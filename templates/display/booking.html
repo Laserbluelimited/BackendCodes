@@ -1,9 +1,9 @@
 {%extends 'display/base.html'%}
 {%load static%}
+{%block content%}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{%static 'display/booking/fonts/material-icon/css/material-design-iconic-font.min.css'%}">
-<link rel="stylesheet" href="{%static 'display/booking/css/style.css'%}" type="text/css">
+<link href="{% static 'libs/select2/dist/css/select2.min.css' %}" rel="stylesheet" type="text/css" />
 <link href="{%static 'libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'%}" rel="stylesheet" type="text/css"/>
 
 <style type="text/css">
@@ -13,185 +13,120 @@
     .datepicker table tr td.disabled{
         color: #b8b8b757;
     }
-
-
-    
 </style>
 {% endblock %}
+<div class="bform">
+    <div class="container-sm">
+        <form id="regForm" action="{%url 'display:booking'%}" method="post">
+          {%csrf_token%}
 
-{%block content%}
-<div class="main">
+      <div class="tab">
+          <h1 class="fw-bold mb-5">Locations Near You</h1>
+          <h2></h2>
+          <input type="search" id="myInput" onkeyup="myFunction()"  name="clinic" placeholder="Search for locations">
+          <ul id="myUL">
+            {%for i in clinics%}
+            <li>
+              <a role="button" data-value="{{i.get_address}}" onclick="Location(this)">
+                <h2 class="fw-bold">{{i.get_city}}</h2>
+                <p class="text-muted">{{i.postal_code}}</p>
+                <p class="text-muted fs-5">{{i.get_address}}</p>
+                <img src="{%static 'display/img/location1.png'%}" alt="">
+              </a>
+            </li>
+            {%endfor%}
+          </ul>
+      </div>
 
-  <div class="container">
-      <form method="POST" id="signup-form" class="signup-form" action="#">
-          <div>
-              <h3>Personal info</h3>
-              <fieldset>
-                  <h2>Personal information</h2>
-                  <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
-                  <div class="fieldset-content">
-                      <div class="form-row">
-                          <label class="form-label">Name</label>
-                          <div class="form-flex">
-                              <div class="form-group">
-                                  <input type="text" name="first_name" id="first_name" />
-                                  <span class="text-input">First</span>
-                              </div>
-                              <div class="form-group">
-                                  <input type="text" name="last_name" id="last_name" />
-                                  <span class="text-input">Last</span>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <label for="email" class="form-label">Email</label>
-                          <input type="email" name="email" id="email" />
-                          <span class="text-input">Example  :<span>  Jeff@gmail.com</span></span>
-                      </div>
-                      <div class="form-group">
-                          <label for="phone" class="form-label">Phone</label>
-                          <input type="text" name="phone" id="phone" />
-                      </div>
-                      <div class="form-date">
-                          <label for="birth_date" class="form-label">Birth Date</label>
-                          <div class="form-date-group">
-                              <div class="form-date-item">
-                                  <select id="birth_month" name="birth_month"></select>
-                                  <span class="text-input">MM</span>
-                              </div>
-                              <div class="form-date-item">
-                                  <select id="birth_date" name="birth_date"></select>
-                                  <span class="text-input">DD</span>
-                              </div>
-                              <div class="form-date-item">
-                                  <select id="birth_year" name="birth_year"></select>
-                                  <span class="text-input">YYYY</span>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <label for="ssn" class="form-label">SSN</label>
-                          <input type="text" name="ssn" id="ssn" />
-                      </div>
-                  </div>
-              </fieldset>
+      <div class="tab">
+          <h1 class=" fw-bold mb-5" style="color: #0AC5A8;">Account Application</h1>
+          <h2 class=" fw-bold mb-5 text-center">Please Enter Your Details</h2>
+            <div class="row g-3 fs-3">
+              <div class="col-sm-6">
+                <label for="username" class="form-label">First Name</label>
+                <input type="text" name="first_name" id="username" class="has-validation form-control fs-3" value="" required="required">
+              </div>
+              <div class="col-sm-6">
+                <label for="username" class="form-label">Last Name</label>
+                <input type="text" name="last_name" id="username" class="has-validation form-control fs-3" value="" required="required">
+              </div>
+              <div class="col-sm-6">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" id="email" class=" has-validation form-control fs-3" value="" required="required">
+              </div>
+              <div class="col-sm-6">
+                <label for="number" class="form-label">Phone Number</label>
+                <input type="tel" name="phone" id="number" class="has-validation form-control fs-3" value="" required="required">
+              </div>
+             <div class="col-sm-6">
+              <label for="lastName" class="form-label">Service</label>
+              <select class="form-select fs-3" id="services" name="product" required>
+                <option value="">Choose...</option>
+                {%for i in form.product.field.choices%}
+                <option value="{{i.0}}">{{i.1}}</option>
+                {%endfor%}
+              </select>
+              <div class="invalid-feedback">
+              </div>
+             </div>
+             <div class="col-sm-6">
+               <label for="username" class="form-label">Date</label>
+               <input type="text" name="date" id="datepicker" class="form-control fs-3" readonly >
+             </div>
+             <div class="col-sm-6">
+              <label for="username">Time</label>
+              <select class="form-select fs-3" name="time_slot" id="time"></select>
+              </div>                                                  
+            </div>
+        </form>
+      </div>
 
-              <h3>Connect Bank Account</h3>
-              <fieldset>
-                  <h2>Connect Bank Account</h2>
-                  <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
-                  <div class="fieldset-content">
-                      <div class="form-group">
-                          <label for="find_bank" class="form-label">Find Your Bank</label>
-                          <div class="form-find">
-                              <input type="text" name="find_bank" id="find_bank" placeholder="Ex. Techcombank" />
-                              <input type="submit" value="Search" class="submit">
-                              <span class="form-icon"><i class="zmdi zmdi-search"></i></span>
-                          </div>
-                      </div>
-                      <div class="choose-bank">
-                          <p class="choose-bank-desc">Or choose from these popular bank</p>
-                          <div class="form-radio-flex">
-                              <div class="form-radio-item">
-                                  <input type="radio" name="choose_bank" id="bank_1" value="bank_1" checked="checked" />
-                                  <label for="bank_1"><img src="images/bank-1.jpg" alt=""></label>
-                              </div>
+      <div style="overflow:auto;">
+        <div class="text-center">
+          <button class="btn btn-lg mt-5" type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+          <button class="btn btn-lg mt-5" type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+        </div>
+      </div>
 
-                              <div class="form-radio-item">
-                                  <input type="radio" name="choose_bank" id="bank_2" value="bank_2" />
-                                  <label for="bank_2"><img src="images/bank-2.jpg" alt=""></label>
-                              </div>
-
-                              <div class="form-radio-item">
-                                  <input type="radio" name="choose_bank" id="bank_3" value="bank_3" />
-                                  <label for="bank_3"><img src="images/bank-3.jpg" alt=""></label>
-                              </div>
-
-                              <div class="form-radio-item">
-                                  <input type="radio" name="choose_bank" id="bank_4" value="bank_4" />
-                                  <label for="bank_4"><img src="images/bank-4.jpg" alt=""></label>
-                              </div>
-
-                              <div class="form-radio-item">
-                                  <input type="radio" name="choose_bank" id="bank_5" value="bank_5" />
-                                  <label for="bank_5"><img src="images/bank-5.jpg" alt=""></label>
-                              </div>
-
-                              <div class="form-radio-item">
-                                  <input type="radio" name="choose_bank" id="bank_6" value="bank_6" />
-                                  <label for="bank_6"><img src="images/bank-6.jpg" alt=""></label>
-                              </div>
-                              
-                              <div class="form-radio-item">
-                                  <input type="radio" name="choose_bank" id="bank_7" value="bank_7" />
-                                  <label for="bank_7"><img src="images/bank-7.jpg" alt=""></label>
-                              </div>
-
-                              <div class="form-radio-item">
-                                  <input type="radio" name="choose_bank" id="bank_8" value="bank_8" />
-                                  <label for="bank_8"><img src="images/bank-8.jpg" alt=""></label>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </fieldset>
-
-              <h3>Set Financial Goals</h3>
-              <fieldset>
-                  <h2>Set Financial Goals</h2>
-                  <p class="desc">Set up your money limit to reach the future plan</p>
-                  <div class="fieldset-content">
-                      <div class="donate-us">
-                          <div class="price_slider ui-slider ui-slider-horizontal">
-                              <div id="slider-margin"></div>
-                              <p class="your-money">
-                                  Your money you can spend per month :
-                                  <span class="money" id="value-lower"></span>
-                                  <span class="money" id="value-upper"></span>
-                              </p>
-                          </div>
-                      </div>
-                  </div>
-              </fieldset>
-          </div>
-      </form>
+      <div style="text-align:center;margin-top:40px;">
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+      </div>
+    </div>
+      
   </div>
-
-</div>
 {%endblock%}
-
 {% block extra_javascript %}
 <!-- jquery step -->
-<script src="{%static 'display/booking/vendor/jquery/jquery.min.js'%}"></script>
-<script src="{%static 'display/booking/vendor/jquery-validation/dist/jquery.validate.min.js'%}"></script>
-<script src="{%static 'display/booking/vendor/jquery-validation/dist/additional-methods.min.js'%}"></script>
-<script src="{% static 'libs/jquery-steps/build/jquery.steps.min.js' %}"></script>
+<script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>
 
-<script src="{%static 'display/booking/js/main.js'%}"></script>
 <!-- form wizard init -->
 <script src="{%static 'libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'%}"></script>
 
 <script type="text/javascript">
-    $("#datepicker").on("change.dp", function(){
-        $.ajax({
-            type:'GET',
-            url:'appointment/ajax/filter-times',
-            data:{
-                'clinic':$('#location').val(),
-                'date':$('#datepicker').val(),
-            },
-            dataType:'json',
-            success:function(response){
-                var select = document.getElementById('time');
-                for (var i=0;i<response.times.length;i++){
-                    var option = document.createElement('option');
-                    option.value = response.times[i]['id'];
-                    option.innerHTML = response.times[i]['time'];
-                    select.appendChild(option)
-                }
+
+$("#datepicker").on("change.dp", function(){
+  console.log('j')
+    $.ajax({
+        type:'GET',
+        url:'appointment/ajax/filter-times',
+        data:{
+            'clinic':$('#myInput').val(),
+            'date':$('#datepicker').val(),
+        },
+        dataType:'json',
+        success:function(response){
+            var select = document.getElementById('time');
+            for (var i=0;i<response.times.length;i++){
+                var option = document.createElement('option');
+                option.value = response.times[i]['id'];
+                option.innerHTML = response.times[i]['time'];
+                select.appendChild(option)
             }
-        })
+        }
     })
+})
 
     
     

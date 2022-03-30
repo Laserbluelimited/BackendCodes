@@ -29,6 +29,11 @@ class OrderForm(forms.ModelForm):
         exclude = ['id', 'order_number', 'appointment', 'fulfilled', 'total_price', 'product']
 
 
+
+
+
+
+
 class CartForm(forms.Form):
     clinic = forms.ModelChoiceField(queryset=Clinic.objects.all())
     product = forms.ModelChoiceField(queryset=Product.objects.all())
@@ -51,3 +56,21 @@ class CartForm(forms.Form):
     #             raise forms.ValidationError("Cookies must be enabled.")
     #         return self.cleaned_data
 
+class CartWebForm(forms.Form):
+    clinic = forms.CharField(max_length=255)
+    product = forms.ModelChoiceField(queryset=Product.objects.all())
+    notes = forms.Textarea()
+    date = forms.DateField(required=True)
+    time_slot = forms.CharField(required=True)
+    first_name = forms.CharField(max_length=100)
+    last_name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    phone = forms.CharField(max_length=15)
+
+
+    def clean_clinic(self):
+        clinic = self.cleaned_data['clinic']
+        if Clinic.objects.filter(address=clinic).exists():
+            return clinic
+        else:
+            raise forms.ValidationError("Invalid Clinic Location. \n Select one of the listed clinics.")

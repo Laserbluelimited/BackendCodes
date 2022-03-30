@@ -16,7 +16,7 @@ html{
 /* --------------------------------------------------------------------------------------------------------------------------------------- */
 
 .navbar{
-    background-color: #fff;
+    background-color: #14171F;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.219);
   }
 
@@ -25,63 +25,71 @@ html{
   padding-bottom: 2.5rem;
 }
 
+.navbar-toggler{
+  border: .3rem solid #0AC5A8;
+}
+
+.navbar-toggler i{
+  color: #fff;
+  font-size: 2rem;
+}
+
 .navbar-nav{
-    margin-left: 2rem;
+  margin-left: 2rem;
 }
 
 .nav-link{
-    color: #14171F;
-    font-size: 1.8rem;
-    font-family: 'Work Sans', sans-serif;
-    font-weight: 600;
-    transition: 0.3s;
-  }
+  color: #0AC5A8;
+  font-size: 1.5rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  transition: 0.3s;
+}
   
-  .nav-link:hover{
-    color: #0AC5A8;
-  }
+.nav-link:hover{
+  color: #fff;
+}
 
-  .dropdown-menu li{
-    font-size: 1.8rem;
-    font-weight: 400;
-    padding: .5rem;
-  }
+.dropdown-menu li{
+  font-size: 1.8rem;
+  font-weight: 400;
+  padding: .5rem;
+}
 
-  .nav-end{
-    display: flex;
-  }
+.nav-end{
+  display: flex;
+}
 
-  .nav-end a{
-    margin-right: 2rem;
-    font-size: 1.8rem;
-    font-family: 'Work Sans', sans-serif;
-    font-weight: 600;
-    background-color: #0AC5A8;
-    color: #fff;
-    border-radius: .7rem;
-    border: .3rem solid #0AC5A8;
-    transition: .3s;
-  }
+.nav-end a{
+  margin-right: 2rem;
+  font-size: 1.5rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  background-color: #0AC5A8;
+  color: #fff;
+  border-radius: .7rem;
+  border: .3rem solid #0AC5A8;
+  transition: .3s;
+}
 
-  .nav-end a:hover{
-    background-color: #fff;
-    color: #0AC5A8;
-  }
+.nav-end a:hover{
+  background-color: #fff;
+  color: #0AC5A8;
+}
 
-  .nav-end button{
-    font-size: 1.8rem;
-    font-family: 'Work Sans', sans-serif;
-    font-weight: 600;
-    color: #0AC5A8;
-    border-radius: .7rem;
-    border: .3rem solid #0AC5A8;
-    transition: .3s;
-  }
-
-  .nav-end button:hover{
-    background-color: #0AC5A8;
-    color: #fff;
-  }
+.nav-end button{
+  font-size: 1.5rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  color: #0AC5A8;
+  border-radius: .7rem;
+  border: .3rem solid #0AC5A8;
+  transition: .3s;
+}
+.nav-end button:hover{
+  background-color: #0AC5A8;
+  color: #fff;
+}
 
   /* --------------------------------------------------------------------------------------------------------------------------------------- */
 /* BODY */
@@ -90,14 +98,17 @@ html{
 .body{
   width: 100%;
   position: relative;
+  overflow: hidden;
 }
 
 .carousel-control-prev{
   z-index: 10;
+  margin-left: -2rem;
 }
 
 .carousel-control-next{
   z-index: 10;
+  margin-right: -2rem;
 }
 
 .overlay {
@@ -107,13 +118,14 @@ html{
   height: 100%;
   width: 100%;
   z-index: 1;
-  background-image: linear-gradient(90deg, rgb(255, 255, 255), rgba(0, 0, 0, 0.281));
+  background-color: #000;
+  opacity: .7;
 }
 
 .body-content{
   position: absolute;
   top: 30%;
-  margin-left: 7%;
+  margin-left: 10%;
   z-index: 10;
   width: 60%;
 }
@@ -197,7 +209,7 @@ input{
   font-size: 7rem;
   font-weight: 900;
   word-spacing: .3rem;
-  color: #14171F;
+  color: #fff;
 }
 
 .text-content p{
@@ -210,7 +222,7 @@ h1 span{
 }
 
 p span{
-  color: #14171F;
+  color: #fff;
 }
 
 .button2{
@@ -218,6 +230,7 @@ p span{
   font-family: 'Work Sans', sans-serif;
   font-weight: 600;
   color: #0AC5A8;
+  background-color: #fff;
   border-radius: .7rem;
   border: .3rem solid #0AC5A8;
   padding: .7rem 2rem;
@@ -271,6 +284,7 @@ p span{
 
 .card{
   border-radius: .5rem;
+  height: 30rem;
   border: .1rem solid rgb(180, 180, 180);
 }
 
@@ -363,6 +377,7 @@ p span{
   width: 80%;
   margin-left: auto;
   margin-right: auto;
+  display: block;
 }
 
 .about-image{
@@ -375,14 +390,13 @@ p span{
 
 .about-texts{
   background-color: #0AC5A8;
-  position: absolute;
   top: 10rem;
   right: 0;
   width: 40%;
+  position: absolute;
 }
 
 .atexts{
-  width: 80%;
   margin: 2rem auto;
 }
 
@@ -431,7 +445,6 @@ p span{
   height: 110vh;
   background: #EFFDFB42;
 }
-
 .services-content{
   width: 80%;
   height: 100%;
@@ -569,7 +582,7 @@ p span{
 .trust-content{
   position: absolute;
   display: flex;
-  width: 80%;
+  width: 85%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -578,6 +591,14 @@ p span{
 
 .trust-pilot{
   width: 15%;
+}
+
+.trust-pilot img{
+  width: 100%;
+}
+
+.trust-texts{
+  margin-left: 2rem;
 }
 
 .trust-pilot img{
@@ -634,10 +655,9 @@ p span{
 /* FOOTER */
 /* -------------------------------------------------------------------------------------------------------------------------------------------- */
 
-.footer-footer{
-  background-color: #0AC5A8;
+.footer, .footer-footer{
+  background-color: #14171F;
   width: 100%;
-  margin-top: 10rem;
   overflow: hidden;
   bottom: 0;
 }
@@ -646,9 +666,21 @@ p span{
   text-align: center;
 }
 
+.footer .col-md-3{
+  color: #fff;
+}
+
+.footer .nav-link{
+  color: #fff;
+}
+
+.footer .nav-link:hover{
+  color: #0AC5A8;
+}
+
 .footer i{
   margin-right: 1rem;
-  color: #14171F;
+  color: #fff;
   transition: .3s;
 }
 
@@ -671,6 +703,7 @@ p span{
 /* -------------------------------------------------------------------------------------------------------------------------------------------- */
 
 #parent_popup{
+  width: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   display: none;
   position: fixed;
@@ -682,6 +715,7 @@ p span{
 }
   
 #parent_popup .container-sm{
+  width: 70%;
   margin: 10% auto;
   padding: .5rem 2rem 1.3rem 2rem;
   border: 1rem solid #0AC5A8;
@@ -727,6 +761,7 @@ p span{
   border-radius: 1.5rem;
   box-shadow: .1rem .1rem .3rem #000;
   transition: .3s;
+  text-decoration: none;
 }
 
 .close:hover{
@@ -875,6 +910,49 @@ p span{
 
 
 
+/* ------------------------------------------------------------------------------------------------------------------------------------------ */
+/* BUSINESS*/
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.business {
+  background-color: #475C83;
+  padding-top: 4rem;
+  padding-bottom: 10rem;
+}
+
+.bus-card {
+  margin-top: -7rem;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------ */
+/* OTHER SERVICES*/
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+
+.vl {
+  border-left: .2rem solid #0AC5A8;
+  height: 60rem;
+  position: absolute;
+  left: 50%;
+  top: 10rem;
+}
+
+.mend-text .btn{
+  font-size: 1.5rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  color: #0AC5A8;
+  border-radius: .7rem;
+  border: .3rem solid #0AC5A8;
+  transition: .3s;
+}
+.mend-text .btn:hover{
+  background-color: #0AC5A8;
+  color: #fff;
+}
+
+
+
 
 
 
@@ -900,53 +978,6 @@ p span{
 /* ------------------------------------------------------------------------------------------------------------------------------------------ */
 /* HGVMEDICALS*/
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
-
-.hfooter{
-  margin-top: 10rem;
-}
-
-.hfooter .col-sm-3 p{
-  font-size: 1.5rem;
-  margin-top: 2rem;
-}
-
-.hfooter .col-sm-3 i{
-  color: #0AC5A8;
-  font-size: 3rem;
-  margin-right: 2rem;
-  margin-top: 2rem;
-}
-
-.hfooter .col-sm-3 ul, .hend{
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-
-.hfooter .col-sm-3 h2{
-  color: #14171F;
-  font-size: 2rem;
-  text-align: center;
-}
-
-.hfooter .col-sm-3 .hnav-item{
-  margin-top: 2rem;
-}
-
-.hfooter .col-sm-3 .hnav-link{
-  color: #14171F;
-  font-size: 1.5rem;
-}
-
-.hfooter .col-sm-3 span{
-  color: #0AC5A8;
-  font-size: 1.4rem;
-  margin-top: 2rem;
-}
-
-.hend p{
-  color: #14171F;
-}
 
 .med-body .container-fluid{
   background-image: linear-gradient(rgba(0, 0, 0, 0.76),rgba(0, 0, 0, 0.76)), url(/img/hero.png);
@@ -987,6 +1018,8 @@ p span{
   font-family: 'Work Sans', sans-serif;
   margin-right: 1rem;
   transition: .3s;
+  text-decoration: none;
+
 }
 
 .med-body .container-fluid a:hover{
@@ -1036,12 +1069,6 @@ p span{
   margin-top: 5rem;
 }
 
-.mbus .row{
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .mbus h2, .mend-text h2{
   color: #0AC5A8;
   font-family: 'Work Sans', sans-serif;
@@ -1078,9 +1105,6 @@ p span{
 
 .mend .row, .tend .row{
   position: relative;
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .mend h2{
@@ -1159,142 +1183,39 @@ p span{
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
 .bform{
-  height: 50vh;
   background: #0AC5A8;
 }
 
 .bform .container-sm{
-  padding-top: 10rem;
-}
-
-.bform form, .sform form{
-  text-align: center;
-}
-
-.bform form h1, .sform form h1, .uform form h1{
-  font-family: 'Work Sans', sans-serif;
-  font-size: 4rem;
-  font-weight: 600;
-  color: #14171F;
-}
-
-.bform form h3, .sform form h3, .uform form h3{
-  font-family: 'Work Sans', sans-serif;
-  font-size: 2rem;
-  font-weight: 600;
-  margin-top: 1rem;
-  color: #14171F;
-}
-
-.bform form input{
-  width: 50%;
-}
-
-.bform form .btn{
-  font-size: 1.8rem;
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 600;
-  background-color: #14171F;
-  color: #fff;
-  border-radius: .7rem;
-  border: .3rem solid #14171F;
-  transition: .3s;
-}
-
-.bform form .btn:hover{
   background-color: #fff;
-  color: #14171F;
-}
-
-/* ------------------------------------------------------------------------------------------------------------------------------------------ */
-/* SERVICE*/
-/* ------------------------------------------------------------------------------------------------------------------------------------------- */
-
-.sform{
-  background: #0AC5A8;
-}
-
-.sform .container-sm{
-  padding-top: 6rem;
-  padding-bottom: 4rem;
-}
-
-.sform form label{
   font-family: 'Work Sans', sans-serif;
-  font-size: 2rem;
-  color: #14171F;
-  margin-top: 1rem;
-}
-
-.sform form option{
-  font-family: 'Work Sans', sans-serif;
-  font-size: 1.5rem;
-  color: #14171F;
-}
-
-.sform form select{
-  font-family: 'Work Sans', sans-serif;
-  font-size: 1.5rem;
-  color: #14171F;
-}
-
-.col-sm-6 input{
-  font-family: 'Work Sans', sans-serif;
-  font-size: 1.5rem;
-  color: #14171F;
-}
-
-.sform a{
-  font-size: 1.8rem;
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 600;
-  background-color: #14171F;
-  color: #fff;
-  border-radius: .7rem;
-  border: .3rem solid #14171F;
-  transition: .3s;
-}
-
-.sform a:hover{
-  background-color: #fff;
-  color: #14171F;
-}
-
-/* ------------------------------------------------------------------------------------------------------------------------------------------ */
-/* USER*/
-/* ------------------------------------------------------------------------------------------------------------------------------------------- */
-
-.uform{
-  background: #0AC5A8;
-}
-
-.uform .container-md{
-  padding-top: 6rem;
-  padding-bottom: 4rem;
-}
-
-.uform .tab{
-  border-radius: .7rem;
-  background-color: aliceblue;
-  margin-top: 2rem;
-  width: 60%;
-  padding: 1rem;
+  padding: 5rem;
   margin-left: auto;
   margin-right: auto;
 }
 
-.uform form label{
-  font-family: 'Work Sans', sans-serif;
-  font-size: 1.5rem;
-  color: #14171F;
+#myInput {
+  width: 100%;
+  font-size: 1.6rem;
+  border: .1rem solid #ddd;
+  margin-bottom: 1.2rem;
 }
 
-.form-check-input{
-  width: 10%;
-  margin-right: 1rem;
+#myUL li a {
+  border: .1rem solid #ddd; /* Add a border to all links */
+  background-color: #f6f6f6; /* Grey background color */
+  padding: 1.2rem ; /* Add some padding */
+  text-decoration: none; /* Remove default text underline */
+  font-size: 1.8rem; /* Increase the font-size */
+  color: #14171F; /* Add a black text color */
+  display: block; /* Make it into a block element to fill the whole list */
 }
 
-.uform .btn{
+#myUL img{
+  width: 20%;
+}
+
+.bform button{
   font-size: 1.8rem;
   font-family: 'Work Sans', sans-serif;
   font-weight: 600;
@@ -1305,79 +1226,119 @@ p span{
   transition: .3s;
 }
 
-.uform .btn:hover{
+.bform button:hover{
+  background-color: #fff;
+  color: #14171F;
+}
+
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------ */
+/* APPLICATION*/
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+
+.biz{
+  background-color: #0AC5A8;
+}
+
+.biz .container{
+  background-color: rgb(255, 255, 255);
+  padding: 5rem;
+}
+
+form h1{
+  text-align: center;
+  font-size: 4rem;
+  font-family: 'Work Sans', sans-serif;
+}
+
+input.invalid {
+  background-color: #ffdddd;
+}
+
+.tab {
+  display: none;
+}
+
+.step {
+  height: 1.5rem;
+  width: 1.5rem;
+  margin: 0 .2rem;
+  background-color: #0AC5A8;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+.step.finish {
+  background-color: #14171F;
+}
+
+.biz .btn {
+  font-size: 1.8rem;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  background-color: #14171F;
+  color: #fff;
+  border-radius: .7rem;
+  border: .3rem solid #14171F;
+  transition: .3s;
+}
+
+.biz .btn:hover{
   background-color: #fff;
   color: #14171F;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------ */
-/* COUPON*/
+/* CLIENT*/
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
-.cform{
-  background: #0AC5A8;
+.client{
+  background-color: #0AC5A8;
 }
 
-.cform .container-sm{
-  padding-top: 7rem;
-}
-
-.cform form h1{
+.client button{
+  font-size: 1.8rem;
   font-family: 'Work Sans', sans-serif;
-  font-size: 4rem;
   font-weight: 600;
-  color: #14171F;
-}
-
-.cform form h3{
-  font-family: 'Work Sans', sans-serif;
-  font-size: 2rem;
-  font-weight: 600;
-  color: #14171F;
-}
-
-.cform .row{
-  padding: 2rem;
-  margin-top: 2rem;
-}
-
-.cform .row .input-group{
-  margin-top: 2rem;
-}
-
-.cform .row h2{
-  font-family: 'Work Sans', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #14171F;
-}
-
-.cform .row .form-control, .btn{
-  font-family: 'Work Sans', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #14171F;
-}
-
-.cform .row .btn{
   background-color: #14171F;
+  color: #fff;
+  border-radius: .7rem;
+  border: .3rem solid #14171F;
+  transition: .3s;
 }
 
-.payment{
-  padding: 1rem;
-  background-color: white;
-}
-
-.payment .form-check{
-  font-family: 'Work Sans', sans-serif;
-  font-size: 2rem;
-  font-weight: 600;
+.client :hover{
+  background-color: #fff;
   color: #14171F;
 }
 
-.payment .btn{
-  font-family: 'Work Sans', sans-serif;
-  font-size: 2rem;
-  font-weight: 600;
-  color: #14171F;
+/* ------------------------------------------------------------------------------------------------------------------------------------------ */
+/* DASHBOARD*/
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.dashboard{
+  background-color: #0AC5A8;
 }
+
+.dashboard .container{
+  background-color: #fff;
+  font-family: 'Work Sans', sans-serif;
+}
+
+
+
+
+
+
+
+
+
+
+

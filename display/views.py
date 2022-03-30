@@ -17,31 +17,29 @@ class LocationPageView(View):
     def get(self, request):
         return render(request, 'display/location.html')
 
-class MedicalPageView(View):
+class HgvPageView(View):
     def get(self, request):
-        return render(request, 'display/medical.html')
+        return render(request, 'display/hgvmedical.html')
 
+class PvcPageView(View):
+    def get(self, request):
+        return render(request, 'display/pvcmedical.html')
+
+class TaxiPageView(View):
+    def get(self, request):
+        return render(request, 'display/taxi.html')
+
+
+class OtherServicesPageView(View):
+    def get(self, request):
+        return render(request, 'display/otherServices.html')
+
+class BusinessClientsPageView(View):
+    def get(self, request):
+        return render(request, 'display/business.html')
 
 class ICBookingView(View):
     def get(self, request):
         return render(request, 'display/booking.html')
 
 
-class CCouponView(View):
-    def get(self, request):
-        return render(request, 'display/coupon.html')
-
-
-class CServiceView(View):
-    def get(self, request):
-        return render(request, 'display/service.html')
-
-
-class CUserView(View):
-    def get(self, request):
-        return render(request, 'display/user.html')
-
-
-class hhhhView(View):
-    def get(self, request):
-        return render(request, 'display/hhhh.html')

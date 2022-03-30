@@ -2,9 +2,10 @@ from django import views
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
+from clinic_mgt.models import Clinic
 from schedules.models import ScheduleDates, TimeSlots
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import OrderForm, CartForm
+from .forms import OrderForm, CartForm, CartWebForm
 from .models import Appointment, Cart, ICOrders
 import datetime
 from client_mgt.models import InternetClient
@@ -233,7 +234,8 @@ def getDates(request):
 
 
     location = request.GET.get('clinic')
-    dates = ScheduleDates.objects.filter(clinic=location).values_list('date', flat=True).distinct()
+    clinic = Clinic.objects.get(address=location)
+    dates = ScheduleDates.objects.filter(clinic=clinic).values_list('date', flat=True).distinct()
     date_list = list(gen())
     response_data = {
         'dates':date_list
@@ -246,13 +248,14 @@ def getTimes(request):
     This ajax request function basically returns times available based on a particular location and date.
     """
     def gen():
-        for i in ScheduleDates.objects.filter(date=date, clinic=location):
+        for i in ScheduleDates.objects.filter(date=date, clinic=clinic):
             for p in TimeSlots.objects.filter(schedule=i, status=0):
                 l = p.id
                 k =p.start_time.strftime('%H:%M') + ' - ' + p.end_time.strftime('%H:%M')
                 yield {"id":l, "time":k}
     
     location = request.GET.get('clinic')
+    clinic = Clinic.objects.get(address=location)
     date = request.GET.get('date')
     date = datetime.datetime.strptime(date, '%m/%d/%Y').strftime('%Y-%m-%d')
 
@@ -261,5 +264,98 @@ def getTimes(request):
         'times':time_obj
     }
     return JsonResponse(response_data)
+
+
+
+
+
+
+#web views
+
+class ICPlaceOrderWebView(View):
+    login_url = '/auth/login'
+    redirect_field_name = 'redirect_to'
+    template_name ='display/booking.html'
+    form_class = CartWebForm
+
+    def get(self, request):
+        form = self.form_class()
+        clinics = Clinic.objects.all()
+        if "cart_id" in request.session:
+            return redirect('display:checkout')
+        else:
+            request.session.set_test_cookie()
+
+        return render(request, self.template_name, context={'form':form, 'clinics':clinics})
+
+    def post(self, request):
+        clinics = Clinic.objects.all()
+        form = self.form_class(request.POST)
+        if request.session.test_cookie_worked():
+            print(form.errors)
+            if form.is_valid():
+                #if form is valid, do the following'
+                #1. get form data
+                #2. save individual client if not save already with a status of 0
+                #3. get schedule object, book appointment
+                #4. add to cart and add cart id to session
+                #5. redirect to checkout page
+
+
+                #1.
+                first_name = form.cleaned_data['first_name']
+                last_name = form.cleaned_data['last_name']
+                phone = form.cleaned_data['phone']
+                email = form.cleaned_data['email']
+                # notes = form.cleaned_data['notes']
+                time_slot = form.cleaned_data['time_slot']
+                product = form.cleaned_data['product']
+
+
+                #2
+                if InternetClient.objects.filter(email=email).exists():
+                    client_obj = InternetClient.objects.get(email=email)
+                else:
+                    client_obj = InternetClient.objects.create(id=id_increment(InternetClient, 1120000),status=0, first_name=first_name, phone=phone, last_name=last_name, email=email)
+
+                #3
+                sche_obj = TimeSlots.objects.get(id=time_slot)
+                app_obj = book_appointment(Appointment, time_slot=sche_obj, status=0, client=client_obj)
+
+                #4
+                cart.add_to_cart(request, client=client_obj, appointment=app_obj, product=product)
+                if request.session.test_cookie_worked():
+                    request.session.delete_test_cookie()
+
+                #5
+                return redirect('display:checkout')
+        else:
+            print('cookie not present')
+
+        return render(request, self.template_name, context={'form':form, 'clinics':clinics})
+
+
+
+class ICOrderWebCheckoutView(View):
+    login_url = '/auth/login'
+    redirect_field_name = 'redirect_to'
+    template_name ='display/checkout.html'
+
+    def get(self, request):
+        if "cart_id" in request.session:
+            cart_id = request.session['cart_id']
+            cart_obj = Cart.objects.get(cart_id=cart_id)
+        else:
+            return redirect('display:booking')
+        return render(request, self.template_name, context={ 'cart':cart_obj})
+
+    def post(self, request):
+        if "cart_id" in request.session:
+            cart_id = request.session['cart_id']
+            cart_obj = Cart.objects.get(cart_id=cart_id)
+            return stripe.iccheckout_stripe(cart_id=cart_obj)
+        else:
+            return redirect('display:booking')
+
 
 
