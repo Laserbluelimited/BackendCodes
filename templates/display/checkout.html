@@ -1,6 +1,10 @@
-<div class="tab">
+{%extends 'display/base.html'%}
+{%load static%}
+{%block content%}
+
   <div class="container-sm">
-    <form id="regForm" action="">
+    <form id="regForm" action="{%url 'display:checkout'%}" method="post">
+      {%csrf_token%}
       <h1 class=" fw-bold mb-5" style="color: #0AC5A8;">Confirm Details</h1>
       <h2 class=" fw-bold mb-5 text-center">Kindly Confirm Your Details</h2>
       <div class="row">
@@ -9,23 +13,23 @@
           <ul class="list-group">
             <li class="list-group-item">
               <h2>Date & Time</h2>
-              <p class="text-muted">20/03/2022 / 14:00-14:15</p>
+              <p class="text-muted">{{cart.get_date}}<p>{{cart.get_time}}</p></p>
             </li>
             <li class="list-group-item">
-              <h2>Location</h2>
-              <p class="text-muted">Brentford London (TW8 0BB)</p>
+              <h2>City</h2>
+              <p class="text-muted">{{cart.get_city}}</p>
             </li>
             <li class="list-group-item">
-              <h2>Confirm Location</h2>
-              <p class="text-muted">Premier Inn - 52 High Street, Brentford, Greater London, TW8 0BB</p>
+              <h2>Address</h2>
+              <p class="text-muted">{{cart.get_location}}</p>
             </li>
             <li class="list-group-item">
               <h2>Services</h2>
-              <p class="text-muted">HGV/PCV Medical (DVLA D4)</p>
+              <p class="text-muted">{{cart.get_product}}</p>
             </li>
             <li class="list-group-item">
-              <h2>HGV/PCV Medical (DVLA D4)</h2>
-              <p class="text-muted">£55.00</p>
+              <h2>Price</h2>
+              <p class="text-muted">£{{cart.get_price}}</p>
             </li>
             <div class="input-group mt-3">
               <input type="text" class="form-control fs-3" placeholder="Coupon">
@@ -35,7 +39,7 @@
         </div>
         
       </div>
-      <div class="col-md mt-5">
+      <!-- <div class="col-md mt-5">
         <ul class="list-group">
           <li class="list-group-item">
             <h2>Select Your Payment Method</h2>
@@ -49,9 +53,16 @@
             </div>
           </li>
         </ul>
-      </div>
+      </div> -->
       
+      <div class="text-center mt-5">
+        <button type="button" class="btn">Cancel</button>
+        <button type="submit" class="btn">Submit</button>
+      </div>
+
+
     </form>
   </div>
 </div>
 
+{%endblock%}

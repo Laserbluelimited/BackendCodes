@@ -229,8 +229,9 @@ def getDates(request):
         This generator puts the dates in the format accepted by the bootstrap datepicker
         """
         for i in dates:
-            m = i.strftime("%#d-%#m-%Y")
-            yield m
+            if i>= datetime.date.today():
+                m = i.strftime("%#d-%#m-%Y")
+                yield m
 
 
     location = request.GET.get('clinic')
@@ -250,9 +251,10 @@ def getTimes(request):
     def gen():
         for i in ScheduleDates.objects.filter(date=date, clinic=clinic):
             for p in TimeSlots.objects.filter(schedule=i, status=0):
-                l = p.id
-                k =p.start_time.strftime('%H:%M') + ' - ' + p.end_time.strftime('%H:%M')
-                yield {"id":l, "time":k}
+                if p.start_time >= datetime.datetime.now().strftime('%H:%M'):
+                    l = p.id
+                    k =p.start_time.strftime('%H:%M') + ' - ' + p.end_time.strftime('%H:%M')
+                    yield {"id":l, "time":k}
     
     location = request.GET.get('clinic')
     clinic = Clinic.objects.get(address=location)

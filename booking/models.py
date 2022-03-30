@@ -179,9 +179,15 @@ class Cart(models.Model):
 
     def get_location(self):
         return self.appointment.time_slot.schedule.clinic.address
+    
+    def get_city(self):
+        return self.appointment.time_slot.schedule.clinic.city
 
     def get_price(self):
         return self.product.price
+
+    def get_time(self):
+        return '{} - {}'.format(self.appointment.time_slot.start_time, self.appointment.time_slot.end_time)
 
 
 class ICInvoice(models.Model):
