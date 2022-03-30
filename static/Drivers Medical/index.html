@@ -13,48 +13,45 @@
     <title>Drivers Medical</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md">
-        <div class="container-fluid">
-            <a class="logo" href="index.html"><img src="/img/DriverMEDICAL LOGO 2.png" alt=""></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarh">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-    
-          <div class="collapse navbar-collapse" id="navbarh">
-            <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">About Us</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link" href="#" data-bs-toggle="dropdown">Our Services</a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="hgvmedical.html">HGV Medical</a></li>
-                    <li><a class="dropdown-item" href="pvcmedical.html">PVC/Bus Medical</a></li>
-                    <li><a class="dropdown-item" href="taxi.html">Taxi Medical</a></li>
-                    <li><a class="dropdown-item" href="#">Business Services</a></li>
-                    <li><a class="dropdown-item" href="#">Other Medicals</a></li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Location</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Contact Us</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="business.html">Business Clients</a>
-              </li>
+
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="logo" href="index.html"><img src="/img/DriverMEDICAL LOGO 2.png" alt=""></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarh">
+          <i class="fa fa-bars"></i>
+        </button>
+
+      <div class="collapse navbar-collapse" id="navbarh">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">About Us</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="#" data-bs-toggle="dropdown">Our Services</a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="hgvmedical.html">HGV Medical</a></li>
+                <li><a class="dropdown-item" href="pvcmedical.html">PVC/Bus Medical</a></li>
+                <li><a class="dropdown-item" href="taxi.html">Taxi Medical</a></li>
+                <li><a class="dropdown-item" href="otherServices.html">Other Medicals</a></li>
             </ul>
-            <div class="nav-end">
-              <a class="btn" href="booking.html" role="button">Book Now</a>
-              <button type="button" class="btn">Login</button>            
-            </div>
-          </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Location</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="business.html">Business Clients</a>
+          </li>
+        </ul>
+        <div class="nav-end">
+          <a class="btn" href="booking.html" role="button">Book Now</a>
+          <button type="button" class="btn">Login</button>            
         </div>
-    </nav>
+      </div>
+    </div>
+  </nav>
 
     <div class="body">
       <div id="demo" class="carousel slide" data-bs-ride="carousel">
@@ -180,7 +177,7 @@
         </div>
         <div class="about-texts">
           <div class="atexts">
-            <h1>About Us</h1>
+            <h1 class="text-break">About Us</h1>
             <p>We have regular clinics across many locations including appointments during the day, in the evening and on weekends. <br>
             <span><br> Our doctors are experienced and have full GMC (General Medical Council) registration to ensure your medical assessment is completed correctly every time and in accordance with DVLA Group 2 guidelines.</span>
             <li class="text-btn">
@@ -273,14 +270,14 @@
     <div class="footer">
       <div class="container-fluid mt-5">
         <div class="row">
-          <div class="col-sm-3">
+          <div class="col-md-3">
             <a href="index.html"><img class="img-fluid mb-2" src="img/DriverMEDICAL LOGO 2.png" alt="Drivers Medicals"></a>
             <p class="h4">All driver medicals are completed by GMC registered doctors in accordance with current DVLA Group 2 guidelines.</p>
             <a class="fs-2" href=""><i class="fab fa-linkedin"></i></a>
             <a class="fs-2" href=""><i class="fab fa-instagram"></i></a>
             <a class="fs-2" href=""><i class="fab fa-twitter"></i></a>
           </div>
-          <div class="col-sm-3">
+          <div class="col-md-3">
             <h2>Ouick Links</h2>
             <ul class="nav flex-column">
               <li class="nav-item">
@@ -294,7 +291,7 @@
               </li>
             </ul>
           </div>
-          <div class="col-sm-3">
+          <div class="col-md-3">
             <h2>Ouick Links</h2>
             <ul class="nav flex-column">
               <li class="nav-item">
@@ -311,7 +308,7 @@
               </li>
             </ul>
           </div>
-          <div class="col-sm-3">
+          <div class="col-md-3">
             <div class="end fs-4">
               <h2>Contact Us</h2> 
               <span class="fas fa-map-marker-alt"></span>       
@@ -341,8 +338,8 @@
             <div class="modal-text">
               <h1 class="fs-1 fw-bold">Newsletter Subscription</h1>
               <p class="fs-3">Subscribe to our newsletter to get latest updates and notifications</p>
-              <input class="fs-1" type="text" placeholder="Enter your email" name="email" id="email" required>
-                <button type="button" class="btn">Subscribe</a></button>
+              <input class="fs-2" type="text" placeholder="Enter your email" name="email" id="email" required>
+              <button type="button" class="btn">Subscribe</a></button>
             </div>
           </div>
   
