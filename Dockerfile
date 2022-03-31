@@ -18,6 +18,7 @@ RUN apk update \
     && apk add jpeg-dev zlib-dev libjpeg \
     && python3 -m pip install --upgrade cryptography \
     && python3 -m pip install --upgrade cffi  \
+    && python3 -m pip install --upgrade wheel  \
     && pip install Pillow \
     && apk del build-deps
 
