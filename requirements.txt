@@ -12,7 +12,7 @@ whitenoise>=5.2.0,<5.8
 django-storages>=1.11.1,<1.19
 boto3>=1.17.40,<1.19
 #django-filter>=2.4.0,<2.8
-#dj-rest-auth[with_social]
+dj-rest-auth[with_social]
 #drf-yasg2>=1.19.4,<1.19.9
 #rest-framework-generic-relations>=2.0.0,<2.4
 #djangorestframework-simplejwt>=4.7.1,<4.7.9
