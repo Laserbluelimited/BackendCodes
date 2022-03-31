@@ -2,12 +2,10 @@ from genericpath import exists
 from django import forms
 from .models import Clinic, Doctor
 from authentication.models import User
+from .managers import AddressRequest
 
-CHOICES = []
-clinics = Clinic.objects.all()
-for i in clinics:
-    clinic_obj = (i, i)
-    CHOICES.append(clinic_obj)
+geo_data= AddressRequest()
+
 
 error_messages = {
     'required':'Please fill this field',
@@ -32,6 +30,13 @@ class ClinicRegistrationForm(forms.Form):
         if Clinic.objects.filter(name=name).exists():
             raise forms.ValidationError('Name already in use')
         return name
+
+    def clean_address(self):
+        address = self.cleaned_data['address']
+        if geo_data.get_geodata(address) is None:
+            raise forms.ValidationError('Invalid address')
+        return address
+
 
 class DoctorRegistrationForm(forms.Form):
     #usermodel

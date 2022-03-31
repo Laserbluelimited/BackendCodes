@@ -72,10 +72,10 @@ class InternetClient(models.Model):
         self.save()
 
     def get_name(self):
-        return self.title + ' ' + self.first_name + self.last_name
+        return self.first_name + self.last_name
 
     def get_email(self):
-        return self.user.email
+        return self.email
 
     def get_phone(self):
         return self.phone
@@ -117,13 +117,13 @@ class CorporateClient(models.Model):
     lat = models.DecimalField('latitude', max_digits=9, decimal_places=6, null=True)
     postal_code = models.CharField('postal_code', max_length=20)
     country = models.CharField('country', max_length=50)
-    pur_system = models.BooleanField('pur_order_sy')
+    medium_of_marketing = models.CharField('medium_of_marketing', max_length=255, null=True)
+    avg_no_order = models.IntegerField('avg_no_order', null=True)
+    pur_system = models.BooleanField('pur_order_sys')
     bill_name = models.CharField('billing_name', max_length=255, null=True)
     bill_phone = models.IntegerField('billing_phone', null=True)
     bill_email = models.EmailField('company_email', null=True)
-    auth_prsnl_first_name = models.CharField('auth_personel_frst_name', max_length=100, null=True)
-    auth_prsnl_last_name = models.CharField('auth_personel_last_name', max_length=100, null=True)
-    auth_prsnl_title = models.CharField('auth_personel_title', max_length=20, choices=TITLE_CHOICES, null=True)
+    auth_prsnl_name = models.CharField('auth_personel_name', max_length=100, null=True)
     preferred_mode = models.CharField('preferred_mode', max_length=100, choices=PREFERRED_MODE_CHOICES)
     sub_newsletter = models.BooleanField('sub_newsletter', default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -177,10 +177,7 @@ class CorporateClient(models.Model):
         return self.vat_reg_no
 
     def get_apn(self):
-        if self.auth_prsnl_first_name and self.auth_prsnl_last_name and self.auth_prsnl_title:
-            return self.auth_prsnl_title + ' ' + self.auth_prsnl_first_name + ' ' + self.auth_prsnl_last_name
-        else:
-            return None
+        return self.auth_prsnl_name
 
 
     class Meta:

@@ -6,7 +6,7 @@ from .models import Clinic, Doctor
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ClinicRegistrationForm, DoctorRegistrationForm
 from .managers import AddressRequest
-
+from skote.settings import DEFAULT_PASSWORD
 
 
 def id_increment(model, initial):
@@ -86,7 +86,7 @@ class DoctorRegistration(LoginRequiredMixin, View):
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
 
-            doctor_user = User.objects.create_user(email=email)
+            doctor_user = User.objects.create_user(email=email, password=DEFAULT_PASSWORD)
             doctor_obj = Doctor.objects.create(id=id_increment(Doctor, 1170000), user=doctor_user, email=email, first_name=first_name, last_name=last_name)
             
             
