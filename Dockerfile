@@ -1,4 +1,4 @@
-FROM python:3.8-alpine
+FROM python:3.9-alpine
 
 COPY ./requirements.txt .
 
@@ -17,8 +17,8 @@ RUN apk update \
 #    && apk add libc-dev linux-headers libressl-dev  libffi-dev openssl-dev cargo \
     && apk add jpeg-dev zlib-dev libjpeg \
     && python3 -m pip install --upgrade cryptography \
+    && python3 -m pip install --upgrade cffi  \
     && pip install Pillow \
-    && pip install django-ckeditor \
     && apk del build-deps
 
 RUN pip install -r /requirements.txt
