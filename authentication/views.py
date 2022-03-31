@@ -26,9 +26,9 @@ class AuthLoginView(View):
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
-            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            user = authenticate(username=username, password=password)
+            user = authenticate(email=email, password=password)
             if user is not None:
                 login(request, user)
                 return redirect('portal:dashboard')

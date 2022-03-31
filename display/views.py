@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.views import View
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.base import TemplateView
-
+from schedules.models import ScheduleDates, TimeSlots
+import datetime
+from clinic_mgt.models import Clinic
+from django.http import JsonResponse
 # Create your views here.
 class HomePageView(View):
     def get(self, request):
@@ -42,4 +43,56 @@ class ICBookingView(View):
     def get(self, request):
         return render(request, 'display/booking.html')
 
+class CorporateDashboardView(View):
+    def get(self, request):
+        return render(request, 'display/dashboard.html')
 
+
+#ajax calls
+def getDates(request):
+
+    """
+    This ajax request function basically returns dates available based on a particular location.
+    """
+    def gen():
+        """
+        This generator puts the dates in the format accepted by the bootstrap datepicker
+        """
+        for i in dates:
+            if i>= datetime.date.today():
+                m = i.strftime("%#d-%#m-%Y")
+                yield m
+
+
+    location = request.GET.get('clinic')
+    clinic = Clinic.objects.get(address=location)
+    dates = ScheduleDates.objects.filter(clinic=clinic).values_list('date', flat=True).distinct()
+    date_list = list(gen())
+    response_data = {
+        'dates':date_list
+    }
+    return JsonResponse(response_data)
+
+def getTimes(request):
+
+    """
+    This ajax request function basically returns times available based on a particular location and date.
+    """
+    def gen():
+        for i in ScheduleDates.objects.filter(date=date, clinic=clinic):
+            for p in TimeSlots.objects.filter(schedule=i, status=0):
+                if p.start_time >= datetime.datetime.now().strftime('%H:%M'):
+                    l = p.id
+                    k =p.start_time.strftime('%H:%M') + ' - ' + p.end_time.strftime('%H:%M')
+                    yield {"id":l, "time":k}
+    
+    location = request.GET.get('clinic')
+    clinic = Clinic.objects.get(address=location)
+    date = request.GET.get('date')
+    date = datetime.datetime.strptime(date, '%m/%d/%Y').strftime('%Y-%m-%d')
+
+    time_obj = list(gen())
+    response_data = {
+        'times':time_obj
+    }
+    return JsonResponse(response_data)

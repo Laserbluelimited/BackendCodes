@@ -110,7 +110,7 @@ function Location(e){
   console.log(location);
   $.ajax({
       type:'GET',
-      url: 'appointment/ajax/filter-dates',
+      url: 'booking/ajax/filter-dates',
       data:{
           'clinic' : $("#myInput").val(),
 

@@ -5,6 +5,7 @@ from .models import InternetClient, CorporateClient
 from .forms import CorporateClientRegistrationForm, InternetClientRegistrationForm
 from clinic_mgt.managers import AddressRequest
 from authentication.models import User
+from skote.settings import DEFAULT_PASSWORD
 # Create your views here.
 
 #functions
@@ -69,21 +70,22 @@ class InternetClientRegistrationView(View):
             email = form.cleaned_data['email']
             password1 = form.cleaned_data['password1']
             address = form.cleaned_data['address']
-            username = form.cleaned_data['username']
 
             address_class = AddressRequest()
             geodata = address_class.get_geodata(address)
 
-            user_obj = User.objects.create_user(email=email, password=password1, username=username)
+            user_obj = User.objects.create_user(email=email, password=password1)
 
             client_obj = form.save(commit=False)
             client_obj.id = id_increment(InternetClient, 1120000)
             client_obj.user = user_obj
-            client_obj.address = address
-            client_obj.long = geodata['longitude']
-            client_obj.lat = geodata['latitude']
-            client_obj.city = geodata['city']
-            client_obj.country = geodata['country']
+            if geodata is not None:
+                client_obj.address = address
+                client_obj.long = geodata['longitude']
+                client_obj.postal_code = geodata['postal_code']
+                client_obj.lat = geodata['latitude']
+                client_obj.city = geodata['city']
+                client_obj.country = geodata['country']
 
             user_obj.save()
             client_obj.save()
@@ -115,15 +117,13 @@ class CorporateClientRegistrationView(LoginRequiredMixin, View):
             #4. save client to corporateclient model
             
             email = form.cleaned_data['main_contact_email']
-            password1 = form.cleaned_data['password1']
             address = form.cleaned_data['address']
-            username = form.cleaned_data['username']
 
 
             address_class = AddressRequest()
             geodata = address_class.get_geodata(address)
 
-            user_obj = User.objects.create_user(email=email, password=password1, username=username)
+            user_obj = User.objects.create_user(email=email, password=DEFAULT_PASSWORD)
 
             company_obj = form.save(commit=False)
             company_obj.user = user_obj
@@ -132,8 +132,10 @@ class CorporateClientRegistrationView(LoginRequiredMixin, View):
             company_obj.long = geodata['longitude']
             company_obj.lat = geodata['latitude']
             company_obj.city = geodata['city']
+            company_obj.postal_code = geodata['postal_code']
+            company_obj.country=geodata['country']
             company_obj.sub_newsletter = form.cleaned_data['sub_newsletter']
-            company_obj.pur_system = form.cleaned_data['pursystem']
+            company_obj.pur_system = form.cleaned_data['pur_system']
 
             user_obj.save()
             company_obj.save()
@@ -162,3 +164,53 @@ class InternetDetailView(View):
         individual = get_object_or_404(individual, slug=slug)
         return render(request, self.template_name, context={'client':individual})
 
+
+#web views
+class CorporateClientRegistrationWebView(View):
+    login_url = '/auth/login'
+    redirect_field_name = 'redirect_to'
+    form_class = CorporateClientRegistrationForm
+
+    def get(self, request):
+        form = self.form_class()
+        clients = CorporateClient.objects.all()
+        return render(request, 'display/application.html', context={'clients':clients, 'form':form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        clients = CorporateClient.objects.all()
+        for i in form.errors:
+            print(i)
+
+        if form.is_valid():
+            #if form is valid, do the following:
+            #1. get form data
+            #2. call Address object to get the city, longitude, latitude and postcode of address inputed
+            #3. save the client to the authentication model, User
+            #4. save client to corporateclient model
+            
+            email = form.cleaned_data['main_contact_email']
+            address = form.cleaned_data['address']
+
+
+            address_class = AddressRequest()
+            geodata = address_class.get_geodata(address)
+
+            user_obj = User.objects.create_user(email=email, password=DEFAULT_PASSWORD)
+
+            company_obj = form.save(commit=False)
+            company_obj.user = user_obj
+            company_obj.id = id_increment(CorporateClient, 1140000)
+            company_obj.address = address
+            company_obj.long = geodata['longitude']
+            company_obj.lat = geodata['latitude']
+            company_obj.city = geodata['city']
+            company_obj.postal_code = geodata['postal_code']
+            company_obj.country=geodata['country']
+            company_obj.sub_newsletter = form.cleaned_data['sub_newsletter']
+            company_obj.pur_system = form.cleaned_data['pur_system']
+
+            user_obj.save()
+            company_obj.save()
+            return redirect('display:home-page')
+        return render(request, 'display/application.html', context={'clients':clients, 'form':form})

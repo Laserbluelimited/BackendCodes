@@ -110,7 +110,7 @@ $("#datepicker").on("change.dp", function(){
   console.log('j')
     $.ajax({
         type:'GET',
-        url:'appointment/ajax/filter-times',
+        url:'booking/ajax/filter-times',
         data:{
             'clinic':$('#myInput').val(),
             'date':$('#datepicker').val(),

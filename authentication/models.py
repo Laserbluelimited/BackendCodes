@@ -9,18 +9,15 @@ from .managers import UserManager, GenerateUsername
 
 #  Create your models here.
 class User(AbstractUser):
-    username = models.CharField('Username', unique=True, max_length=20)
-    email = models.EmailField("email address", unique=True, null=True)
+    username = models.CharField('username', null=True, max_length=255)
+    email = models.EmailField("email_address", unique=True)
     objects = UserManager()
 
-    def __str__(self):
-        return self.username
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
-    def save(self, *args, **kwargs):
-        if not self.username:
-            user_obj = GenerateUsername(self.id, self.first_name)
-            self.username = user_obj.generate_username()
-        return super().save(*args, **kwargs)
+    def __str__(self):
+        return self.email
 
 
 

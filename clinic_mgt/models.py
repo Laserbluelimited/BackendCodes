@@ -19,6 +19,7 @@ class Clinic(models.Model):
     long = models.DecimalField('longitude', max_digits=9, decimal_places=6, null=True)
     lat = models.DecimalField('latitude', max_digits=9, decimal_places=6, null=True)
     city = models.CharField('city', max_length=100,)
+    avail_to_work = models.BooleanField('avail_to_work', default=True)
 
 
 
