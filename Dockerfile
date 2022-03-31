@@ -19,7 +19,6 @@ RUN apk update \
     && python3 -m pip install --upgrade cryptography \
     && pip install Pillow \
     && pip install django-ckeditor \
-    && pip install stripe \
     && apk del build-deps
 
 RUN pip install -r /requirements.txt
