@@ -65,9 +65,11 @@ def getDates(request):
 
 
     location = request.GET.get('clinic')
+    print(location + 's')
     clinic = Clinic.objects.get(address=location)
     dates = ScheduleDates.objects.filter(clinic=clinic).values_list('date', flat=True).distinct()
     date_list = list(gen())
+    print(date_list)
     response_data = {
         'dates':date_list
     }
@@ -81,10 +83,10 @@ def getTimes(request):
     def gen():
         for i in ScheduleDates.objects.filter(date=date, clinic=clinic):
             for p in TimeSlots.objects.filter(schedule=i, status=0):
-                if p.start_time >= datetime.datetime.now().strftime('%H:%M'):
-                    l = p.id
-                    k =p.start_time.strftime('%H:%M') + ' - ' + p.end_time.strftime('%H:%M')
-                    yield {"id":l, "time":k}
+                # if p.start_time >= datetime.datetime.now().strftime('%H:%M'):
+                l = p.id
+                k =p.start_time.strftime('%H:%M') + ' - ' + p.end_time.strftime('%H:%M')
+                yield {"id":l, "time":k}
     
     location = request.GET.get('clinic')
     clinic = Clinic.objects.get(address=location)

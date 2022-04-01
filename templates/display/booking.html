@@ -27,7 +27,7 @@
           <ul id="myUL">
             {%for i in clinics%}
             <li>
-              <a role="button" data-value="{{i.get_address}}" onclick="Location(this)">
+              <a role="button" data-value="{{i.get_address}}"  class="cardss"> 
                 <h2 class="fw-bold">{{i.get_city}}</h2>
                 <p class="text-muted">{{i.postal_code}}</p>
                 <p class="text-muted fs-5">{{i.get_address}}</p>
@@ -71,7 +71,7 @@
              </div>
              <div class="col-sm-6">
                <label for="username" class="form-label">Date</label>
-               <input type="text" name="date" id="datepicker" class="form-control fs-3" readonly >
+               <input type="text" name="date" id="datepicker" class="form-control fs-3"  readonly>
              </div>
              <div class="col-sm-6">
               <label for="username">Time</label>
@@ -103,9 +103,57 @@
 
 <!-- form wizard init -->
 <script src="{%static 'libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'%}"></script>
-
 <script type="text/javascript">
 
+  var element = document.querySelector('#myInput');
+
+  var el = document.querySelectorAll('.cardss');
+
+
+  el.forEach(e=>{
+  e.addEventListener('click', function(){
+    element.value = e.getAttribute('data-value');
+
+    var enableDays =[];
+    function change(data){enableDays=data}
+
+
+
+    $.ajax({
+        type:'GET',
+        url: 'booking/ajax/filter-dates',
+        data:{
+            'clinic' : element.value,
+
+        },
+        dataType:'json',
+
+        success:function(response){
+            change(response.dates)
+
+        jQuery(function(){
+            
+            function enableAllTheseDays(date){
+                var sdate = date.getDate() + "-" + (date.getMonth()+1)+"-"+date.getFullYear();
+                if(enableDays.indexOf(sdate) != -1){
+                    return true;
+                }
+                else{
+                return false;}
+            }
+            console.log(enableDays);
+            $(document).ready(function(){
+                $('#datepicker').datepicker('destroy');
+                $('#datepicker').datepicker({dateFormat:'dd-mm-yy', beforeShowDay:enableAllTheseDays});
+            })
+          })
+        }
+        })
+    })
+  })
+</script>
+
+<script type="text/javascript">
 $("#datepicker").on("change.dp", function(){
   console.log('j')
     $.ajax({

@@ -1,4 +1,4 @@
-FROM python:3.8-alpine
+FROM python:3.9-alpine
 
 COPY ./requirements.txt .
 
@@ -7,16 +7,17 @@ RUN pip install --upgrade pip
 WORKDIR /usr/src/bic
 
 RUN apk update \
-    && apk add --update --no-cache --virtual build-deps gcc python3 musl-dev \
+    && apk add --update --no-cache --virtual build-deps gcc g++ python3 musl-dev \
     && apk add postgresql \
     && apk add postgresql-dev \
     && pip install psycopg2 \
     && apk add --no-cache file-dev \
     && pip install filemagic \
-    && apk add libc-dev linux-headers libffi-dev openssl-dev cargo \
+    && apk add libc-dev linux-headers libressl-dev  libffi-dev openssl-dev cargo \
 #    && apk add libc-dev linux-headers libressl-dev  libffi-dev openssl-dev cargo \
     && apk add jpeg-dev zlib-dev libjpeg \
     && python3 -m pip install --upgrade cryptography \
+    && python3 -m pip install --upgrade grpcio \
     && pip install Pillow \
     && apk del build-deps
 

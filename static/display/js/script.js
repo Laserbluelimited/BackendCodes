@@ -99,42 +99,8 @@ function myFunction() {
 
 
 function Location(e){
+  document.getElementById.bind(document);
   document.getElementById('myInput').value = e.getAttribute('data-value');
-  
-  
-  
-  var enableDays =[];
-  function change(data){
-      enableDays=data
-  }
-  console.log(location);
-  $.ajax({
-      type:'GET',
-      url: 'booking/ajax/filter-dates',
-      data:{
-          'clinic' : $("#myInput").val(),
-
-      },
-      dataType:'json',
-
-      success:function(response){
-          change(response.dates)
-
-      jQuery(function(){
-          
-          function enableAllTheseDays(date){
-              var sdate = date.getDate() + "-" + (date.getMonth()+1)+"-"+date.getFullYear();
-              if(enableDays.indexOf(sdate) != -1){
-                  return true;
-              }
-              else{
-              return false;}
-          }
-          $("#datepicker").datepicker({dateFormat:'dd-mm-yy', beforeShowDay:enableAllTheseDays})
-      })
-      }
-  })
-
 }
 
 
