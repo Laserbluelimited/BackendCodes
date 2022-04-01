@@ -32,6 +32,8 @@ class AuthLoginView(View):
             if user is not None:
                 login(request, user)
                 return redirect('portal:dashboard')
+            else:
+                print(form.errors)
         return render(request, self.template_name, context={'form':form})
 
 
