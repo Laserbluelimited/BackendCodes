@@ -65,14 +65,6 @@
                                                         <div class="autocomplete-container" id="autocomplete-container"></div>
                                                     </div>
                                                     <div class="mb-3">
-                                                        {%for error in form.postal_code.errors%}
-                                                        <label style="color: red;">{{error}}</label>
-                                                        {%endfor%}<br>
-
-                                                        <label for="manufacturerbrand">Postal Code</label>
-                                                        <input  name="postal_code" type="text" class="form-control" >
-                                                    </div>
-                                                    <div class="mb-3">
                                                         {%for error in form.password1.errors%}
                                                         <label style="color: red;">{{error}}</label>
                                                         {%endfor%}<br>
@@ -147,7 +139,7 @@
                                                         {%endfor%}<br>
 
                                                         <label for="productname">VAT Registration Number</label>
-                                                        <input name="vat_reg_no" type="number" class="form-control" >
+                                                        <input name="vat_reg_no" type="text" class="form-control" >
                                                     </div>
 
 
@@ -274,36 +266,21 @@
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="mb-3">
-                                                        {%for error in form.auth_prsnl_first_name.errors%}
+                                                        {%for error in form.auth_prsnl_name.errors%}
                                                         <label style="color: red;">{{error}}</label>
                                                         {%endfor%}<br>
-                                                        <label for="productname">Authorised Personnel First Name</label>
-                                                        <input id="productname" name="auth_prsnl_first_name" type="text" class="form-control" placeholder="">
+                                                        <label for="productname">Authorised Personnel Name</label>
+                                                        <input id="productname" name="auth_prsnl_name" type="text" class="form-control" placeholder="">
                                                     </div>
                                                     <div class="mb-3">
-                                                        {%for error in form.auth_prsnl_last_name.errors%}
+                                                        {%for error in form.medium_of_marketing.errors%}
                                                         <label style="color: red;">{{error}}</label>
                                                         {%endfor%}<br>
-
-                                                        <label for="productname">Authorised Personnel Last Name</label>
-                                                        <input name="auth_prsnl_last_name" type="text" class="form-control" >
+                                                        <label for="productname">How did you hear about us?</label>
+                                                        <input id="productname" name="medium_of_marketing" type="text" class="form-control" placeholder="">
                                                     </div>
-
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <div class="mb-3">
-                                                        {%for error in form.auth_prsnl_title.errors%}
-                                                        <label style="color: red;">{{error}}</label>
-                                                        {%endfor%}<br>
-                                                        <label class="control-label">Authorised Personnel Title</label><br>
-                                                        <select class="form-control select2" name="auth_prsnl_title">
-                                                            <option>Select</option>
-                                                            
-                                                            {%for choice in form.auth_prsnl_title.field.choices%}
-                                                            <option value="{{choice.0}}">{{choice.1}}</option>
-                                                            {%endfor%}
-                                                        </select>
-                                                    </div>
                                                     <div class="mb-3">
                                                         {%for error in form.sub_newsletter.errors%}
                                                         <label style="color: red;">{{error}}</label>
@@ -317,7 +294,13 @@
                                                             {%endfor%}
                                                         </select>
                                                     </div>
-                                                    
+                                                    <div class="mb-3">
+                                                        {%for error in form.avg_no_order.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+                                                        <label for="productname">How often will you place an order in a year</label>
+                                                        <input id="productname" name="avg_no_order" type="text" class="form-control" placeholder="">
+                                                    </div>
                                                 </div>
                                             </div>
         

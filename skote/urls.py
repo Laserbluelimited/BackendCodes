@@ -23,7 +23,7 @@ urlpatterns = [
     # path('accounts/password/set/', login_required(MyPasswordSetView.as_view()), name="account_set_password"),
     #display
     path('', include("display.urls")),
-    # path('clinic', include("clinic_mgt.urls")),
+    path('business/', include('corporate_portal.urls')),
     path('portal/', include("portal.urls")),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

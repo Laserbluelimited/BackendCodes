@@ -6,6 +6,8 @@ from .forms import CorporateClientRegistrationForm, InternetClientRegistrationFo
 from clinic_mgt.managers import AddressRequest
 from authentication.models import User
 from skote.settings import DEFAULT_PASSWORD
+from django.contrib.auth.models import Group
+
 # Create your views here.
 
 #functions
@@ -108,7 +110,8 @@ class CorporateClientRegistrationView(LoginRequiredMixin, View):
     def post(self, request):
         form = self.form_class(request.POST)
         clients = CorporateClient.objects.all()
-
+        group = Group.objects.get(name='Corporate group')
+        print(form.errors)
         if form.is_valid():
             #if form is valid, do the following:
             #1. get form data
@@ -138,6 +141,7 @@ class CorporateClientRegistrationView(LoginRequiredMixin, View):
             company_obj.pur_system = form.cleaned_data['pur_system']
 
             user_obj.save()
+            group.user_set.add(user_obj)
             company_obj.save()
             return redirect('portal:crprt-cli-list')
         return render(request, 'client/cor-client-reg.html', context={'clients':clients, 'form':form})
@@ -178,6 +182,7 @@ class CorporateClientRegistrationWebView(View):
 
     def post(self, request):
         form = self.form_class(request.POST)
+        group = Group.objects.get(name='Corporate group')
         clients = CorporateClient.objects.all()
         for i in form.errors:
             print(i)
@@ -212,5 +217,6 @@ class CorporateClientRegistrationWebView(View):
 
             user_obj.save()
             company_obj.save()
+            group.user_set.add(user_obj)
             return redirect('display:home-page')
         return render(request, 'display/application.html', context={'clients':clients, 'form':form})

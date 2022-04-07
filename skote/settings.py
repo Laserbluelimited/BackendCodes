@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'booking',
     'payment',
     'e_mail',
+    'corporate_portal',
     # Third Party App
     'crispy_forms',
     'django.contrib.sites',

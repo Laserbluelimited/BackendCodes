@@ -1,7 +1,20 @@
+from statistics import mode
 from django.db import models
 from django.template.defaultfilters import slugify
 
 # Create your models here.
+
+def id_increment(model, initial):
+    last_value = model.objects.all().order_by('id').last()
+    if not last_value:
+        new_id = initial
+    else:
+        new_id = last_value.id + 1
+    return new_id
+
+
+
+
 TITLE_CHOICES = (
     ('Miss', 'Miss'),
     ('Mr', 'Mr.'),
@@ -51,9 +64,9 @@ class InternetClient(models.Model):
     country = models.CharField('country', max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    crprt_client = models.ForeignKey('CorporateClient', null=True, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=255, help_text='Unique Value for product page URL, created from name.')
     status = models.CharField('status', max_length=20, choices=[(0,'visitor'),(1, 'unverified customer'), (2, 'verified customer')], default=0)
+    cor_comp = models.ForeignKey('CorporateClient', on_delete=models.CASCADE, null=True)
 
     class Meta:
         db_table = 'internet_client'
@@ -65,6 +78,8 @@ class InternetClient(models.Model):
         if not self.slug:
             name = self.first_name + str(self.phone)
             self.slug = slugify(name)
+        if not self.id:
+            self.id = id_increment(InternetClient, 112000)
         return super(InternetClient,self).save(*args, **kwargs)
 
     def update_status(self, status):
