@@ -64,10 +64,6 @@
                         {% endblock %}
 
                         {% block extra_javascript %}
-                                <!-- form repeater js -->
-                                <script src="{% static 'libs/jquery.repeater/jquery.repeater.min.js' %}"></script>
-                        
-                                <!-- <script src="{% static 'js/pages/form-repeater.int.js' %}"></script> -->
 
                                 <script>
                                     var form = document.querySelectorAll('.form');
@@ -75,25 +71,8 @@
                                     var add_btn = document.getElementById('add');
                                     var total = document.getElementById('id_form-TOTAL_FORMS')
                                     var formnum = form.length-1
-                                    // $(document).ready(function(){
-                                    // $('.form-control').attr('name', function(){
-                                    //     return this.name.replace(/\[(\d)]/, '');})
-                                    
-                                    // $('.form-control').attr('name', function(){
-                                    //     return this.name.replace(/\[|\]/g, '');})
-                                    
-                                    // })
                                     document.getElementById('add').addEventListener('click', function(){
                                         console.log('hi')
-
-                                    //     $(document).ready(function(){
-                                    // $('.form-control').attr('name', function(){
-                                    //     return this.name.replace(/\[(\d)]/, '');})
-                                    
-                                    // $('.form-control').attr('name', function(){
-                                    //     return this.name.replace(/\[|\]/g, '');})
-                                    
-                                    // })
                                     var newform = form[0].cloneNode(true)
                                     let formRegex = RegExp(`form-(\\d){1}-`,'g')
                                     formnum++

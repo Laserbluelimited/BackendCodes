@@ -179,6 +179,12 @@ class CorporateClient(models.Model):
     def get_address(self):
         return self.address
 
+    def get_city(self):
+        return self.city
+    
+    def get_postal_code(self):
+        return self.postal_code
+
     def get_nature(self):
         return self.nature_of_business
 
