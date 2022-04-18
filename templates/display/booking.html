@@ -130,19 +130,21 @@
             // change(response.dates)
 
         jQuery(function(){
-            // var enableDays =[];
+            var enableDays =['22-04-2022'];
             // function change(data){enableDays=data}
             
             function enableAllTheseDays(date){
                 var sdate = date.getDate() + "-" + (date.getMonth()+1)+"-"+date.getFullYear();
-                if(response.dates.indexOf(sdate) != -1){
+                if(enableDays.indexOf(sdate) != -1){
                     return true;
+                    console.log('true')
                 }
                 else{
+                  console.log('false')
                 return false;}
             }
             $('#datepicker').datepicker('destroy');
-              console.log(response.dates);
+              console.log(enableDays);
               console.log('work');
 
             $('#datepicker').datepicker({dateFormat:'dd-mm-yy', beforeShowDay:enableAllTheseDays});
