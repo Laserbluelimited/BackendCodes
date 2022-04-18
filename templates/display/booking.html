@@ -148,16 +148,16 @@
               console.log('work');
             var datesEnabled = ['22-04-2022'];
 
-            $('#datepicker').datepicker({dateFormat:'dd-mm-yy', beforeShowDay:
-function (date) {
-  var allDates = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+            $('#datepicker').datepicker({
+format: 'dd-mm-yyyy',
+beforeShowDay: function (date) {
+  var allDates = date.getDate() + '-' + `${date.getMonth() + 1}`.padStart(2, "0") + '-' + date.getFullYear();console.log(allDates);
   if(datesEnabled.indexOf(allDates) != -1)
   return true;
   else
   return false;
    }
-})
-          })
+});          })
         }
         })
     })
