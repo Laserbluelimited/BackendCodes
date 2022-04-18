@@ -142,8 +142,8 @@
                 return false;}
             }
             $('#datepicker').datepicker('destroy');
-              console.log(enableDays);
-              console.log('please')
+              console.log(response.dates);
+              console.log('work');
 
             $('#datepicker').datepicker({dateFormat:'dd-mm-yy', beforeShowDay:enableAllTheseDays});
           })
@@ -151,7 +151,8 @@
         })
     })
   })
-
+</script>
+<script>
 $("#datepicker").on("change.dp", function(){
   console.log('j')
     $.ajax({
