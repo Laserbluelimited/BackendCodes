@@ -31,11 +31,11 @@ class ClinicRegistrationForm(forms.Form):
             raise forms.ValidationError('Name already in use')
         return name
 
-    def clean_address(self):
-        address = self.cleaned_data['address']
-        if geo_data.get_geodata(address) is None:
-            raise forms.ValidationError('Invalid address')
-        return address
+    # def clean_address(self):
+    #     address = self.cleaned_data['address']
+    #     if geo_data.get_geodata(address) is None:
+    #         raise forms.ValidationError('Invalid address')
+    #     return address
 
 
 class DoctorRegistrationForm(forms.Form):
