@@ -91,7 +91,7 @@ def getTimes(request):
     location = request.GET.get('clinic')
     clinic = Clinic.objects.get(address=location)
     date = request.GET.get('date')
-    date = datetime.datetime.strptime(date, '%m/%d/%Y').strftime('%Y-%m-%d')
+    date = datetime.datetime.strptime(date, '%d-%m/%Y').strftime('%Y-%m-%d')
 
     time_obj = list(gen())
     response_data = {
