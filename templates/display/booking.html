@@ -141,11 +141,11 @@
                 else{
                 return false;}
             }
-            console.log(enableDays);
-            $(document).ready(function(){
-                $('#datepicker').datepicker('destroy');
-                $('#datepicker').datepicker({dateFormat:'dd-mm-yy', beforeShowDay:enableAllTheseDays});
-            })
+            $('#datepicker').datepicker('destroy');
+              console.log(enableDays);
+              console.log('please')
+
+            $('#datepicker').datepicker({dateFormat:'dd-mm-yy', beforeShowDay:enableAllTheseDays});
           })
         }
         })

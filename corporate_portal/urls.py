@@ -13,3 +13,4 @@ urlpatterns = [
     path('<slug>/appointment/ajax/filter-times', views.getTimes, name='filter-times'),
     path('<slug>/checkout', views.CheckoutView.as_view(), name='checkout'),
 ]
+
