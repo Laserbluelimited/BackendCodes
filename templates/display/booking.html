@@ -114,8 +114,6 @@
   e.addEventListener('click', function(){
     element.value = e.getAttribute('data-value');
 
-    var enableDays =[];
-    function change(data){enableDays=data}
 
 
 
@@ -129,13 +127,15 @@
         dataType:'json',
 
         success:function(response){
-            change(response.dates)
+            // change(response.dates)
 
         jQuery(function(){
+            // var enableDays =[];
+            // function change(data){enableDays=data}
             
             function enableAllTheseDays(date){
                 var sdate = date.getDate() + "-" + (date.getMonth()+1)+"-"+date.getFullYear();
-                if(enableDays.indexOf(sdate) != -1){
+                if(response.dates.indexOf(sdate) != -1){
                     return true;
                 }
                 else{
@@ -143,9 +143,9 @@
             }
             $('#datepicker').datepicker('destroy');
               console.log(enableDays);
-              console.log('work')
+              console.log('please')
 
-            $('#datepicker').datepicker({dateFormat:'dd-mm-yy'});
+            $('#datepicker').datepicker({dateFormat:'dd-mm-yy', beforeShowDay:enableAllTheseDays});
           })
         }
         })
