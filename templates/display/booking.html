@@ -146,8 +146,17 @@
             $('#datepicker').datepicker('destroy');
               console.log(enableDays);
               console.log('work');
+            var datesEnabled = ['22-04-2022'];
 
-            $('#datepicker').datepicker({dateFormat:'dd-mm-yy', beforeShowDay:enableAllTheseDays});
+            $('#datepicker').datepicker({dateFormat:'dd-mm-yy', beforeShowDay:
+function (date) {
+  var allDates = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+  if(datesEnabled.indexOf(allDates) != -1)
+  return true;
+  else
+  return false;
+   }
+})
           })
         }
         })
