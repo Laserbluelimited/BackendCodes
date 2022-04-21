@@ -159,18 +159,20 @@
             success:function(response){
                 change(response.dates)
 
-            jQuery(function(){
-                
-                function enableAllTheseDays(date){
-                    var sdate = date.getDate() + "-" + (date.getMonth()+1)+"-"+date.getFullYear();
-                    if(enableDays.indexOf(sdate) != -1){
-                        return true;
-                    }
-                    else{
-                    return false;}
-                }
-                $(`#form-${num}-date`).datepicker({dateFormat:'dd-mm-yy', beforeShowDay:enableAllTheseDays})
-            })
+                jQuery(function(){
+            $('#datepicker').datepicker('destroy');
+            var datesEnabled = response.dates;
+
+            $('#datepicker').datepicker({
+dateFormat: 'dd-mm-yyyy',
+beforeShowDay: function (date) {
+  var allDates = date.getDate() + '-' + `${date.getMonth() + 1}`.padStart(2, "0") + '-' + date.getFullYear();console.log(allDates);
+  if(datesEnabled.indexOf(allDates) != -1)
+  return true;
+  else
+  return false;
+   }
+});          })
             }
         })
     }

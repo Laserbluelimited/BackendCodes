@@ -130,23 +130,8 @@
             // change(response.dates)
 
         jQuery(function(){
-            var enableDays =['22-04-2022'];
-            // function change(data){enableDays=data}
-            
-            function enableAllTheseDays(date){
-                var sdate = date.getDate() + "-" + (date.getMonth()+1)+"-"+date.getFullYear();
-                if(enableDays.indexOf(sdate) != -1){
-                    return true;
-                    console.log('true')
-                }
-                else{
-                  console.log('false')
-                return false;}
-            }
             $('#datepicker').datepicker('destroy');
-              console.log(enableDays);
-              console.log('work');
-            var datesEnabled = ['22-04-2022'];
+            var datesEnabled = response.dates;
 
             $('#datepicker').datepicker({
 dateFormat: 'dd-mm-yyyy',
