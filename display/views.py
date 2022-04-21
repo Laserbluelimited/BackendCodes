@@ -1,4 +1,3 @@
-import time
 from django.shortcuts import render
 from django.views import View
 from schedules.models import ScheduleDates, TimeSlots
@@ -92,9 +91,8 @@ def getTimes(request):
     location = request.GET.get('clinic')
     clinic = Clinic.objects.get(address=location)
     date = request.GET.get('date')
-    newdate = time.strptime(str(date), '%d-%m-%Y')
+    newdate = datetime.datetime.strptime(str(date), format='%d-%m-%Y')
     date = newdate.strftime('%Y-%m-%d')
-
 
     time_obj = list(gen())
     response_data = {
