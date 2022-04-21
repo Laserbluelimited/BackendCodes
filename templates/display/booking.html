@@ -149,7 +149,7 @@
             var datesEnabled = ['22-04-2022'];
 
             $('#datepicker').datepicker({
-format: 'dd-mm-yyyy',
+dateFormat: 'dd-mm-yyyy',
 beforeShowDay: function (date) {
   var allDates = date.getDate() + '-' + `${date.getMonth() + 1}`.padStart(2, "0") + '-' + date.getFullYear();console.log(allDates);
   if(datesEnabled.indexOf(allDates) != -1)
