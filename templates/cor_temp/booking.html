@@ -143,10 +143,6 @@
 
 
     function filter_date(num){
-        var enableDays =[];
-    function change(data){
-        enableDays=data
-    }
         $.ajax({
             type:'GET',
             url: 'appointment/ajax/filter-dates',
@@ -157,22 +153,22 @@
             dataType:'json',
 
             success:function(response){
-                change(response.dates)
 
                 jQuery(function(){
-            $('#datepicker').datepicker('destroy');
             var datesEnabled = response.dates;
+            console.log(datesEnabled);
 
             $('#datepicker').datepicker({
-dateFormat: 'dd-mm-yyyy',
-beforeShowDay: function (date) {
-  var allDates = date.getDate() + '-' + `${date.getMonth() + 1}`.padStart(2, "0") + '-' + date.getFullYear();console.log(allDates);
-  if(datesEnabled.indexOf(allDates) != -1)
-  return true;
-  else
-  return false;
-   }
-});          })
+            dateFormat: 'dd-mm-yyyy',
+            beforeShowDay: function (date) {
+            var allDates = date.getDate() + '-' + `${date.getMonth() + 1}`.padStart(2, "0") + '-' + date.getFullYear();console.log(allDates);
+            if(datesEnabled.indexOf(allDates) != -1)
+            return true;
+            else
+            return false;
+                        }
+                    });          
+                })
             }
         })
     }
@@ -224,20 +220,6 @@ beforeShowDay: function (date) {
         filter_date(formnum);
 
         $(`input[name="form-${formnum}-date"]`).on("change", function(){filter_time(formnum);})
-
-                
-                
-        // var previousOption = null;
-        // $('select[]').on('change', function(event){
-        //     var selectedOption = $(this).find('option:selected').val();
-        //     $(`option[value="${previousOption}"]:disabled`).attr('disabled', false);
-        //     previousOption=null;
-        //     $(`option[value="${selectedOption}"]:not(:selected)`).attr('disabled', true);
-
-        // })
-        // $('select').on('click', function(){
-        //     previousOption = $(this).find('option:selected').val()
-        // })
         })
 
 
@@ -257,14 +239,6 @@ beforeShowDay: function (date) {
                     $('input[name="form-0-date"]').on("change", function(){filter_time(0);})
                 });
                 })
-        // $('#book').submit(function(){
-        //     var total = document.getElementById('id_form-TOTAL_FORMS');
-        //     var el = document.getElementById('form-0-time')
-        //     m=e.parentNode.parentNode.parentNode
-        //     m.remove()
-        //     total.setAttribute('value', `${formnum-1}`)
-        //     return true;
-        // })
 
         </script>
 
