@@ -1,7 +1,7 @@
 import random
 from booking.models import CCart
 
-CART_ID_SESSION_KEY = 'cart_id'
+CART_ID_SESSION_KEY = 'cor_cart_id'
 
 def _cart_id(request):
     if request.session.get(CART_ID_SESSION_KEY, '')=='':

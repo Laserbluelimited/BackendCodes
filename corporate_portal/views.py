@@ -116,7 +116,7 @@ class BookAppointmentView(LoginRequiredMixin, GroupRequiredMixin, View):
 
     def get(self, request, slug):
         company = get_object_or_404(CorporateClient, slug=slug)
-        if "cart_id" in request.session:
+        if "cor_cart_id" in request.session:
             return redirect('corporate_portal:checkout', slug=company.slug)
         else:
             request.session.set_test_cookie()
@@ -147,7 +147,6 @@ class BookAppointmentView(LoginRequiredMixin, GroupRequiredMixin, View):
 
                 #4
             cart.add_to_cart(request, client=company, appointment=app_obj.appointment_no, quantity=quantity)
-            print(request.session['cart_id'])
             if request.session.test_cookie_worked():
                 request.session.delete_test_cookie()
             
@@ -172,8 +171,8 @@ class CheckoutView(LoginRequiredMixin, GroupRequiredMixin, View):
 
     def get(self, request, slug):
         company = get_object_or_404(CorporateClient, slug=slug)
-        if "cart_id" in request.session:
-            basket_id = request.session['cart_id']
+        if "cor_cart_id" in request.session:
+            basket_id = request.session['cor_cart_id']
             basket = CCart.objects.get(cart_id=basket_id)
         else:
             basket = 'empty'
