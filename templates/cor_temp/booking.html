@@ -158,10 +158,10 @@
             var datesEnabled = response.dates;
             console.log(datesEnabled);
 
-            $('#datepicker').datepicker({
-            dateFormat: 'dd-mm-yyyy',
+            $(`#form-${num}-date`).datepicker({
+            dateFormat: 'dd-m-yyyy',
             beforeShowDay: function (date) {
-            var allDates = date.getDate() + '-' + `${date.getMonth() + 1}`.padStart(2, "0") + '-' + date.getFullYear();console.log(allDates);
+            var allDates = date.getDate() + '-' + `${date.getMonth() + 1}` + '-' + date.getFullYear();
             if(datesEnabled.indexOf(allDates) != -1)
             return true;
             else
