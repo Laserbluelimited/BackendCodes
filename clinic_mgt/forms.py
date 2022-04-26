@@ -79,11 +79,3 @@ class DoctorEditForm(forms.ModelForm):
     first_name = forms.CharField(required=True, max_length=20, error_messages=error_messages)
     last_name = forms.CharField(required=True, max_length=20, error_messages=error_messages)
 
-    #doctormodel
-
-
-    # def clean_email(self):
-    #     email = self.cleaned_data['email']
-    #     if User.objects.filter(email=email).exists():
-    #         raise forms.ValidationError('Email already in use')
-    #     return email
