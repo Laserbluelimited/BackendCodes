@@ -27,7 +27,7 @@ class Clinic(models.Model):
         if not self.slug:
             name = self.name
             self.slug = slugify(name)
-        return super(Clinic,self).save(*args, **kwargs)
+        return super(Clinic,self).save(*args, **kwarggs)
 
 
     def __str__(self):
