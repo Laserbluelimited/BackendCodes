@@ -19,7 +19,7 @@
                                         <h4 class="card-title">Basic Information</h4>
                                         <p class="card-title-desc">Fill all information below</p>
         
-                                        <form method="post" action="{%url 'portal:clinic-registration'%}">
+                                        <form method="post" action="{%url 'portal:clinic-edit' clinic.slug%}">
                                             {%csrf_token%}
                                             <div class="row">
                                                 <div class="col-sm-6">
@@ -28,7 +28,7 @@
                                                         <label style="color: red;">{{error}}</label>
                                                         {%endfor%}<br>
                                                         <label for="productname">Clinic Name</label>
-                                                        <input id="productname" name="name" type="text" class="form-control" placeholder="e.g. God's Grace Clinic">
+                                                        <input id="productname" name="name" type="text" class="form-control" value="{{clinic.name}}">
                                                     </div>
                                                     <div class="mb-3">
                                                         {%for error in form.email.errors%}
@@ -36,7 +36,7 @@
                                                         {%endfor%}<br>
 
                                                         <label for="productname">Clinic Email</label>
-                                                        <input name="email" type="text" class="form-control" >
+                                                        <input name="email" type="text" class="form-control" value="{{clinic.email}}">
                                                     </div>
 
                                                 </div>
@@ -82,14 +82,16 @@
     <!-- init js -->
     <script src="{% static 'js/pages/ecommerce-select2.init.js' %}"></script>
     <!--location js-->
-    <script src="{% static 'js/testing.js' %}"></script>    
+    <script src="{% static 'js/testing.js' %}"></script>
     <script>
   addressAutocomplete(document.getElementById("autocomplete-container"), (data) => {
   }, {
-    placeholder: "Enter an address here",
+    // placeholder: "Enter an address here",
     value:'{{clinic.address}}',
   });
+        
     </script>
+
 
 
 {% endblock %}

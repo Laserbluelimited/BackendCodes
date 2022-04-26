@@ -13,6 +13,7 @@ function addressAutocomplete(containerElement, callback, options) {
     inputElement.setAttribute("type", "text");
     inputElement.setAttribute("name", "address")
     inputElement.setAttribute("placeholder", options.placeholder);
+    inputElement.setAttribute("value", options.value)
     inputContainerElement.appendChild(inputElement);
   
     // add input field clear button
@@ -215,10 +216,4 @@ function addressAutocomplete(containerElement, callback, options) {
     });
   }
   
-  addressAutocomplete(document.getElementById("autocomplete-container"), (data) => {
-    console.log("Selected option: ");
-    console.log(data);
-  }, {
-    placeholder: "Enter an address here"
-  });
   

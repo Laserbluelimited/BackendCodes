@@ -10,7 +10,7 @@
                                             <div class="col-sm-4">
                                                 <div class="search-box me-2 mb-2 d-inline-block">
                                                     <div class="position-relative">
-                                                        <input type="text" class="form-control" placeholder="Search...">
+                                                        <input type="text" class="cd-search table-filter form-control" data-table="cd-table"  placeholder="Search...">
                                                         <i class="bx bx-search-alt search-icon"></i>
                                                     </div>
                                                 </div>
@@ -23,7 +23,7 @@
                                         </div>
                 
                                         <div class="table-responsive">
-                                            <table class="table align-middle table-nowrap table-check">
+                                            <table class="table align-middle table-nowrap table-check cd-table">
                                                 <thead class="table-light">
                                                     <tr>
                                                         <th style="width: 20px;" class="align-middle">
@@ -42,7 +42,7 @@
                                                 </thead>
                                                 <tbody>
 
-                                                        {%for doc in doctor_list%}
+                                                        {%for doc in page_obj%}
                                                     <tr>
                                                         <td>
                                                             <div class="form-check font-size-16">
@@ -69,8 +69,8 @@
                                                         </td>
                                                         <td>
                                                             <div class="d-flex gap-3">
-                                                                <a href="javascript:void(0);" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                                <a href="javascript:void(0);" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></a>
+                                                                <a href="{%url 'portal:doctor-edit' doc.slug%}" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                                                <a href="javascript:void(0);" class="text-danger" id="delete" data-slug="{{doc.slug}}"><i class="mdi mdi-delete font-size-18"></i></a>
                                                             </div>
                                                         </td>
                                                         {%endfor%}
@@ -80,22 +80,38 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <ul class="pagination pagination-rounded justify-content-end mb-2">
+                                        <ul class="pagination pagination-rounded justify-content-end mb-2" >
+                                            {%if page_obj.has_previous%}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
+                                                    <i class="mdi mdi-chevron-left"></i>
+                                                </a>
+                                            </li>
+                                                {%else%}
                                             <li class="page-item disabled">
                                                 <a class="page-link" href="javascript: void(0);" aria-label="Previous">
                                                     <i class="mdi mdi-chevron-left"></i>
                                                 </a>
                                             </li>
-                                            <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a></li>
+                                            {%endif%}
+                                            <li class="page-item active"><a class="page-link" href="?page={{page_obj.number}}">{{page_obj.number}}</a></li>
+                                            {%if page_obj.has_next%}
+                                            <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">{{page_obj.next_page_number}}</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">...</a></li>
+                                            {%endif%}
+                                            {%if page_obj.has_next%}
                                             <li class="page-item">
-                                                <a class="page-link" href="javascript: void(0);" aria-label="Next">
+                                                <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Next">
                                                     <i class="mdi mdi-chevron-right"></i>
                                                 </a>
                                             </li>
+                                            {%else%}
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="javascript: void(0);" >
+                                                    <i class="mdi mdi-chevron-right"></i>
+                                                </a>
+                                            </li>
+                                            {%endif%}
                                         </ul>
                                     </div>
                                 </div>
@@ -105,3 +121,84 @@
                 <!-- Modal -->
                 
 {% endblock %}
+{%block extra_javascript%}
+<script>
+(function() {
+	'use strict';
+
+var TableFilter = (function() {
+ var Arr = Array.prototype;
+		var input;
+  
+		function onInputEvent(e) {
+			input = e.target;
+			var table1 = document.getElementsByClassName(input.getAttribute('data-table'));
+			Arr.forEach.call(table1, function(table) {
+				Arr.forEach.call(table.tBodies, function(tbody) {
+					Arr.forEach.call(tbody.rows, filter);
+				});
+			});
+		}
+
+		function filter(row) {
+			var text = row.textContent.toLowerCase();
+       console.log(text);
+      var val = input.value.toLowerCase();
+      console.log(val);
+			row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+		}
+
+		return {
+			init: function() {
+				var inputs = document.getElementsByClassName('table-filter');
+				Arr.forEach.call(inputs, function(input) {
+					input.oninput = onInputEvent;
+				});
+			}
+		};
+ 
+	})();
+
+  /*console.log(document.readyState);
+	document.addEventListener('readystatechange', function() {
+		if (document.readyState === 'complete') {
+      console.log(document.readyState);
+			TableFilter.init();
+		}
+	}); */
+  
+ TableFilter.init(); 
+})();
+
+document.getElementById('delete').addEventListener('click', function(){
+    var txt;
+    var el = document.getElementById('delete');
+    if (confirm('Do you wish to delete this doctor')){
+        txt = 'yes'
+        $.ajax({
+        type:'GET',
+        url: el.getAttribute('data-slug') + '-delete/doctor',
+        dataType:'json',
+
+        success:function(response){
+            console.log('deleted');
+            if (response.reply=='success'){
+                alert('It has been successfully deleted')
+                document.location.reload(true);
+            
+            }
+
+                else{
+                    alert('Not successfully deleted')
+                }
+
+        }
+    
+    })
+    }
+    else{
+        txt='cancel';
+    }
+})
+</script>
+{%endblock%}

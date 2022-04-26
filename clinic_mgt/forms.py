@@ -1,3 +1,4 @@
+from dataclasses import fields
 from genericpath import exists
 from django import forms
 from .models import Clinic, Doctor
@@ -31,11 +32,29 @@ class ClinicRegistrationForm(forms.Form):
             raise forms.ValidationError('Name already in use')
         return name
 
-    # def clean_address(self):
-    #     address = self.cleaned_data['address']
-    #     if geo_data.get_geodata(address) is None:
-    #         raise forms.ValidationError('Invalid address')
-    #     return address
+    def clean_address(self):
+        address = self.cleaned_data['address']
+        if geo_data.get_geodata(address) is None:
+            raise forms.ValidationError('Invalid address')
+        return address
+
+class ClinicEditForm(forms.Form):
+    address = forms.CharField(max_length=100, required=False)
+    # clinicmodel
+    name = forms.CharField(max_length=50)
+
+    def clean_name(self):
+        name = self.cleaned_data['name']
+        if Clinic.objects.filter(name=name).exists():
+            raise forms.ValidationError('Name already in use')
+        return name
+
+    def clean_address(self):
+        address = self.cleaned_data['address']
+        if geo_data.get_geodata(address) is None:
+            raise forms.ValidationError('Invalid address')
+        return address
+    
 
 
 class DoctorRegistrationForm(forms.Form):
@@ -49,7 +68,22 @@ class DoctorRegistrationForm(forms.Form):
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        if User.objects.filter(email=email).exists() and Doctor.objects.filter(email=email):
+        if User.objects.filter(email=email).exists():
             raise forms.ValidationError('Email already in use')
         return email
 
+class DoctorEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields=['email']
+    first_name = forms.CharField(required=True, max_length=20, error_messages=error_messages)
+    last_name = forms.CharField(required=True, max_length=20, error_messages=error_messages)
+
+    #doctormodel
+
+
+    # def clean_email(self):
+    #     email = self.cleaned_data['email']
+    #     if User.objects.filter(email=email).exists():
+    #         raise forms.ValidationError('Email already in use')
+    #     return email

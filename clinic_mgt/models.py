@@ -12,7 +12,7 @@ from django.template.defaultfilters import slugify
 
 class Clinic(models.Model):
     id = models.IntegerField('clinic_id', primary_key=True, unique=True)
-    name = models.CharField('clinic_name', max_length=100)
+    name = models.CharField('clinic_name', max_length=100, unique=True)
     email = models.EmailField('email', unique=True, null=True)
     postal_code = models.CharField('postal_code', max_length=10,)
     address = models.CharField('postal_code', max_length=100,)
@@ -20,9 +20,14 @@ class Clinic(models.Model):
     lat = models.DecimalField('latitude', max_digits=9, decimal_places=6, null=True)
     city = models.CharField('city', max_length=100,)
     avail_to_work = models.BooleanField('avail_to_work', default=True)
+    slug = models.SlugField(max_length=255, help_text='Unique Value for product page URL, created from name.')
 
 
-
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            name = self.name
+            self.slug = slugify(name)
+        return super(Clinic,self).save(*args, **kwargs)
 
 
     def __str__(self):
@@ -47,7 +52,6 @@ class Doctor(models.Model):
     id = models.IntegerField('doctor_id', primary_key=True, unique=True)
     first_name = models.CharField('first_name', max_length=100)
     last_name = models.CharField('last_name', max_length=100)
-    email = models.EmailField('email', unique=True)
     user = models.OneToOneField('authentication.User', on_delete=models.CASCADE)
     verified = models.BooleanField('verified', default=True)
     available_to_work = models.BooleanField('available_to_work', default=True)

@@ -4,8 +4,6 @@
 {% block extra_css %}
     <!-- select2 css -->
     <link href="{% static 'libs/select2/dist/css/select2.min.css' %}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'css/testing.css' %}" rel="stylesheet" type="text/css" />
-
 
     <!-- dropzone css -->
     <link href="{% static 'libs/dropzone/dist/min/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
@@ -19,39 +17,36 @@
                                         <h4 class="card-title">Basic Information</h4>
                                         <p class="card-title-desc">Fill all information below</p>
         
-                                        <form method="post" action="{%url 'portal:clinic-registration'%}">
+                                        <form method="post" action="{%url 'portal:doctor-edit' doc.slug%}">
                                             {%csrf_token%}
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="mb-3">
-                                                        {%for error in form.name.errors%}
+                                                        {%for error in form.first_name.errors%}
                                                         <label style="color: red;">{{error}}</label>
                                                         {%endfor%}<br>
-                                                        <label for="productname">Clinic Name</label>
-                                                        <input id="productname" name="name" type="text" class="form-control" placeholder="e.g. God's Grace Clinic">
+                                                        <label for="productname">First Name</label>
+                                                        <input  required name="first_name" type="text" class="form-control" value="{{doc.first_name}}" placeholder="e.g. God's Grace Clinic">
                                                     </div>
+                                                    <div class="mb-3">
+                                                        {%for error in form.last_name.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+                                                        <label for="productname">Last Name</label>
+                                                        <input  name="last_name" type="text" class="form-control" value="{{doc.last_name}}"  required>
+                                                    </div>
+                                                </div>
+        
+                                                <div class="col-sm-6">
                                                     <div class="mb-3">
                                                         {%for error in form.email.errors%}
                                                         <label style="color: red;">{{error}}</label>
                                                         {%endfor%}<br>
-
-                                                        <label for="productname">Clinic Email</label>
-                                                        <input name="email" type="text" class="form-control" >
+                                                        <label for="manufacturerbrand">Email</label>
+                                                        <input  name="email" type="text" class="form-control" placeholder="e.g. sarahunoke@gmail.com" value="{{doc.email}}" required>
                                                     </div>
 
-                                                </div>
-        
-                                                <div class="col-sm-6">
 
-
-                                                    <div class="mb-3">
-                                                        {%for error in form.address.errors%}
-                                                        <label style="color: red;">{{error}}</label>
-                                                        {%endfor%}<br>
-
-                                                        <label for="manufacturerbrand">Address</label>
-                                                        <div class="autocomplete-container" id="autocomplete-container"></div>
-                                                    </div>
 
                                                     
                                                 </div>
@@ -81,17 +76,5 @@
 
     <!-- init js -->
     <script src="{% static 'js/pages/ecommerce-select2.init.js' %}"></script>
-    <!--location js-->
-    <script src="{% static 'js/testing.js' %}"></script>    
-    <script>
-  addressAutocomplete(document.getElementById("autocomplete-container"), (data) => {
-  }, {
-    placeholder: "Enter an address here",
-    value:'{{clinic.address}}',
-  });
-    </script>
-
 
 {% endblock %}
-
-
