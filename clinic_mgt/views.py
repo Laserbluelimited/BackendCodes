@@ -102,7 +102,7 @@ class DoctorRegistration(LoginRequiredMixin, PermissionRequiredMixin, View):
             last_name = form.cleaned_data['last_name']
 
             doctor_user = User.objects.create_user(email=email, password=DEFAULT_PASSWORD)
-            doctor_obj = Doctor.objects.create(id=id_increment(Doctor, 1170000), user=doctor_user, email=email, first_name=first_name, last_name=last_name)
+            doctor_obj = Doctor.objects.create(id=id_increment(Doctor, 1170000), user=doctor_user, first_name=first_name, last_name=last_name)
             
             
             doctor_user.save()
