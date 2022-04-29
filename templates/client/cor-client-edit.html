@@ -1,0 +1,331 @@
+{% extends 'partials-actual/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <!-- select2 css -->
+    <link href="{% static 'libs/select2/dist/css/select2.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/testing.css' %}" rel="stylesheet" type="text/css" />
+
+
+    <!-- dropzone css -->
+    <link href="{% static 'libs/dropzone/dist/min/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block contents %}
+
+            <form method="post" action="{%url 'portal:crprt-cli-edit' clent.slug%}">
+                    {%csrf_token%}
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+        
+                                        <h4 class="card-title">Basic Information</h4>
+                                        <p class="card-title-desc">Fill all information below</p>
+        
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        {%for error in form.company_name.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+                                                        <label for="productname">Business Name</label>
+                                                        <input id="productname" name="company_name" type="text" value="{{client.company_name}}" class="form-control" placeholder="Enter Business Name">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {%for error in form.main_contact_email.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+
+                                                        <label for="productname">Business Email</label>
+                                                        <input name="main_contact_email" type="email" value="{{client.main_contact_email}}" class="form-control" >
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {%for error in form.main_contact_number.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+
+                                                        <label for="productname">Business Phone</label>
+                                                        <input name="main_contact_number" type="text" value="{{client.main_contact_number}}" class="form-control" >
+                                                    </div>
+
+
+
+                                                </div>
+        
+                                                <div class="col-sm-6">
+
+
+                                                    <div class="mb-3">
+                                                        {%for error in form.address.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+
+                                                        <label for="manufacturerbrand">Address</label>
+                                                        <div class="autocomplete-container" id="autocomplete-container"></div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+        
+        
+                                    </div>
+                                </div>
+
+        
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+        
+                                        <h4 class="card-title">Basic Information</h4>
+                                        <p class="card-title-desc">Fill all information below</p>
+        
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        {%for error in form.nature_of_business.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+                                                        <label for="productname">Nature of Business</label>
+                                                        <textarea  name="nature_of_business" type="text" class="form-control" value="{{client.nature_of_business}}" placeholder="Nature of Business"></textarea>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {%for error in form.company_type.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+                                                        <label class="control-label">Company Type</label><br>
+                                                        <select class="form-control select2" name="company_type">
+                                                            <option>Select</option>
+                                                            
+                                                            {%for choice in form.company_type.field.choices%}
+                                                            <option value="{{client.company_type}}" selected>{{client.company_type}}</option>
+                                                            <option value="{{choice.0}}">{{choice.1}}</option>
+                                                            {%endfor%}
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {%for error in form.industry_sector.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+
+                                                        <label for="productname">Industry Sector</label>
+                                                        <input name="industry_sector" type="text" class="form-control" value="{{client.industry_sector}}" >
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        {%for error in form.vat_reg_no.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+
+                                                        <label for="productname">VAT Registration Number</label>
+                                                        <input name="vat_reg_no" type="text" class="form-control" value="{{client.vat_reg_no}}">
+                                                    </div>
+
+
+                                                </div>
+        
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        {%for error in form.no_of_employees.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+
+                                                        <label for="productname">Number of Employees</label>
+                                                        <input name="no_of_employees" type="number" class="form-control" value="{{client.no_of_employees}}" >
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        {%for error in form.no_of_years.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+
+                                                        <label for="productname">Number of years of experience</label>
+                                                        <input name="no_of_years" type="number" class="form-control" value="{{client.no_of_years}}">
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        {%for error in form.pur_system.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+                                                        <label class="control-label">Do you use a Purchase System</label><br>
+                                                        <select class="form-control select2" name="pur_system">
+                                                            <option value="{{client.pur_system}}" selected>{{client.pur_system}}</option>
+                                                            
+                                                            {%for choice in form.pur_system.field.choices%}
+                                                            <option value="{{choice.0}}">{{choice.1}}</option>
+                                                            {%endfor%}
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {%for error in form.preferred_mode.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+                                                        <label class="control-label">Preferred Mode of Booking</label><br>
+                                                        <select class="form-control select2" name="preferred_mode">
+                                                            <option value="{{client.preferred_mode}}" selected>{{client.preferred_mode}}</option>
+                                                            
+                                                            {%for choice in form.preferred_mode.field.choices%}
+                                                            <option value="{{choice.0}}">{{choice.1}}</option>
+                                                            {%endfor%}
+                                                        </select>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+        
+        
+                                    </div>
+                                </div>
+
+        
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+        
+                                        <h4 class="card-title">Billing Information</h4>
+                                        <p class="card-title-desc">Fill all information below</p>
+        
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        {%for error in form.bill_name.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+                                                        <label for="productname">Account Name</label>
+                                                        <input id="productname" name="bill_name" value="{{client.bill_name}}" type="text" class="form-control" placeholder="Enter Account Name">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {%for error in form.bill_email.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+
+                                                        <label for="productname">Account Email</label>
+                                                        <input name="bill_email" type="email" class="form-control" value="{{client.bill_email}}" >
+                                                    </div>
+
+
+
+                                                </div>
+        
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        {%for error in form.bill_phone.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+
+                                                        <label for="manufacturerbrand">Account Phone</label>
+                                                        <input  name="bill_phone" type="text" class="form-control" value="{{client.bill_phone}}" >
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+        
+        
+                                    </div>
+                                </div>
+
+        
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+        
+                                        <h4 class="card-title">Authorised Personnel Information</h4>
+                                        <p class="card-title-desc">Fill all information below</p>
+        
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        {%for error in form.auth_prsnl_name.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+                                                        <label for="productname">Authorised Personnel Name</label>
+                                                        <input id="productname" name="auth_prsnl_name" type="text" value="{{client.auth_prsnl_name}}" class="form-control" placeholder="">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {%for error in form.medium_of_marketing.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+                                                        <label for="productname">How did you hear about us?</label>
+                                                        <input id="productname" name="medium_of_marketing" type="text" value="{{client.medium_of_marketing}}" class="form-control" placeholder="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        {%for error in form.sub_newsletter.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+                                                        <label class="control-label">Would you like to subscribe to our newsletter</label><br>
+                                                        <select class="form-control select2" name="sub_newsletter">
+                                                            <option value="{{client.sub_newsletter}}" selected>{{client.sub_newsletter}}</option>
+                                                            
+                                                            {%for choice in form.sub_newsletter.field.choices%}
+                                                            <option value="{{choice.0}}">{{choice.1}}</option>
+                                                            {%endfor%}
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        {%for error in form.avg_no_order.errors%}
+                                                        <label style="color: red;">{{error}}</label>
+                                                        {%endfor%}<br>
+                                                        <label for="productname">How often will you place an order in a year</label>
+                                                        <input id="productname" name="avg_no_order" type="text" class="form-control" value="{{client.avg_no_order}}" placeholder="">
+                                                    </div>
+                                                </div>
+                                            </div>
+        
+        
+                                    </div>
+                                </div>
+
+        
+                            </div>
+                        </div>
+
+
+                        <div class="d-flex flex-wrap gap-2">
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Save Changes</button>
+                            <input type="reset" class="btn btn-secondary waves-effect waves-light" value="Cancel">
+                        </div>
+        </form>
+                        <!-- end row -->
+{% endblock %}
+
+{% block extra_javascript %}
+    <!-- select 2 plugin -->
+    <script src="{% static 'libs/select2/dist/js/select2.min.js' %}"></script>
+
+    <!-- dropzone plugin -->
+    <script src="{% static 'libs/dropzone/dist/min/dropzone.min.js' %}"></script>
+
+    <!-- init js -->
+    <script src="{% static 'js/pages/ecommerce-select2.init.js' %}"></script>
+    <!--location js-->
+    <script src="{% static 'js/testing.js' %}"></script>    
+    <script>
+        addressAutocomplete(document.getElementById("autocomplete-container"), (data) => {
+        }, {
+          // placeholder: "Enter an address here",
+          value:'{{client.address}}',
+        });
+              
+          </script>
+
+{% endblock %}
+
+

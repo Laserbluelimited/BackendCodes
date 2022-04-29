@@ -10,7 +10,7 @@
                                             <div class="col-sm-4">
                                                 <div class="search-box me-2 mb-2 d-inline-block">
                                                     <div class="position-relative">
-                                                        <input type="text" class="form-control" placeholder="Search...">
+                                                        <input type="text" class="cd-search table-filter form-control" data-table="cd-table"  placeholder="Search...">
                                                         <i class="bx bx-search-alt search-icon"></i>
                                                     </div>
                                                 </div>
@@ -22,8 +22,8 @@
                                             </div><!-- end col-->
                                         </div>
                 
-                                        <div class="table-responsive">
-                                            <table class="table align-middle table-nowrap table-check">
+                                        <div class="table-responsive" id="tl">
+                                            <table class="table align-middle table-nowrap table-check cd-table">
                                                 <thead class="table-light">
                                                     <tr>
                                                         <th style="width: 20px;" class="align-middle">
@@ -43,7 +43,7 @@
                                                 </thead>
                                                 <tbody>
 
-                                                        {%for prod in products%}
+                                                        {%for prod in page_obj%}
                                                     <tr>
                                                         <td>
                                                             <div class="form-check font-size-16">
@@ -68,8 +68,8 @@
                                                         </td>
                                                         <td>
                                                             <div class="d-flex gap-3">
-                                                                <a href="javascript:void(0);" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                                <a href="javascript:void(0);" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></a>
+                                                                <a href="{%url 'portal:product-edit' prod.slug%}" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                                                <a href="javascript:void(0);"  data-slug="{{prod.slug}}" class="text-danger deld"><i class="mdi mdi-delete font-size-18" data-slug="{{prod.slug}}"></i></a>
                                                             </div>
                                                         </td>
                                                         {%endfor%}
@@ -79,22 +79,38 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <ul class="pagination pagination-rounded justify-content-end mb-2">
+                                        <ul class="pagination pagination-rounded justify-content-end mb-2" >
+                                            {%if page_obj.has_previous%}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
+                                                    <i class="mdi mdi-chevron-left"></i>
+                                                </a>
+                                            </li>
+                                                {%else%}
                                             <li class="page-item disabled">
                                                 <a class="page-link" href="javascript: void(0);" aria-label="Previous">
                                                     <i class="mdi mdi-chevron-left"></i>
                                                 </a>
                                             </li>
-                                            <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a></li>
+                                            {%endif%}
+                                            <li class="page-item active"><a class="page-link" href="?page={{page_obj.number}}">{{page_obj.number}}</a></li>
+                                            {%if page_obj.has_next%}
+                                            <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">{{page_obj.next_page_number}}</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">...</a></li>
+                                            {%endif%}
+                                            {%if page_obj.has_next%}
                                             <li class="page-item">
-                                                <a class="page-link" href="javascript: void(0);" aria-label="Next">
+                                                <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Next">
                                                     <i class="mdi mdi-chevron-right"></i>
                                                 </a>
                                             </li>
+                                            {%else%}
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="javascript: void(0);" >
+                                                    <i class="mdi mdi-chevron-right"></i>
+                                                </a>
+                                            </li>
+                                            {%endif%}
                                         </ul>
                                     </div>
                                 </div>
@@ -102,89 +118,88 @@
                         </div>
                         <!-- end row -->
                 <!-- Modal -->
-                <div class="modal fade orderdetailsModal" tabindex="-1" role="dialog" aria-labelledby="orderdetailsModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="orderdetailsModalLabel">Order Details</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p class="mb-2">Product id: <span class="text-primary">#SK2540</span></p>
-                                <p class="mb-4">Billing Name: <span class="text-primary">Neal Matthews</span></p>
-
-                                <div class="table-responsive">
-                                    <table class="table align-middle table-nowrap">
-                                        <thead>
-                                            <tr>
-                                            <th scope="col">Product</th>
-                                            <th scope="col">Product Name</th>
-                                            <th scope="col">Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">
-                                                    <div>
-                                                        <img src="{% static 'images/product/img-7.png'%}" alt="" class="avatar-sm">
-                                                    </div>
-                                                </th>
-                                                <td>
-                                                    <div>
-                                                        <h5 class="text-truncate font-size-14">Wireless Headphone (Black)</h5>
-                                                        <p class="text-muted mb-0">$ 225 x 1</p>
-                                                    </div>
-                                                </td>
-                                                <td>$ 255</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">
-                                                    <div>
-                                                        <img src="{% static 'images/product/img-4.png'%}" alt="" class="avatar-sm">
-                                                    </div>
-                                                </th>
-                                                <td>
-                                                    <div>
-                                                        <h5 class="text-truncate font-size-14">Hoodie (Blue)</h5>
-                                                        <p class="text-muted mb-0">$ 145 x 1</p>
-                                                    </div>
-                                                </td>
-                                                <td>$ 145</td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <h6 class="m-0 text-right">Sub Total:</h6>
-                                                </td>
-                                                <td>
-                                                    $ 400
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <h6 class="m-0 text-right">Shipping:</h6>
-                                                </td>
-                                                <td>
-                                                    Free
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <h6 class="m-0 text-right">Total:</h6>
-                                                </td>
-                                                <td>
-                                                    $ 400
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <!-- end modal -->
                 
 {% endblock %}
+{%block extra_javascript%}
+<script>
+(function() {
+	'use strict';
+
+var TableFilter = (function() {
+ var Arr = Array.prototype;
+		var input;
+  
+		function onInputEvent(e) {
+			input = e.target;
+			var table1 = document.getElementsByClassName(input.getAttribute('data-table'));
+			Arr.forEach.call(table1, function(table) {
+				Arr.forEach.call(table.tBodies, function(tbody) {
+					Arr.forEach.call(tbody.rows, filter);
+				});
+			});
+		}
+
+		function filter(row) {
+			var text = row.textContent.toLowerCase();
+       console.log(text);
+      var val = input.value.toLowerCase();
+      console.log(val);
+			row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+		}
+
+		return {
+			init: function() {
+				var inputs = document.getElementsByClassName('table-filter');
+				Arr.forEach.call(inputs, function(input) {
+					input.oninput = onInputEvent;
+				});
+			}
+		};
+ 
+	})();
+
+  /*console.log(document.readyState);
+	document.addEventListener('readystatechange', function() {
+		if (document.readyState === 'complete') {
+      console.log(document.readyState);
+			TableFilter.init();
+		}
+	}); */
+  
+ TableFilter.init(); 
+})();
+
+$('.deld').on('click', function(e){
+    var txt;
+    var el = e.target;
+    console.log(el);
+    if (confirm('Delete')){
+        txt = 'yes'
+        $.ajax({
+        type:'GET',
+        url: 'product/' +el.getAttribute('data-slug') + '-delete',
+        dataType:'json',
+
+        success:function(response){
+            console.log('deleted');
+            if (response.reply=='success'){
+                alert('It has been successfully deleted')
+                document.location.reload(true);
+            
+            }
+
+                else{
+                    alert('Not successfully deleted')
+                }
+
+        }
+    
+    })
+    }
+    else{
+        txt='cancel';
+    }
+})
+</script>
+{%endblock%}

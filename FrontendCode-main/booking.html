@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Compliance Medical</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="logo" href="index.html"><img src="/img/logo1.png" alt=""></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
+              <i class="fa fa-bars"></i>
+            </button>
+          <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="hgvmedicals.html">HGV/BUS MEDICALS</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="taxi.html">TAXI MEDICALS</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="omedicals.html">OTHER MEDICALS</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="business.html">BUSINESS CLIENTS</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="#" data-bs-toggle="dropdown">MORE</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">LOCATIONS</a></li>
+                    <li><a class="dropdown-item" href="contact.html">CONTACT</a></li>
+                    <li><a class="dropdown-item" href="faqs.html">FAQS</a></li>
+                </ul>
+              </li>
+            </ul>
+            <div class="nav-end">
+              <a class="btn btn-lg" href="booking.html" role="button">Book Now</a>
+            </div>
+          </div>
+        </div>
+    </nav>
+
+    <div class="bform">
+      <div class="bform-content">
+        <div class="container">
+
+          <div style="overflow:auto;">
+            <div class="text-end">
+              <button class="btn btn-lg mt-5" type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+              <button class="btn btn-lg mt-5" type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+            </div>
+          </div>
+  
+          <div class="tab">
+            <form id="regForm" action="">
+              <h1 class=" display-1 fw-bold mt-5 mb-5">Locations Near You</h1>
+              <input class="sfield" type="search" id="myInput" onkeyup="myFunction()" placeholder="Search for locations">
+              <ul class="bform-list" id="myUL">
+                <li>
+                  <a href="#" role="button" onclick="">
+                    <div>
+                      <h2 class="fw-bold">Brentford London </h2>
+                      <p class="text-muted">(TW8 0BB)</p>
+                      <p class="text-muted fs-5">Premier Inn - 52 High Street Brentford, Greater London TW8 0BB</p>
+                    </div>
+                    <div class="bform-image">
+                      <img src="/img/location1.png" alt="">
+                    </div>
+                  </a>
+                </li>
+    
+                <li>
+                  <a href="#" role="button" onclick="">
+                    <div>
+                      <h2 class="fw-bold">Luton</h2>
+                      <p class="text-muted">(B1 3AX)</p>
+                      <p class="text-muted fs-5">Premier Inn - 52 High Street Brentford, Greater London TW8 0BB</p>
+                    </div>
+                    <div class="bform-image">
+                      <img src="/img/location2.png" alt="">
+                    </div>
+                  </a>
+                </li>
+    
+                <li>
+                  <a href="#" role="button" onclick="">
+                    <div>
+                      <h2 class="fw-bold">Milton Keynes</h2>
+                      <p class="text-muted">(B1 3AX)</p>
+                      <p class="text-muted fs-5">Premier Inn - 52 High Street Brentford, Greater London TW8 0BB</p>
+                    </div>
+                    <div class="bform-image">
+                      <img src="/img/location3.png" alt="">
+                    </div>
+                  </a>
+                </li>
+    
+                <li>
+                  <a href="#" role="button" onclick="">
+                    <div>
+                      <h2 class="fw-bold">Bedford</h2>
+                      <p class="text-muted">(B1 3AX)</p>
+                      <p class="text-muted fs-5">Premier Inn - 52 High Street Brentford, Greater London TW8 0BB</p>
+                    </div>
+                    <div class="bform-image">
+                      <img src="/img/location1.png" alt="">
+                    </div>
+                  </a>
+                </li>
+    
+                <li>
+                  <a href="#" role="button" onclick="">
+                    <div>
+                      <h2 class="fw-bold">Peterborough</h2>
+                      <p class="text-muted">(B1 3AX)</p>
+                      <p class="text-muted fs-5">Premier Inn - 52 High Street Brentford, Greater London TW8 0BB</p>
+                    </div>
+                    <div class="bform-image">
+                      <img src="/img/location2.png" alt="">
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </form>
+          </div>
+    
+          <div class="tab">
+            <form id="regForm" action="">
+              <h1 class=" fw-bold mb-5">Account Application</h1>
+              <h2 class=" fw-bold mb-5">Please Enter Your Details</h2>
+                <div class="row g-3 fs-3">
+                  <div class="col-sm-6">
+                    <label for="username" class="form-label">Name</label>
+                    <input type="text" name="" id="username" class="has-validation form-control fs-3" value="" required="required">
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="" id="email" class=" has-validation form-control fs-3" value="" required="required">
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="number" class="form-label">Phone Number</label>
+                    <input type="number" name="" id="number" class="has-validation form-control fs-3" value="" required="required">
+                  </div>
+                 <div class="col-sm-6">
+                  <label for="lastName" class="form-label">Service</label>
+                  <select class="form-select fs-3" id="services" required>
+                    <option value="">Choose...</option>
+                    <option>HGV/PCV Medical (DVLA D4)</option>
+                    <option>Taxi/Private Hire & PCO(TFL) Medical</option>
+                    <option>Coach Medical</option>
+                    <option>Bus Medical</option>
+                    <option>Pre-employment Medical</option>
+                    <option>Ambulance Driver Medical</option>
+                    <option>Motorhome Medical</option>
+                    <option>Motorsport Medical</option>
+                    <option>Forklift Medical</option>
+                  </select>
+                  <div class="invalid-feedback">
+                  </div>
+                 </div>
+                 <div class="col-sm-6">
+                  <label for="username" class="form-label">Price</label>
+                  <div class="input-group has-validation">
+                  <input type="number" class="form-control fs-3" id="username" placeholder="" required>
+                  <div class="invalid-feedback"></div>
+                  </div>
+                 </div>
+                 <div class="col-sm-6">
+                   <label for="username" class="form-label">Date</label>
+                   <input type="date" name="" id="input" class="form-control fs-3" value="" required="required" title="">
+                 </div>
+                 <div class="col-sm-6">
+                   <label for="username" class="form-label">Time</label>
+                   <input type="time" name="" id="input" class="form-control fs-3" value="" required="required" title="">
+                 </div>                                                  
+                </div>
+            </form>
+          </div>
+    
+          <div class="tab">
+            <div class="container-sm">
+              <form id="regForm" action="">
+                <h1 class=" fw-bold mb-5">Confirm Details</h1>
+                <h2 class=" fw-bold mb-5">Kindly Confirm Your Details</h2>
+                <div class="row">
+                  
+                  <div class="col-md">
+                    <ul class="list-group">
+                      <li class="list-group-item">
+                        <h2>Date & Time</h2>
+                        <p class="fs-3 text-muted">20/03/2022 / 14:00-14:15</p>
+                      </li>
+                      <li class="list-group-item">
+                        <h2>Location</h2>
+                        <p class="fs-3 text-muted">Brentford London (TW8 0BB)</p>
+                      </li>
+                      <li class="list-group-item">
+                        <h2>Confirm Location</h2>
+                        <p class="fs-3 text-muted">Premier Inn - 52 High Street, Brentford, Greater London, TW8 0BB</p>
+                      </li>
+                      <li class="list-group-item">
+                        <h2>Services</h2>
+                        <p class="fs-3 text-muted">HGV/PCV Medical (DVLA D4)</p>
+                      </li>
+                      <li class="list-group-item">
+                        <h2>HGV/PCV Medical (DVLA D4)</h2>
+                        <p class="fs-3 text-muted">£55.00</p>
+                      </li>
+                      <div class="input-group mt-3">
+                        <input type="text" class="form-control fs-3" placeholder="Coupon">
+                        <button type="submit" class="btn">Redeem</button>
+                      </div>
+                    </ul>
+                  </div>
+                  
+                </div>
+                <div class="col-md mt-5">
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                      <h2>Select Your Payment Method</h2>
+                      <div class="form-check mt-5 fs-2">
+                        <input type="checkbox" class="form-check-input p-2" id="check1" name="option1" value="something">
+                        <label class="form-check-label" for="check1">Stripe</label>
+                      </div>
+                      <div class="form-check mt-2 fs-2">
+                        <input type="checkbox" class="form-check-input p-2" id="check1" name="option1" value="something">
+                        <label class="form-check-label" for="check1">Credit Card</label>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                
+              </form>
+            </div>
+          </div>
+    
+          <div style="text-align:center;margin-top:40px;">
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+          </div>
+        </div>
+      </div>
+
+      
+        
+    </div>
+
+    <div class="footer">
+      <div class="footer-content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-3 bottom">
+              <div class="logo2">
+                <a href="index.html"><img src="img/logo2.png" alt="Drivers Medicals"></a>
+              </div>
+              <p class="mt-5">All driver medicals are completed by GMC registered doctors in accordance with current DVLA Group 2 guidelines.</p>
+              <a class="fs-2" href=""><i class="fab fa-linkedin"></i></a>
+              <a class="fs-2" href=""><i class="fab fa-instagram"></i></a>
+              <a class="fs-2" href=""><i class="fab fa-twitter"></i></a>
+            </div>
+            <div class="col-lg-3 quick">
+              <h2>Ouick Links</h2>
+              <ul class="nav flex-column">
+                <li class="enav-item">
+                  <a class="enav-link" href="hgvmedicals.html">HGV/Bus Medical</a>
+                </li>
+                <li class="enav-item">
+                  <a class="enav-link" href="taxi.html">Taxi Medical</a>
+                </li>
+                <li class="enav-item">
+                  <a class="enav-link" href="omedicals.html">Other Medicals</a>
+                </li>
+                <li class="enav-item">
+                  <a class="enav-link" href="business.html">Business Clients</a>
+                </li>
+                <li class="enav-item">
+                  <a class="enav-link" href="location.html">Locations</a>
+                </li>
+                <li class="enav-item">
+                  <a class="enav-link" href="faqs.html">FAQs</a>
+                </li>
+                <li class="enav-item">
+                  <a class="enav-link" href="contact.html">Contact</a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-lg-3 quick quicks">
+              <h2>Ouick Links</h2>
+              <div>
+                <a href="tel:+"><span class="fas fa-phone-alt spa mt-5"></span>0203 963 9083</a>
+                <p class="text-break"><span class="fas fa-envelope spa mt-5"></span>Send A Message</p>
+                <a href="mailto:">Bookings@drivermedicals.uk</a>
+              </div>
+            </div>
+            <div class="col-lg-3 pilot">
+              <div class="pilot">
+                <img src="/img/logo3.png" alt="Trust Pilot">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  
+    <footer class="footer-footer">
+      <div class="footer-wrapper">
+        <div class="wrapper-end fs-2 p-3">
+          <p>Drivermedicals.uk © 2022. All Rights Reserved</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="scrpt.js"></script>
+    <script src="/animated-search-filter.js"></script>
+    <script src="/js/bootstrap.js"></script>
+</body>
+</html>

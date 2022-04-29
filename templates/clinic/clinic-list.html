@@ -73,7 +73,7 @@
                                                         <td>
                                                             <div class="d-flex gap-3">
                                                                 <a href="{%url 'portal:clinic-edit' clinic.slug%}" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                                <a href="javascript:void(0);" class="text-danger" id="delete" data-slug="{{clinic.slug}}"><i class="mdi mdi-delete font-size-18"></i></a>
+                                                                <a href="javascript:void(0);" class="text-danger deld"  data-slug="{{clinic.slug}}"><i class="mdi mdi-delete font-size-18" data-slug="{{clinic.slug}}"></i></a>
                                                             </div>
                                                         </td>
 
@@ -176,10 +176,10 @@ var TableFilter = (function() {
   
  TableFilter.init(); 
 })();
-
-document.getElementById('delete').addEventListener('click', function(){
+ 
+$('.deld').on('click', function(e){
     var txt;
-    var el = document.getElementById('delete');
+    var el = e.target;
     if (confirm('Delete')){
         txt = 'yes'
         $.ajax({

@@ -27,11 +27,15 @@ urlpatterns = [
     path('<slug>-delete/doctor', clinic_views.del_doctor, name='doctor-delete'),
     path('doctor-sche-calendar',sche_views.DoctorScheduleCalendarView.as_view(), name='doc-sche-cal'),
     path('doctor-sche-tab', sche_views.DoctorScheduleTableView.as_view(), name="doc-sche-tab"),
+    path('schedule/<slug>-edit', sche_views.ScheduleEditView.as_view(), name='doc-sche-edit'),
+    path('schedule/<slug>-delete', sche_views.del_schedule, name='doc-sche-del'),
     path('doc-sche-reg', sche_views.DoctorSchedulesRegistrationView.as_view(), name='doc-sche-reg'),
     path('testing', views.TestingView.as_view(), name='testing'),
     path('add-product', prod_views.AddProductView.as_view(), name='add-product'),
     path('view-products', prod_views.ViewProductView.as_view(), name='view-product'), 
-    path('product/<slug>', prod_views.ProductDetailView.as_view(), name='product-detail'),
+    path('product/<slug>-edit', prod_views.EditProductView.as_view(), name="product-edit"),
+    path('product/<slug>-view', prod_views.ProductDetailView.as_view(), name='product-detail'),
+    path('product/<slug>-delete', prod_views.del_product, name='product-delete'),
 
     #client Management
     path('internet-clients-list', client_views.InternetClientTableView.as_view(), name='intrnt-cli-list'),
@@ -40,6 +44,10 @@ urlpatterns = [
     path('corporate-client-reg', client_views.CorporateClientRegistrationView.as_view(), name='crprt-cli-reg'),
     path('crprt-client-detail/<slug>', client_views.CorporateDetailView.as_view(), name='crprt-cli-det'),
     path('int-client-detail/<slug>', client_views.InternetDetailView.as_view(), name='intrnt-cli-det'),
+    path('internet-client/<slug>-edit', client_views.InternetClientEdit.as_view(), name='intrnt-cli-edit'),
+    path('internet-client/<slug>-delete', client_views.del_ic, name='intrnt-cli-del'),
+    path('corporate-client/<slug>-edit', client_views.CorporateClientEditView.as_view(), name='crprt-cli-edit'),
+    path('corporate-client/<slug>-delete', client_views.del_cc, name='crprt-cli-del'),
 
     #appointment
     path('place-icorder', booking_views.ICPlaceOrderAdminView.as_view(), name='place-order'),

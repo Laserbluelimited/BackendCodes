@@ -75,11 +75,11 @@ class InternetClient(models.Model):
         return self.first_name + self.last_name
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            name = self.first_name + str(self.phone)
-            self.slug = slugify(name)
         if not self.id:
             self.id = id_increment(InternetClient, 112000)
+        if not self.slug:
+            name = self.first_name + str(self.id)
+            self.slug = slugify(name)
         return super(InternetClient,self).save(*args, **kwargs)
 
     def update_status(self, status):

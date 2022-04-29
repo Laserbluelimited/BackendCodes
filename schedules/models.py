@@ -55,6 +55,10 @@ class ScheduleDates(models.Model):
     day_of_week = models.CharField('day_of_week', max_length=10, null=True)
     start_time = models.TimeField('actual_star_time')
     end_time = models.TimeField('actual_end_time')
+    slug = models.SlugField(max_length=255, help_text='Unique Value for product page URL, created from name.')
+
+
+    
 
     def get_start_time(self):
         return self.start_time
@@ -83,5 +87,8 @@ class ScheduleDates(models.Model):
         if not self.duration:
             self.duration = datetime.combine(date.min, self.end_time) - datetime.combine(date.min, self.start_time)
         self.day_of_week = self.date.strftime('%A')
+        if not self.slug:
+            name = self.doctor.first_name + str(self.id)
+            self.slug = slugify(name)
         return super(ScheduleDates,self).save(*args, **kwargs)
         

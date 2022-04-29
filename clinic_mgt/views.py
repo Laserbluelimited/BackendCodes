@@ -30,7 +30,7 @@ class ClinicListView(LoginRequiredMixin,PermissionRequiredMixin,View, ):
     
     def get(self, request):
         clinic_list = Clinic.objects.all().order_by('-id')
-        paginator = Paginator(clinic_list, 10)
+        paginator = Paginator(clinic_list, 5) 
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         return render(request, 'clinic/clinic-list.html',context={'page_obj':page_obj} )
@@ -146,7 +146,7 @@ class ClinicEditView(LoginRequiredMixin, PermissionRequiredMixin, View):
         return render(request, self.template_name, context={'clinic':clinic, 'form':form})
     def post(self, request, slug):
         clinic = get_object_or_404(Clinic, slug=slug)
-        form = self.form_class(request.POST)
+        form = self.form_class(request.POST, instance=clinic)
         if form.is_valid():
             name = form.cleaned_data['name']
             address = form.cleaned_data['address']
