@@ -222,6 +222,9 @@ class Cart(models.Model):
     def get_price(self):
         return self.product.price
 
+    def get_email(self):
+        return self.client.email
+
     def get_time(self):
         return '{} - {}'.format(self.appointment.time_slot.start_time, self.appointment.time_slot.end_time)
 
@@ -414,6 +417,9 @@ class CCart(models.Model):
 
     def get_name(self):
         return self.client.company_name
+    
+    def get_email(self):
+        return self.client.main_contact_email
 
     # def get_date(self):
     #     return self.appointment.time_slot.schedule.date

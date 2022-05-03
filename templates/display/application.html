@@ -1,284 +1,287 @@
-{%extends 'display/base.html'%}
-{%load static%}
-{%block content%}
-    <div class="biz">
-      <div class="container">
-        <form id="regForm" action="{%url 'display:bus-application'%}" method="post">
-          {%csrf_token%}
-          <h1 class="">Register:</h1>
-          
-          <div class="tab fs-3">
-            <div class="row g-5">
-              <h2 class="mb-5">Section 1: Company Details</h2>
-              <div class="col-sm-6">
-                <label for="firstName" class="form-label">Company Name</label>
-                <input type="text" class="form-control" name="company_name" id="firstName" placeholder="" value="">
-                <div class="invalid-feedback"> 
-                  {%for error in form.company_name.errors%}
-                  <label >{{error}}</label>
-                  {%endfor%}<br>
-                </div>
-              </div>
+{%extends 'display/base.html'%}{%load static%}{%block content%}
+    <div class="apply">
+      <div class="apply-content">
+        <div class="container">
+          <form id="regForm" action="{%url 'display:bus-application'%}" method="post">
+            {%csrf_token%}
+              <h1>Register</h1>
             
-              <div class="col-sm-6">
-                <label for="lastName" class="form-label">Company Type</label>
-                <select class="form-select fs-4" id="country" name="company_type">
-                  {%for i in form.company_type.field.choices%}
-                  <option value="{{i.0}}">{{i.1}}</option>
-                  {%endfor%}
-                </select>
-                <div class="invalid-feedback">
-                  {%for error in form.company_type.errors%}
-                  <label >{{error}}</label>
-                  {%endfor%}<br>
+            <div class="tab">
+              <div class="row g-5">
+                <h2 class="mb-3">Section 1: Company Details</h2>
+                <div class="col-sm-6">
+                  <label for="name" class="form-label">Company Name</label>
+                  <input type="text" class="form-control" name="company_name"  placeholder="" value="">
+                  <div class="invalid-feedback">Valid Company name is required.</div>
                 </div>
-              </div>
-            
-              <div class="col-sm-6">
-                <label for="username" class="form-label">Nature Of Business</label>
-                <div class="input-group has-validation">
-                  <input type="text" class="form-control" id="username" placeholder="" name="nature_of_business">
+              
+                <div class="col-sm-6">
+                  <label for="text" class="form-label">Company Type</label>
+                  <select class="form-select " id="country" name="company_type">
+                    {%for i in form.company_type.field.choices%}
+                    <option value="{{i.0}}">{{i.1}}</option>
+                    {%endfor%}
+                  </select>
+                  <div class="invalid-feedback">
+                    {%for error in form.company_type.errors%}
+                    <label >{{error}}</label>
+                    {%endfor%}<br>
+                  </div>
+                  </div>
+              
+                <div class="col-sm-6">
+                  <label for="text" class="form-label">Nature Of Business</label>
+                  <input type="text" class="form-control"  placeholder="" name="nature_of_business">
                   <div class="invalid-feedback">
                     {%for error in form.nature_of_business.errors%}
                     <label >{{error}}</label>
                     {%endfor%}<br>
                     </div>
                 </div>
-              </div>
-            
-              <div class="col-sm-6">
-                <label for="email" class="form-label">Industry Sector</label>
-                <input type="text" class="form-control" id="username" placeholder="" name="industry_sector">
-                <div class="invalid-feedback">
-                  {%for error in form.industry_sector.errors%}
-                  <label >{{error}}</label>
-                  {%endfor%}<br>
-                </div>
-              </div>
-            
-              <div class="col-sm-6">
-                <label for="address" class="form-label">VAT registration number(if applicable)</label>
-                <input type="text" class="form-control" id="" placeholder="If not available write none" name="vat_reg_no">
-              <div class="invalid-feedback">
-                {%for error in form.vat_reg_no.errors%}
-                <label >{{error}}</label>
-                {%endfor%}<br>
-              </div>
-
-              </div>
-
-                        
-              <div class="col-sm-6">
-                <label for="address2" class="form-label"> How many years has the business been trading </label>
-                <input type="number" class="form-control" id="address2" placeholder="" name="no_of_years">
-                <div class="invalid-feedback">
-                  {%for error in form.no_of_years.errors%}
-                  <label >{{error}}</label>
-                  {%endfor%}<br>
-                </div>
-              </div>
-
-              <div class="col-sm-6">
-                <label for="address2" class="form-label"> Number of employees </label>
-                <input type="number" class="form-control" id="address2" placeholder="" name="no_of_employees">
-                <div class="invalid-feedback">
-                  {%for error in form.no_of_employees.errors%}
-                  <label >{{error}}</label>
-                  {%endfor%}<br>
-                </div>
-              </div>
-
-              <div class="col-sm-6">
-                <label for="address2" class="form-label">Address</label>
-                <div class="autocomplete-container" id="autocomplete-container"></div>
-                <div class="invalid-feedback">
-                  {%for error in form.address.errors%}
-                  <label >{{error}}</label>
-                  {%endfor%}<br>
-                </div>
-              </div>
-
-
-              <div class="col-sm-6">
-                <label for="comment" class="form-label"> How did you hear about us? </label>
-                <textarea class="form-control fs-4" rows="4" id="comment" name="medium_of_marketing"></textarea>
-                <div class="invalid-feedback">
-                  {%for error in form.medium_of_marketing.errors%}
-                  <label >{{error}}</label>
-                  {%endfor%}<br>
-                </div>
-              </div>
-               
-            </div>
-          </div>
-
-          <div class="tab fs-3">
-            <div class="row g-5">
-              <h2 class="mb-5">Section 2: Contact & Billing details</h2>
-            
-              <div class="col-sm-6">
-                <label for="username" class="form-label">Primary Contact Phone Number</label>
-                <div class="input-group has-validation">
-                  <input type="tel" class="form-control" id="username" placeholder="Enter Phone Number" name="main_contact_number" >
-                </div>
-              </div>
-            
-              <div class="col-sm-6">
-                <label for="email" class="form-label">Primary Contact Email Address</label>
-                <input type="email" class="form-control" id="email" placeholder=""  name="main_contact_email">
-                <div class="invalid-feedback">
-                  {%for error in form.main_contact_email.errors%}
-                  <label >{{error}}</label>
-                  {%endfor%}<br>
-                </div>
-              </div>
-            
-              <div class="col-sm-6">
-                <label for="address2" class="form-label">Account Name</label>
-                <input type="text" class="form-control" id="address2" placeholder="" name="bill_name">
-                <div class="invalid-feedback">
-                  {%for error in form.bill_name.errors%}
-                  <label >{{error}}</label>
-                  {%endfor%}<br>
-                </div>
-              </div>
-            
-              <div class="col-sm-6">
-                <label for="address2" class="form-label">Account's Phone Number</label>
-                <input type="text" class="form-control" id="address2" placeholder="" name="bill_phone">
-                <div class="invalid-feedback">
-                  {%for error in form.bill_phone.errors%}
-                  <label >{{error}}</label>
-                  {%endfor%}<br>
-                </div>
-              </div>
-
-              <div class="col-sm-6">
-                <label for="email" class="form-label">Account's Email Address</label>
-                <input type="email" class="form-control" id="email" placeholder="" name="bill_email">
-                <div class="invalid-feedback">
-                  {%for error in form.bill_email.errors%}
-                  <label >{{error}}</label>
-                  {%endfor%}<br>
-                </div>
-              </div>
-
-              <div class="col-sm-6">
-                <label for="lastName" class="form-label">Do you operate a purchase order system?</label>
-                <select class="form-select fs-4" id="country"  name="pur_system">
-                  {%for i in form.pur_system.field.choices%}
-                  <option value="{{i.0}}">{{i.1}}</option>
-                  {%endfor%}
-                </select>
-                <div class="invalid-feedback">
-                  {%for error in form.pur_system.errors%}
-                  <label >{{error}}</label>
-                  {%endfor%}<br>
-                </div>
-              </div>
-
-              <div class="col-sm-6">
-                <label for="lastName" class="form-label">Preferred Mode</label>
-                <select class="form-select fs-4" id="country" name="preferred_mode">
-                  {%for i in form.preferred_mode.field.choices%}
-                  <option value="{{i.0}}">{{i.1}}</option>
-                  {%endfor%}
-                </select>
-                <div class="invalid-feedback">
-                  {%for error in form.preferred_mode.errors%}
-                  <label >{{error}}</label>
-                  {%endfor%}<br>
-                </div>
-              </div>
-
-              <h4>Please note, if PO numbers are required for invoicing purposes this must be given at the time of booking. We do not accept any delays to payment where PO numbers are not provided by you.</h4>
-               
-            </div>
-          </div>
-
-          <div class="tab">
-            <div class="row g-5">
-              <h2 class="mb-3">Section 3: Business Account Usage</h2>
-              <p>Please tell us how frequently you intend to use our service so we can assist you most efficiently. There are no minimum booking requirements, however, we may decline your request if your business is unlikely to use our service regularly.</p>
               
-              <div class="col mb-5">
-                <label for="text" class="form-label">Roughly how many medical appointments do you expect to book per month?</label>
-                <input type="number" class="form-control fs-4" id="text" placeholder="" value="" name="avg_no_order">
+              
+                <div class="col-sm-6">
+                  <label  class="form-label">Industry Sector</label>
+                  <input type="text" class="form-control"  placeholder="" name="industry_sector">
+                  <div class="invalid-feedback">
+                    {%for error in form.industry_sector.errors%}
+                    <label >{{error}}</label>
+                    {%endfor%}<br>
+                  </div>
+                </div>
+                
+                <div class="col-sm-6">
+                  <label for="tel" class="form-label"> Main contact number </label>
+                  <input type="tel" class="form-control"  placeholder="Enter Phone Number" name="main_contact_number" >
+                  <div class="invalid-feedback">
+                    {%for error in form.main_contact_number.errors%}
+                    <label >{{error}}</label>
+                    {%endfor%}<br>
+                  </div>
+                </div>
+              
+                <div class="col-sm-6">
+                  <label for="address2" class="form-label"> How many years has the business been trading </label>
+                  <input type="number" class="form-control"  placeholder="" name="no_of_years">
+                  <div class="invalid-feedback">
+                    {%for error in form.no_of_years.errors%}
+                    <label >{{error}}</label>
+                    {%endfor%}<br>
+                  </div>
+                </div>
+    
+                <div class="col-sm-6">
+                  <label for="address2" class="form-label"> Number of employees </label>
+                  <input type="number" class="form-control" id="address2" placeholder="" name="no_of_employees">
+                  <div class="invalid-feedback">
+                    {%for error in form.no_of_employees.errors%}
+                    <label >{{error}}</label>
+                    {%endfor%}<br>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <label for="address" class="form-label">VAT registration number(if applicable)</label>
+                  <input type="text" class="form-control" id="" placeholder="If not available write none" name="vat_reg_no">
                 <div class="invalid-feedback">
-                  {%for error in form.avg_no_order.errors%}
+                  {%for error in form.vat_reg_no.errors%}
                   <label >{{error}}</label>
                   {%endfor%}<br>
                 </div>
-
-              </div>
-            
-              <div class="col">
-                <label for="text" class="form-label">Authorised persons (names of those authorised to book appointments if you book by email/phone)</label>
-                <input type="text" class="form-control fs-4" id="text" placeholder="" value=""  name="auth_prsnl_name">
-                <div class="invalid-feedback">
-                  {%for error in form.auth_prsnl_name.errors%}
-                  <label >{{error}}</label>
-                  {%endfor%}<br>
+  
                 </div>
-              </div>
-
-            </div>
-
-            <div class="row g-5">
-              <div class="col">
-                <label for="address" class="form-label">May we mention your company in our monthly newsletter to our business customers and on our social media channels?</label>
-                <select class="form-select fs-4" id="address" name="sub_newsletter">
-                  {%for i in form.sub_newsletter.field.choices%}
-                  <option value="{{i.0}}">{{i.1}}</option>
-                  {%endfor%}
-                </select>
-                <div class="invalid-feedback">
-                  {%for error in form.sub_newsletter.errors%}
-                  <label >{{error}}</label>
-                  {%endfor%}<br>
+      
+                <div class="col-sm-6">
+                  <label for="address2" class="form-label">Address</label>
+                  <div class="autocomplete-container" id="autocomplete-container"></div>
+                  <div class="invalid-feedback">
+                    {%for error in form.address.errors%}
+                    <label >{{error}}</label>
+                    {%endfor%}<br>
+                  </div>
                 </div>
-                <div>(We will always check with you prior to publishing any reference to your business).</div>
-              </div>
-            
-              <div class="col">
-                <label for="address2" class="form-label">I hereby request that an account be opened for our business in accordance with the above particulars. Please print name to sign.</label>
-                <input type="text" class="form-control fs-4" id="address2" placeholder="">
-              </div>
-
-            </div>
-          </div>
-
-
-
-          
-
-
-
-
-
-
-
-          
-
-          <div class="mt-5" style="overflow:auto;">
-            <div style="float:right;">
-              <button class="btn btn-lg" type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-              <button class="btn btn-lg" type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
-            </div>
-          </div>
-
-          <div style="text-align:center;margin-top:4rem;">
-          <span class="step"></span>
-          <span class="step"></span>
-          <span class="step"></span>
-          </div>
-          
-        </form>
-      </div>
-    </div>
     
   
+  
+  
+                <div class="col-sm-6">
+                  <label for="comment" class="form-label"> How did you hear about us? </label>
+                  <textarea class="form-control fs-4" rows="4" id="comment" name="medium_of_marketing"></textarea>
+                  <div class="invalid-feedback">
+                    {%for error in form.medium_of_marketing.errors%}
+                    <label >{{error}}</label>
+                    {%endfor%}<br>
+                  </div>
+                </div>
+                   
+              </div>
+            </div>
+  
+            <div class="tab">
+              <div class="row g-5">
+                <h2 class="mb-5">Section 2: Contact & Billing details</h2>
+              
+              
+                <div class="col-sm-6">
+                  <label for="email" class="form-label">Primary Contact Email Address</label>
+                  <input type="email" class="form-control"  placeholder=""  name="main_contact_email">
+                  <div class="invalid-feedback">
+                    {%for error in form.main_contact_email.errors%}
+                    <label >{{error}}</label>
+                    {%endfor%}<br>
+                  </div>
+                </div>
+    
+              
+                <div class="col-sm-6">
+                  <label for="address2" class="form-label">Account Name</label>
+                  <input type="text" class="form-control"  placeholder="" name="bill_name">
+                  <div class="invalid-feedback">
+                    {%for error in form.bill_name.errors%}
+                    <label >{{error}}</label>
+                    {%endfor%}<br>
+                  </div>
+                </div>
+                
+                <div class="col-sm-6">
+                  <label for="address2" class="form-label">Account's Phone Number</label>
+                  <input type="text" class="form-control"  placeholder="" name="bill_phone">
+                  <div class="invalid-feedback">
+                    {%for error in form.bill_phone.errors%}
+                    <label >{{error}}</label>
+                    {%endfor%}<br>
+                  </div>
+                </div>
+    
+                <div class="col-sm-6">
+                  <label for="email" class="form-label">Account's Email Address</label>
+                  <input type="email" class="form-control"  placeholder="" name="bill_email">
+                  <div class="invalid-feedback">
+                    {%for error in form.bill_email.errors%}
+                    <label >{{error}}</label>
+                    {%endfor%}<br>
+                  </div>
+                </div>
+    
+  
+                <div class="col-sm-6">
+                  <label for="lastName" class="form-label">Do you operate a purchase order system?</label>
+                  <select class="form-select"   name="pur_system">
+                    {%for i in form.pur_system.field.choices%}
+                    <option value="{{i.0}}">{{i.1}}</option>
+                    {%endfor%}
+                  </select>
+                  <div class="invalid-feedback">
+                    {%for error in form.pur_system.errors%}
+                    <label >{{error}}</label>
+                    {%endfor%}<br>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <label for="lastName" class="form-label">Preferred Mode</label>
+                  <select class="form-select fs-4" id="country" name="preferred_mode">
+                    {%for i in form.preferred_mode.field.choices%}
+                    <option value="{{i.0}}">{{i.1}}</option>
+                    {%endfor%}
+                  </select>
+                  <div class="invalid-feedback">
+                    {%for error in form.preferred_mode.errors%}
+                    <label >{{error}}</label>
+                    {%endfor%}<br>
+                  </div>
+                </div>
+  
+    
+                  <h4 class="fs-3">Please note, if PO numbers are required for invoicing purposes this must be given at the 
+                time of booking. We do not accept any delays to payment where PO numbers are not provided by 
+                you.</h4>
+                 
+              </div>
+            </div>
+  
+            <div class="tab">
+              <div class="row g-5">
+                <h2 class="mb-3">Section 3: Business Account Usage</h2>
+                <h3>Please tell us how frequently you intend to use our service so we can assist you most 
+                efficiently. There are no minimum booking requirements, however, we may decline your request 
+                if your business is unlikely to use our service regularly.</h3>
+                
+                <div class="col mb-5">
+                  <label for="text" class="form-label">Roughly how many medical appointments do you expect to book per month?</label>
+                  <input type="number" class="form-control fs-4"  placeholder="" value="" name="avg_no_order">
+                  <div class="invalid-feedback">
+                    {%for error in form.avg_no_order.errors%}
+                    <label >{{error}}</label>
+                    {%endfor%}<br>
+                  </div>
+  
+                </div>
+                
+                <div class="col">
+                  <label for="text" class="form-label">Authorised persons (names of those authorised to book appointments if you book by email/phone)</label>
+                  <input type="text" class="form-control fs-4"  placeholder="" value=""  name="auth_prsnl_name">
+                  <div class="invalid-feedback">
+                    {%for error in form.auth_prsnl_name.errors%}
+                    <label >{{error}}</label>
+                    {%endfor%}<br>
+                  </div>
+                </div>
+    
+              </div>
+  
+              <div class="row g-5">
+                <div class="col">
+                  <label for="address" class="form-label">May we mention your company in our monthly newsletter to our business customers and on our social media channels?</label>
+                  <select class="form-select fs-4"  name="sub_newsletter">
+                    {%for i in form.sub_newsletter.field.choices%}
+                    <option value="{{i.0}}">{{i.1}}</option>
+                    {%endfor%}
+                  </select>
+                  <div class="invalid-feedback">
+                    {%for error in form.sub_newsletter.errors%}
+                    <label >{{error}}</label>
+                    {%endfor%}<br>
+                  </div>
+                  <div>(We will always check with you prior to publishing any reference to your business).</div>
+                </div>
+                  <div class="col">
+                  <label for="address2" class="form-label">I hereby request that an account be opened for our
+                  business in accordance with the above particulars. Please print name to sign.</label>
+                  <input type="text" class="form-control fs-4" id="address2" placeholder="">
+                </div>
+  
+              </div>
+            </div>
+
+            <div class="mt-5 mb-5" style="overflow:auto;">
+              <div style="float:right;">
+                <button class="btn btn-lg" type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                <button class="btn btn-lg" type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+              </div>
+            </div>
+  
+            <div style="text-align:center;margin-top:4rem;">
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            </div>
+  
+          </form>
+        </div>
+      </div>
+      
+    </div>
+
 {%endblock%}
 {%block extra_javascript%}
-<script src="{% static 'js/testing.js' %}"></script>    
+<script src="{% static 'js/testing.js' %}"></script>  
+<script>
+  addressAutocomplete(document.getElementById("autocomplete-container"), (data) => {
+  }, {
+    placeholder: "Enter an address here",
+    value: "none"
+  });
+    </script>
+
 {%endblock%}

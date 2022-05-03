@@ -12,7 +12,7 @@
 {% endblock %}
 {% block contents %}
 
-            <form method="post" action="{%url 'portal:crprt-cli-edit' clent.slug%}">
+            <form method="post" action="{%url 'portal:crprt-cli-edit' client.slug%}">
                     {%csrf_token%}
 
                         <div class="row">

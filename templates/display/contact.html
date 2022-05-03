@@ -1,0 +1,71 @@
+{%extends 'display/base.html'%}{%load static%}{%block content%}
+
+    <div class="body">
+            <div class="hero11">
+                <img src="{%static 'display/img/hero14.jpg'%}" alt="">
+            </div>
+            <div class="mbody-texts">
+                <div class="mtext-content">
+                  <h1>Get in Touch</h1>
+                  <div class="nav-end">
+                    <a class="btn btn-lg" href="{%url 'display:booking'%}" role="button">Book Instantly</a>
+                  </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="lowcost mb-5 pb-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-7 cform">
+              <div class="comply-texts">
+                <h1 class="pt-5">Contact Form</h1>
+              </div>
+              <form action="" class="was-validated">
+              <div class="mb-5">
+                <label for="name" class="form-label">Your Name (required)</label>
+                <input type="text" class="form-control form-control-lg" id="name" placeholder="Enter your name" name="name" required>
+                <div class="valid-feedback fs-3">Valid.</div>
+                <div class="invalid-feedback fs-3">Please fill out this field.</div>
+              </div>
+              <div class="mb-5">
+                <label for="email" class="form-label">Your Email (required)</label>
+                <input type="email" class="form-control form-control-lg" id="email" placeholder="Enter your email" name="email" required>
+                <div class="valid-feedback fs-3">Valid.</div>
+                <div class="invalid-feedback fs-3">Please fill out this field.</div>
+              </div>
+              <div class="mb-5">
+                <label for="tel" class="form-label">Your Phone Number (required)</label>
+                <input type="tel" class="form-control form-control-lg" id="tel" placeholder="E.g. +1 300 400 5000" name="tel" required>
+                <div class="invalid-feedback fs-3">Please fill out this field.</div>
+              </div>
+              </form>
+              <form action="/action_page.php">
+                <div class="mb-5">
+                  <label for="text" class="form-label">Subject</label>
+                  <input type="text" class="form-control form-control-lg" id="text" placeholder="" name="text">
+                </div>
+                <div class="mb-5">
+                  <label for="comment">Your message</label>
+                  <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
+                </div>
+                <button type="submit" class="btn btn-lg">Send</button>
+                </form>
+            </div>
+            <div class="col-lg-5 call">
+              <div class="container">
+                <div class="call-texts">
+                  <h1 class="pb-5">Call us on <a href="tel:+">01234567833</a></h1>
+                  <h1>Send an email:</h1>
+                  <h2 class="pb-5 text-break"><a href="mailto:">Bookings@compliancemedicals.uk</a></h2>
+                </div>
+                <div class="call-image pt-5 pb-5">
+                  <img src="{%static 'display/img/hero6.jpg'%}" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+{%endblock%}

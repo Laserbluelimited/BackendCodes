@@ -14,6 +14,10 @@ class AboutPageView(View):
     def get(self, request):
         return render(request, 'display/about.html')
 
+class OmedicalsPageView(View):
+    def get(self, request):
+        return render(request, 'display/omedicals.html')
+
 class LocationPageView(View):
     def get(self, request):
         return render(request, 'display/location.html')
@@ -29,6 +33,21 @@ class PvcPageView(View):
 class TaxiPageView(View):
     def get(self, request):
         return render(request, 'display/taxi.html')
+
+
+class LocationPage(View):
+    def get(self, request):
+        return render(request, 'display/location.html')
+
+class FAQPage(View):
+    def get(self, request):
+        return render(request, 'display/faqs.html')
+
+class ContactPage(View):
+    def get(self, request):
+        return render(request, 'display/contact.html')
+
+
 
 
 class OtherServicesPageView(View):
@@ -82,6 +101,7 @@ def getTimes(request):
     """
     def gen():
         for i in ScheduleDates.objects.filter(date=date, clinic=clinic):
+            print(f"hi, {i}")
             for p in TimeSlots.objects.filter(schedule=i, status=0):
                 # if p.start_time >= datetime.datetime.now().strftime('%H:%M'):
                 l = p.id
@@ -91,7 +111,7 @@ def getTimes(request):
     location = request.GET.get('clinic')
     clinic = Clinic.objects.get(address=location)
     date = request.GET.get('date')
-    newdate = datetime.datetime.strptime(str(date), format='%d-%m-%Y')
+    newdate = datetime.datetime.strptime(str(date), '%m/%d/%Y')
     date = newdate.strftime('%Y-%m-%d')
 
     time_obj = list(gen())

@@ -25,16 +25,16 @@ def iccheckout_stripe(cart_id):
             'price_data': {
                 'currency':'usd',
                 'product_data': {
-                    'name':cart_id.get_product()
+                    'name':"Compliance Medical Appointments"
                 },
-                'unit_amount':int(cart_id.get_price()*100)
+                'unit_amount':55*100
             },
             'quantity':cart_id.get_quantity(),
             
         }],
         mode = 'payment',
-        success_url = DOMAIN+'/portal/payment-success',
-        cancel_url = DOMAIN+'/portal/payment-cancel',
+        success_url = DOMAIN+'/payment-success',
+        cancel_url = DOMAIN+'/payment-cancel',
         metadata={
             'cart_id':cart_id.cart_id,
             }
@@ -50,8 +50,8 @@ class PaymentSuccessView(View):
     template_name ='payment/success.html'
 
     def get(self, request):
-        if 'cart_id' in request.session:
-            del request.session['cart_id']
+        if 'cor_cart_id' in request.session:
+            del request.session['cor_cart_id']
             request.session.modified = True
         return render(request, self.template_name)
 

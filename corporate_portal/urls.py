@@ -1,5 +1,6 @@
 from django.urls import path, include
 from . import views
+from . import stripe
 
 
 app_name = 'corporate_portal'
@@ -12,5 +13,7 @@ urlpatterns = [
     path('<slug>/appointment/ajax/filter-dates', views.getDates, name='filter-dates'),
     path('<slug>/appointment/ajax/filter-times', views.getTimes, name='filter-times'),
     path('<slug>/checkout', views.CheckoutView.as_view(), name='checkout'),
+    path('payment-success',stripe.PaymentSuccessView.as_view(), name='payment-sucess' ),
+    path('payment-cancel',stripe.PaymentCancelView.as_view(), name='payment-sucess' ),
 ]
 

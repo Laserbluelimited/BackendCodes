@@ -1,90 +1,91 @@
-{%extends 'display/base.html'%}
-{%load static%}
-{%block content%}
-  <div class="med-body">
-    <div class="container-fluid">
-      <h1>Business Services</h1>
-      <div class="med-links ">
-        <a href="{%url 'display:home-page'%}"><i class="fas fa-home"></i>Home</a>
-        <a href=""><i class="far fa-dot-circle"></i>Our Services</a>
-        <a href=""><i class="far fa-dot-circle"></i>HGV Medical</a>
-      </div>
-      <div class="med-btns">
-        <li>
-          <a class="btn" href="{%url 'display:bus-application'%}" role="button">Fill the application</a>
-        </li>
-      </div>
+{%extends 'display/base.html'%}{%load static%}{%block content%}
+
+    <div class="body">
+            <div class="hero11">
+                <img src="{%static 'display/img/hero8.jpeg'%}" alt="">
+            </div>
+            <div class="bizbody-texts">
+                <div class="mtext-content">
+                  <h1>Compliance Medicals <br> Business Service</h1>
+                  <div class="nav-end">
+                    <a class="btn btn-lg" href="{%url 'display:bus-application'%}" role="button">Fill the application</a>
+                  </div>
+                </div>
+            </div>
     </div>
-  </div>
 
-  <div class="container-fluid business">
-    <h1 class="text-center text-uppercase text-light">Business accounts benefits</h1>
-  </div>
-
-  <div class="container bus-card pb-5">
-    <div class="row gx-md-5">
-      <div class="col-4">
-        <div class="rounded bg-light text-center pt-5 pb-4">
-          <img src="{%static 'display/services/Vector.svg'%}" alt="Icon" class="pb-5">
-          <h3>Discounted Prices</h3>
-        </div>
-      </div>
-      <div class="col-4">
-        <div class="rounded bg-light text-center pt-5 pb-4">
-          <img src="{%static 'display/services/Vector (1).svg'%}" alt="Icon" class="pb-5">
-          <h3>Online Booking</h3>
-        </div>
-      </div>
-      <div class="col-4">
-        <div class="rounded bg-light text-center pt-5 pb-4">
-          <img src="{%static 'display/services/_2404776141824.svg'%}" alt="Icon" class="pb-5">
-          <h3>Onsite Medicals</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="mbus">
-    <div class="container">
+    <div class="biz container">
       <div class="row">
-        <div class="col-sm-6">
-          <h2 class="fw-bold" style="color: #475C83;">We provide services to</h2>
-          <ul>
-            <li class="pb-2">Haulage</li>
-            <li class="pb-2">Logistics</li>
-            <li class="pb-2">Courier</li>
-            <li class="pb-2">HGV/PSV Training school</li>
-            <li class="pb-2">Skip Hire/Waste</li>
-            <li class="pb-2">Heavy Plant</li>
-            <li class="pb-2">Taxi/Private Hire Service</li>
-            <li class="pb-2">Local authority</li>
-            <li class="pb-2">Roadside Recovery</li>
-            <li class="pb-2">Occupational Health</li>
-            <li class="pb-2">Construction</li>
-          </ul>
+        <div class="col-lg-4">
+          <div class="biz-card rounded text-center pt-5 pb-5" style="background-color: #02A9CD;">
+              <div class="date pb-5">
+                <img src="{%static 'display/img/bell.svg'%}" alt="Icon" class="pt-5">
+              </div>
+            <h3 class="pt-5 pb-5">Discounted Prices</h3>
+          </div>
         </div>
-        <div class="col-md-6">
-          <img src="{%static 'display/services/Rectangle 143.png'%}" alt="Bus" class="pb-5" style="width: 100%;">
+        <div class="col-lg-4">
+          <div class="biz-card rounded text-center pt-5 pb-5" style="background-color: #015668;">
+            <div class="date pb-5">
+              <img src="{%static 'display/img/date.svg'%}" alt="Icon" class="pt-5">
+            </div>
+            <h3 class="pt-5 pb-5">Online Booking</h3>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="mbook">
-    <div class="mbook-content">
-      <div class="book-headline">
-        <div class="bheadline-text">
-          <h1 class="fw-bold" style="color: #475C83;">To Discuss how we can help <br> your business</h1>
-          <p><span>Inc. Free Eye Test</span> -Same day appointments available upon request</p>
-          <li class="text-btn">
-            <button type="button" class="btn">Call now: 02039639083</button>
-            <button type="button" class="btn">Email:admin@driversmedical.uk</button>
-          </li>
+        <div class="col-lg-4">
+          <div class="biz-card rounded text-center pt-5 pb-5" style="background-color: #02A9CD;">
+            <div class="date pb-5">
+              <img src="{%static 'display/img/medic.svg'%}" alt="Icon" class="pt-5">
+            </div>
+            <h3 class="pt-5 pb-5">Onsite Medicals</h3>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  
+    <div class="lowcost">
+        <div class="container">
+            <div class="comply-texts mb-5 pb-5">
+                <h1>We provide services to</h1>
+                <ul class="fw-bold mt-5 mb-5">
+                  <li class="mb-3">Haulage</li>
+                  <li class="mb-3">Logistics</li>
+                  <li class="mb-3">Courier</li>
+                  <li class="mb-3">HGV/PSV Training school</li>
+                  <li class="mb-3">Skip Hire/Waste</li>
+                  <li class="mb-3">Heavy Plant</li>
+                  <li class="mb-3">Taxi/Private Hire Service</li>
+                  <li class="mb-3">Local authority</li>
+                  <li class="mb-3">Roadside Recovery</li>
+                  <li class="mb-3">Occupational Health</li>
+                  <li>Construction</li>
+                </ul>
+                <p class="text-break fw-bold">To discuss how we can help your business call 01234562523 or 
+                 <a href="mailto:">email: admin@compliancemedicals.uk</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="end">
+      <div class="end-left">
+        <div class="hero7">
+          <img src="{%static 'display/img/hero7.jpg'%}" alt="">
+        </div>
+      </div>
+      <div class="end-right" style="background-color: #fff;">
+        <div class="end-texts">
+          <h1>Book Your Driver Medical Now</h1>
+          <p class="text-break">You can book your HGV/PCV medical easily by clicking the Book Now button 
+          below.</p>
+          <p class="text-break">Select your preferred date and time and we will send you an appointment 
+            confirmation after completing your booking. Your appointment confirmation will contain 
+            relevant information about your medical. Alternatively, you can call us on 020 3963 9083 to 
+            book your appointment.</p>
+          <div class="nav-end">
+              <a class="btn btn-lg" href="{%url 'display:booking'%}" role="button">Book Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
 {%endblock%}
-

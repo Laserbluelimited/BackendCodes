@@ -98,19 +98,4 @@ function myFunction() {
 }
 
 
-function Location(e){
-  document.getElementById.bind(document);
-  document.getElementById('myInput').value = e.getAttribute('data-value');
-}
-
-
-
-
-
-
-
-
-
-
-
-
+// 

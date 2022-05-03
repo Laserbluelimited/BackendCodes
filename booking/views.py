@@ -334,6 +334,17 @@ class ICPlaceOrderWebView(View):
 
         return render(request, self.template_name, context={'form':form, 'clinics':clinics})
 
+class BacktoBookingView(View):
+    login_url = '/auth/login'
+    redirect_field_name = 'redirect_to'
+    template_name ='display/booking.html'
+
+    def get(self, request):
+        if "cart_id" in request.session:
+            del request.session['cart_id']
+            return redirect('display:booking')
+        else:
+            return redirect('display:booking')
 
 
 class ICOrderWebCheckoutView(View):
@@ -348,7 +359,7 @@ class ICOrderWebCheckoutView(View):
         else:
             return redirect('display:booking')
         return render(request, self.template_name, context={ 'cart':cart_obj})
-
+ 
     def post(self, request):
         if "cart_id" in request.session:
             cart_id = request.session['cart_id']

@@ -1,0 +1,75 @@
+{%extends 'display/base.html'%}{%load static%}{%block content%}
+    <div class="body">
+      <div class="hero11">
+          <img src="{%static 'display/img/hero17.jpeg'%}" alt="">
+      </div>
+      <div class="mbody-texts">
+          <div class="mtext-content">
+            <h1>Clinic Locations</h1>
+          </div>
+      </div>
+    </div>
+
+    <div class="location">
+      <div class="container">
+        <div class="comply-texts">
+          <h1 class="mt-5 pt-5">We Have Several Clinic Locations Across the UK</h1>
+        </div>
+        <iframe src="https://www.google.com/maps/d/embed?mid=1fKfnG_yufw5-njFY2Kk2edUj1GGYR9tn&ehbc=2E312F" class="map"></iframe>
+        <div class="mapped">
+          <div class="row">
+            <div class="col-lg-2 fs-2 fw-bold map-text">Bedford</div>
+            <div class="col-lg-2 fs-2 fw-bold map-text">Birmingham</div>
+            <div class="col-lg-2 fs-2 fw-bold map-text">Brentford</div>
+            <div class="col-lg-2 fs-2 fw-bold map-text">Bristol</div>
+            <div class="col-lg-2 fs-2 fw-bold map-text">Cambridge</div>
+            <div class="col-lg-2 fs-2 fw-bold map-text">Chelmsford</div>
+          </div>
+          <div class="row">
+            <div class="col-lg-2 fs-2 fw-bold map-text">Colchester</div>
+            <div class="col-lg-2 fs-2 fw-bold map-text">Coventry</div>
+            <div class="col-lg-2 fs-2 fw-bold map-text">Derby</div>
+            <div class="col-lg-2 fs-2 fw-bold map-text">London - Hendon</div>
+            <div class="col-lg-2 fs-2 fw-bold map-text">Ipswich</div>
+            <div class="col-lg-2 fs-2 fw-bold map-text">Leicester</div>
+          </div>
+          <div class="row">
+            <div class="col-lg-2 fs-2 fw-bold map-text">Luton</div>
+            <div class="col-lg-2 fs-2 fw-bold map-text">Milton Keynes</div>
+            <div class="col-lg-2 fs-2 fw-bold map-text">Northampton</div>
+            <div class="col-lg-2 fs-2 fw-bold map-text">Nottingham</div>
+            <div class="col-lg-2 fs-2 fw-bold map-text">Oxford</div>
+            <div class="col-lg-2 fs-2 fw-bold map-text">Peterborough</div>
+          </div>
+          <div class="row">
+            <div class="col-lg-2 fs-2 fw-bold map-text">Reading</div>
+            <div class="col-lg-2 fs-2 fw-bold map-text">Stevenage</div>
+            <div class="col-lg-2 fs-2 fw-bold map-text">Stoke on Trent</div>
+            <div class="col-lg-2 fs-2 fw-bold map-text">Telford</div>
+            <div class="col-lg-2 fs-2 fw-bold map-text">Wolverhampton</div>
+            <div class="col-lg-2 fs-2 fw-bold map-text"></div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="end">
+      <div class="end-left">
+        <div class="hero7">
+          <img src="{%static 'display/img/hero7.jpg'%}" alt="">
+        </div>
+      </div>
+      <div class="end-right">
+        <div class="end-texts">
+          <h1>Book Your Driver Medical Now</h1>
+          <p class="text-break">You can book your HGV/PCV medical easily by clicking the Book Now button below.</p>
+          <p class="text-break">Select your preferred date and time and we will send you an appointment confirmation after completing your booking. Your appointment confirmation will contain relevant information about your medical. Alternatively, you can call us on 020 3963 9083 to book your appointment.</p>
+          <div class="nav-end">
+              <a class="btn btn-lg" href="{%url 'display:booking'%}" role="button">Book Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{%endblock%}

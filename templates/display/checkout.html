@@ -1,53 +1,58 @@
 {%extends 'display/base.html'%}
-{%load static%}
-{%block content%}
+{%load static%}{%block content%}
 
-  <div class="container-sm">
-    <form id="regForm" action="{%url 'display:checkout'%}" method="post">
-      {%csrf_token%}
-      <h1 class=" fw-bold mb-5" style="color: #0AC5A8;">Confirm Details</h1>
-      <h2 class=" fw-bold mb-5 text-center">Kindly Confirm Your Details</h2>
-      <div class="row">
-        
-        <div class="col-md">
-          <ul class="list-group">
-            <li class="list-group-item">
-              <h2>Date & Time</h2>
-              <p class="text-muted">{{cart.get_date}}<p>{{cart.get_time}}</p></p>
-            </li>
-            <li class="list-group-item">
-              <h2>City</h2>
-              <p class="text-muted">{{cart.get_city}}</p>
-            </li>
-            <li class="list-group-item">
-              <h2>Address</h2>
-              <p class="text-muted">{{cart.get_location}}</p>
-            </li>
-            <li class="list-group-item">
-              <h2>Services</h2>
-              <p class="text-muted">{{cart.get_product}}</p>
-            </li>
-            <li class="list-group-item">
-              <h2>Price</h2>
-              <p class="text-muted">£{{cart.get_price}}</p>
-            </li>
-            <div class="input-group mt-3">
-              <input type="text" class="form-control fs-3" placeholder="Coupon">
-              <button type="submit" class="btn">Redeem</button>
+
+<div class="bform">
+    <div class="bform-content">
+      <div class="container">
+
+                <div class="tab">
+                    <div class="container-sm">
+                        <form id="regForm" action="{%url 'display:checkout'%}" method="post">
+                            {%csrf_token%}
+                                              <h1 class=" fw-bold mb-5">Confirm Details</h1>
+                        <h2 class=" fw-bold mb-5">Kindly Confirm Your Details</h2>
+                        <div class="row">
+                        
+                        <div class="col-md">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                <h2>Date & Time</h2>
+                                <p class="text-muted fs-3">{{cart.get_date}}<p class="text-muted fs-3">{{cart.get_time}}</p></p>
+                                </li>
+                                <li class="list-group-item">
+                                <h2>City</h2>
+                                <p class="text-muted fs-3">{{cart.get_city}}</p>
+                                </li>
+                                <li class="list-group-item">
+                                <h2>Address</h2>
+                                <p class="text-muted fs-3">{{cart.get_location}}</p>
+                                </li>
+                                <li class="list-group-item">
+                                <h2>Services</h2>
+                                <p class="text-muted fs-3">{{cart.get_product}}</p>
+                                </li>
+                                <li class="list-group-item">
+                                <h2>Price</h2>
+                                <p class="text-muted fs-3">£{{cart.get_price}}</p>
+                                </li>
+                                <div class="input-group mt-3">
+                                    <input type="text" class="form-control fs-3" placeholder="Coupon">
+                                    <button type="submit" class="btn">Redeem</button>
+                                </div>
+                                </ul>
+                            </div>
+                        
+                        </div>
+                        <div class="col-md mt-5">
+                                <a href="{%url 'display:cancel-booking' %}"><button class="btn btn-lg mt-5" type="button" >Back to Booking</button></a>
+                                <button class="btn btn-lg mt-5" type="submit" >Proceed to Stripe</button>
+                        </div>
+                        
+                    </form>
+                    </div>
+                </div>
             </div>
-          </ul>
         </div>
-        
-      </div>
-      
-      <div class="text-center mt-5">
-        <button type="button" class="btn">Cancel</button>
-        <button type="submit" class="btn">Proceed to Stripe</button>
-      </div>
-
-
-    </form>
-  </div>
-</div>
-
+    </div>
 {%endblock%}

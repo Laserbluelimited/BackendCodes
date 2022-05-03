@@ -11,6 +11,7 @@ import datetime
 from schedules.models import ScheduleDates, TimeSlots
 from booking.models import CCart, CorporateAppointment
 from . import cart
+from . import stripe
 
 
 
@@ -179,6 +180,15 @@ class CheckoutView(LoginRequiredMixin, GroupRequiredMixin, View):
             return redirect('corporate_portal:booking', slug=company.slug)
 
         appointments = CorporateAppointment.objects.filter(appointment_no =basket.appointment)
+        return render(request, self.template_name, context={'company':company, 'appointments':appointments})
+
+    def post(self, request):
+        if "cor_cart_id" in request.session:
+            cart_id = request.session['cor_cart_id']
+            cart_obj = CCart.objects.get(cart_id=cart_id)
+            return stripe.iccheckout_stripe(cart_id=cart_obj)
+        else:
+            return redirect('corporate_portal:booking')
     
         
         return render(request, self.template_name, context={'company':company, 'appointments':appointments})

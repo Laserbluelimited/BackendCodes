@@ -14,12 +14,16 @@ urlpatterns = [
     path('pvcmedical', views.PvcPageView.as_view(), name='pvc'),
     path('taximedical', views.TaxiPageView.as_view(), name='taxi'),
     path('other-medical-services', views.OtherServicesPageView.as_view(), name='other'),
+    path('omedicals', views.OmedicalsPageView.as_view(), name='omedicals'),
     # path('contact-us', views.ContactUsPageView.as_view(), name='contact-us'),
     path('business/', views.BusinessClientsPageView.as_view(), name='business-clients'),
+    path('faq', views.FAQPage.as_view(), name='faq'),
+    path('contact', views.ContactPage.as_view(), name='contact'),
 
     #booking
     path('book-appointment', booking_views.ICPlaceOrderWebView.as_view(), name='booking'),
     path('checkout', booking_views.ICOrderWebCheckoutView.as_view(), name='checkout'),
+    path('cancel', booking_views.BacktoBookingView.as_view(), name='cancel-booking'),
     path('booking/ajax/filter-dates', views.getDates, name='ajax-dates'),
     path('booking/ajax/filter-times', views.getTimes, name="ajax-times"),
     path('business/application', client_mgt_views.CorporateClientRegistrationWebView.as_view(), name='bus-application'),
