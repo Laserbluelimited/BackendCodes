@@ -24,8 +24,8 @@
                                 <div class="card">
                                     <div class="card-body">
 
-                                        <h4 class="card-title">Doctor Schedule Registration</h4>
-                                        <p class="card-title-desc">This is the doctor schedule form for {{clinic.name}} clinic</p>
+                                        <h4 class="card-title">Book appointments for your drivers</h4>
+                                        <!-- <p class="card-title-desc">This is the doctor schedule form for {{clinic.name}} clinic</p> -->
                                         <form method="post" action="{%url 'corporate_portal:booking' company.slug%}" id="book">
                                         {%csrf_token%}
 
@@ -66,8 +66,8 @@
                                                                         <label for="name">Driver</label>
                                                                         <select class="form-select" name="form-{{i}}-driver">
                                                                             <option>Select</option>
-                                                                            {%for choice in f.driver.field.choices%}
-                                                                            <option value="{{choice.0}}">{{choice.1}}</option>
+                                                                            {%for choice in d_query%}
+                                                                            <option value="{{choice}}">{{choice.get_name}}</option>
                                                                             {%endfor%}
                                                                         </select>
                                                                     </div>

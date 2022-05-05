@@ -81,19 +81,18 @@ class InternetClientRegistrationView(LoginRequiredMixin,PermissionRequiredMixin,
 
 
             email = form.cleaned_data['email']
-            password1 = form.cleaned_data['password1']
             address = form.cleaned_data['address']
 
             address_class = AddressRequest()
             geodata = address_class.get_geodata(address)
 
-            user_obj = User.objects.create_user(email=email, password=password1)
+            user_obj = User.objects.create_user(email=email, password=DEFAULT_PASSWORD)
 
             client_obj = form.save(commit=False)
             client_obj.id = id_increment(InternetClient, 1120000)
             client_obj.user = user_obj
+            client_obj.address = address
             if geodata is not None:
-                client_obj.address = address
                 client_obj.long = geodata['longitude']
                 client_obj.postal_code = geodata['postal_code']
                 client_obj.lat = geodata['latitude']

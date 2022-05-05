@@ -1,22 +1,29 @@
+from calendar import c
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
+from authentication.models import User
+from django.core.paginator import Paginator
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .mixins import GroupRequiredMixin
 from .forms import AddDriverFormSet, LoginForm,BaseBookingFormSet, LocationForm, AppointmentForm
 from client_mgt.models import InternetClient, CorporateClient
+from clinic_mgt.managers import AddressRequest
 from django.forms import formset_factory
-from django.http import JsonResponse
+from django import forms
+from prod_mgt.models import Product
+from django.http import JsonResponse, HttpResponseForbidden
 import datetime
 from schedules.models import ScheduleDates, TimeSlots
-from booking.models import CCart, CorporateAppointment
-from . import cart
-from . import stripe
+from booking.models import CCart, CorporateAppointment, increment_capp_no
+from . import cart, stripe
+from client_mgt.forms import CorporateClientRegistrationForm, InternetClientRegistrationForm
+from skote.settings import DEFAULT_PASSWORD
 
 
 
 #function to book appointment
-def book_appointment(model, time_slot, client,c_client,product, status=0,  notes=None,):
+def book_appointment(model, time_slot, client,c_client,product,appointment_no, status=0,  notes=None,):
 
     """
     This function basically helps to book an appointment
@@ -30,7 +37,7 @@ def book_appointment(model, time_slot, client,c_client,product, status=0,  notes
     
     
     """
-    app_obj = model.objects.create( time_slot=time_slot, client=client, status=status, notes=notes, c_client=c_client, product=product )
+    app_obj = model.objects.create( time_slot=time_slot, client=client, status=status, notes=notes, c_client=c_client, product=product, appointment_no=appointment_no )
     if status == 0:
         time_slot.status = 1
         time_slot.save()
@@ -38,6 +45,12 @@ def book_appointment(model, time_slot, client,c_client,product, status=0,  notes
         time_slot.status = 2
         time_slot.save()
     return app_obj
+
+def check_user(slug_user, current_user):
+    if slug_user!=current_user:
+        return HttpResponseForbidden()
+        
+
 
 
 
@@ -82,6 +95,7 @@ class DashboardView(LoginRequiredMixin, GroupRequiredMixin, View):
     
     def get(self, request, slug):
         company = get_object_or_404(CorporateClient, slug=slug)
+        check_user(current_user=request.user, slug_user=company.user)
         return render(request, 'cor_temp/dashboard.html', context={'company':company})
 
 class AddDriverView(LoginRequiredMixin, GroupRequiredMixin, View):
@@ -92,6 +106,7 @@ class AddDriverView(LoginRequiredMixin, GroupRequiredMixin, View):
 
     def get(self, request, slug):
         company = get_object_or_404(CorporateClient, slug=slug)
+        check_user(current_user=request.user, slug_user=company.user)
         formset = AddDriverFormSet(queryset=InternetClient.objects.none())
         return render(request, self.template_name, context={'company':company, 'formset':formset, 'annoying':enumerate(formset)})
 
@@ -114,9 +129,12 @@ class BookAppointmentView(LoginRequiredMixin, GroupRequiredMixin, View):
     login_url = '/auth/login'
     redirect_field_name = 'redirect_to'
     group_required = [u'Corporate group']
+    company=None
+
 
     def get(self, request, slug):
         company = get_object_or_404(CorporateClient, slug=slug)
+        check_user(current_user=request.user, slug_user=company.user)
         if "cor_cart_id" in request.session:
             return redirect('corporate_portal:checkout', slug=company.slug)
         else:
@@ -125,7 +143,8 @@ class BookAppointmentView(LoginRequiredMixin, GroupRequiredMixin, View):
         l_form = LocationForm()
         d_form = formset_factory(AppointmentForm, extra=1, formset=BaseBookingFormSet)
         d_form = d_form()
-        return render(request, self.template_name, context={'company':company,  'l_form':l_form, 'd_form':d_form, 'annoying':enumerate(d_form)})
+        d_query = InternetClient.objects.filter(cor_comp=company)
+        return render(request, self.template_name, context={'company':company,  'l_form':l_form, 'd_form':d_form, 'annoying':enumerate(d_form), 'd_query':d_query})
         
 
     def post(self, request, slug):
@@ -136,6 +155,7 @@ class BookAppointmentView(LoginRequiredMixin, GroupRequiredMixin, View):
         
         if d_form.is_valid() and request.session.test_cookie_worked():
             quantity = 0
+            appointment_no = increment_capp_no()
             for form in d_form:
                 driver = form.cleaned_data['driver']
                 product = form.cleaned_data['product']
@@ -143,11 +163,11 @@ class BookAppointmentView(LoginRequiredMixin, GroupRequiredMixin, View):
 
                 #3
                 sche_obj = TimeSlots.objects.get(id=time_slot)
-                app_obj = book_appointment(CorporateAppointment, time_slot=sche_obj, status=0, client=driver, c_client=company, product=product)
+                app_obj = book_appointment(CorporateAppointment, time_slot=sche_obj, status=0, client=driver, c_client=company, product=product, appointment_no=appointment_no)
                 quantity+=1
 
                 #4
-            cart.add_to_cart(request, client=company, appointment=app_obj.appointment_no, quantity=quantity)
+            cart.add_to_cart(request, client=company, appointment=appointment_no, quantity=quantity)
             if request.session.test_cookie_worked():
                 request.session.delete_test_cookie()
             
@@ -172,6 +192,7 @@ class CheckoutView(LoginRequiredMixin, GroupRequiredMixin, View):
 
     def get(self, request, slug):
         company = get_object_or_404(CorporateClient, slug=slug)
+        check_user(current_user=request.user, slug_user=company.user)
         if "cor_cart_id" in request.session:
             basket_id = request.session['cor_cart_id']
             basket = CCart.objects.get(cart_id=basket_id)
@@ -182,17 +203,127 @@ class CheckoutView(LoginRequiredMixin, GroupRequiredMixin, View):
         appointments = CorporateAppointment.objects.filter(appointment_no =basket.appointment)
         return render(request, self.template_name, context={'company':company, 'appointments':appointments})
 
-    def post(self, request):
+    def post(self, request, slug):
+        company = get_object_or_404(CorporateClient, slug=slug)
         if "cor_cart_id" in request.session:
             cart_id = request.session['cor_cart_id']
             cart_obj = CCart.objects.get(cart_id=cart_id)
             return stripe.iccheckout_stripe(cart_id=cart_obj)
         else:
-            return redirect('corporate_portal:booking')
+            return redirect('corporate_portal:booking', slug=company.slug)
     
-        
-        return render(request, self.template_name, context={'company':company, 'appointments':appointments})
 
+
+class DriverListView(LoginRequiredMixin, GroupRequiredMixin, View):
+    permission_required = ('clinic_mgt.view_doctor')
+    login_url = '/auth/login'
+    redirect_field_name = 'redirect_to'
+    group_required = [u'Corporate group']
+    def get(self, request, slug):
+        company = get_object_or_404(CorporateClient, slug=slug)
+        check_user(current_user=request.user, slug_user=company.user)
+        drivers = InternetClient.objects.filter(cor_comp=company).order_by('id')
+        paginator = Paginator(drivers, 5)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'cor_temp/driver-table.html', context={'page_obj':page_obj, 'company':company})
+
+class CompanyEditView(LoginRequiredMixin,GroupRequiredMixin, View):
+    login_url = '/auth/login'
+    redirect_field_name = 'redirect_to'
+    group_required = [u'Corporate group']
+    form_class = CorporateClientRegistrationForm
+
+    def get(self, request, slug):
+        company = get_object_or_404(CorporateClient, slug=slug)
+        check_user(slug_user=company.user, current_user=request.user)
+        form = self.form_class()
+        return render(request, 'cor_temp/company-edit.html', context={'company':company, 'form':form})
+
+    def post(self, request, slug):
+        company = get_object_or_404(CorporateClient, slug=slug)
+        form = self.form_class(request.POST, instance=company)
+        print(form.errors)
+        if form.is_valid():
+            #if form is valid, do the following:
+            #1. get form data
+            #2. call Address object to get the city, longitude, latitude and postcode of address inputed
+            #3. save the client to the authentication model, User
+            #4. save client to corporateclient model
+            
+            email = form.cleaned_data['main_contact_email']
+            address = form.cleaned_data['address']
+
+
+            address_class = AddressRequest()
+            geodata = address_class.get_geodata(address)
+            user_obj = User.objects.get(email=email)
+
+
+            company_obj = form.save(commit=False)
+            user_obj.email = email
+            company_obj.main_contact_email = email
+            company_obj.address = address
+            if geodata is not None:
+                company_obj.long = geodata['longitude']
+                company_obj.lat = geodata['latitude']
+                company_obj.city = geodata['city']
+                company_obj.postal_code = geodata['postal_code']
+                company_obj.country=geodata['country']
+            company_obj.sub_newsletter = form.cleaned_data['sub_newsletter']
+            company_obj.pur_system = form.cleaned_data['pur_system']
+
+            user_obj.save()
+            company_obj.save()
+            return redirect('corporate_portal:dashboard', slug=company_obj.slug)
+        return render(request, 'cor_temp/company-edit.html', context={'company':company, 'form':form})
+
+class DriverEditView(LoginRequiredMixin,GroupRequiredMixin, View):
+    login_url = '/auth/login'
+    redirect_field_name = 'redirect_to'
+    group_required = [u'Corporate group']
+    form_class = InternetClientRegistrationForm
+
+    def get(self, request, slug, driver):
+        company = get_object_or_404(CorporateClient, slug=slug)
+        driver = get_object_or_404(InternetClient, slug=driver)
+        form = self.form_class()
+        clients = InternetClient.objects.all()
+        return render(request, 'cor_temp/driver-edit.html', context={'company':company,'driver':driver, 'form':form})
+
+    def post(self, request, slug, driver):
+        company = get_object_or_404(CorporateClient, slug=slug)
+        driver = get_object_or_404(InternetClient, slug=driver)
+        form = self.form_class(request.POST, instance=driver)
+
+        if form.is_valid():
+            #if form is valid, do the following:
+            #1. get form data
+            #2. call Address object to get the city, longitude, latitude and postcode of address inputed
+            #3. save the client to the authentication model, User
+            #4. save client to internetclient model
+
+
+            email = form.cleaned_data['email']
+            address = form.cleaned_data['address']
+
+            address_class = AddressRequest()
+            geodata = address_class.get_geodata(address)
+
+
+            client_obj = form.save(commit=False)
+            client_obj.email = email
+            if address:
+                client_obj.address = address
+                client_obj.long = geodata['longitude']
+                client_obj.postal_code = geodata['postal_code']
+                client_obj.lat = geodata['latitude']
+                client_obj.city = geodata['city']
+                client_obj.country = geodata['country']
+ 
+            client_obj.save()
+            return redirect('corporate_portal:driver-list', slug=company.slug)
+        return render(request, 'cor_temp/driver-edit.html', context={'company':company,'driver':driver, 'form':form})
 
 def getDates(request, slug):
 
@@ -240,5 +371,23 @@ def getTimes(request, slug):
     response_data = {
         'times':time_obj
     }
+    return JsonResponse(response_data)
+
+def del_driver(request, slug, driver):
+    company = get_object_or_404(CorporateClient, slug=slug)
+    check_user(current_user=request.user, slug_user=company.user)
+    driver = get_object_or_404(InternetClient, slug=driver)
+    try:
+
+        driver.delete()
+        response_data = {
+            'reply':'success'
+        }
+ 
+    except:
+
+        response_data = {
+            'reply':'failed'
+        }
     return JsonResponse(response_data)
 

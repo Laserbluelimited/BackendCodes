@@ -15,14 +15,10 @@ class LocationForm(forms.Form):
     location = forms.ModelChoiceField(queryset=Clinic.objects.all())
 
 class AppointmentForm(forms.Form):
-    driver = forms.ModelChoiceField(queryset=InternetClient.objects.all(),error_messages={'invalid_choice':'Not a valid choice'})
+    driver = forms.CharField(required=True, widget=forms.Select)
     product = forms.ModelChoiceField(queryset=Product.objects.all(),error_messages={'invalid_choice':'Not a valid choice'})
     date = forms.DateField(required=True )
     time_slot = forms.CharField(required=True)
-
-    def __init__(self, company=None, *args, **kwargs):
-        super(AppointmentForm, self).__init__(*args, **kwargs)
-        self.fields['driver'].queryset = InternetClient.objects.filter(cor_comp=company)
 
 class BaseBookingFormSet(BaseFormSet):
     def clean(self):

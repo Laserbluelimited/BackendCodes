@@ -264,7 +264,7 @@ class ICInvoice(models.Model):
 class CorporateAppointment(models.Model):
     id = models.IntegerField('appointment_id', primary_key=True)
     appointment_id = models.CharField('appointment_id', max_length=20, default=increment_capp_id)
-    appointment_no = models.CharField('appointment_no', max_length=20, unique=False, default=increment_capp_no)
+    appointment_no = models.CharField('appointment_no', max_length=20, unique=False, )
     product = models.ForeignKey('prod_mgt.Product', on_delete=models.CASCADE)
     client = models.ForeignKey('client_mgt.InternetClient', on_delete=models.CASCADE)
     c_client = models.ForeignKey('client_mgt.CorporateClient', on_delete=models.CASCADE)

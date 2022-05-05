@@ -87,7 +87,7 @@ class InternetClient(models.Model):
         self.save()
 
     def get_name(self):
-        return self.first_name + self.last_name
+        return self.first_name + " "+ self.last_name
 
     def get_email(self):
         return self.email

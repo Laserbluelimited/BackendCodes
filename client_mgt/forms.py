@@ -11,10 +11,8 @@ geo_data = AddressRequest()
 class InternetClientRegistrationForm(forms.ModelForm):
     #usermodel
     email = forms.EmailField(required=True)
-    password1 = forms.CharField(required=True)
-    password2 = forms.CharField(required=True)
     address = forms.CharField(required=False)
-
+    dob = forms.DateField(required=False)
 
     class Meta:
         model = InternetClient
@@ -26,19 +24,13 @@ class InternetClientRegistrationForm(forms.ModelForm):
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError('email already exists')
         return email
-    def clean_password2(self):
-        password2 = self.cleaned_data['password2']
-        password1 = self.cleaned_data['password1']
-        if password2 != password1:
-            raise forms.ValidationError('Passwords must be the same')
-        return password2
-
     def clean_address(self):
         address = self.cleaned_data['address']
-        if geo_data.get_geodata(address) is not None:
-            pass
-        else:
-            raise forms.ValidationError("Invalid Address")
+        if address:
+            if geo_data.get_geodata(address) is not None:
+                pass
+            else:
+                raise forms.ValidationError("Invalid Address")
         return address
 
 
@@ -57,9 +49,9 @@ class CorporateClientRegistrationForm(forms.ModelForm):
 
 
     def clean_email(self):
-        email = self.cleaned_data['email']
-        if User.objects.filter(username=email).exists():
-            raise forms.ValidationError('username already exists')
+        email = self.cleaned_data['main_contact_email']
+        if User.objects.filter(email=email).exists() or CorporateClient.object.filter(main_contact_email=email).exists():
+            raise forms.ValidationError('Email already exists')
         return email
 
     def clean_address(self):
