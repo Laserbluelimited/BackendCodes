@@ -405,6 +405,7 @@ class CCart(models.Model):
     client = models.ForeignKey('client_mgt.CorporateClient', on_delete=models.CASCADE)
     appointment = models.CharField('appointment_no', max_length=20)
     quantity = models.IntegerField('quantity')
+    price = models.IntegerField('total_price')
 
     def __str__(self):
         return self.cart_id

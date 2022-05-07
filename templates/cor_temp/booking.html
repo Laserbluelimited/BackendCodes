@@ -67,7 +67,7 @@
                                                                         <select class="form-select" name="form-{{i}}-driver">
                                                                             <option>Select</option>
                                                                             {%for choice in d_query%}
-                                                                            <option value="{{choice}}">{{choice.get_name}}</option>
+                                                                            <option value="{{choice.pk}}">{{choice.get_name}}</option>
                                                                             {%endfor%}
                                                                         </select>
                                                                     </div>

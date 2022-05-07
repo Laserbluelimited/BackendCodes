@@ -155,9 +155,11 @@ class BookAppointmentView(LoginRequiredMixin, GroupRequiredMixin, View):
         
         if d_form.is_valid() and request.session.test_cookie_worked():
             quantity = 0
+            price = 0
             appointment_no = increment_capp_no()
             for form in d_form:
                 driver = form.cleaned_data['driver']
+                driver = InternetClient.objects.get(id=int(driver))
                 product = form.cleaned_data['product']
                 time_slot = form.cleaned_data['time_slot']
 
@@ -165,9 +167,10 @@ class BookAppointmentView(LoginRequiredMixin, GroupRequiredMixin, View):
                 sche_obj = TimeSlots.objects.get(id=time_slot)
                 app_obj = book_appointment(CorporateAppointment, time_slot=sche_obj, status=0, client=driver, c_client=company, product=product, appointment_no=appointment_no)
                 quantity+=1
+                price+=product.price
 
                 #4
-            cart.add_to_cart(request, client=company, appointment=appointment_no, quantity=quantity)
+            cart.add_to_cart(request, client=company, appointment=appointment_no, quantity=quantity, price=price)
             if request.session.test_cookie_worked():
                 request.session.delete_test_cookie()
             
