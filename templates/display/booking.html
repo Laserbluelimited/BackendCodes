@@ -85,7 +85,7 @@
                </div>
                <div class="col-sm-6">
                  <label for="username" class="form-label">Date</label>
-                 <input type="text" name="date" id="datepicker" class="form-control fs-3"  readonly>
+                 <input type="text" name="date" id="datepicker" class="form-control fs-3" data-date-format="dd-mm-yyyy" readonly>
                </div>
                <div class="col-sm-6">
                 <label for="username">Time</label>
@@ -169,7 +169,7 @@
             url:'booking/ajax/filter-times',
             data:{
                 'clinic':$('#myInput').val(),
-                'date':$('#datepicker').val(),
+                'date':new Date($('#datepicker').val()),
             },
             dataType:'json',
             success:function(response){
