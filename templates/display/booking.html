@@ -148,9 +148,9 @@
                 console.log(datesEnabled);
     
                 $('#datepicker').datepicker({
-    format: 'd-m-yyyy',
+    format: 'dd-mm-yyyy',
     beforeShowDay: function (date) {
-      var allDates = date.getDate() + '-' + `${date.getMonth() + 1}`+ '-' + date.getFullYear();
+      var allDates = date.getDate() + '-' + (date.getMonth() + 1)+ '-' + date.getFullYear();console.log(allDates)
       if(datesEnabled.indexOf(allDates) != -1)
       return true;
       else
