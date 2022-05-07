@@ -150,7 +150,7 @@
                 $('#datepicker').datepicker({
     format: 'dd-mm-yyyy',
     beforeShowDay: function (date) {
-      var allDates = date.getDate() + '-' + (date.getMonth() + 1)+ '-' + date.getFullYear();console.log(allDates)
+      var allDates = `${date.getDate()}`.padStart(2, 0) + '-' + `${date.getMonth() + 1}`.padStart(2,0)+ '-' + date.getFullYear();console.log(allDates)
       if(datesEnabled.indexOf(allDates) != -1)
       return true;
       else
