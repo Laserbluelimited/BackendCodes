@@ -65,7 +65,17 @@ def increment_invoice_number():
     new_invoice_no = 'DMINV' + str(formatted)
     return new_invoice_no  
 
-
+def increment_cinvoice_number():
+    last_invoice = CCInvoice.objects.all().order_by('id').last()
+    if not last_invoice:
+        return 'DMCNV0000001'
+    invoice_no = last_invoice.invoice_number
+    invoice_int = int(invoice_no.split('DMCNV')[-1])
+    width = 7
+    new_invoice_int = invoice_int + 1
+    formatted = (width - len(str(new_invoice_int))) * "0" + str(new_invoice_int)
+    new_invoice_no = 'DMCNV' + str(formatted)
+    return new_invoice_no  
 
 def increment_ico_id():
     last_ico = ICOrders.objects.all().order_by('id').last()
@@ -315,8 +325,8 @@ class CorporateAppointment(models.Model):
 
 class CCInvoice(models.Model):
     id = models.IntegerField('id', primary_key=True)
-    invoice_number = models.CharField('invoice_number', max_length=20, default=increment_invoice_number)
-    order = models.OneToOneField('CCOrders', on_delete=models.CASCADE)
+    invoice_number = models.CharField('invoice_number', max_length=20, default=increment_cinvoice_number)
+    order = models.CharField('order_number',max_length=50)
     payment = models.OneToOneField('payment.Payment', on_delete=models.CASCADE)
     issued_at = models.DateTimeField('issued_at', auto_now_add=True)
 
@@ -326,26 +336,27 @@ class CCInvoice(models.Model):
     def get_issued_at(self):
         return self.issued_at
 
-    def get_client(self):
-        return self.order.client
+    # def get_client(self):
+    #     return self.order.client
 
-    def get_product(self):
-        return self.order.product
+    # def get_product(self):
+    #     return self.order.product
 
-    def get_price(self):
-        return self.order.total_price
+    # def get_price(self):
+    #     return self.order.total_price
 
-    def get_product(self):
-        return self.order.product
+    # def get_product(self):
+    #     return self.order.product
 
     def get_payment(self):
         return self.payment
 
 class CCOrders(models.Model):
     id = models.AutoField('order_id', primary_key=True)
-    order_number = models.CharField('order_number', max_length=20, default=increment_ico_id)
+    order_number = models.CharField('order_number', max_length=20)
     appointment = models.CharField('appointment_number', max_length=20)
     c_client = models.ForeignKey('client_mgt.CorporateClient', on_delete=models.CASCADE)
+    d_client = models.ForeignKey('client_mgt.InternetClient', on_delete=models.CASCADE)
     placed_at = models.DateTimeField(auto_now_add=True)
     quantity = models.IntegerField('quantity', default=1)
     total_price = models.IntegerField('total_price')

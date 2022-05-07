@@ -32,7 +32,7 @@
   
           <div class="tab">
               {%csrf_token%}
-                <h1 class=" display-1 fw-bold mt-5 mb-5">Available Locations</h1>
+                <h1 class=" display-1 fw-bold mt-5 mb-5">Available Clinics</h1>
               <input class="sfield" type="search" id="myInput" name="clinic" onkeyup="myFunction()" placeholder="Search for locations">
               <ul class="bform-list" id="myUL">
                 {%for i in clinics%}
@@ -145,7 +145,7 @@
                 
                 $('#datepicker').datepicker('destroy');
                 var datesEnabled = response.dates;
-                console.log("hi");
+                console.log(datesEnabled);
     
                 $('#datepicker').datepicker({
     dateFormat: 'dd-mm-yyyy',

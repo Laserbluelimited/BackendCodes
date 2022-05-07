@@ -171,6 +171,7 @@ class BookAppointmentView(LoginRequiredMixin, GroupRequiredMixin, View):
 
                 #4
             cart.add_to_cart(request, client=company, appointment=appointment_no, quantity=quantity, price=price)
+            print(cart.price)         
             if request.session.test_cookie_worked():
                 request.session.delete_test_cookie()
             
@@ -199,6 +200,7 @@ class CheckoutView(LoginRequiredMixin, GroupRequiredMixin, View):
         if "cor_cart_id" in request.session:
             basket_id = request.session['cor_cart_id']
             basket = CCart.objects.get(cart_id=basket_id)
+            print(basket.price)
         else:
             basket = 'empty'
             return redirect('corporate_portal:booking', slug=company.slug)
@@ -211,10 +213,27 @@ class CheckoutView(LoginRequiredMixin, GroupRequiredMixin, View):
         if "cor_cart_id" in request.session:
             cart_id = request.session['cor_cart_id']
             cart_obj = CCart.objects.get(cart_id=cart_id)
-            return stripe.iccheckout_stripe(cart_id=cart_obj)
+            return stripe.iccheckout_stripe(cart_id=cart_obj, slug=company.slug)
         else:
             return redirect('corporate_portal:booking', slug=company.slug)
-    
+
+
+class DeleteCartView(LoginRequiredMixin, GroupRequiredMixin, View):
+    template_name = 'cor_temp/checkout.html'
+    login_url = '/auth/login'
+    redirect_field_name = 'redirect_to'
+    group_required = [u'Corporate group']
+
+    def get(self, request, slug):
+        company = get_object_or_404(CorporateClient, slug=slug)
+        check_user(current_user=request.user, slug_user=company.user)
+        if "cor_cart_id" in request.session:
+            cart.delete_cart(request)
+            del request.session['cor_cart_id']
+            return redirect('corporate_portal:booking', slug=company.slug)
+        else:
+            return redirect('corporate_portal:booking', slug=company.slug)
+
 
 
 class DriverListView(LoginRequiredMixin, GroupRequiredMixin, View):
