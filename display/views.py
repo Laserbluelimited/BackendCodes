@@ -79,7 +79,7 @@ def getDates(request):
         """
         for i in dates:
             if i>= datetime.date.today():
-                m = i.strftime("%d-%m-%Y")
+                m = i.strftime("%-d-%-m-%Y")
                 yield m
 
 
