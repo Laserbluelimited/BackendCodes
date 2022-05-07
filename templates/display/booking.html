@@ -111,7 +111,6 @@
 
     <script src="{%static 'display/animated-search-filter.js'%}"></script>
 
-    <script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>
 
     <!-- form wizard init -->
     <script src="{%static 'libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'%}"></script>
@@ -146,12 +145,12 @@
                 
                 $('#datepicker').datepicker('destroy');
                 var datesEnabled = response.dates;
-                console.log(datesEnabled);
+                console.log("hi");
     
                 $('#datepicker').datepicker({
     dateFormat: 'dd-mm-yyyy',
     beforeShowDay: function (date) {
-      var allDates = date.getDate() + '-' + `${date.getMonth() + 1}`+ '-' + date.getFullYear();;
+      var allDates = date.getDate() + '-' + `${date.getMonth() + 1}`+ '-' + date.getFullYear();
       if(datesEnabled.indexOf(allDates) != -1)
       return true;
       else

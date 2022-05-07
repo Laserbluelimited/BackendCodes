@@ -31,7 +31,7 @@ class Clinic(models.Model):
 
 
     def __str__(self):
-        return self.name
+        return self.name + ', ' + self.address
 
     def get_name(self):
         return self.name

@@ -20,7 +20,7 @@ def _generate_cart_id():
 def get_cart_item(request):
     return CCart.objects.get(cart_id=_cart_id(request))
 
-def add_to_cart(request, client, appointment, quantity=1):
+def add_to_cart(request, client, appointment, price, quantity=1):
     """
     This function adds to the cart in the database and stores the cart id in the session
     request:
@@ -28,6 +28,6 @@ def add_to_cart(request, client, appointment, quantity=1):
     appointment: appointment object/instance
     product: product object/instance
     """
-    cart = CCart(cart_id=_cart_id(request), client=client, appointment=appointment, quantity=quantity)
+    cart = CCart(cart_id=_cart_id(request), client=client,price=price, appointment=appointment, quantity=quantity)
     cart.save()
     return cart
