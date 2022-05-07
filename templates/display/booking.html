@@ -164,12 +164,13 @@
     </script>
     <script>
     $("#datepicker").on("change.dp", function(){
+      date = $('#datepicker').val()
         $.ajax({
             type:'GET',
             url:'booking/ajax/filter-times',
             data:{
                 'clinic':$('#myInput').val(),
-                'date':new Date($('#datepicker').val()),
+                'date':String(date),
             },
             dataType:'json',
             success:function(response){
