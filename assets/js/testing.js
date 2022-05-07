@@ -12,7 +12,11 @@ function addressAutocomplete(containerElement, callback, options) {
     const inputElement = document.createElement("input");
     inputElement.setAttribute("type", "text");
     inputElement.setAttribute("name", "address")
+    inputElement.setAttribute("class", "form-control")
+    inputElement.setAttribute("list", "list-example")
+    inputElement.setAttribute("id", "example")
     inputElement.setAttribute("placeholder", options.placeholder);
+    inputElement.setAttribute("value", options.value)
     inputContainerElement.appendChild(inputElement);
   
     // add input field clear button
@@ -101,14 +105,15 @@ function addressAutocomplete(containerElement, callback, options) {
           currentItems = data.results;
   
           /*create a DIV element that will contain the items (values):*/
-          const autocompleteItemsElement = document.createElement("div");
+          const autocompleteItemsElement = document.createElement("datalist");
           autocompleteItemsElement.setAttribute("class", "autocomplete-items");
+          autocompleteItemsElement.setAttribute("id", "list-example")
           inputContainerElement.appendChild(autocompleteItemsElement);
   
           /* For each item in the results */
           data.results.forEach((result, index) => {
             /* Create a DIV element for each element: */
-            const itemElement = document.createElement("div");
+            const itemElement = document.createElement("option");
             /* Set formatted address as item value */
             itemElement.innerHTML = result.formatted;
             autocompleteItemsElement.appendChild(itemElement);
@@ -215,10 +220,4 @@ function addressAutocomplete(containerElement, callback, options) {
     });
   }
   
-  addressAutocomplete(document.getElementById("autocomplete-container"), (data) => {
-    console.log("Selected option: ");
-    console.log(data);
-  }, {
-    placeholder: "Enter an address here"
-  });
   
