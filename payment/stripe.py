@@ -39,7 +39,7 @@ def iccheckout_stripe(cart_id):
             
         }],
         mode = 'payment',
-        success_url = DOMAIN+'/payment/payment-success',
+        success_url = DOMAIN+'/payment/payment-success?session_id={CHECKOUT_SESSION_ID}',
         cancel_url = DOMAIN+'/payment/payment-cancel',
         metadata={
             'cart_id':cart_id.cart_id,
@@ -55,19 +55,17 @@ class PaymentSuccessView(View):
     template_name ='payment/success.html'
 
     def get(self, request):
+        session = stripe.checkout.Session.retrieve(request.GET.get('session_id'))            
+        payment_status = session['payment_status']
+        print(payment_status)
+        email = session['customer_email']
+        message = 'yes'
         if 'cart_id' in request.session:
-            cart = Cart.objects.get(cart_id=request.session['cart_id'])
-            order_obj = cart.icorders
-            payment_obj = Payment.objects.get(order_id=order_obj.order_number) 
-            stripe_obj = stripe.checkout.Session.retrieve(payment_obj.stripe_session_id)
-            payment_status = stripe_obj['payment_status']
-            email = stripe_obj['customer_email']
-            message = 'yes'
             del request.session['cart_id']
             request.session.modified = True
-            return render(request, self.template_name, context={'message':message, 'payment_status':payment_status, 'email':email})
-        else:
-            return render(request, self.template_name)
+
+        return render(request, self.template_name, context={'message':message, 'payment_status':payment_status, 'email':email})
+
 
 class PaymentCancelView(View):
     login_url = '/auth/login'
@@ -103,7 +101,6 @@ def my_webhook_view(request):
 
 def fulfill_order(session):
     session_id = session['id']
-    print(session_id)
 
     session_object = stripe.checkout.Session.retrieve(session_id)
     
@@ -131,11 +128,9 @@ def fulfill_order(session):
             cart.appointment.time_slot.update_status(0)
             cart.appointment.delete()
             print('unpaid')
-        return True
 
     else:
         print('no cart id')
-        return False
 
 
 def increment_order_number():
