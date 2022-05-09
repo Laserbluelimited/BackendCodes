@@ -16,8 +16,8 @@ from client_mgt.models import CorporateClient
 stripe.api_key = STRIPE_API_KEY
 
 
-DOMAIN='http://127.0.0.1:8000' 
-# DOMAIN='http://13.40.3.25'
+# DOMAIN='http://127.0.0.1:8000' 
+DOMAIN='http://13.40.3.25'
 
 
 
