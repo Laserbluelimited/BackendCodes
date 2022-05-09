@@ -62,9 +62,10 @@ class PaymentSuccessView(View):
             stripe_obj = stripe.checkout.Session.retrieve(payment_obj.stripe_session_id)
             payment_status = stripe_obj['payment_status']
             email = stripe_obj['customer_email']
+            message = 'yes'
             del request.session['cart_id']
             request.session.modified = True
-            return render(request, self.template_name, context={'payment_status':payment_status, 'email':email})
+            return render(request, self.template_name, context={'message':message, 'payment_status':payment_status, 'email':email})
         else:
             return render(request, self.template_name)
 
