@@ -39,8 +39,8 @@ def iccheckout_stripe(cart_id):
             
         }],
         mode = 'payment',
-        success_url = DOMAIN+'/payment-success',
-        cancel_url = DOMAIN+'/payment-cancel',
+        success_url = DOMAIN+'/payment/payment-success',
+        cancel_url = DOMAIN+'/payment/payment-cancel',
         metadata={
             'cart_id':cart_id.cart_id,
             }
