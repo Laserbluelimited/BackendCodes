@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from booking import views as booking_views
 from client_mgt import views as client_mgt_views
+from payment import stripe
 
 app_name='display'
 
@@ -28,4 +29,7 @@ urlpatterns = [
     path('booking/ajax/filter-times', views.getTimes, name="ajax-times"),
     path('business/application', client_mgt_views.CorporateClientRegistrationWebView.as_view(), name='bus-application'),
     path('business/dashboard', views.CorporateDashboardView.as_view(), name='dashboard'),
+    path('payment-success', stripe.PaymentSuccessView.as_view(), name='payment-success'),
+    path('payment-cancel', stripe.PaymentCancelView.as_view(), name='payment-cancel'),
+    path('webhook', stripe.my_webhook_view, name='stripe-webhook'),
 ]

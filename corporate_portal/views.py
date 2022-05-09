@@ -16,8 +16,9 @@ from django.http import JsonResponse, HttpResponseForbidden
 import datetime
 from schedules.models import ScheduleDates, TimeSlots
 from booking.models import CCart, CorporateAppointment, increment_capp_no
-from . import cart, stripe
+from . import cart
 from client_mgt.forms import CorporateClientRegistrationForm, InternetClientRegistrationForm
+from payment import stripe
 from skote.settings import DEFAULT_PASSWORD
 
 
@@ -213,7 +214,7 @@ class CheckoutView(LoginRequiredMixin, GroupRequiredMixin, View):
         if "cor_cart_id" in request.session:
             cart_id = request.session['cor_cart_id']
             cart_obj = CCart.objects.get(cart_id=cart_id)
-            return stripe.iccheckout_stripe(cart_id=cart_obj, slug=company.slug)
+            return stripe.cccheckout_stripe(cart_id=cart_obj, slug=company.slug)
         else:
             return redirect('corporate_portal:booking', slug=company.slug)
 

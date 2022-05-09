@@ -37,7 +37,7 @@
               <ul class="bform-list" id="myUL">
                 {%for i in clinics%}
                 <li>
-                  <a role="button" data-value="{{i.get_address}}"  class="cardss"> 
+                  <a role="button" data-value="{{i.get_address}}"  class="cardss location"> 
                     <div>
                     <h2 class="fw-bold">{{i.get_city}}</h2>
                     <p class="text-muted">{{i.postal_code}}</p>
@@ -115,18 +115,12 @@
     <!-- form wizard init -->
     <script src="{%static 'libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'%}"></script>
     <script type="text/javascript">
-    
       var element = document.querySelector('#myInput');
-    
       var el = document.querySelectorAll('.cardss');
-    
-    
       el.forEach(e=>{
       e.addEventListener('click', function(){
         element.value = e.getAttribute('data-value');
-    
-    
-    
+        $('#nextBtn').click()
     
         $.ajax({
             type:'GET',

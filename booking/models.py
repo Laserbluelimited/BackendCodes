@@ -154,6 +154,7 @@ class ICOrders(models.Model):
     order_medium = models.CharField('order_medium', max_length=30, choices=[('portal','portal'),('website','website')])
     payment_medium = models.CharField('payment_medium', max_length=30, choices=[('stripe','stripe'),('transfer','transfer')])
     fulfilled = models.BooleanField('fulfilled', default=False)
+    cart = models.OneToOneField('Cart', on_delete=models.CASCADE)
 
 
     def save(self, *args, **kwargs):

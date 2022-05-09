@@ -1,1 +1,33 @@
-<h1>Payment Success</h1>
+
+{%extends 'display/base.html'%}
+{%load static%}
+
+{%block content%}
+
+  <div class="success">
+    <div class="container">
+      <div class="row">
+         <div class="col-lg-6 mx-auto mt-5">
+            <div class="payment">
+               <div class="payment_header">
+                  <div class="correct"><i class="fa fa-check" aria-hidden="true"></i></div>
+               </div>
+               {%if payment_success%}
+               <div class="content">
+                  <h1 class="display-1 mt-5">Success!</h1>
+                  <p class="fs-3 mb-5">Payment Status for {{email}}:{{payment_status}}</p>
+                  <p class="fs-3 mb-5">An email has been sent to {{email}}<a href="index.html" class="mb-5 mt-5 fs-3">Resend email</a></p>
+               </div>
+               {%else%}
+               <div class="content">
+                  <h1 class="display-1 mt-5">You need to book first</h1>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+    </div>
+  </div>
+  
+
+{%endblock%}
