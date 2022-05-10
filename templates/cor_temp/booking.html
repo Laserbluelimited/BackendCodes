@@ -26,7 +26,7 @@
 
                                         <h4 class="card-title">Book appointments for your drivers</h4>
                                         <p class="card-title-desc"></p>
-                                        <form method="post" action="{%url 'corporate_portal:booking' company.slug%}" id="book">
+                                        <form method="post" action="{%url 'corporate_portal:booking' company.slug%}" data-slug="{{company.slug}}" id="book">
                                         {%csrf_token%}
 
                                         <div class="mb-3 row">
@@ -155,20 +155,22 @@
             success:function(response){
 
                 jQuery(function(){
-            var datesEnabled = response.dates;
-            console.log(datesEnabled);
-
-            $(`#form-${num}-date`).datepicker({
-            dateFormat: 'dd-mm-yyyy',
-            beforeShowDay: function (date) {
-            var allDates = date.getDate() + '-' + `${date.getMonth() + 1}` + '-' + date.getFullYear();
-            if(datesEnabled.indexOf(allDates) != -1)
-            return true;
-            else
-            return false;
-                        }
-                    });          
-                })
+                // function change(data){enableDays=data}
+                
+                $(`#form-${num}-date`).datepicker('destroy');
+                var datesEnabled = response.dates;
+                console.log(datesEnabled);
+    
+                $(`#form-${num}-date`).datepicker({
+                  format:'mm/dd/yyyy',    beforeShowDay: function (date) {
+                var allDates = `${date.getDate()}`.padStart(2, 0) + '-' + `${date.getMonth() + 1}`.padStart(2,0)+ '-' + date.getFullYear();console.log(allDates)
+                if(datesEnabled.indexOf(allDates) != -1)
+                return true;
+                else
+                return false;
+                }
+                });          
+            })
             }
         })
     }

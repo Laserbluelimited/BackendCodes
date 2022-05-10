@@ -18,6 +18,6 @@ urlpatterns = [
     path('<slug>/driver-list', views.DriverListView.as_view(), name='driver-list'),
     path('<slug>/<driver>-edit', views.DriverEditView.as_view(), name='driver-edit'),
     path('<slug>/<driver>-delete', views.del_driver, name='driver-delete'),
-    path('<slug>/cart-delete', views.DeleteCartView.as_view(), name='cart-delete'),
+    path('<slug>/del-cart', views.DeleteCartView.as_view(), name='cart-del'),
 ]
 

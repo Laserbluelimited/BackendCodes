@@ -60,7 +60,7 @@ assets
                                                                                     <h6 class="m-0 text-end">Total:</h6>
                                                                                 </td>
                                                                                 <td>
-                                                                                    $ 675
+                                                                                    ${{basket.price}}
                                                                                 </td>
                                                                             </tr>
                                                                         </tbody>
@@ -75,7 +75,7 @@ assets
                                         </div>
                                         <div class="row mt-4">
                                             <div class="col-sm-6">
-                                                <a href="{% url 'corporate_portal:cart-delete' company.slug %}" class="btn text-muted d-none d-sm-inline-block btn-link">
+                                                <a href="{% url 'corporate_portal:cart-del' company.slug %}" class="btn text-muted d-none d-sm-inline-block btn-link">
                                                     <i class="mdi mdi-arrow-left me-1"></i> Back to Booking </a>
                                             </div> <!-- end col -->
                                             <div class="col-sm-6">

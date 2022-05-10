@@ -16,8 +16,8 @@ from client_mgt.models import CorporateClient
 stripe.api_key = STRIPE_API_KEY
 
 
-# DOMAIN='http://127.0.0.1:8000' 
-DOMAIN='http://13.40.3.25'
+DOMAIN='http://127.0.0.1:8000' 
+# DOMAIN='http://13.40.3.25'
 
 
 
@@ -63,6 +63,9 @@ class PaymentSuccessView(View):
         if 'cart_id' in request.session:
             del request.session['cart_id']
             request.session.modified = True
+        if session['metadata']['corporate']:
+            company = CorporateClient.objects.get(main_contact_email=email)
+            return render(request, self.template_name, context={'message':message, 'payment_status':payment_status, 'email':email, 'company':company})
 
         return render(request, self.template_name, context={'message':message, 'payment_status':payment_status, 'email':email})
 
@@ -127,7 +130,7 @@ def fulfill_order(session):
         else:
             cart.appointment.time_slot.update_status(0)
             cart.appointment.delete()
-            print('unpaid')
+            cart.save()
 
     else:
         print('no cart id')
@@ -147,7 +150,7 @@ def increment_order_number():
 
 
 
-def cccheckout_stripe(cart_id, slug):
+def cccheckout_stripe(cart_id):
     session = stripe.checkout.Session.create(
         customer_email= cart_id.get_email(),
         line_items=[{
@@ -162,10 +165,11 @@ def cccheckout_stripe(cart_id, slug):
             
         }],
         mode = 'payment',
-        success_url = DOMAIN+'/business/'+slug+'/success',
-        cancel_url = DOMAIN +'/business/'+slug+'/cancel',
+        success_url = DOMAIN+'/payment/'+'payment-success?session_id={CHECKOUT_SESSION_ID}',
+        cancel_url = DOMAIN +'/payment/'+'payment-cancel',
         metadata={
             'cart_id':cart_id.cart_id,
+            'corporate':True,
             }
     )
 
@@ -228,6 +232,6 @@ def fulfill_corporate_order(session):
         else:
             cart.appointment.time_slot.update_status(0)
             cart.appointment.delete()
-            print('unpaid')
+            cart.save()
 
     print('fulfilling order')

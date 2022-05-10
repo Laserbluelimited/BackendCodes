@@ -38,16 +38,15 @@ class ClinicRegistrationForm(forms.Form):
             raise forms.ValidationError('Invalid address')
         return address
 
-class ClinicEditForm(forms.Form):
-    address = forms.CharField(max_length=100, required=False)
-    # clinicmodel
-    name = forms.CharField(max_length=50)
+class ClinicEditForm(forms.ModelForm):
 
-    def clean_name(self):
-        name = self.cleaned_data['name']
-        if Clinic.objects.filter(name=name).exists():
-            raise forms.ValidationError('Name already in use')
-        return name
+    class Meta:
+        model=Clinic
+        fields=['name', 'email']
+    address = forms.CharField(max_length=100, required=False)
+    email = forms.EmailField(required=False)
+    # clinicmodel
+
 
     def clean_address(self):
         address = self.cleaned_data['address']

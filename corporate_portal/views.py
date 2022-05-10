@@ -172,14 +172,13 @@ class BookAppointmentView(LoginRequiredMixin, GroupRequiredMixin, View):
 
                 #4
             cart.add_to_cart(request, client=company, appointment=appointment_no, quantity=quantity, price=price)
-            print(cart.price)         
             if request.session.test_cookie_worked():
                 request.session.delete_test_cookie()
             
 
 
             
-            return redirect('corporate_portal:dashboard', slug = company.slug)
+            return redirect('corporate_portal:checkout', slug = company.slug)
         else:
             print(d_form.errors)
             print(d_form.non_form_errors())
@@ -201,12 +200,13 @@ class CheckoutView(LoginRequiredMixin, GroupRequiredMixin, View):
         if "cor_cart_id" in request.session:
             basket_id = request.session['cor_cart_id']
             basket = CCart.objects.get(cart_id=basket_id)
+            appointments = CorporateAppointment.objects.filter(appointment_no =basket.appointment)
+
             print(basket.price)
         else:
             basket = 'empty'
             return redirect('corporate_portal:booking', slug=company.slug)
 
-        appointments = CorporateAppointment.objects.filter(appointment_no =basket.appointment)
         return render(request, self.template_name, context={'company':company, 'appointments':appointments})
 
     def post(self, request, slug):
@@ -214,7 +214,7 @@ class CheckoutView(LoginRequiredMixin, GroupRequiredMixin, View):
         if "cor_cart_id" in request.session:
             cart_id = request.session['cor_cart_id']
             cart_obj = CCart.objects.get(cart_id=cart_id)
-            return stripe.cccheckout_stripe(cart_id=cart_obj, slug=company.slug)
+            return stripe.cccheckout_stripe(cart_id=cart_obj)
         else:
             return redirect('corporate_portal:booking', slug=company.slug)
 
@@ -245,7 +245,7 @@ class DriverListView(LoginRequiredMixin, GroupRequiredMixin, View):
     def get(self, request, slug):
         company = get_object_or_404(CorporateClient, slug=slug)
         check_user(current_user=request.user, slug_user=company.user)
-        drivers = InternetClient.objects.filter(cor_comp=company).order_by('id')
+        drivers = InternetClient.objects.filter(cor_comp=company).order_by('-id')
         paginator = Paginator(drivers, 5)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
@@ -359,7 +359,7 @@ def getDates(request, slug):
         """
         for i in dates:
             if i>= datetime.date.today():
-                m = i.strftime("%#d-%#m-%Y")
+                m = i.strftime("%d-%m-%Y")
                 yield m
 
 

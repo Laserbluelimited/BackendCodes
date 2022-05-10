@@ -35,12 +35,10 @@ def add_to_cart(request, client, appointment, price, quantity=1):
 def delete_cart(request):
     if 'cor_cart_id' in request.session:
         cart = CCart.objects.get(cart_id=request.session['cor_cart_id'])
-        app_obj = CorporateAppointment.objects.filter(appointment_no=cart.appointment_no)
+        app_obj = CorporateAppointment.objects.filter(appointment_no=cart.appointment)
         for i in app_obj:
             i.update_status(0)
-            i.save()
             i.time_slot.update_status(0)
             i.save()
 
-        del request.session['cor_cart_id']
 
