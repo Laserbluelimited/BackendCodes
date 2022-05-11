@@ -93,7 +93,7 @@
                                                                         <input type="text" class="form-control date"  name="form-{{i}}-date" id="form-{{i}}-date"  readonly>
                                                                     </div>
                                                                     
-                                                                    <div  class="mb-3 col-lg-2">
+                                                                    <div  class=" col-lg-2 mb-3">
 
                                                                         {%for error in f.time_slot.errors%}
                                                                         <label style="color: red; font-size: smaller;" class="error">{{error}}</label>
@@ -104,14 +104,14 @@
                                                                     </div>
                         
                 
-                                                                    <div class="col-lg-2 align-self-center">
-                                                                        <div class="d-grid">
-                                                                            <input data-repeater-delete type="button" class="btn btn-primary" id="{{i}}" value="Delete" onclick="delete_form(this)"/>
-                                                                        </div>
+                                                                    <div class="col-lg-2 mb-3">
+                                                                        <br>
+                                                                        <label for="resume">Delete? </label>
+                                                                        <input data-repeater-delete type="button" class="form-control btn btn-primary d-grid" id="{{i}}" value="Delete" onclick="delete_form(this)"/>
                                                                     </div>
                                                                 </div>
                                                                 {%endfor%}
-                                                            <input data-repeater-create type="button" class="btn btn-success mt-3 mt-lg-0" value="Add" id="add"/>
+                                                            <input data-repeater-create type="button"  class="btn btn-success mt-3 mt-lg-0" value="Add" id="add"/>
                                                                 
                                                             </div>
                                                             
@@ -122,7 +122,7 @@
                                             </div>
                                         </div>
                                                         <div class="d-flex flex-wrap gap-2">
-                                            <button type="submit"  class="btn btn-primary waves-effect waves-light">Save Changes</button>
+                                            <button type="submit"  class="btn btn-primary waves-effect waves-light">Proceed to Cart</button>
                                             <input type="reset" class="btn btn-secondary waves-effect waves-light" value="Cancel">
                                         </div>
                                     </form>

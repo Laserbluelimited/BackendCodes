@@ -19,5 +19,6 @@ urlpatterns = [
     path('<slug>/<driver>-edit', views.DriverEditView.as_view(), name='driver-edit'),
     path('<slug>/<driver>-delete', views.del_driver, name='driver-delete'),
     path('<slug>/del-cart', views.DeleteCartView.as_view(), name='cart-del'),
+    path('<slug>/orders', views.OrderListView.as_view(), name='order-list')
 ]
 

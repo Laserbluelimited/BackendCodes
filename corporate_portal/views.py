@@ -1,6 +1,6 @@
-from calendar import c
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
+from booking.models import CCOrders
 from authentication.models import User
 from django.core.paginator import Paginator
 from django.contrib.auth import authenticate, login, logout
@@ -90,7 +90,7 @@ class AuthLoginView(View):
 
 
 class DashboardView(LoginRequiredMixin, GroupRequiredMixin, View):
-    login_url = '/auth/login'
+    login_url = '/business/login'
     redirect_field_name = 'redirect_to'
     group_required = [u'Corporate group']
     
@@ -101,7 +101,7 @@ class DashboardView(LoginRequiredMixin, GroupRequiredMixin, View):
 
 class AddDriverView(LoginRequiredMixin, GroupRequiredMixin, View):
     template_name = 'cor_temp/driver-form.html'
-    login_url = '/auth/login'
+    login_url = '/business/login'
     redirect_field_name = 'redirect_to'
     group_required = [u'Corporate group']
 
@@ -127,7 +127,7 @@ class AddDriverView(LoginRequiredMixin, GroupRequiredMixin, View):
 
 class BookAppointmentView(LoginRequiredMixin, GroupRequiredMixin, View):
     template_name = 'cor_temp/booking.html'
-    login_url = '/auth/login'
+    login_url = '/business/login'
     redirect_field_name = 'redirect_to'
     group_required = [u'Corporate group']
     company=None
@@ -190,7 +190,7 @@ class BookAppointmentView(LoginRequiredMixin, GroupRequiredMixin, View):
 
 class CheckoutView(LoginRequiredMixin, GroupRequiredMixin, View):
     template_name = 'cor_temp/checkout.html'
-    login_url = '/auth/login'
+    login_url = '/business/login'
     redirect_field_name = 'redirect_to'
     group_required = [u'Corporate group']
 
@@ -207,7 +207,7 @@ class CheckoutView(LoginRequiredMixin, GroupRequiredMixin, View):
             basket = 'empty'
             return redirect('corporate_portal:booking', slug=company.slug)
 
-        return render(request, self.template_name, context={'company':company, 'appointments':appointments})
+        return render(request, self.template_name, context={'company':company, 'appointments':appointments, 'basket':basket})
 
     def post(self, request, slug):
         company = get_object_or_404(CorporateClient, slug=slug)
@@ -221,7 +221,7 @@ class CheckoutView(LoginRequiredMixin, GroupRequiredMixin, View):
 
 class DeleteCartView(LoginRequiredMixin, GroupRequiredMixin, View):
     template_name = 'cor_temp/checkout.html'
-    login_url = '/auth/login'
+    login_url = '/business/login'
     redirect_field_name = 'redirect_to'
     group_required = [u'Corporate group']
 
@@ -229,7 +229,6 @@ class DeleteCartView(LoginRequiredMixin, GroupRequiredMixin, View):
         company = get_object_or_404(CorporateClient, slug=slug)
         check_user(current_user=request.user, slug_user=company.user)
         if "cor_cart_id" in request.session:
-            cart.delete_cart(request)
             del request.session['cor_cart_id']
             return redirect('corporate_portal:booking', slug=company.slug)
         else:
@@ -239,7 +238,7 @@ class DeleteCartView(LoginRequiredMixin, GroupRequiredMixin, View):
 
 class DriverListView(LoginRequiredMixin, GroupRequiredMixin, View):
     permission_required = ('clinic_mgt.view_doctor')
-    login_url = '/auth/login'
+    login_url = '/business/login'
     redirect_field_name = 'redirect_to'
     group_required = [u'Corporate group']
     def get(self, request, slug):
@@ -251,8 +250,20 @@ class DriverListView(LoginRequiredMixin, GroupRequiredMixin, View):
         page_obj = paginator.get_page(page_number)
         return render(request, 'cor_temp/driver-table.html', context={'page_obj':page_obj, 'company':company})
 
+
+class OrderListView(LoginRequiredMixin,GroupRequiredMixin, View):
+    login_url = '/business/login'
+    redirect_field_name = 'redirect_to'
+    group_required = [u'Corporate group']
+
+    def get(self, request, slug):
+        company = get_object_or_404(CorporateClient, slug=slug)
+        check_user(slug_user=company.user, current_user=request.user)
+        orders = CCOrders.objects.filter(c_client=company)
+        return render(request, 'cor_temp/orders.html', context={'company':company, 'orders':orders})
+
 class CompanyEditView(LoginRequiredMixin,GroupRequiredMixin, View):
-    login_url = '/auth/login'
+    login_url = '/business/login'
     redirect_field_name = 'redirect_to'
     group_required = [u'Corporate group']
     form_class = CorporateClientRegistrationForm
@@ -302,7 +313,7 @@ class CompanyEditView(LoginRequiredMixin,GroupRequiredMixin, View):
         return render(request, 'cor_temp/company-edit.html', context={'company':company, 'form':form})
 
 class DriverEditView(LoginRequiredMixin,GroupRequiredMixin, View):
-    login_url = '/auth/login'
+    login_url = '/business/login'
     redirect_field_name = 'redirect_to'
     group_required = [u'Corporate group']
     form_class = InternetClientRegistrationForm
@@ -357,20 +368,23 @@ def getDates(request, slug):
         """
         This generator puts the dates in the format accepted by the bootstrap datepicker
         """
-        for i in dates:
+        for i in new_dates:
             if i>= datetime.date.today():
                 m = i.strftime("%d-%m-%Y")
                 yield m
 
 
     location = request.GET.get('clinic')
-    print(location)
-    dates = ScheduleDates.objects.filter(clinic=location).values_list('date', flat=True).distinct()
+    dates = ScheduleDates.objects.filter(clinic=location)
+    for i in dates:
+        if TimeSlots.objects.filter(schedule=i, status=0).exists()==False:
+            dates = dates.exclude(id=i.id)
+    new_dates = dates.values_list('date', flat=True).distinct()
     date_list = list(gen())
     response_data = {
         'dates':date_list
     }
-    print(dates)
+    print(new_dates)
     return JsonResponse(response_data)
 
 def getTimes(request, slug):

@@ -44,11 +44,11 @@
                                                         <input type="text" class="form-control"  name="cor_comp" value="{{company.get_name}}" readonly>
                                                     </div>
 
-                                                    <div class="col-lg-2 align-self-center">
-                                                        <div class="d-grid">
-                                                            <input data-repeater-delete type="button" class="btn btn-primary" id="{{i}}" value="Delete" onclick="delete_form(this)"/>
-                                                        </div>
-                                                    </div>
+                                                    <div class="col-lg-2 mb-3">
+
+                                                        <label for="resume">Delete? </label>
+                                                            <input data-repeater-delete type="button" class="btn btn-primary d-grid" id="{{i}}" value="Delete" onclick="delete_form(this)"/>
+                                              </div>
                                                 </div>
                                                 {%endfor%}
                                                 

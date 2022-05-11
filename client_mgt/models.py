@@ -53,7 +53,7 @@ class InternetClient(models.Model):
     email = models.EmailField('email', unique=True)
     user = models.OneToOneField('authentication.User', on_delete=models.CASCADE, null=True)
     title = models.CharField('title', max_length=20, choices=TITLE_CHOICES, null=True)
-    phone = models.IntegerField('phone_number', unique=False)
+    phone = models.CharField('phone_number', unique=False, max_length=15)
     dob = models.DateField('date_of_birth', null=True)
     gender = models.CharField('gender', choices=GENDER_CHOICES, max_length=50, null=True)
     address = models.CharField('address', max_length=255, null=True)
@@ -72,7 +72,7 @@ class InternetClient(models.Model):
         db_table = 'internet_client'
 
     def __str__(self):
-        return self.first_name + self.last_name
+        return self.first_name +' '+ self.last_name
 
     def save(self, *args, **kwargs):
         if not self.id:

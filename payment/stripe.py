@@ -16,8 +16,8 @@ from client_mgt.models import CorporateClient
 stripe.api_key = STRIPE_API_KEY
 
 
-DOMAIN='http://127.0.0.1:8000' 
-# DOMAIN='http://13.40.3.25'
+# DOMAIN='http://127.0.0.1:8000' 
+DOMAIN='http://13.40.3.25'
 
 
 
@@ -65,6 +65,9 @@ class PaymentSuccessView(View):
             request.session.modified = True
         if session['metadata']['corporate']:
             company = CorporateClient.objects.get(main_contact_email=email)
+        if 'cor_cart_id' in request.session:
+            del request.session['cor_cart_id']
+            request.session.modified = True
             return render(request, self.template_name, context={'message':message, 'payment_status':payment_status, 'email':email, 'company':company})
 
         return render(request, self.template_name, context={'message':message, 'payment_status':payment_status, 'email':email})
@@ -212,26 +215,33 @@ def fulfill_corporate_order(session):
         #update appointment status, update client status, update time slot status
 
         cart = CCart.objects.get(cart_id=session_object['metadata']['cart_id'])
-        app_obj = CorporateAppointment.objects.filter(appointment_no=cart.appointment_no)
+        app_obj = CorporateAppointment.objects.filter(appointment_no=cart.appointment)
         order_no = increment_order_number()
         for i in app_obj:
-            order_obj = CCOrders.objects.create(c_client=cart.client,d_client=i.client,quantity=cart.quantity, appointment=cart.appointment, product=i.product, total_price=session_object['amount_total'], payment_status=session_object['payment_status'], order_medium='website', payment_medium='stripe')
+            order_obj = CCOrders.objects.create(order_number=order_no, c_client=cart.client,d_client=i.client,quantity=cart.quantity, appointment=cart.appointment, total_price=session_object['amount_total'], payment_status=session_object['payment_status'], order_medium='website', payment_medium='stripe')
         payment_obj = Payment.objects.create(order_id=order_no, stripe_session_id=session_id, status=session_object['payment_status'], total_amount=session_object['amount_total'])
-        invoice=CCInvoice.objects.create(order_id=order_no, payment=payment_obj)
+        invoice=CCInvoice.objects.create(order=order_no, payment=payment_obj)
 
         if session_object['payment_status']=='paid':
-            cart.appointment.update_status(1)
-            cart.client.update_status(1)
-            cart.appointment.time_slot.update_status(2)
-            cart.save()
+            app_obj = CorporateAppointment.objects.filter(appointment_no=cart.appointment)
+            for i in app_obj:
+
+                i.update_status(1)
+                i.client.update_status(1)
+                i.time_slot.update_status(2)
+                i.save()
 
 
             #send email
             #delete cart
         
         else:
-            cart.appointment.time_slot.update_status(0)
-            cart.appointment.delete()
-            cart.save()
+            app_obj = CorporateAppointment.objects.filter(appointment_no=cart.appointment)
+            for i in app_obj:
+
+                i.time_slot.update_status(0)
+                i.save()
+
+                i.delete()
 
     print('fulfilling order')

@@ -97,7 +97,7 @@ class Appointment(models.Model):
     id = models.IntegerField('appointment_id', primary_key=True)
     appointment_id = models.CharField('appointment_id', max_length=20, default=increment_app_id)
     client = models.ForeignKey('client_mgt.InternetClient', on_delete=models.CASCADE)
-    time_slot = models.OneToOneField('schedules.Timeslots', on_delete=models.CASCADE)
+    time_slot = models.ForeignKey('schedules.Timeslots', on_delete=models.CASCADE)
     notes = models.TextField('notes', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -279,7 +279,7 @@ class CorporateAppointment(models.Model):
     product = models.ForeignKey('prod_mgt.Product', on_delete=models.CASCADE)
     client = models.ForeignKey('client_mgt.InternetClient', on_delete=models.CASCADE)
     c_client = models.ForeignKey('client_mgt.CorporateClient', on_delete=models.CASCADE)
-    time_slot = models.OneToOneField('schedules.Timeslots', on_delete=models.CASCADE)
+    time_slot = models.ForeignKey('schedules.Timeslots', on_delete=models.CASCADE)
     notes = models.TextField('notes', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -367,9 +367,6 @@ class CCOrders(models.Model):
     fulfilled = models.BooleanField('fulfilled', default=False)
 
 
-    def save(self, *args, **kwargs):
-        self.total_price = self.quantity*self.product.price
-        return super(ICOrders,self).save(*args, **kwargs)
 
     def __str__(self):
         return self.order_number
@@ -383,11 +380,12 @@ class CCOrders(models.Model):
     def get_appointment(self):
         return self.appointment
     
-    def get_product(self):
-        return self.product
+    # def get_product(self):
+    #     app_obj = CorporateAppointment.objects.get(appointment_no=self.appointment, client=self.d_client, c_client=self.c_client,)
+    #     return self.product
 
     def get_client(self):
-        return self.client
+        return self.d_client
 
     def get_date_placed(self):
         return self.placed_at

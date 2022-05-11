@@ -3,6 +3,18 @@
 {% load crispy_forms_tags %}
 {% load socialaccount %}
 {% block title %}Login{% endblock title %}
+{%block extra_css%}
+<style type="text/css">
+    .login_bg {
+    background-color: rgba(2,169,205,0.25)!important;
+}
+.login_btn{
+    color: #fff;
+    background-color: #02A9CD;
+    border-color: #02A9CD;
+}
+</style>
+{%endblock%}
 {% block content %}
 <body>
     <div class="account-pages my-5 pt-sm-5">
@@ -10,16 +22,13 @@
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6 col-xl-5">
                     <div class="card overflow-hidden">
-                        <div class="bg-primary bg-soft">
+                        <div class="login_bg">
                             <div class="row">
                                 <div class="col-7">
                                     <div class="text-primary p-4">
                                         <h5 class="text-primary">Welcome Back !</h5>
                                         <p>Sign in to continue to Dmedicals</p>
                                     </div>
-                                </div>
-                                <div class="col-5 align-self-end">
-                                    <img src="{% static 'display/img/DriverMEDICAL LOGO 2.png' %}" alt="" class="img-fluid">
                                 </div>
                             </div>
                         </div>
@@ -98,7 +107,7 @@
                         
                         <div>
                             <p>Don't have an account ? <a href="" class="fw-medium text-primary"> Signup now </a> </p>
-                            <p>© <script>document.write(new Date().getFullYear())</script> Skote. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
+                            <p>© <script>document.write(new Date().getFullYear())</script> Compliance Medicals. Crafted with <i class="mdi mdi-heart text-danger"></i> by LaserBlueLimited</p>
                         </div>
                     </div>
 

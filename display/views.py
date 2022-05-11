@@ -77,7 +77,7 @@ def getDates(request):
         """
         This generator puts the dates in the format accepted by the bootstrap datepicker
         """
-        for i in dates:
+        for i in new_dates:
             if i>= datetime.date.today():
                 m = i.strftime("%d-%m-%Y")
                 yield m
@@ -86,9 +86,12 @@ def getDates(request):
     location = request.GET.get('clinic')
     print(location + 's')
     clinic = Clinic.objects.get(address=location)
-    dates = ScheduleDates.objects.filter(clinic=clinic).values_list('date', flat=True).distinct()
+    dates = ScheduleDates.objects.filter(clinic=location)
+    for i in dates:
+        if TimeSlots.objects.filter(schedule=i, status=0).exists()==False:
+            dates = dates.exclude(id=i.id)
+    new_dates = dates.values_list('date', flat=True).distinct()
     date_list = list(gen())
-    print(date_list)
     response_data = {
         'dates':date_list
     }
