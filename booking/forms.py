@@ -27,7 +27,7 @@ class OrderForm(forms.ModelForm):
 
     class Meta:
         model = ICOrders
-        exclude = ['id', 'order_number', 'appointment', 'fulfilled', 'total_price', 'product']
+        exclude = ['id', 'order_number', 'appointment', 'fulfilled', 'total_price', 'product', 'cart']
 
 
 

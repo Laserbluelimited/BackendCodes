@@ -3,6 +3,12 @@
 }
 .login_btn{
     color: #fff;
-    background-color: #02A9CD;
+    background-color: #02A9CD; 
     border-color: #02A9CD;
+}
+.dash_text{
+    color:#D5F3FF;
+}
+.side_color{
+    background:#015668;
 }

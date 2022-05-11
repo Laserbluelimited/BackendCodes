@@ -2,6 +2,7 @@ from django import views
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
+from django.core.paginator import Paginator
 from clinic_mgt.models import Clinic
 from schedules.models import ScheduleDates, TimeSlots
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -70,8 +71,11 @@ class AppointmentTableView(LoginRequiredMixin, View):
     template_name ='orders/appointment-table.html' 
     def get(self, request):
         appntments = Appointment.objects.all()
+        paginator = Paginator(appntments, 5)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
 
-        return render(request, self.template_name, context={'appointments':appntments})
+        return render(request, self.template_name, context={'appointments':appntments, 'page_obj':page_obj})
  
 
 
@@ -81,9 +85,12 @@ class ICOrderTableView(LoginRequiredMixin, View):
     redirect_field_name = 'redirect_to'
     template_name ='orders/order-list.html' 
     def get(self, request):
-        orders = ICOrders.objects.all()
+        orders = ICOrders.objects.all().order_by('-id')
+        paginator = Paginator(orders, 5)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
 
-        return render(request, self.template_name, context={'orders':orders})
+        return render(request, self.template_name, context={'orders':orders, 'page_obj':page_obj})
 
 
 
@@ -119,6 +126,9 @@ class ICPlaceOrderAdminView(LoginRequiredMixin, views.View):
             order_obj.save()
 
             return redirect('portal:icorder-list')
+            
+        else:
+            print(form.errors)
 
 
         return render(request, self.template_name, context={'form':form})
@@ -228,14 +238,18 @@ def getDates(request):
         """
         This generator puts the dates in the format accepted by the bootstrap datepicker
         """
-        for i in dates:
+        for i in new_dates:
             if i>= datetime.date.today():
                 m = i.strftime("%#d-%#m-%Y")
                 yield m
 
 
     location = request.GET.get('clinic')
-    dates = ScheduleDates.objects.filter(clinic=location).values_list('date', flat=True).distinct()
+    dates = ScheduleDates.objects.filter(clinic=location)
+    for i in dates:
+        if TimeSlots.objects.filter(schedule=i, status=0).exists()==False:
+            dates = dates.exclude(id=i.id)
+    new_dates = dates.values_list('date', flat=True).distinct()
     date_list = list(gen())
     response_data = {
         'dates':date_list
@@ -250,10 +264,9 @@ def getTimes(request):
     def gen():
         for i in ScheduleDates.objects.filter(date=date, clinic=location):
             for p in TimeSlots.objects.filter(schedule=i, status=0):
-                if p.start_time >= datetime.datetime.now().strftime('%H:%M'):
-                    l = p.id
-                    k =p.start_time.strftime('%H:%M') + ' - ' + p.end_time.strftime('%H:%M')
-                    yield {"id":l, "time":k}
+                l = p.id
+                k =p.start_time.strftime('%H:%M') + ' - ' + p.end_time.strftime('%H:%M')
+                yield {"id":l, "time":k}
     
     location = request.GET.get('clinic')
     date = request.GET.get('date')
