@@ -44,6 +44,7 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="mb-3 row alert"></div>
 
                                         <div class="row">
                                             <div class="col-12">
@@ -64,7 +65,7 @@
                                                                         <label style="color: red; font-size: smaller;" class="error">{{error}}</label>
                                                                         {%endfor%}<br>
                                                                         <label for="name">Driver</label>
-                                                                        <select class="form-select" name="form-{{i}}-driver">
+                                                                        <select class="form-select" name="form-{{i}}-driver" >
                                                                             <option>Select</option>
                                                                             {%for choice in d_query%}
                                                                             <option value="{{choice.pk}}">{{choice.get_name}}</option>
@@ -77,7 +78,7 @@
                                                                         <label style="color: red; font-size: smaller;" class="error">{{error}}</label>
                                                                         {%endfor%}<br>
                                                                         <label for="name">Product</label>
-                                                                        <select class="form-select" name="form-{{i}}-product">
+                                                                        <select class="form-select" name="form-{{i}}-product" >
                                                                             <option>Select</option>
                                                                             {%for choice in f.product.field.choices%}
                                                                             <option value="{{choice.0}}">{{choice.1}}</option>
@@ -122,8 +123,9 @@
                                             </div>
                                         </div>
                                                         <div class="d-flex flex-wrap gap-2">
-                                            <button type="submit"  class="btn btn-primary waves-effect waves-light">Proceed to Cart</button>
+                                            <button type="submit"  class="btn btn-success waves-effect waves-light">Proceed to Cart</button>
                                             <input type="reset" class="btn btn-secondary waves-effect waves-light" value="Cancel">
+                                            <!-- <button  class="btn btn-primary waves-effect waves-light" id="save">Save</button> -->
                                         </div>
                                     </form>
 
@@ -138,110 +140,5 @@
         <!-- Plugins js -->
         <script src="{%static 'libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'%}"></script>
 
-
-<script type="text/javascript">
-
-
-    function filter_date(num){
-        $.ajax({
-            type:'GET',
-            url: 'appointment/ajax/filter-dates',
-            data:{
-                'clinic' : $("#location").val(),
-
-            },
-            dataType:'json',
-
-            success:function(response){
-
-                jQuery(function(){
-                // function change(data){enableDays=data}
-                
-                $(`#form-${num}-date`).datepicker('destroy');
-                var datesEnabled = response.dates;
-                console.log(datesEnabled);
-    
-                $(`#form-${num}-date`).datepicker({
-                  format:'mm/dd/yyyy',    beforeShowDay: function (date) {
-                var allDates = `${date.getDate()}`.padStart(2, 0) + '-' + `${date.getMonth() + 1}`.padStart(2,0)+ '-' + date.getFullYear();console.log(allDates)
-                if(datesEnabled.indexOf(allDates) != -1)
-                return true;
-                else
-                return false;
-                }
-                });          
-            })
-            }
-        })
-    }
-
-     function filter_time(num){
-            $.ajax({
-                type:'GET',
-                url:'appointment/ajax/filter-times',
-                data:{
-                    'clinic':$('#location').val(),
-                    'date':$(`input[name="form-${num}-date"]`).val(),
-                },
-                dataType:'json',
-                success:function(response){
-                    var select = document.getElementById(`form-${num}-time`);
-                    select.innerHTML = null;
-                    for (var i=0;i<response.times.length;i++){
-                        var option = document.createElement('option');
-                        option.value = response.times[i]['id'];
-                        option.innerHTML = response.times[i]['time'];
-                        select.appendChild(option)
-                    }
-                }
-        })
-     }
-                    
-
-        $(document).on('click','#add', function(){
-
-        var total = document.getElementById('id_form-TOTAL_FORMS')
-
-        var form = document.querySelectorAll('.bookrow');
-        var container = document.getElementById('form');
-        var before = document.getElementById('add');
-        var formnum = form.length-1
-        var newform = form[0].cloneNode(true)
-        var select = newform.childNodes[7].childNodes[5].options
-        while (select.length > 0){select.remove(0);}
-
-        console.log(select)
-        let formRegex = RegExp(`form-(\\d){1}-`,'g')
-        formnum++
-        newform.innerHTML = newform.innerHTML.replace(formRegex, `form-${formnum}-`);
-
-        container.insertBefore(newform,before);
-
-
-        total.setAttribute('value', `${formnum+1}`);
-        filter_date(formnum);
-
-        $(`input[name="form-${formnum}-date"]`).on("change", function(){filter_time(formnum);})
-        })
-
-
-        function delete_form(e){
-        console.log('k')
-        var total = document.getElementById('id_form-TOTAL_FORMS');
-        if (window.confirm('Are you sure you want to delete?')){
-        m=e.parentNode.parentNode.parentNode
-        m.remove()
-        total.setAttribute('value', `${formnum-1}`)
-        }
-        }
-
-        document.getElementById('location').addEventListener("change", function (){
-                $('#repeater').load(window.location.href +" #repeater", function(){
-                    filter_date(0);
-                    $('input[name="form-0-date"]').on("change", function(){filter_time(0);})
-                });
-                })
-
-        </script>
-
-{% endblock %}
+        <script src="{%static 'js/save-later.js'%}"></script>
+        {% endblock %}
