@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from booking.models import CCOrders
 from authentication.models import User
 from django.core.paginator import Paginator
 from django.contrib.auth import authenticate, login, logout
@@ -15,10 +14,11 @@ from prod_mgt.models import Product
 from django.http import JsonResponse, HttpResponseForbidden
 import datetime
 from schedules.models import ScheduleDates, TimeSlots
-from booking.models import CCart, CorporateAppointment, increment_capp_no
+from booking.models import CCart, CorporateAppointment, increment_capp_no, CCInvoice, CCOrders
 from . import cart
 from client_mgt.forms import CorporateClientRegistrationForm, InternetClientRegistrationForm
 from payment import stripe
+from payment.models import Payment
 from skote.settings import DEFAULT_PASSWORD
 
 
@@ -358,6 +358,23 @@ class DriverEditView(LoginRequiredMixin,GroupRequiredMixin, View):
             client_obj.save()
             return redirect('corporate_portal:driver-list', slug=company.slug)
         return render(request, 'cor_temp/driver-edit.html', context={'company':company,'driver':driver, 'form':form})
+
+
+class InvoiceView(LoginRequiredMixin,GroupRequiredMixin, View):
+    login_url = '/business/login'
+    redirect_field_name = 'redirect_to'
+    group_required = [u'Corporate group']
+
+    def get(self, request, slug, order_no):
+        company = get_object_or_404(CorporateClient, slug=slug)
+        invoice = get_object_or_404(CCInvoice, order=order_no)
+        order = CCOrders.objects.filter(order_number=invoice.order).first()
+        appointments = CorporateAppointment.objects.filter(appointment_no=order.appointment)
+        total = float(invoice.payment.total_amount)/100
+
+        return render(request, 'payment/invoice_cor.html', context={'invoice':invoice,'apps':appointments,'total':total, 'order':order, 'company':company})
+
+
 
 def getDates(request, slug):
 

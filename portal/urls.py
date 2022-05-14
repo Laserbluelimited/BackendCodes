@@ -58,6 +58,7 @@ urlpatterns = [
     path('payment-cancel', payment_views.PaymentCancelView.as_view(), name='payment-cancel'),
     path('icorder-list', booking_views.ICOrderTableView.as_view(), name='icorder-list'),
     path('appointment-table', booking_views.AppointmentTableView.as_view(), name='app-tab'),
+    path('invoice/<slug>', booking_views.ICInvoiceView.as_view(), name='invoice'),
     path('appointment-calendar', booking_views.AppointmentCalendarView.as_view(), name='app-cal'),
     path('appointment/ajax/filter-dates', booking_views.getDates, name='ajax-dates'),
     path('appointment/ajax/filter-times', booking_views.getTimes, name="ajax-times"),

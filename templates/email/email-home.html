@@ -7,9 +7,8 @@
     <div class="col-lg-4">
         <div class="card card-body">
             <h4 class="card-title">Send an Email</h4>
-            <p class="card-text">With supporting text below as a natural lead-in to additional
-                content.</p>
-            <a href="javascript: void(0);" class="btn btn-primary waves-effect waves-light">Send</a>
+            <p class="card-text">Send Custom Email</p>
+            <a href="javascript: void(0);" class="btn btn-primary waves-effect waves-light" style="background-color:#015668; border-color: #015668;">Send</a>
         </div>
     </div>
     {%for email in emails%}
@@ -17,7 +16,7 @@
         <div class="card card-body text-center">
             <h4 class="card-title">Edit {{email.get_title}} Email</h4>
             <p class="card-text">{{email.get_description}}</p>
-            <a href="{%url 'portal:email-edit' email.get_slug%}" class="btn btn-primary waves-effect waves-light">Edit</a>
+            <a href="{%url 'portal:email-edit' email.get_slug%}" class="btn btn-primary waves-effect waves-light" style="background-color:#015668; border-color: #015668;">Edit</a>
         </div>
     </div>
     {%endfor%}
@@ -26,7 +25,7 @@
         <div class="card card-body">
             <h4 class="card-title">Create Custom Email</h4>
             <p class="card-text">Create a custom e-mail</p>
-            <a href="{%url 'portal:email-create'%}" class="btn btn-primary waves-effect waves-light">Create</a>
+            <a href="{%url 'portal:email-create'%}" class="btn btn-primary waves-effect waves-light" style="background-color:#015668; border-color: #015668;">Create</a>
         </div>
     </div>
 

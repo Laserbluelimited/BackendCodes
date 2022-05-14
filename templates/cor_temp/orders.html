@@ -24,6 +24,7 @@
                                             <thead>
                                             <tr>
                                                 <th>ID</th>
+                                                <th>Generate Invoice</th>
                                                 <th>Order Number</th>
                                                 <th>Appointment ID</th>
                                                 <th>Driver</th>
@@ -42,7 +43,7 @@
                                                 {%for i in orders%}
                                             <tr>
                                                 <td>{{i.get_id}}</td>
-                                                <!-- <td><button type="button" class="btn btn-primary btn-sm btn-rounded" >Generate Invoice</button></td> -->
+                                                <td><a href="{%url 'corporate_portal:invoice' slug=company.slug order_no=i.order_number%}" class="btn btn-primary btn-sm btn-rounded" >Generate Invoice</a></td>
                                                 <td>{{i.get_order_number}}</td>
                                                 <td>{{i.get_appointment}}</td>
                                                 <td>{{i.get_client}}</td>

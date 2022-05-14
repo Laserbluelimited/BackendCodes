@@ -1,6 +1,3 @@
-import os
-from re import T
-from urllib import request
 import stripe
 from skote.settings import STRIPE_API_KEY
 from django.shortcuts import redirect, render
@@ -10,7 +7,7 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from client_mgt.models import CorporateClient
-
+from e_mail import send
 
 
 stripe.api_key = STRIPE_API_KEY

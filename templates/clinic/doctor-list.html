@@ -17,7 +17,7 @@
                                             </div>
                                             <div class="col-sm-8">
                                                 <div class="text-sm-end">
-                                                    <a href="{%url 'portal:doctor-registration'%}"><button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> Add New Doctor</button></a>
+                                                    <a href="{%url 'portal:doctor-registration'%}"><button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2" style="background-color:#015668; border-color: #015668;"><i class="mdi mdi-plus me-1"></i> Add New Doctor</button></a>
                                                 </div>
                                             </div><!-- end col-->
                                         </div>
@@ -60,7 +60,7 @@
                                                         </td>
                                                         <td>
                                                             <!-- Button trigger modal -->
-                                                            <a href="{%url 'portal:doctor-detail' doc.slug%}" ><button type="button" class="btn btn-primary btn-sm btn-rounded" data-bs-toggle="modal" data-bs-target=".orderdetailsModal{{doc.id}}">
+                                                            <a href="{%url 'portal:doctor-detail' doc.slug%}" ><button type="button" class="btn btn-primary btn-sm btn-rounded" style="background-color:#02A9CD; border-color: #02A9CD;">
                                                                 View Details
                                                             </button></a>
 
@@ -94,9 +94,9 @@
                                                 </a>
                                             </li>
                                             {%endif%}
-                                            <li class="page-item active"><a class="page-link" href="?page={{page_obj.number}}">{{page_obj.number}}</a></li>
+                                            <li class="page-item active"><a class="page-link" href="?page={{page_obj.number}}" style="background-color:#015668; border-color: #015668;">{{page_obj.number}}</a></li>
                                             {%if page_obj.has_next%}
-                                            <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">{{page_obj.next_page_number}}</a></li>
+                                            <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}" style="background-color:#015668; border-color: #015668;">{{page_obj.next_page_number}}</a></li>
                                             <li class="page-item"><a class="page-link" href="javascript: void(0);">...</a></li>
                                             {%endif%}
                                             {%if page_obj.has_next%}

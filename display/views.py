@@ -86,7 +86,7 @@ def getDates(request):
     location = request.GET.get('clinic')
     print(location + 's')
     clinic = Clinic.objects.get(address=location)
-    dates = ScheduleDates.objects.filter(clinic=location)
+    dates = ScheduleDates.objects.filter(clinic=clinic)
     for i in dates:
         if TimeSlots.objects.filter(schedule=i, status=0).exists()==False:
             dates = dates.exclude(id=i.id)

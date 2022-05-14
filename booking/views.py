@@ -1,6 +1,6 @@
 from django import views
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.views import View
 from django.core.paginator import Paginator
 from clinic_mgt.models import Clinic
@@ -92,7 +92,17 @@ class ICOrderTableView(LoginRequiredMixin, View):
 
         return render(request, self.template_name, context={'orders':orders, 'page_obj':page_obj})
 
-
+class ICInvoiceView(LoginRequiredMixin, View):
+    login_url = '/auth/login'
+    redirect_field_name = 'redirect_to'
+    template_name ='payment/invoice_int.html' 
+    def get(self, request, slug):
+        order = get_object_or_404(ICOrders, order_number=slug)
+        invoice = order.icinvoice
+        client = order.client
+        app = order.appointment
+        total = float(invoice.payment.total_amount)/100
+        return render(request, self.template_name, context={'order':order, 'client':client,'total':total, 'invoice':invoice, 'app':app})
 
 class ICPlaceOrderAdminView(LoginRequiredMixin, views.View):
     login_url = '/auth/login'
@@ -354,7 +364,7 @@ class BacktoBookingView(View):
 
     def get(self, request):
         if "cart_id" in request.session:
-            del request.session['cart_id']
+            cart.delete_cart(request)
             return redirect('display:booking')
         else:
             return redirect('display:booking')

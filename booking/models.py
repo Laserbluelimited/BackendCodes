@@ -292,12 +292,17 @@ class CorporateAppointment(models.Model):
         self.status = status
         self.save()
 
+    def get_driver(self):
+        return self.client
 
     def get_start_time(self):
         return self.time_slot.schedule.start_time
 
     def get_end_time(self):
         return self.time_slot.schedule.end_time
+
+    def get_price(self):
+        return self.product.price
     
 
         
@@ -430,7 +435,7 @@ class CCart(models.Model):
         return self.client.company_name
     
     def get_email(self):
-        return self.client.main_contact_email
+        return self.client.bill_email
 
     # def get_date(self):
     #     return self.appointment.time_slot.schedule.date

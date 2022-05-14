@@ -5,16 +5,8 @@
                 <div class="d-flex">
                     <!-- LOGO -->
                     <div class="navbar-brand-box" style="background:#015668;">
-                        <a href="{% url 'portal:dashboard' %}" class="logo logo-dark">
-                            <span class="logo-sm">
-                                <img src="{% static 'images/logo.svg' %}" alt="" height="22">
-                            </span>
-                            <span class="logo-lg">
-                                <img src="{% static 'images/logo-dark.png' %}" alt="" height="35">
-                            </span>
-                        </a>
 
-                        <a href="{% url 'portal:dashboard' %}" class="logo logo-light">
+                        <a href="{% url 'corporate_portal:dashboard' company.slug %}" class="logo logo-light">
                             <span class="logo-sm">
                                 <img src="{% static 'images/logo-light.svg' %}" alt="" height="22">
                             </span>
