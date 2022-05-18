@@ -22,8 +22,8 @@
                                     <div class="table-responsive" >
                                         <div class="col-sm-8">
                                             <div class="text-sm-end">
-                                                <a href="{%url 'portal:place-order'%}"><button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> Place An Order</button></a>
-                                                <a href="{%url 'portal:test-order'%}"><button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i>Order for non-client</button></a>
+                                                <a href="{%url 'portal:place-order'%}"><button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2" style="background-color:#015668; border-color: #015668;"><i class="mdi mdi-plus me-1" ></i> Place An Order</button></a>
+                                                <a href="{%url 'portal:test-order'%}"><button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2" style="background-color:#015668; border-color: #015668;"><i class="mdi mdi-plus me-1"></i>Order for non-client</button></a>
                                             </div>
                                         </div><!-- end col-->
                                     <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
@@ -50,7 +50,7 @@
                                                 {%for i in orders%}
                                             <tr>
                                                 <td>{{i.get_id}}</td>
-                                                <td><button type="button" class="btn btn-primary btn-sm btn-rounded" >Generate Invoice</button></td>
+                                                <td><a href="{%url 'portal:invoice' i.order_number%}" class="btn btn-primary btn-sm btn-rounded" >Generate Invoice</a></td>
                                                 <!-- <td>{{i.get_order_number}}</td> -->
                                                 <td>{{i.get_client}}</td>
                                                 <td>{{i.get_appointment}}</td>

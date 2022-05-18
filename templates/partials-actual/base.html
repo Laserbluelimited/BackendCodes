@@ -9,7 +9,7 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
 
-    <title>{{heading}} | Driver Medicals - Admin & Dashboard</title>
+    <title>{{heading}} | Compliance Medicals - Admin & Dashboard</title>
     <!-- App favicon -->
     <link rel="shortcut icon" href="{% static 'display/img/▶ Home - DRIVERS MEDICALS.UK - Google Chrome 1_26_2022 11_19_25 AM (2).png' %}">
     {% block css %}
@@ -20,10 +20,11 @@
     <!-- Icons Css -->
     <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="{% static 'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/app.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/portal.css' %}"  rel="stylesheet" type="text/css" />
     {% endblock css %}
 </head>
-
+ 
 
 <body data-sidebar="dark">
     <!-- Begin page -->
@@ -34,12 +35,8 @@
         {% block sidebar %}
         {% include 'partials-actual/sidebar.html' %}
         {% endblock %}
-        {% comment %} {% block header %}
-        {% include 'partials-actual/hori-header.html' %}
-        {% endblock %}
-        {% block sidebar %}
-        {% include 'partials-actual/hori-sidebar.html' %}
-        {% endblock %} {% endcomment %}
+        {% comment %} 
+        {% endcomment %}
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
@@ -77,13 +74,6 @@
         <!-- end main content-->
     </div>
     <!-- END layout-wrapper -->
-    {% block Subscribe %}
-    {% endblock %} 
-
-    {% block r_sidebar %}
-    {% include 'partials-actual/rightsidebar.html' %}
-    {% endblock %}
-
             {% block javascript %}
             <!-- JAVASCRIPT -->
             <script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>

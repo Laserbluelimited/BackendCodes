@@ -31,3 +31,12 @@ def add_to_cart(request, client, appointment, product, quantity=1):
     cart = Cart(cart_id=_cart_id(request), client=client, appointment=appointment, product=product)
     cart.save()
     return cart
+
+def delete_cart(request):
+    if 'cart_id' in request.session:
+        cart = Cart.objects.get(cart_id=request.session['cart_id'])
+        cart.appointment.update_status(0)
+        cart.appointment.time_slot.update_status(0)
+        cart.save()
+        del request.session['cart_id']
+        request.session.modified=True

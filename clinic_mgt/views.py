@@ -148,23 +148,19 @@ class ClinicEditView(LoginRequiredMixin, PermissionRequiredMixin, View):
         clinic = get_object_or_404(Clinic, slug=slug)
         form = self.form_class(request.POST, instance=clinic)
         if form.is_valid():
-            name = form.cleaned_data['name']
             address = form.cleaned_data['address']
-
-
+            clinic_obj = form.save(commit=False)
             address_class = AddressRequest()
             geodata = address_class.get_geodata(address)
+            clinic_obj.address=address
+            if geodata is not None:
+                clinic_obj.postal_code=geodata['postal_code']
+                clinic_obj.long=geodata['longitude']
+                clinic_obj.lat=geodata['latitude']
+                clinic_obj.city=geodata['city']
+            clinic_obj.save()
 
-
-            clinic.name =name
-            clinic.address=address
-            clinic.postal_code=geodata['postal_code']
-            clinic.long=geodata['longitude']
-            clinic.lat=geodata['latitude']
-            clinic.city=geodata['city']
-            clinic.save()
-
-            return redirect('portal:clinic-detail', slug=clinic.slug)
+            return redirect('portal:clinic-detail', slug=clinic_obj.slug)
             
         return render(request, self.template_name, context={'form':form, 'clinic':clinic})
 

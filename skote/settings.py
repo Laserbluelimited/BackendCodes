@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'stripe',
     'tinymce',
+    'sendgrid',
 ]
 
 AUTH_USER_MODEL = 'authentication.User'
@@ -227,3 +228,5 @@ GEOAPIFY_API_KEY = "d4641924f0854b1bbd807ee57d602c8d"
 DEFAULT_PASSWORD = "drivermedicals"
 
 STRIPE_API_KEY = 'sk_test_51KfF8SHQiFLHp4SA2oHWts22RDTHCuPh2CGs5Ry4kqMpUbp4z3rVX4IBiwMyIe7GElxRjGNserGeTu8EpRDypF4V00aXtdXyKT'
+
+SENDGRID_API = 'kk'

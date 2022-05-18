@@ -1,43 +1,48 @@
 {% load static %} {% block sidebar %}
     <!-- ========== Left Sidebar Start ========== -->
-    <div class="vertical-menu">
+    <div class="vertical-menu" style="background:#015668;">
       <div data-simplebar class="h-100">
         <!--- Sidemenu -->
         <div id="sidebar-menu">
           <!-- Left Menu Start -->
           <ul class="metismenu list-unstyled" id="side-menu">
-        <li class="menu-title" key="t-menu">Menu</li>
+        <li class="menu-title" key="t-menu"style="color:#D5F3FF;">Menu</li>
 
         <li>
-          <a href="javascript: void(0);" class="waves-effect">
-            <i class="bx bx-home-circle"></i
-            ><span class="badge rounded-pill bg-info float-end">04</span>
-            <span key="t-dashboards">Dashboards</span>
+          <a href="{%url 'corporate_portal:dashboard' slug=company.slug %}" class="waves-effect">
+            <i class="bx bx-home-circle"></i>
+            <span key="t-dashboards" class="dash_text" style="color:#D5F3FF;">Dashboards</span>
           </a>
         </li>
 
 
-        <li>
+        <li> 
           <a href="{%url 'corporate_portal:driver-list' company.slug%}" class="waves-effect">
-            <i class="bx bx-home-circle"></i
-            ><span class="badge rounded-pill bg-info float-end">04</span>
-            <span key="t-dashboards">Drivers</span>
+            <i class="bx bx-home-circle"></i>
+            <span key="t-dashboards"style="color:#D5F3FF;">Drivers</span>
           </a>
         </li>
 
         <li>
           <a href="{%url 'corporate_portal:booking' company.slug%}" class="waves-effect">
-            <i class="bx bx-home-circle"></i
-            ><span class="badge rounded-pill bg-info float-end">04</span>
-            <span key="t-dashboards">Book Now</span>
+            <i class="bx bx-home-circle"></i>
+            <span key="t-dashboards"style="color:#D5F3FF;">Book Now</span>
           </a>
         </li>
      
         <li>
           <a href="{%url 'corporate_portal:checkout' company.slug%}" class="waves-effect">
-            <i class="bx bx-home-circle"></i
-            ><span class="badge rounded-pill bg-info float-end">04</span>
-            <span key="t-dashboards">Cart</span>
+            <i class="bx bx-home-circle"></i>
+            <!-- ><span class="badge rounded-pill bg-info float-end">04</span> -->
+            <span key="t-dashboards"style="color:#D5F3FF;">Cart</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="{%url 'corporate_portal:order-list' company.slug%}" class="waves-effect">
+            <i class="bx bx-home-circle"></i>
+            <!-- ><span class="badge rounded-pill bg-info float-end">04</span> -->
+            <span key="t-dashboards"style="color:#D5F3FF;">Orders</span>
           </a>
         </li>
         

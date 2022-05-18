@@ -26,7 +26,7 @@ class Payment(models.Model):
     id = models.AutoField('id', primary_key=True)
     payment_id = models.CharField('payment_id', max_length=20, default=increment_payment_id)
     medium = models.CharField('medium', default='stripe', max_length=20)
-    order_id = models.CharField('order_id', max_length=100)
+    order_id = models.CharField('order_id', max_length=100, unique=True)
     created_at = models.DateTimeField('created_at', auto_now_add=True)
     stripe_session_id = models.CharField('stripe_sess_id', max_length=255)
     status = models.CharField('status', max_length=100)

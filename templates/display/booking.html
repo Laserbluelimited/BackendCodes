@@ -32,19 +32,19 @@
   
           <div class="tab">
               {%csrf_token%}
-                <h1 class=" display-1 fw-bold mt-5 mb-5">Available Locations</h1>
+                <h1 class=" display-1 fw-bold mt-5 mb-5">Available Clinics</h1>
               <input class="sfield" type="search" id="myInput" name="clinic" onkeyup="myFunction()" placeholder="Search for locations">
               <ul class="bform-list" id="myUL">
                 {%for i in clinics%}
                 <li>
-                  <a role="button" data-value="{{i.get_address}}"  class="cardss"> 
+                  <a role="button" data-value="{{i.get_address}}"  class="cardss location"> 
                     <div>
                     <h2 class="fw-bold">{{i.get_city}}</h2>
                     <p class="text-muted">{{i.postal_code}}</p>
                     <p class="text-muted fs-5">{{i.get_address}}</p>
                     </div>
                     <div class="bform-image">
-                      <img src="{%static 'display/img/location2.png'%}" alt="">
+                      <img src="{%static 'display/img/location2.png'%}" alt=""> 
                     </div>
                   </a>
                 </li>
@@ -57,38 +57,71 @@
               <h2 class=" fw-bold mb-5">Please Enter Your Details</h2>
               <div class="row g-3 fs-3">
                 <div class="col-sm-6">
+                  <div class="feedback">
+                    {%for error in form.first_name.errors%}
+                    <label >{{error}}</label>
+                    {%endfor%}<br>
+                  </div>
                   <label for="username" class="form-label">First Name</label>
-                  <input type="text" name="first_name" id="username" class="has-validation form-control fs-3" value="" required="required">
+                  <input type="text" name="first_name" id="username" class=" form-control fs-3" value="" required="required">
                 </div>
                 <div class="col-sm-6">
+                  <div class="feedback">
+                    {%for error in form.last_name.errors%}
+                    <label >{{error}}</label>
+                    {%endfor%}<br>
+                  </div>
                   <label for="username" class="form-label">Last Name</label>
-                  <input type="text" name="last_name"  class="has-validation form-control fs-3" value="" required="required">
+                  <input type="text" name="last_name"  class=" form-control fs-3" value="" >
                 </div>
                 <div class="col-sm-6">
+                  <div class="feedback">
+                    {%for error in form.email.errors%}
+                    <label >{{error}}</label>
+                    {%endfor%}<br>
+                  </div>
                   <label for="email" class="form-label">Email</label>
-                  <input type="email" name="email" id="email" class=" has-validation form-control fs-3" value="" required="required">
+                  <input type="email" name="email" id="email" class=" form-control fs-3" value="" >
                 </div>
                 <div class="col-sm-6">
+                  <div class="feedback">
+                    {%for error in form.phone.errors%}
+                    <label >{{error}}</label>
+                    {%endfor%}<br>
+                  </div>
                   <label for="number" class="form-label">Phone Number</label>
-                  <input type="tel" name="phone" id="number" class="has-validation form-control fs-3" value="" required="required">
+                  <input type="tel" name="phone" id="number" class="form-control fs-3" value="" >
                 </div>
                <div class="col-sm-6">
-                <label for="lastName" class="form-label">Service</label>
+                <div class="feedback">
+                  {%for error in form.product.errors%}
+                  <label >{{error}}</label>
+                  {%endfor%}<br>
+                </div>
+              <label  class="form-label">Service</label>
                 <select class="form-select fs-3" id="services" name="product" required>
                   <option value="">Choose...</option>
                   {%for i in form.product.field.choices%}
                   <option value="{{i.0}}">{{i.1}}</option>
                   {%endfor%}
                 </select>
-                <div class="invalid-feedback">
+               </div>
+               <div class="col-sm-6">
+                <div class="feedback">
+                  {%for error in form.date.errors%}
+                  <label >{{error}}</label>
+                  {%endfor%}<br>
                 </div>
+               <label for="username" class="form-label">Date</label>
+                 <input type="text" name="date" id="datepicker" class="form-control fs-3" data-date-format="dd-mm-yyyy" readonly>
                </div>
                <div class="col-sm-6">
-                 <label for="username" class="form-label">Date</label>
-                 <input type="text" name="date" id="datepicker" class="form-control fs-3"  readonly>
-               </div>
-               <div class="col-sm-6">
-                <label for="username">Time</label>
+                <div class="feedback">
+                  {%for error in form.time_slot.errors%}
+                  <label >{{error}}</label>
+                  {%endfor%}<br>
+                </div>
+              <label for="username">Time</label>
                 <select class="form-select fs-3" name="time_slot" id="time2"></select>
                 </div>                                                  
               </div>
@@ -115,18 +148,12 @@
     <!-- form wizard init -->
     <script src="{%static 'libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'%}"></script>
     <script type="text/javascript">
-    
       var element = document.querySelector('#myInput');
-    
       var el = document.querySelectorAll('.cardss');
-    
-    
       el.forEach(e=>{
       e.addEventListener('click', function(){
         element.value = e.getAttribute('data-value');
-    
-    
-    
+        // $('#nextBtn').click()
     
         $.ajax({
             type:'GET',
@@ -134,23 +161,22 @@
             data:{
                 'clinic' : element.value,
     
-            },
+            }, 
             dataType:'json',
     
             success:function(response){
                 // change(response.dates)
-    
+     
             jQuery(function(){
                 // function change(data){enableDays=data}
                 
                 $('#datepicker').datepicker('destroy');
                 var datesEnabled = response.dates;
-                console.log("hi");
+                console.log(datesEnabled);
     
                 $('#datepicker').datepicker({
-    dateFormat: 'dd-mm-yyyy',
-    beforeShowDay: function (date) {
-      var allDates = date.getDate() + '-' + `${date.getMonth() + 1}`+ '-' + date.getFullYear();
+                  format:'mm/dd/yyyy',    beforeShowDay: function (date) {
+      var allDates = `${date.getDate()}`.padStart(2, 0) + '-' + `${date.getMonth() + 1}`.padStart(2,0)+ '-' + date.getFullYear();console.log(allDates)
       if(datesEnabled.indexOf(allDates) != -1)
       return true;
       else
@@ -164,12 +190,13 @@
     </script>
     <script>
     $("#datepicker").on("change.dp", function(){
+      date = $('#datepicker').val()
         $.ajax({
             type:'GET',
             url:'booking/ajax/filter-times',
             data:{
                 'clinic':$('#myInput').val(),
-                'date':$('#datepicker').val(),
+                'date':String(date),
             },
             dataType:'json',
             success:function(response){

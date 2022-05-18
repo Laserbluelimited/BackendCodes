@@ -1,50 +1,29 @@
 {% load static %} {% block sidebar %}
     <!-- ========== Left Sidebar Start ========== -->
-    <div class="vertical-menu">
+    <div class="vertical-menu side_color" style="background:#015668;">
       <div data-simplebar class="h-100">
         <!--- Sidemenu -->
         <div id="sidebar-menu">
           <!-- Left Menu Start -->
           <ul class="metismenu list-unstyled" id="side-menu">
-        <li class="menu-title" key="t-menu">Menu</li>
+        <li class="menu-title" key="t-menu" class="dash_text">Menu</li>
 
         <li>
-          <a href="javascript: void(0);" class="waves-effect">
-            <i class="bx bx-home-circle"></i
-            ><span class="badge rounded-pill bg-info float-end">04</span>
-            <span key="t-dashboards">Dashboards</span>
+          <a href="{% url 'portal:dashboard' %}" class="waves-effect">
+            <i class="bx bx-home-circle"></i>
+            <span key="t-dashboards" class="dash_text">Dashboards</span>
           </a>
-          <ul class="sub-menu" aria-expanded="false">
-            <li><a href="{% url 'portal:dashboard' %}" key="t-default">Default</a></li>
-          </ul>
         </li>
 
         <li>
           <a href="javascript: void(0);" class="waves-effect">
-            <i class="bx bx-home-circle"></i
-            ><span class="badge rounded-pill bg-info float-end">04</span>
-            <span key="t-dashboards">Medical Management</span>
+            <i class="bx bx-home-circle"></i>
+            <span key="t-dashboards" class="dash_text">Medical Management</span>
           </a>
           <ul class="sub-menu" aria-expanded="true">
-            <li><a href="javascript: void(0); " class="has-arrow" key="t-vertical">Clinic Management</a>
-              <ul class="sub-menu" aria-expanded="true">
-                <li>
-                  <a href="{% url 'portal:clinic-list'%}" key="t-light-sidebar">View Clinics</a  >
+            <li><a href="{% url 'portal:clinic-list'%}" class=" dash_text" key="t-vertical" >Clinic Management</a>
                 </li>
-                <li>
-                  <a href="{% url 'portal:clinic-registration'%}" key="t-compact-sidebar">Register Clinic</a>
-                </li>
-                </ul>
-                </li>
-                <li><a href="javascript: void(0); " class="has-arrow" key="t-vertical">Doctor Management</a>
-                  <ul class="sub-menu" aria-expanded="true">
-                    <li>
-                      <a href="{% url 'portal:doctor-list'%}" key="t-light-sidebar">View Doctors</a  >
-                    </li>
-                    <li>
-                      <a href="{% url 'portal:doctor-registration'%}" key="t-compact-sidebar">Register Doctors</a>
-                    </li>
-                    </ul>
+                <li><a href="{% url 'portal:doctor-list'%}" class=" dash_text" key="t-vertical">Doctor Management</a>
                     </li>
                     
               </ul>
@@ -52,14 +31,12 @@
 
         <li>
           <a href="javascript: void(0);" class="waves-effect">
-            <i class="bx bx-home-circle"></i
-            ><span class="badge rounded-pill bg-info float-end">04</span>
-            <span key="t-dashboards">Doctor schedules</span>
+            <i class="bx bx-home-circle"></i>
+            <span key="t-dashboards" class="dash_text">Doctor schedules</span>
           </a>
           <ul class="sub-menu" aria-expanded="false">
-            <li><a href="{% url 'portal:doc-sche-reg' %}" key="t-default"> Add Schedule</a></li>
-            <li><a href="{% url 'portal:doc-sche-tab' %}" key="t-default">Schedule table</a></li>
-            <li><a href="{% url 'portal:doc-sche-cal' %}" key="t-default">Schedule Calendar</a></li>
+            <li><a href="{% url 'portal:doc-sche-tab' %}" key="t-default" class="dash_text">Schedule Table</a></li>
+            <li><a href="{% url 'portal:doc-sche-cal' %}" key="t-default" class="dash_text">Schedule Calendar</a></li>
           </ul>
         </li>
 
@@ -69,74 +46,64 @@
 
 
         <li>
-          <a href="javascript: void(0);" class="waves-effect">
-            <i class="bx bx-home-circle"></i
-            ><span class="badge rounded-pill bg-info float-end">04</span>
-            <span key="t-dashboards">Products</span>
+          <a href="{% url 'portal:view-product' %}" class="waves-effect">
+            <i class="bx bx-home-circle"></i>
+            <span key="t-dashboards" class="dash_text">Products</span>
           </a>
-          <ul class="sub-menu" aria-expanded="false">
-            <li><a href="{% url 'portal:add-product' %}" key="t-default">Register Product</a></li>
-            <li><a href="{% url 'portal:view-product' %}" key="t-default">View Products</a></li>
-          </ul>
         </li>
 
 
 
         <li>
           <a href="javascript: void(0);" class="waves-effect">
-            <i class="bx bx-home-circle"></i
-            ><span class="badge rounded-pill bg-info float-end">04</span>
-            <span key="t-dashboards">Client Management</span>
+            <i class="bx bx-home-circle"></i>
+            <span key="t-dashboards" class="dash_text">Client Management</span>
           </a>
             <ul class="sub-menu" aria-expanded="false">
-            <li><a href="{% url 'portal:intrnt-cli-list' %}" key="t-default">Individual</a></li>
-            <li><a href="{% url 'portal:crprt-cli-list' %}" key="t-default">Corporate</a></li>
+            <li><a href="{% url 'portal:intrnt-cli-list' %}" key="t-default dash_text" class="dash_text">Individual</a></li>
+            <li><a href="{% url 'portal:crprt-cli-list' %}" key="t-default" class="dash_text">Corporate</a></li>
             </ul>
         </li>
 
         <li>
           <a href="javascript: void(0);" class="waves-effect">
-            <i class="bx bx-home-circle"></i
-            ><span class="badge rounded-pill bg-info float-end">04</span>
-            <span key="t-dashboards">Orders</span>
+            <i class="bx bx-home-circle"></i>
+            <span key="t-dashboards" class="dash_text">Orders</span>
           </a>
             <ul class="sub-menu" aria-expanded="false">
-              <li><a href="{% url 'portal:icorder-list' %}" key="t-default">Individual Orders</a></li>
-              <li><a key="t-default">Corporate Orders</a></li>
+              <li><a href="{% url 'portal:icorder-list' %}" key="t-default" class="dash_text">Individual Orders</a></li>
+              <li><a key="t-default" class="dash_text">Corporate Orders</a></li>
             </ul>
         </li>
 
         <li>
           <a href="javascript: void(0);" class="waves-effect">
-            <i class="bx bx-home-circle"></i
-            ><span class="badge rounded-pill bg-info float-end">04</span>
-            <span key="t-dashboards">Appointments</span>
+            <i class="bx bx-home-circle"></i>
+            <span key="t-dashboards" class="dash_text">Appointments</span>
           </a>
             <ul class="sub-menu" aria-expanded="false">
-            <li><a href="{% url 'portal:app-tab' %}" key="t-default">Individual</a></li>
-            <li><a  key="t-default" >Corporate</a></li>
+            <li><a href="{% url 'portal:app-tab' %}" key="t-default" class="dash_text">Individual</a></li>
+            <li><a  key="t-default"class="dash_text" >Corporate</a></li>
             </ul>
         </li>
 
 
         <li>
           <a href="javascript: void(0);" class="waves-effect">
-            <i class="bx bx-home-circle"></i
-            ><span class="badge rounded-pill bg-info float-end">04</span>
-            <span key="t-dashboards">Invoice</span>
+            <i class="bx bx-home-circle"></i>
+            <span key="t-dashboards" class="dash_text">Invoice</span>
           </a>
             <ul class="sub-menu" aria-expanded="false">
-              <li><a href="{% url 'portal:icorder-list' %}" key="t-default">Individual</a></li>
-              <li><a key="t-default">Corporate </a></li>
+              <li><a href="{% url 'portal:icorder-list' %}" key="t-default" class="dash_text">Individual</a></li>
+              <li><a key="t-default" class="dash_text">Corporate </a></li>
             </ul>
         </li>
     
         
         <li>
           <a href="{%url 'portal:email-home'%}" class="waves-effect">
-            <i class="bx bx-home-circle"></i
-            ><span class="badge rounded-pill bg-info float-end">04</span>
-           <span key="t-dashboards">Emails</span>
+            <i class="bx bx-home-circle"></i>
+           <span key="t-dashboards" class="dash_text">Emails</span>
           </a>
             <!-- <ul class="sub-menu" aria-expanded="false">
               <li><a href="{% url 'portal:icorder-list' %}" key="t-default">Individual Orders</a></li>

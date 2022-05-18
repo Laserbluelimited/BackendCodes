@@ -1,5 +1,5 @@
 import random
-from booking.models import CCart
+from booking.models import CCart, CorporateAppointment
 
 CART_ID_SESSION_KEY = 'cor_cart_id'
 
@@ -31,3 +31,14 @@ def add_to_cart(request, client, appointment, price, quantity=1):
     cart = CCart(cart_id=_cart_id(request), client=client,price=price, appointment=appointment, quantity=quantity)
     cart.save()
     return cart
+
+def delete_cart(request):
+    if 'cor_cart_id' in request.session:
+        cart = CCart.objects.get(cart_id=request.session['cor_cart_id'])
+        app_obj = CorporateAppointment.objects.filter(appointment_no=cart.appointment)
+        for i in app_obj:
+            i.update_status(0)
+            i.time_slot.update_status(0)
+            i.save()
+
+

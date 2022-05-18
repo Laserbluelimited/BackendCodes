@@ -1,4 +1,5 @@
 from genericpath import exists
+from pickle import TRUE
 from django import forms
 from .models import ICOrders
 from client_mgt.models import InternetClient
@@ -26,7 +27,7 @@ class OrderForm(forms.ModelForm):
 
     class Meta:
         model = ICOrders
-        exclude = ['id', 'order_number', 'appointment', 'fulfilled', 'total_price', 'product']
+        exclude = ['id', 'order_number', 'appointment', 'fulfilled', 'total_price', 'product', 'cart']
 
 
 
@@ -62,9 +63,9 @@ class CartWebForm(forms.Form):
     notes = forms.Textarea()
     date = forms.DateField(required=True)
     time_slot = forms.CharField(required=True)
-    first_name = forms.CharField(max_length=100)
-    last_name = forms.CharField(max_length=100)
-    email = forms.EmailField()
+    first_name = forms.CharField(max_length=100, required=True)
+    last_name = forms.CharField(max_length=100, required=True)
+    email = forms.EmailField(required=True)
     phone = forms.CharField(max_length=15)
 
 

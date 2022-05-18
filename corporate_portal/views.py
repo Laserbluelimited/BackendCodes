@@ -1,4 +1,3 @@
-from calendar import c
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from authentication.models import User
@@ -15,9 +14,11 @@ from prod_mgt.models import Product
 from django.http import JsonResponse, HttpResponseForbidden
 import datetime
 from schedules.models import ScheduleDates, TimeSlots
-from booking.models import CCart, CorporateAppointment, increment_capp_no
-from . import cart, stripe
+from booking.models import CCart, CorporateAppointment, increment_capp_no, CCInvoice, CCOrders
+from . import cart
 from client_mgt.forms import CorporateClientRegistrationForm, InternetClientRegistrationForm
+from payment import stripe
+from payment.models import Payment
 from skote.settings import DEFAULT_PASSWORD
 
 
@@ -89,7 +90,7 @@ class AuthLoginView(View):
 
 
 class DashboardView(LoginRequiredMixin, GroupRequiredMixin, View):
-    login_url = '/auth/login'
+    login_url = '/business/login'
     redirect_field_name = 'redirect_to'
     group_required = [u'Corporate group']
     
@@ -100,7 +101,7 @@ class DashboardView(LoginRequiredMixin, GroupRequiredMixin, View):
 
 class AddDriverView(LoginRequiredMixin, GroupRequiredMixin, View):
     template_name = 'cor_temp/driver-form.html'
-    login_url = '/auth/login'
+    login_url = '/business/login'
     redirect_field_name = 'redirect_to'
     group_required = [u'Corporate group']
 
@@ -126,7 +127,7 @@ class AddDriverView(LoginRequiredMixin, GroupRequiredMixin, View):
 
 class BookAppointmentView(LoginRequiredMixin, GroupRequiredMixin, View):
     template_name = 'cor_temp/booking.html'
-    login_url = '/auth/login'
+    login_url = '/business/login'
     redirect_field_name = 'redirect_to'
     group_required = [u'Corporate group']
     company=None
@@ -177,7 +178,7 @@ class BookAppointmentView(LoginRequiredMixin, GroupRequiredMixin, View):
 
 
             
-            return redirect('corporate_portal:dashboard', slug = company.slug)
+            return redirect('corporate_portal:checkout', slug = company.slug)
         else:
             print(d_form.errors)
             print(d_form.non_form_errors())
@@ -189,7 +190,7 @@ class BookAppointmentView(LoginRequiredMixin, GroupRequiredMixin, View):
 
 class CheckoutView(LoginRequiredMixin, GroupRequiredMixin, View):
     template_name = 'cor_temp/checkout.html'
-    login_url = '/auth/login'
+    login_url = '/business/login'
     redirect_field_name = 'redirect_to'
     group_required = [u'Corporate group']
 
@@ -199,40 +200,70 @@ class CheckoutView(LoginRequiredMixin, GroupRequiredMixin, View):
         if "cor_cart_id" in request.session:
             basket_id = request.session['cor_cart_id']
             basket = CCart.objects.get(cart_id=basket_id)
+            appointments = CorporateAppointment.objects.filter(appointment_no =basket.appointment)
+
+            print(basket.price)
         else:
             basket = 'empty'
             return redirect('corporate_portal:booking', slug=company.slug)
 
-        appointments = CorporateAppointment.objects.filter(appointment_no =basket.appointment)
-        return render(request, self.template_name, context={'company':company, 'appointments':appointments})
+        return render(request, self.template_name, context={'company':company, 'appointments':appointments, 'basket':basket})
 
     def post(self, request, slug):
         company = get_object_or_404(CorporateClient, slug=slug)
         if "cor_cart_id" in request.session:
             cart_id = request.session['cor_cart_id']
             cart_obj = CCart.objects.get(cart_id=cart_id)
-            return stripe.iccheckout_stripe(cart_id=cart_obj)
+            return stripe.cccheckout_stripe(cart_id=cart_obj)
         else:
             return redirect('corporate_portal:booking', slug=company.slug)
-    
+
+
+class DeleteCartView(LoginRequiredMixin, GroupRequiredMixin, View):
+    template_name = 'cor_temp/checkout.html'
+    login_url = '/business/login'
+    redirect_field_name = 'redirect_to'
+    group_required = [u'Corporate group']
+
+    def get(self, request, slug):
+        company = get_object_or_404(CorporateClient, slug=slug)
+        check_user(current_user=request.user, slug_user=company.user)
+        if "cor_cart_id" in request.session:
+            del request.session['cor_cart_id']
+            return redirect('corporate_portal:booking', slug=company.slug)
+        else:
+            return redirect('corporate_portal:booking', slug=company.slug)
+
 
 
 class DriverListView(LoginRequiredMixin, GroupRequiredMixin, View):
     permission_required = ('clinic_mgt.view_doctor')
-    login_url = '/auth/login'
+    login_url = '/business/login'
     redirect_field_name = 'redirect_to'
     group_required = [u'Corporate group']
     def get(self, request, slug):
         company = get_object_or_404(CorporateClient, slug=slug)
         check_user(current_user=request.user, slug_user=company.user)
-        drivers = InternetClient.objects.filter(cor_comp=company).order_by('id')
+        drivers = InternetClient.objects.filter(cor_comp=company).order_by('-id')
         paginator = Paginator(drivers, 5)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         return render(request, 'cor_temp/driver-table.html', context={'page_obj':page_obj, 'company':company})
 
+
+class OrderListView(LoginRequiredMixin,GroupRequiredMixin, View):
+    login_url = '/business/login'
+    redirect_field_name = 'redirect_to'
+    group_required = [u'Corporate group']
+
+    def get(self, request, slug):
+        company = get_object_or_404(CorporateClient, slug=slug)
+        check_user(slug_user=company.user, current_user=request.user)
+        orders = CCOrders.objects.filter(c_client=company)
+        return render(request, 'cor_temp/orders.html', context={'company':company, 'orders':orders})
+
 class CompanyEditView(LoginRequiredMixin,GroupRequiredMixin, View):
-    login_url = '/auth/login'
+    login_url = '/business/login'
     redirect_field_name = 'redirect_to'
     group_required = [u'Corporate group']
     form_class = CorporateClientRegistrationForm
@@ -282,7 +313,7 @@ class CompanyEditView(LoginRequiredMixin,GroupRequiredMixin, View):
         return render(request, 'cor_temp/company-edit.html', context={'company':company, 'form':form})
 
 class DriverEditView(LoginRequiredMixin,GroupRequiredMixin, View):
-    login_url = '/auth/login'
+    login_url = '/business/login'
     redirect_field_name = 'redirect_to'
     group_required = [u'Corporate group']
     form_class = InternetClientRegistrationForm
@@ -328,6 +359,23 @@ class DriverEditView(LoginRequiredMixin,GroupRequiredMixin, View):
             return redirect('corporate_portal:driver-list', slug=company.slug)
         return render(request, 'cor_temp/driver-edit.html', context={'company':company,'driver':driver, 'form':form})
 
+
+class InvoiceView(LoginRequiredMixin,GroupRequiredMixin, View):
+    login_url = '/business/login'
+    redirect_field_name = 'redirect_to'
+    group_required = [u'Corporate group']
+
+    def get(self, request, slug, order_no):
+        company = get_object_or_404(CorporateClient, slug=slug)
+        invoice = get_object_or_404(CCInvoice, order=order_no)
+        order = CCOrders.objects.filter(order_number=invoice.order).first()
+        appointments = CorporateAppointment.objects.filter(appointment_no=order.appointment)
+        total = float(invoice.payment.total_amount)/100
+
+        return render(request, 'payment/invoice_cor.html', context={'invoice':invoice,'apps':appointments,'total':total, 'order':order, 'company':company})
+
+
+
 def getDates(request, slug):
 
     """
@@ -337,20 +385,23 @@ def getDates(request, slug):
         """
         This generator puts the dates in the format accepted by the bootstrap datepicker
         """
-        for i in dates:
+        for i in new_dates:
             if i>= datetime.date.today():
-                m = i.strftime("%#d-%#m-%Y")
+                m = i.strftime("%d-%m-%Y")
                 yield m
 
 
     location = request.GET.get('clinic')
-    print(location)
-    dates = ScheduleDates.objects.filter(clinic=location).values_list('date', flat=True).distinct()
+    dates = ScheduleDates.objects.filter(clinic=location)
+    for i in dates:
+        if TimeSlots.objects.filter(schedule=i, status=0).exists()==False:
+            dates = dates.exclude(id=i.id)
+    new_dates = dates.values_list('date', flat=True).distinct()
     date_list = list(gen())
     response_data = {
         'dates':date_list
     }
-    print(dates)
+    print(new_dates)
     return JsonResponse(response_data)
 
 def getTimes(request, slug):

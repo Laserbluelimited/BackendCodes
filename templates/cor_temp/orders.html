@@ -1,0 +1,98 @@
+{% extends 'cor_partials/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <!-- DataTables -->
+    <link href="{% static 'libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <!-- Responsive datatable examples -->
+    <link href="{% static 'libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />    
+{% endblock %}
+{% block contents %}
+        
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+        
+                                        <h4 class="card-title">Orders</h4>
+                                        <p class="card-title-desc">
+                                        </p>
+                                    <div class="table-responsive" >
+                                    <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                                            <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Generate Invoice</th>
+                                                <th>Order Number</th>
+                                                <th>Appointment ID</th>
+                                                <th>Driver</th>
+                                                <th>Placed At</th>
+                                                <th>Quantity</th>
+                                                <th>Total Price</th>
+                                                <th>Payment Status</th>
+                                                <th>Order Medium</th>
+                                                <th>Payment Medium</th>
+                                                <!-- <th>Fulfilled</th> -->
+                                            </tr>
+                                            </thead>
+        
+        
+                                            <tbody>
+                                                {%for i in orders%}
+                                            <tr>
+                                                <td>{{i.get_id}}</td>
+                                                <td><a href="{%url 'corporate_portal:invoice' slug=company.slug order_no=i.order_number%}" class="btn btn-primary btn-sm btn-rounded" >Generate Invoice</a></td>
+                                                <td>{{i.get_order_number}}</td>
+                                                <td>{{i.get_appointment}}</td>
+                                                <td>{{i.get_client}}</td>
+
+                                                <td>{{i.get_date_placed}}</td>
+                                                <td>{{i.get_quantity}}</td>
+                                                
+                                                <!-- <td>{{i.get_product}}</td> -->
+                                                <td>{{i.get_total_price}}</td>
+                                                <td>{{i.get_payment_status}}</td>
+                                                <td>{{i.get_order_medium}}</td>
+                                                <td>{{i.get_payment_medium}}</td>
+                                            </tr>
+                                            {%endfor%}
+                                            </tbody>
+                                        </table>
+                                    </div>    
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+{% endblock %}
+
+
+{% block extra_javascript %}
+        <!-- Required datatable js -->
+        <script src="{% static 'libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+        <!-- Buttons examples -->
+        <script src="{% static 'libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
+        <script src="{% static 'libs/jszip/dist/jszip.min.js' %}"></script>
+        <script src="{% static 'libs/pdfmake/build/pdfmake.min.js' %}"></script>
+        <script src="{% static 'libs/pdfmake/build/vfs_fonts.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
+        
+        <!-- Responsive examples -->
+        <script src="{% static 'libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+        <script src="{% static 'libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
+
+        <!-- Datatable init js -->
+        <script src="{% static 'js/pages/datatables.init.js' %}"></script>    
+        <script>
+            $(document).ready( function () {
+                $('#datatable-buttons').DataTable();
+            } );        
+
+
+</script>
+{% endblock %}

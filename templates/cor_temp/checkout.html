@@ -18,6 +18,8 @@ assets
                                         </div>
                                     </div>
                                     <div class="col-xl-10 col-sm-9">
+                                        <form method="post" action="{%url 'corporate_portal:checkout' company.slug%}">
+                                            {%csrf_token%}
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="tab-content" id="v-pills-tabContent">
@@ -58,7 +60,7 @@ assets
                                                                                     <h6 class="m-0 text-end">Total:</h6>
                                                                                 </td>
                                                                                 <td>
-                                                                                    $ 675
+                                                                                    ${{basket.price}}
                                                                                 </td>
                                                                             </tr>
                                                                         </tbody>
@@ -73,16 +75,17 @@ assets
                                         </div>
                                         <div class="row mt-4">
                                             <div class="col-sm-6">
-                                                <a href="{% url 'corporate_portal:booking' company.slug %}" class="btn text-muted d-none d-sm-inline-block btn-link">
-                                                    <i class="mdi mdi-arrow-left me-1"></i> Back to Booking </a>
+                                                <a href="{% url 'corporate_portal:cart-del' company.slug %}" class="btn btn-secondary text-muted d-none d-sm-inline-block btn-link">
+                                                    <i class="mdi mdi-arrow-left me-1"></i>Clear Cart </a>
                                             </div> <!-- end col -->
                                             <div class="col-sm-6">
                                                 <div class="text-end">
-                                                    <a href="{% url 'corporate_portal:booking' company.slug %}" class="btn btn-success">
-                                                        <i class="mdi mdi-truck-fast me-1"></i> Proceed to Stripe</a>
+                                                    <button type="submit" class="btn btn-success">
+                                                        <i class="mdi mdi-truck-fast me-1"></i> Proceed to Payment</button>
                                                 </div>
                                             </div> <!-- end col -->
                                         </div> <!-- end row -->
+                                    </form>
                                     </div>
                                 </div>
                             </div>
