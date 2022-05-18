@@ -14,41 +14,63 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-        <a class="logo" href="index.html"><img src="/img/logo1.png" alt=""></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
-          <i class="fa fa-bars"></i>
-        </button>
-      <div class="collapse navbar-collapse" id="navbar">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="hgvmedicals.html">HGV/BUS MEDICALS</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="taxi.html">TAXI MEDICALS</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="omedicals.html">OTHER MEDICALS</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="business.html">BUSINESS CLIENTS</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link" href="#" data-bs-toggle="dropdown">MORE</a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">LOCATIONS</a></li>
-                <li><a class="dropdown-item" href="contact.html">CONTACT</a></li>
-                <li><a class="dropdown-item" href="faqs.html">FAQS</a></li>
-            </ul>
-          </li>
-        </ul>
-        <div class="nav-end">
-          <a class="btn btn-lg" href="booking.html" role="button">Book Now</a>
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="info p-3">
+      <div class="container">
+        <a class="infos tel fs-4" href="tel:+"><span class="fas fa-phone-alt pe-1"></span>0203 963 9083</a>
+        <a class="infos mail fs-4" href="mailto:"><span class="fas fa-envelope pe-1"></span>Bookings@compliancemedicals.uk</a>
+        <div class="infolink">
+          <a class="fs-2 infos" href=""><i class="fab fa-facebook"></i></a>
+          <a class="fs-2 infos" href=""><i class="fab fa-instagram"></i></a>
+          <a class="fs-2 infos" href=""><i class="fab fa-twitter"></i></a>
         </div>
       </div>
     </div>
-    </nav>
+    
+      <div class="container">
+          <a class="logo" href="index.html"><img src="/img/logo1.png" alt=""></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
+            <i class="fa fa-bars"></i>
+          </button>
+        <div class="collapse navbar-collapse" id="navbar">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="hgvmedicals.html">HGV/BUS MEDICALS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="taxi.html">TAXI MEDICALS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="omedicals.html">OTHER MEDICALS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link bc" href="business.html">BUSINESSES</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link loc" href="location.html">LOCATIONS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fre" href="faqs.html">FAQS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link con" href="contact.html">CONTACT</a>
+            </li>
+            <li class="nav-item dropdown none">
+              <a class="nav-link" href="#" data-bs-toggle="dropdown">MORE</a>
+              <ul class="dropdown-menu">
+                  <li><a class="dropdown-item bc2" href="business.html">BUSINESS CLIENTS</a></li>
+                  <li><a class="dropdown-item loc2" href="location.html">LOCATIONS</a></li>
+                  <li><a class="dropdown-item" href="contact.html">CONTACT</a></li>
+                  <li><a class="dropdown-item" href="faqs.html">FAQS</a></li>
+              </ul>
+            </li>
+          </ul>
+          <div class="nav-end">
+            <a class="btn btn-lg" href="booking.html" role="button">BOOK ONLINE</a>
+          </div>
+        </div>
+      </div>
+  </nav>
 
     <div class="body">
             <div class="hero14">
@@ -56,45 +78,42 @@
             <div class="mbody-texts">
                 <div class="mtext-content">
                   <h1>Get in Touch</h1>
-                  <div class="nav-end">
-                    <a class="btn btn-lg" href="booking.html" role="button">Book Instantly</a>
-                  </div>
                 </div>
             </div>
     </div>
 
     <div class="lowcost mb-5 pb-5">
-        <div class="container">
+        <div class="container mb-5">
           <div class="row">
             <div class="col-lg-7 cform">
-              <div class="comply-texts">
+              <div class="cform-texts">
                 <h1 class="pt-5">Contact Form</h1>
               </div>
               <form action="" class="was-validated">
-              <div class="mb-5">
+              <div class="mt-5 mb-5">
                 <label for="name" class="form-label">Your Name (required)</label>
                 <input type="text" class="form-control form-control-lg" id="name" placeholder="Enter your name" name="name" required>
-                <div class="valid-feedback fs-3">Valid.</div>
-                <div class="invalid-feedback fs-3">Please fill out this field.</div>
+                <div class="valid-feedback fs-4">Valid.</div>
+                <div class="invalid-feedback fs-4">Please fill out this field.</div>
               </div>
-              <div class="mb-5">
+              <div class="mt-5 mb-5">
                 <label for="email" class="form-label">Your Email (required)</label>
-                <input type="email" class="form-control form-control-lg" id="email" placeholder="Enter your email" name="email" required>
-                <div class="valid-feedback fs-3">Valid.</div>
-                <div class="invalid-feedback fs-3">Please fill out this field.</div>
+                <input type="email" class="form-control form-control-lg" id="email" placeholder="Example@email.com" name="email" required>
+                <div class="valid-feedback fs-4">Valid.</div>
+                <div class="invalid-feedback fs-4">Please fill out this field.</div>
               </div>
-              <div class="mb-5">
+              <div class="mt-5 mb-5">
                 <label for="tel" class="form-label">Your Phone Number (required)</label>
                 <input type="tel" class="form-control form-control-lg" id="tel" placeholder="E.g. +1 300 400 5000" name="tel" required>
-                <div class="invalid-feedback fs-3">Please fill out this field.</div>
+                <div class="invalid-feedback fs-4">Please fill out this field.</div>
               </div>
               </form>
               <form action="/action_page.php">
-                <div class="mb-5">
+                <div class="mt-5 mb-5">
                   <label for="text" class="form-label">Subject</label>
                   <input type="text" class="form-control form-control-lg" id="text" placeholder="" name="text">
                 </div>
-                <div class="mb-5">
+                <div class="mt-5 mb-5">
                   <label for="comment">Your message</label>
                   <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
                 </div>
@@ -109,7 +128,7 @@
                   <h2 class="pb-5 text-break"><a href="mailto:">Bookings@compliancemedicals.uk</a></h2>
                 </div>
                 <div class="call-image pt-5 pb-5">
-                  <img src="/img/hero6.jpg" alt="">
+                  <img class="rounded-3" src="/img/hero16.jpeg" alt="">
                 </div>
               </div>
             </div>
@@ -123,16 +142,13 @@
           <div class="row">
             <div class="col-lg-3 bottom">
               <div class="logo2">
-                <a href="index.html"><img src="img/logo2.png" alt="Drivers Medicals"></a>
+                <a href="index.html"><img src="img/logo2.png" alt="Compliance Medicals"></a>
               </div>
-              <p class="mt-5">All driver medicals are completed by GMC registered doctors in accordance with current DVLA Group 2 guidelines.</p>
-              <a class="fs-2" href=""><i class="fab fa-linkedin"></i></a>
-              <a class="fs-2" href=""><i class="fab fa-instagram"></i></a>
-              <a class="fs-2" href=""><i class="fab fa-twitter"></i></a>
+              <p class="mt-4">All driver medicals are completed by GMC registered doctors in accordance with current DVLA Group 2 guidelines.</p>
             </div>
             <div class="col-lg-3 quick">
               <h2>Ouick Links</h2>
-              <ul class="nav flex-column">
+              <ul class="nav flex-column mt-3">
                 <li class="enav-item">
                   <a class="enav-link" href="hgvmedicals.html">HGV/Bus Medical</a>
                 </li>
@@ -143,7 +159,7 @@
                   <a class="enav-link" href="omedicals.html">Other Medicals</a>
                 </li>
                 <li class="enav-item">
-                  <a class="enav-link" href="business.html">Business Clients</a>
+                  <a class="enav-link" href="business.html">Businesses</a>
                 </li>
                 <li class="enav-item">
                   <a class="enav-link" href="location.html">Locations</a>
@@ -157,11 +173,11 @@
               </ul>
             </div>
             <div class="col-lg-3 quick quicks">
-              <h2>Ouick Links</h2>
-              <div>
-                <a href="tel:+"><span class="fas fa-phone-alt spa mt-5"></span>0203 963 9083</a>
-                <p class="text-break"><span class="fas fa-envelope spa mt-5"></span>Send A Message</p>
-                <a href="mailto:">Bookings@drivermedicals.uk</a>
+              <h2>Contact Info</h2>
+              <div class="mt-3">
+                <a href="tel:+0203 963 9083"><span class="fas fa-phone-alt spa mt-3"></span>Call Us: 0203 963 9083</a>
+                <p class="text-break"><span class="fas fa-envelope spa mt-4"></span>Send A Message</p>
+                <a href="mailto:Bookings@compliancemedicals.uk">Bookings@compliancemedicals.uk</a>
               </div>
             </div>
             <div class="col-lg-3 pilot">
@@ -177,8 +193,8 @@
   
     <footer class="footer-footer">
       <div class="footer-wrapper">
-        <div class="wrapper-end fs-2 p-3">
-          <p>Drivermedicals.uk © 2022. All Rights Reserved</p>
+        <div class="wrapper-end fs-4 p-3">
+          <p>Compliance Medicals Ltd © 2022. All Rights Reserved. <a href="/privacy policy.html" class="fs-4">Privacy policy</a> | <a href="/terms and conditions.html" class="fs-4">Terms and Conditions</a></p>
         </div>
       </div>
     </footer>

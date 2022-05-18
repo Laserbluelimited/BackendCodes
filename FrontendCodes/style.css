@@ -13,7 +13,7 @@ html{
 }
 
 body{
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------ */
@@ -42,15 +42,15 @@ body{
 
 .navbar{
     background-color: #fff;
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.219);
+    box-shadow: 0 .3rem .5rem rgba(0, 0, 0, 0.219);
     width: 100%;
     display: block;
 }
   
 .logo{
-    margin-top: 2.5rem;
-    padding-bottom: 2.5rem;
-    width: 30rem;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+    width: 25rem;
 }
   
 .logo img{
@@ -72,14 +72,18 @@ body{
 
 .nav-link{
     color: #015668;
-    font-size: 180%;
+    font-size: 1.5rem;
     font-weight: 600;
     transition: 0.3s;
-    margin-left: 3rem;
+    margin-left: 1rem;
 }
   
 .nav-link:hover{
     color: #02A9CD;
+}
+
+.none{
+    display: none;
 }
 
 .dropdown-menu{
@@ -94,17 +98,52 @@ body{
 }
 
 .nav-end a{
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    background-color: #015668;
+    color: #fff;
+    border-radius: .4rem;
+    padding: 1rem 1.7rem;
+    border: .3rem solid #015668;
+    transition: .3s;
+}
+
+.nav-end2 a{
+    font-size: 2rem;
+    font-weight: 500;
+    background-color: #02A9CD;
+    color: #fff;
+    border-radius: .4rem;
+    padding: 1.5rem 4.5rem;
+    border: .3rem solid #02A9CD;
+    transition: .3s;
+}
+
+.nav-end3 a{
+    font-size: 2.5rem;
     font-weight: 600;
     background-color: #015668;
     color: #fff;
-    border-radius: .7rem;
+    border-radius: .4rem;
+    padding: 1.5rem 3.5rem;
     border: .3rem solid #015668;
-    padding: 1rem;
     transition: .3s;
+    margin-bottom: 10rem;
+}
+
+.nav-end a:hover{
+    background-color: #02A9CD;
+    color: #fff;
+    border: .3rem solid #02A9CD;
 }
   
-.nav-end a:hover{
+.nav-end2 a:hover{
+    font-size: 2.3rem;
+    padding: 1.8rem 4.8rem;
+    color: #fff;
+}
+
+.nav-end3 a:hover{
     background-color: #02A9CD;
     color: #fff;
     border: .3rem solid #02A9CD;
@@ -121,7 +160,9 @@ body{
 
 .hero {
     width: 100%;
+    height: 100%;
     background-color: #D5F3FF;
+    
 }
 
 .hero img{
@@ -130,21 +171,23 @@ body{
 
 .body-texts{
     position: absolute;
-    top: 15%;
-    left: 12%;
+    top: 13%;
+    left: 13%;
 }
 
 .text-content h1{
     font-weight: 700;
-    font-size: 7rem;
-    color: #015668;
+    font-size: 5.5rem;
+    color: #003a46;
+    width: 57%;
 }
 
 .text-content h2{
     font-weight: 700;
-    font-size: 3rem;
+    font-size: 2.8rem;
     color: #555;
     padding: 2rem 0rem;
+    width: 75%;
 }
 
 .text-content h3{
@@ -154,7 +197,7 @@ body{
 }
 
 .body .container{
-    margin-top: -5rem;
+    margin-top: -6rem;
     z-index: 100;
 }
 
@@ -163,14 +206,14 @@ body{
 }
 
 .body-card h1{
-    font-size: 5rem;
+    font-size: 4rem;
     font-weight: 700;
     color: #fff;
     padding-bottom: 3rem;
 }
 
 .body-card h3{
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 700;
     color: #fff;
     padding-bottom: 3rem;
@@ -181,32 +224,46 @@ body{
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
 .comply .container{
-    margin-top: 10rem;
+    margin-top: 15rem;
 }
 
 .comply-image{
     width: 100%;
-    padding-right: 3rem;
+    height: 60rem;
+    background-image: url(/img/hero2.jpeg);
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .comply-image img{
     width: 100%;
+    display: none;
+}
+
+.c1{
+    padding-right: 2rem;
+}
+
+.c2{
+    padding-left: 2rem;
 }
 
 .comply-texts h1{
     margin-top: 1rem;
-    font-size: 4rem;
+    font-size: 3.5rem;
     font-weight: 700;
-    color: #02A9CD;
+    color: #015668;
 }
 
-.comply-texts p, .end-texts p, .mend-texts p{
-    font-size: 2rem;
+.comply-texts p{
+    font-size: 1.7rem;
     color: #555;
+    width: 85%;
 }
 
-.comply-texts h2, .stext h2{
-    font-size: 3rem;
+.comply-texts h2{
+    font-size: 2.5rem;
     font-weight: 700;
     color: #555;
 }
@@ -221,27 +278,36 @@ body{
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
 .services{
-    margin-top: 10rem;
+    margin-top: 15rem;
     width: 100%;
 }
 
 .s-content{
     background-color: #D5F3FF;
-    margin-bottom: 10rem;
+    margin-bottom: 6rem;
 }
 
 .services h1{
     margin-top: 10rem;
     font-size: 4rem;
     font-weight: 700;
-    color: #02A9CD;
+    color: #015668;
 }
 
 .simage{
     width: 100%;
+    height: 100%;
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.simage img, .hero4 img, .hero5 img, .hero6 img, .hero7 img, .logo2 img{
+.simage img{
+    width: 100%;
+    display: none;
+}
+
+.logo2 img{
     width: 100%;
 }
 
@@ -250,14 +316,22 @@ body{
     margin-right: 1rem;
 }
 
+.stext h2{
+    font-size: 3rem;
+    font-weight: 700;
+    color: #555;
+}
+
 .stext-p{
     display: flex;
 }
 
 .stext-p p{
-    font-weight: 500;
-    font-size: 2rem;
+    font-weight: 600;
+    font-size: 1.7rem;
     color: #555;
+    width: 87%;
+    line-height: 3rem;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------ */
@@ -267,6 +341,7 @@ body{
 .end{
     width: 100%;
     display: flex;
+    margin-top: 13rem;
 }
 
 .end-left{
@@ -276,10 +351,21 @@ body{
 .end-right{
     width: 50%;
     background-color: #D5F3FF;
+    
 }
+
 
 .hero7{
     width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.hero7 img{
+    width: 100%;
+    display: none;
 }
 
 .end-texts{
@@ -287,14 +373,16 @@ body{
 }
 
 .end-texts h1{
-    padding-top: 5rem;
-    font-size: 4rem;
+    padding-top: 7rem;
+    font-size: 3rem;
     font-weight: 700;
-    color: #015668;
+    color: #003a46;
 }
 
 .end-texts p{
-    font-weight: 500;
+    padding-top: 2rem;
+    font-size: 1.8rem;
+    width: 85%;
 }
 
 
@@ -307,15 +395,11 @@ body{
 }
 
 .footer-content{
-    padding: 10rem;
-}
-
-.bottom{
-    padding-right: 2rem;
+    padding: 10rem 15rem;
 }
 
 .logo2{
-    width: auto;
+    width: 20rem;
 }
 
 .logo2 img{
@@ -324,12 +408,12 @@ body{
 
 .bottom p{
     color: #fff;
-    font-weight: 700;
-    font-size: 190%
+    font-weight: 500;
+    font-size: 1.5rem;
+    width: 95%;
 }
 
 .bottom i{
-    margin-right: 1rem;
     color: #fff;
     transition: .3s;
 }
@@ -347,13 +431,13 @@ body{
 }
 
 .quick li{
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .quick a{
     text-decoration: none;
     color: #fff;
-    font-size: 190%
+    font-size: 1.5rem
 }
 
 .quick a:hover{
@@ -362,7 +446,7 @@ body{
 
 .quick p{
     color: #fff;
-    font-size: 190%
+    font-size: 1.5rem
 }
 
 .spa{
@@ -378,6 +462,11 @@ body{
 
 .pilot{
     padding-left: 3rem;
+    width: 20rem;
+}
+
+.pilot img{
+    width: 100%;
 }
 
 .footer-wrapper p{
@@ -385,97 +474,15 @@ body{
   color: #fff;
 }
 
-/* -------------------------------------------------------------------------------------------------------------------------------------------- */
-/* MODAL */
-/* -------------------------------------------------------------------------------------------------------------------------------------------- */
-
-#parent_popup{
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    display: none;
-    position: fixed;
-    top: 10rem;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 100;
-}
-  
-#parent_popup .container{
-    margin: 10% auto;
-    padding: 10rem;
-    border: 1rem solid #015668;
-    position: relative;
-    box-shadow: 0rem 0rem 2rem #000;
-    border-radius: 1.5rem;
-}
-
-.modal-headline{
-    margin: 3rem;
-    text-align: center;
-}   
-
-.modal-text{
-    font-family: 'Work Sans', sans-serif;
-    color: #015668;
-}   
-
-.modal-headline input{
-    font-family: 'Work Sans', sans-serif;
-    padding: .7rem 2rem;
-    width: 100%;
-    text-align: center;
-    border-radius: .4rem;
-    box-shadow: 0 .7rem .7rem rgba(0, 0, 0, 0.219);
-}   
-
-.close{
-    background-color: #015668;;
+.footer-wrapper a{
     color: #fff;
-    border: .2rem solid #ccc;
-    height: 2.4rem;
-    position: absolute;
-    bottom: .5rem;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    cursor: pointer;
-    font-weight: bold;
-    text-align: center;
-    font-size: 1.4rem;
-    text-shadow: 0 -.1rem rgba(0, 0, 0, 0.9);
-    width: 2.4rem;
-    border-radius: 1.5rem;
-    box-shadow: .1rem .1rem .3rem #000;
-    transition: .3s;
     text-decoration: none;
-}   
+    transition: .3s;
+  }
 
-.close:hover{
-    background-color: #02A9CD;;
-    color: #fff;
-}
-
-.modal-headline .btn{
-    font-size: 1.8rem;
-    font-family: 'Work Sans', sans-serif;
-    font-weight: 600;
-    background-color: #007d96;
-    border-radius: .7rem;
-    border: .3rem solid #007d96;
-    margin: 2rem 0;
-}
-
-.modal-headline .btn:hover{
-    background-color: #fff;
-    color: #015668;
-}
-
-.mailbox{
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
+  .footer-wrapper a:hover{
+    color: #02A9CD;
+  }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------ */
 /* HGVMEDICALS*/
@@ -483,30 +490,38 @@ body{
 
 .hero8{
     width: 100%;
-    background-color: #000;
-    height: 50rem;
+    height: 45rem;
     background-image: url(/img/hero8.jpeg);
-    background-position: center;
+    background-position: bottom;
     background-repeat: no-repeat;
     background-size: cover;
-    filter: brightness(50%);
 }
 
-.mbody-texts{
+.hgv-texts{
     position: absolute;
-    top: 70%;
-    left: 12%;
+    top: 50%;
+    left: 14%;
+    width: 40%;
+    
 }
 
-.mtext-content h1{
+.hgv-text h1{
     font-weight: 700;
-    font-size: 5rem;
+    font-size: 4rem;
     color: #fff;
+    line-height: 4rem;
 }
 
 .lowcost{
-    margin-top: 10rem;
+    margin-top: 7rem;
     display: flex;
+}
+
+
+.hgv-arrange .container{
+    margin-top: 7rem;
+    background-color: #D5F3FF;
+    padding: 10rem 3rem;
 }
 
 .arrange{
@@ -520,25 +535,47 @@ body{
     margin-bottom: 10rem;
 }
 
-.arrange-text h1{
-    font-size: 4rem;
+.lowcost-texts h1{
     font-weight: 700;
-    color: #02A9CD;
+    font-size: 3.3rem;
+    color: #007d96;
 }
 
-.arrange-text p{
-    font-size: 2rem;
+.range-texts h2, .lowcost-texts h2{
+    font-weight: 700;
+    font-size: 2.7rem;
     color: #555;
 }
 
-.comply-texts ul{
+.range-texts p, .lowcost-texts p{
+    font-size: 1.7rem;
+    color: #555;
+    width: 90%;
+}
+
+.range-texts ul{
     margin-left: 0;
 }
 
-.comply-texts li{
+.range-texts li, a{
     list-style: disc;
     color: #555;
-    font-size: 2rem;
+    font-size: 1.8rem;
+}
+
+.range-texts a:hover{
+    color: #007d96;
+}
+
+.hgv-end{
+    width: 100%;
+    display: flex;
+}
+
+.hgv-footer .container{
+    margin-top: 7rem;
+    background-color: #007d96;
+    padding: 10rem;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------ */
@@ -547,13 +584,24 @@ body{
 
 .hero9{
     width: 100%;
-    background-color: #000;
     height: 50rem;
-    background-image: url(/img/hero9.jpg);
+    background-image: url(/img/hero9.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    filter: brightness(50%);
+}
+
+.mbody-texts{
+    position: absolute;
+    top: 35%;
+    left: 14%;
+}
+
+.mtext-content h1{
+    font-weight: 700;
+    font-size: 4.5rem;
+    color: #fff;
+    width: 100%;
 }
 
 .hero10{
@@ -570,13 +618,29 @@ body{
 
 .hero11{
     width: 100%;
-    background-color: #000;
     height: 50rem;
-    background-image: url(/img/hero11.jpg);
+    background-image: url(/img/hero11.jpeg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    filter: brightness(50%);
+}
+
+.otext-content h1{
+    font-weight: 700;
+    font-size: 4.3rem;
+    color: #fff;
+    width: 100%;
+}
+
+.tend{
+    width: 100%;
+    display: flex;
+}
+
+.tend-right{
+    width: 50%;
+    background-color: #fff;
+    
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------ */
@@ -584,24 +648,31 @@ body{
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
 .biz{
-    margin-top: 10rem;
+    margin-top: 12rem;
 }
 
-.hero8{
+.hero88{
     width: 100%;
-    background-color: #000;
     height: 50rem;
     background-image: url(/img/hero8.jpeg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    filter: brightness(50%);
 }
 
 .bizbody-texts{
     position: absolute;
-    top: 60%;
-    left: 12%;
+    top: 35%;
+    left: 14%;
+}
+
+.btext-content h1{
+    font-weight: 700;
+    font-size: 4.5rem;
+    color: #fff;
+    width: 70%;
+    line-height: 4rem;
+    margin-bottom: 3rem;
 }
 
 .biz-card h3{
@@ -616,27 +687,31 @@ body{
 
 .hero14{
     width: 100%;
-    background-color: #000;
     height: 50rem;
     background-image: url(/img/hero14.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    filter: brightness(50%);
 }
 
 .cform{
     padding: 0rem 3rem;
 }
 
+.cform-texts h1{
+    font-size: 4rem;
+    font-weight: 700;
+    color: #007d96;
+}
+
 .cform label{
-    font-size: 2rem;
+    font-size: 1.7rem;
     color: #555;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .cform input, .cform textarea{
-    font-size: 2rem;
+    font-size: 1.7rem;
     color: #555;
     background-color: #eee;
     font-weight: 500;
@@ -646,8 +721,9 @@ body{
     background-color: #02A9CD;
     color: #fff;
     font-weight: 500;
-    font-size: 2rem;
+    font-size: 1.7rem;
     padding: 1rem 3rem;
+    transition: .3s;
 }
 
 .cform .btn:hover{
@@ -693,30 +769,18 @@ body{
 
 .hero15{
     width: 100%;
-    background-color: #000;
     height: 50rem;
-    background-image: url(/img/hero15.jpg);
-    background-position: center;
+    background-image: url(/img/hero15.jpeg);
+    background-position: bottom;
     background-repeat: no-repeat;
     background-size: cover;
-    filter: brightness(50%);
 }
 
 .faq-content{
-    width: 80%;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 10rem;
-}
-
-.faq-texts{
-    position: absolute;
-    top: 50%;
-    left: 12%;
-}
-
-.faq-texts h1{
-    color: #015668;
 }
 
 .faq-ul li{
@@ -727,8 +791,35 @@ body{
     background-color: #fff;
 }
 
-#accordion .btn,p,h2{
+#accordion h1{
+    font-size: 2.3rem;
+    padding: .5rem;
     color: #555;
+}
+
+#accordion p{
+    font-size: 1.7rem;
+    padding: 0rem 1rem;
+    line-height: 3.5rem;
+    color: #555;
+}
+
+#accordion h2{
+    font-size: 1.7rem;
+    color: #555;
+    padding: 0rem 1rem;
+}
+
+#accordion li{
+    font-size: 1.7rem;
+    color: #555;
+    padding: 0rem 1rem;
+}
+
+#accordion a{
+    font-size: 1.7rem;
+    color: #555;
+    padding: 0rem 1rem;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------ */
@@ -737,13 +828,17 @@ body{
 
 .hero17{
     width: 100%;
-    background-color: #000;
-    height: 50rem;
+    height: 45rem;
     background-image: url(/img/hero17.jpeg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    filter: brightness(50%);
+}
+
+.l-body-texts{
+    position: absolute;
+    top: 45%;
+    left: 12%;
 }
 
 .map{
@@ -752,13 +847,49 @@ body{
     margin: 5rem 0;
 }
 
-.map-text{
-    margin: 1rem 0;
-    color: #015668;
+.mapp{
+    margin-top: 5rem;
 }
 
 .mapped{
-    margin: 5rem 0;
+    display: grid;
+}
+
+.mapped a, .mapped2 a{
+    text-decoration: none;
+    color: #007d96;
+    font-size: 3rem;
+    font-weight: 700;
+    transition: .3s;
+}
+
+.mapped a:hover{
+    color: #015668;
+}
+
+.mapped2 a:hover{
+    color: #015668;
+}
+
+.mapped2{
+    display: flex;
+    flex-direction: column;
+}
+
+.locate{
+    margin-top: 10rem;
+    margin-bottom: 15rem;
+    background-color: #015668;
+    border-radius: 2rem;
+    padding: 8rem;
+}
+
+.locate h1{
+    color: #fff;
+    font-size: 3rem;
+    font-weight: 700;
+    width: 90%;
+    margin: auto;
 }
 
 
@@ -933,6 +1064,7 @@ input.invalid {
     width: 100%;
     height: 100vh;
 }
+
 .payment{
 	border:1px solid #f2f2f2;
 	height:40rem;
@@ -983,8 +1115,61 @@ input.invalid {
     text-decoration:none;
     background:#02A9CD;
 }
-  
 
+/* ------------------------------------------------------------------------------------------------------------------------------------------ */
+/* TERMS AND CONDITIONS*/
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.hero18{
+    width: 100%;
+    height: 50rem;
+    background-image: url(/img/hero18.jpeg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.hero19{
+    width: 100%;
+    height: 50rem;
+    background-image: url(/img/hero19.jpeg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------ */
+/* ERROR PAGES*/
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.e-content{
+    margin-top: 15%;
+}
+
+.e-content h1{
+    font-size: 30rem;
+    font-weight: 300;
+}
+
+.e-content p{
+    font-weight: 300;
+}
+
+.e-content a{
+    width:20rem;
+    height:3.5rem;
+    color:#fff;
+    font-weight: 300;
+    border-radius:.3rem;
+    padding:1rem 3rem;
+    background:#015668;
+    transition:all ease-in-out 0.3s;
+    text-decoration:none;
+}
+.e-content a:hover{
+    text-decoration:none;
+    background:#02A9CD;
+}
 
 
 
@@ -1030,21 +1215,17 @@ input.invalid {
 /* MEDIA-QUERIES*/
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
-
+ 
 @media only screen and (max-width: 1500px){
-    
-    .body-texts{
-        top: 10%;
-        left: 12%;
-    }
-    
+
     .text-content h1{
-        font-size: 6rem;
+        font-size: 5rem;
     }
     
     .text-content h2{
         font-size: 2.5rem;
         padding: 2rem 0rem;
+        width: 65%;
     }
     
     .text-content h3{
@@ -1052,53 +1233,127 @@ input.invalid {
         padding: 2rem 0rem;
     }
 
-    
+    .body-texts{
+        top: 13%;
+        left: 10%;
+    }
+
+    .faq-content{
+        width: 60%;
+    }
+
+    .hgv-texts{
+        width: 45%;
+    }
     
 }
 
 @media only screen and (max-width: 1400px){
-    
-    .body-texts{
-        left: 8%;
+
+    .logo{
+        width: 23rem;
+    }
+
+    .navbar-nav{
+        margin-left: 4rem;
     }
 
     .nav-link{
-        margin-left: 1rem;
+        font-size: 1.45rem;
+        margin-left: .3rem;
     }
 
-    .end-texts{
-        padding: 4rem;
+    .none{
+        display: block;
     }
-    
-    .end-texts h1, .mend-texts h1{
-        padding-top: 0rem;
-        font-size: 3.8rem;
+
+    .con, .fre, .bc2, .loc2{
+        display: none;
     }
+
+    .body-texts{
+        top: 10%;
+        left: 7%;
+    }
+
+    .text-content h1{
+        font-size: 4.7rem;
+    }
+
+    .text-content h2{
+        width: 70%;
+    }
+
+    .hgv-texts{
+        width: 50%;
+        left: 11%;
+        top: 50%;
+    }
+
+    .mbody-texts{
+        top: 29%;
+        left: 11%;
+    }
+
+    .bizbody-texts{
+        top: 29%;
+        left: 11%;
+    }
+
+    .footer-content{
+        padding: 10rem 13rem;
+    }
+
 
     
 }
 
 @media only screen and (max-width: 1300px){
-    
-    .text-content h1{
-        font-size: 5rem;
+
+    .loc{
+        display: none;
     }
 
-    .nav-link{
-        margin-left: .5rem;
-        font-size: 150%;
+    .loc2{
+        display: block;
     }
 
-    .dropdown-menu a{
-        font-size: 150%;
+    .body-texts{
+        top: 9%;
     }
 
-    .end-texts h1, .mend-texts h1{
-        font-size: 3.5rem;
+    .body .container{
+        margin-top: -4rem;
+    }
+
+    .body-card h1{
+        font-size: 3rem;
+    }
+
+    .end-texts p{
+        width: 100%;
+    }
+
+    .footer-content{
+        padding: 10rem 10rem;
     }
 
     .bizbody-texts{
-        top: 50%;
+        top: 26%;
+        left: 7%;
+    }
+
+    .mbody-texts{
+        top: 26%;
+        left: 7%;
+    }
+
+    .hgv-texts{
+        left: 7%;
+    }
+
+    .faq-content{
+        width: 65%;
     }
 
     
@@ -1106,15 +1361,15 @@ input.invalid {
 }
 
 @media only screen and (max-width: 1200px){
-    
-    .nav-link{
-        margin-left: .5rem;
-        font-size: 130%;
+
+    .bc{
+        display: none;
     }
 
-    .dropdown-menu a{
-        font-size: 130%;
+    .bc2{
+        display: block;
     }
+    
     
     .text-content h2{
         font-size: 2rem;
@@ -1138,25 +1393,28 @@ input.invalid {
         font-size: 2rem;
     }
 
-    .comply-texts p, .stext-p p{
-        font-size: 1.8rem;
-    }
-    
-    .comply-texts h2, .stext h2{
-        font-size: 2rem;
-    }
 
-    .end-texts h1, .mend-texts h1{
+    .end-texts h1{
         font-size: 3rem;
     }
 
-    .end-texts p, .mend-texts p{
-        font-size: 2rem;
+    .footer-content{
+        padding: 10rem 6rem;
     }
 
-    .mbody-texts{
-        top: 60%;
+    .mbody-texts, .bizbody-texts{
+        left: 4%;
     }
+
+    .hgv-texts{
+        width: 55%;
+        left: 4%;
+    }
+
+    .faq-content{
+        width: 70%;
+    }
+
 
     
     
@@ -1164,32 +1422,20 @@ input.invalid {
 
 @media only screen and (max-width: 1100px){
     
-
-    .nav-link{
-        font-size: 110%;
-    }
-    
-    .dropdown-menu a{
-        font-size: 110%;
-    }
-
     .text-content h1{
         font-size: 4rem;
     }
 
-    .end-texts h1, .mend-texts h1{
-        font-size: 2.8rem;
+    .footer-content{
+        padding: 10rem 2rem;
     }
 
-    .end-texts p, .mend-texts p{
-        font-size: 1.7rem;
-        color: #555;
+    .faq-content{
+        width: 75%;
     }
 
-    .mailbox{
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
+    .hgv-texts{
+        width: 60%;
     }
 
     
@@ -1197,18 +1443,27 @@ input.invalid {
 }
 
 @media only screen and (max-width: 992px){
-    
 
     .navbar-nav{
         margin-left: 0rem;
     }
 
-    .nav-link{
-        font-size: 150%;
+    .con, .fre, .bc, .loc{
+        display: block;
     }
-    
-    .dropdown-menu a{
-        font-size: 150%;
+
+    .none{
+        display: none;
+    }
+
+    .nav-link{
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
+    .nav-end a{
+        margin: 2rem 0rem;
+        font-size: 2rem;
     }
 
     .body-texts{
@@ -1230,7 +1485,28 @@ input.invalid {
         padding-bottom: 1rem;
     }
 
-    .end{
+    .comply-image{
+        width: 100%;
+        height: auto;
+        background: none;
+        margin-bottom: 2rem;
+    }
+    
+    .comply-image img{
+        width: 100%;
+        display: block;
+    }
+
+    .simage{
+        background: none;
+    }
+    
+    .simage img{
+        width: 100%;
+        display: block;
+    }
+
+    .end, .tend{
         display: block;
     }
 
@@ -1238,13 +1514,32 @@ input.invalid {
         width: 100%;
     }
     
-    .end-right{
+    .end-right, .tend-right{
         width: 100%;
+    }
+
+    .end-texts p{
+        width: 80%;
+    }
+
+    .hero7{
+        width: 100%;
+        height: 100%;
+        background: none;
+    }
+    
+    .hero7 img{
+        width: 100%;
+        display: block;
     }
 
     .bottom{
         padding-right: 0rem;
         margin-bottom: 3rem;
+    }
+
+    .bottom p{
+        width: 80%;
     }
 
     .quick{
@@ -1265,19 +1560,59 @@ input.invalid {
     }
 
     .logo2 img{
-        width: 70%;
+        width: 100%;
     }
 
     .footer-content{
         padding: 5rem;
     }
 
-    .mbody-texts{
-        top: 60%;
+    .hgv-texts{
+        width: 55%;
+        left: 4%;
+        top: 45%;
     }
     
-    .mtext-content h1{
+    .mtext-content h1, .btext-content h1{
         font-size: 4rem;
+    }
+
+    .mbody-texts, .bizbody-texts{
+        left: 4%;
+        top: 30%;
+    }
+
+    .lowcost-texts h1{
+        font-size: 3rem;
+    }
+
+    .range-texts h2, .lowcost-texts h2{
+        font-size: 2.5rem;
+    }
+
+    .range-texts p, .lowcost-texts p{
+        font-size: 1.6rem;
+        width: 100%;
+    }
+    
+    .range-texts ul{
+        margin-left: 0;
+    }
+    
+    .range-texts li, a{
+        font-size: 1.6rem;
+    }
+
+    .faq-content{
+        width: 100%;
+    }
+
+    .bform-image{
+        width: 20%;
+    }
+
+    .e-content h1{
+        font-size: 25rem;
     }
 
     
@@ -1299,22 +1634,14 @@ input.invalid {
         width: 100%;
     }
 
-    .mbody-texts{
-        top: 50%;
-    }
-
-    .hero8{
-        height: 30rem;
-    }
-
     
 }
 
 @media only screen and (max-width: 769px){
 
     .hero {
-        background-color: #D5F3FF;
-        height: 70vh;
+        background-color: #edfaff;
+        height: 90vh;
     }
 
     .hero img{
@@ -1323,27 +1650,51 @@ input.invalid {
     }
 
     .text-content h1{
-        font-size: 5rem;
+        font-size: 4.5rem;
+        width: 36rem;
     }
 
     .text-content h2{
         font-size: 3rem;
+        margin-top: 3rem;
+        width: 40rem;
     }
     
     .text-content h3{
         font-size: 2rem;
     }
 
-    #parent_popup .container{
-        padding: 5rem;
+    .body .container{
+        margin-top: -5rem;
+    }
+    
+    .comply-texts h2, .stext h2{
+        font-size: 2rem;
     }
 
-    .mailbox{
+    .hgv-texts{
+        width: 65%;
+    }
+
+    .hgv-text h1{
+        font-size: 3.7rem;
+    }
+
+    .l-body-texts{
+        left: 4%;
+        top: 45%;
+    }
+
+    .end-texts p{
         width: 100%;
     }
 
-    .bizbody-texts{
-        top: 40%;
+    .sfield{
+        width: 100%;
+    }
+
+    .e-content h1{
+        font-size: 20rem;
     }
 
     
@@ -1352,60 +1703,104 @@ input.invalid {
 
 @media only screen and (max-width: 568px){
 
-    #parent_popup{
-        top: 15rem;
+    .text-content h2{
+        font-size: 2.5rem;
+        margin-top: 3rem;
     }
     
-    .mbody-texts{
-        top: 30%;
-        left: 3%;
+    .text-content h3{
+        font-size: 2rem;
+        margin-top: 3rem;
+        margin-bottom: 1.5rem;
     }
 
-    .bizbody-texts{
-        top: 30%;
-        left: 3%;
+    .comply .arrow{
+        width: 6%;
+    }
+
+    .check{
+        width: 6%;
     }
 
     .infolink{
         display: none;
     }
 
-    
-    
-}
-
-@media only screen and (max-width: 471px){
-    
-    .hero {
-        height: 80vh;
+    .hgv-texts{
+        width: 70%;
+        top: 35%;
     }
 
-    #parent_popup .container{
-        padding: 2rem;
+    .btext-content h1{
+        width: 90%;
+        text-shadow: 0 .3rem .5rem rgba(0, 0, 0, 0.647);
     }
 
-    .modal-headline{
-        margin: 1rem;
+    .mtext-content h1, .btext-content h1{
+        font-size: 3.7rem;
     }
+
+    .bform-image{
+        width: 30%;
+    }
+
+    .e-content h1{
+        font-size: 15rem;
+    }
+    
     
 }
 
 @media only screen and (max-width: 426px){
-    
+
+    .text-content h1{
+        width: 30rem;
+    }
+
+    .nav-link{
+        font-size: 2rem;
+    }
+
+    .text-content h2{
+        width: 100%;
+    }
+
     .hero {
-        height: 80vh;
+        height: 100vh;
     }
 
-    .mbody-texts{
-        top: 30%;
-    }
-
-    .bizbody-texts{
-        top: 20%;
+    .body .container{
+        margin-top: rem;
     }
 
     .info{
         display: grid;
+    }
+
+    .hgv-texts{
+        top: 25%;
+    }
+
+    .bizbody-texts{
+        top: 17%;
+    }
+
+    .bform-image{
+        width: 50%;
+    }
+
+    .aform h2{
+        width: 90%;
+        margin: auto;
+        padding-top: 4rem;
+    }
+    
+    .aform label{
+        font-size: 1.8rem;
+    }
+    
+    .aform input, .aform textarea, .aform select, .aform option{
+        font-size: 1.5rem;
     }
 
     
@@ -1416,10 +1811,6 @@ input.invalid {
    
     .logo{
         width: 20rem;
-    }
-
-    .hero {
-        height: 75vh;
     }
 
     .text-content h1{
@@ -1434,8 +1825,20 @@ input.invalid {
         font-size: 1.8rem;
     }
 
-    .mbody-texts{
-        top: 25%;
+    .l-body-texts h1{
+        width: 90%;
+    }
+
+    .bform-image{
+        width: 100%;
+    }
+
+    .sfield{
+        font-size: 1.5rem;
+    }
+
+    .e-content h1{
+        font-size: 10rem;
     }
 
     
@@ -1444,11 +1847,14 @@ input.invalid {
 
 @media only screen and (max-width: 320px){
    
-    .bizbody-texts{
-        top: 10%;
+    .aform h2{
+        width: 100%;
+    }
+
+    .hgv-texts{
+        width: 100%;
     }
 
     
     
 }
-
