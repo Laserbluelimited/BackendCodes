@@ -25,7 +25,7 @@ if os.path.isfile(dotenv_file):
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'd!m50t)w$$&ff(*pn7%oqw-1yxo+eub*xcxd^8pzo=*2)ynq=w'
+SECRET_KEY= os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -227,10 +227,10 @@ ACCOUNT_EMAIL_REQUIRED = True
 # ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
-# GEOAPIFY_API_KEY = os.environ['GEOAPIFY_API_KEY']
+GEOAPIFY_API_KEY = os.environ['GEOAPIFY_API_KEY']
 
-# DEFAULT_PASSWORD = os.environ['DEFAULT_PASSWORD']
+DEFAULT_PASSWORD = os.environ['DEFAULT_PASSWORD']
 
-# STRIPE_API_KEY = os.environ['STRIPE_API_KEY']
+STRIPE_API_KEY = os.environ['STRIPE_API_KEY']
 
-# SENDGRID_API = os.environ['SENDGRID_API']
+SENDGRID_API = os.environ['SENDGRID_API']
