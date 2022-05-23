@@ -1,6 +1,5 @@
 from random import choices
 from django import forms
-from pyparsing import empty
 from authentication.models import User
 
 TRUE_FALSE_CHOICES = ((True, 'Yes'), (False, 'No'))
