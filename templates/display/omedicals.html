@@ -1,90 +1,61 @@
 {%extends 'display/base.html'%}{%load static%}{%block content%}
-    <div class="body">
-            <div class="hero11">
-                <img src="{%static 'display/img/hero11.jpg'%}" alt="">
-            </div>
-            <div class="mbody-texts">
-                <div class="mtext-content">
-                  <h1>Other Medicals</h1>
-                  <div class="nav-end">
-                    <a class="btn btn-lg" href="{%url 'display:booking'%}" role="button">Book Instantly</a>
-                  </div>
-                </div>
-            </div>
-    </div>
+<div class="body pb-5">
+  <div class="hero11">
+  </div>
+  <div class="mbody-texts">
+      <div class="otext-content">
+        <h1>Other Medicals For Drivers</h1>
+        <div class="nav-end2 mt-3">
+          <a class="btn btn-lg" href="{%url 'display:booking'%}" role="button">Book Instantly</a>
+        </div>
+      </div>
+  </div>
+</div>
 
-    <div class="lowcost">
-        <div class="container">
-            <div class="comply-texts">
-                <h1>Ambulance Driver Medicals</h1>
-                <p class="text-break mt-5 mb-5">Many ambulance students are required to hold a provisional 
-                C1 licence before starting their paramedic courses. We conduct ambulance driver medicals 
-                for paramedics, ambulance drivers and students all over the UK.</p>
-                <h2 class="mt-5 mb-5">What will happen at the medical?</h2>
-                <p class="text-break fw-bold mt-5 mb-5">Our doctors will confirm your identity and conduct a full 
-                D4 medical during your appointment.</p>
-                <p class="text-break mt-5 mb-5">Your medical will include a thorough medical history and an 
-                assessment of your physical health.The doctor will take a blood pressure reading which 
-                complies with DVLA criteria and conduct a visual acuity test using a DVLA approved Snellen 
-                chart.</p>
-                <h2 class="mt-5 mb-5">What you need to bring to the medical?</h2>
-                <ul>
-                  <li>D4 Medical Form</li>
-                  <li>Photo ID</li>
-                  <li>Your driving glasses/contact lenses & prescription</li>
-                  <li>Details of any ongoing medical conditions plus any medication you are taking</li>
-                </ul>
-                <h2 class="mt-5 mb-5">What to do after the medical?</h2>
-                <p class="text-break mt-5">Please send your completed application forms (D4 form and D2 form) 
-                to the DVLA using the return envelope provided.</p>
+<div class="lowcost">
+    <div class="container">
+        <div class="lowcost-texts">
+            <h1>Ambulance Driver Medicals</h1>
+            <p class="text-break mt-5 mb-5">Many ambulance students are required to hold a provisional 
+            C1 licence before starting their paramedic courses. We conduct ambulance driver medicals 
+            for paramedics, ambulance drivers and students all over the UK.</p>
+            <h2 class="mt-5 mb-5">What will happen at the medical?</h2>
+            <p class="text-break fw-bold mt-5 mb-5">Our doctors will confirm your identity and conduct a full 
+            D4 medical during your appointment.</p>
+            <p class="text-break mt-5 mb-5">Your medical will include a thorough medical history and an 
+            assessment of your physical health.The doctor will take a blood pressure reading which 
+            complies with DVLA criteria and conduct a visual acuity test using a DVLA approved Snellen 
+            chart.</p>
+            <div class="range-texts mt-5">
+              <h2 class="mb-5">What you need to bring to the medical?</h2>
+              <ul class="pb-3">
+                <li class="mt-3">D4 Medical Form</li>
+                <li class="mt-3">Photo ID</li>
+                <li class="mt-3">Your driving glasses/contact lenses & prescription</li>
+                <li class="mt-3">Details of any ongoing medical conditions plus any medication you are taking</li>
+              </ul>
+                <h2 class="mt-5">What to do after the medical?</h2>
+                <p class="text-break mt-5">Please send your completed application forms (D4 form and D2 form) to the DVLA using the return envelope provided.</p>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="arrange">
-      <div class="container">
-          <div class="arrange-text">
-              <h1>Pre-Employment</h1>
-              <p class="text-break">A number of employers now request for a certificate of fitness to be 
-              provided by an individual when starting a new role. Our doctors conduct pre-employment 
-              medicals according to strict DVLA group 2 medical standards. Please bring along any form 
-              which needs to be completed by the doctor.</p>
-          </div>
-          <div class="comply-texts">
-              <h2 class="mt-5 mb-5">What will happen at the medical?</h2>
-              <p class="text-break fw-bold mt-5 mb-5">Our doctors will confirm your identity and conduct a full 
-              D4 medical during your appointment.</p>
-              <p class="text-break mt-5 mb-5">Your medical will include a thorough medical history and an 
-              assessment of your physical health. The doctor will take a blood pressure reading which 
-              complies with DVLA criteria and conduct a visual acuity test using a DVLA approved Snellen 
-              chart.</p>
-              <h2 class="mt-5 mb-5">What you need to bring to the medical?</h2>
-              <ul>
-                <li>Medical Form (specific to your company). We can provide standard forms</li>
-                <li>Photo ID</li>
-                <li>Your driving glasses/contact lenses & prescription</li>
-                <li>Details of any ongoing medical conditions plus any medication you are taking</li>
-                <li>Medical records where required</li>
-              </ul>
-              <h2 class="mt-5 mb-5">What to do after the medical?</h2>
-              <p class="text-break mt-5">Please submit your completed application forms to your employer.</p>
-          </div>
+<div class="arrange">
+  <div class="container">
+      <div class="lowcost-texts">
+          <h1>Pre-Employment</h1>
+          <p class="text-break mt-5">A number of employers now request for a certificate of fitness to be 
+          provided by an individual when starting a new role. Our doctors conduct pre-employment 
+          medicals according to strict DVLA group 2 medical standards. Please bring along any form 
+          which needs to be completed by the doctor.</p>
       </div>
-    </div>
-
-    <div class="lowcost">
-      <div class="container">
-        <div class="comply-texts">
-          <h1>Motorhome Driver Medical</h1>
-          <p class="text-break mt-5 mb-5">For drivers who passed their driving tests prior to 1997, you 
-          will be required to undergo a medical from the age of 70 in order to retain your C1 entitlements 
-          for another 3 years. All other drivers require a medical to obtain C1 provisional licence 
-          which allows you to train and pass the test to drive a motorhome weighing over 3.5 tonne.</p>
+      <div class="range-texts">
           <h2 class="mt-5 mb-5">What will happen at the medical?</h2>
           <p class="text-break fw-bold mt-5 mb-5">Our doctors will confirm your identity and conduct a full 
           D4 medical during your appointment.</p>
           <p class="text-break mt-5 mb-5">Your medical will include a thorough medical history and an 
-          assessment of your physical health.The doctor will take a blood pressure reading which 
+          assessment of your physical health. The doctor will take a blood pressure reading which 
           complies with DVLA criteria and conduct a visual acuity test using a DVLA approved Snellen 
           chart.</p>
           <h2 class="mt-5 mb-5">What you need to bring to the medical?</h2>
@@ -96,121 +67,150 @@
             <li>Medical records where required</li>
           </ul>
           <h2 class="mt-5 mb-5">What to do after the medical?</h2>
-          <p class="text-break mt-5">Please send your completed application forms (D4 form and D2 form) 
-          to the DVLA using the return envelope provided.</p>
-        </div>
+          <p class="text-break mt-5">Please submit your completed application forms to your employer.</p>
       </div>
-    </div>
+  </div>
+</div>
 
-    <div class="arrange">
-      <div class="container">
-        <div class="arrange-text">
-            <h1>Forklift Medical</h1>
-            <p class="text-break">Operating a forklift is a quite strenuous and FLT medicals are necessary 
-            to ensure that the forklift operator is fit to carry our their duties safely. Forklift 
-            medicals include a thorough medical assessment conducted by a GMC registered medical doctor.</p>
-        </div>
-        <div class="comply-texts">
-            <h2 class="mt-5 mb-5">What will happen at the medical?</h2>
-            <p class="text-break fw-bold mt-5 mb-5">Our doctors will confirm your identity and conduct a full 
-            D4 medical during your appointment.</p>
-            <p class="text-break mt-5 mb-5">Your medical will include a thorough medical history and an 
-            assessment of your physical health.The doctor will take a blood pressure reading which 
-            complies with DVLA criteria and conduct a visual acuity test using a DVLA approved Snellen 
-            chart.</p>
-            <h2 class="mt-5 mb-5">What you need to bring to the medical?</h2>
-            <ul>
-              <li>Medical Form (specific to your company). We can provide standard forms</li>
-              <li>Photo ID</li>
-              <li>Your driving glasses/contact lenses & prescription</li>
-              <li>Details of any ongoing medical conditions plus any medication you are taking</li>
-              <li>Medical records where required</li>
-            </ul>
-            <h2 class="mt-5 mb-5">What to do after the medical?</h2>
-            <p class="text-break mt-5 mb-5">Please submit your completed application forms.</p>
-        </div>
+<div class="lowcost">
+  <div class="container">
+    <div class="lowcost-texts">
+      <h1>Motorhome Driver Medical</h1>
+      <p class="text-break mt-5 mb-5">For drivers who passed their driving tests prior to 1997, you 
+      will be required to undergo a medical from the age of 70 in order to retain your C1 entitlements 
+      for another 3 years. All other drivers require a medical to obtain C1 provisional licence 
+      which allows you to train and pass the test to drive a motorhome weighing over 3.5 tonne.</p>
+      <h2 class="mt-5 mb-5">What will happen at the medical?</h2>
+      <p class="text-break fw-bold mt-5 mb-5">Our doctors will confirm your identity and conduct a full 
+      D4 medical during your appointment.</p>
+      <p class="text-break mt-5 mb-5">Your medical will include a thorough medical history and an 
+      assessment of your physical health.The doctor will take a blood pressure reading which 
+      complies with DVLA criteria and conduct a visual acuity test using a DVLA approved Snellen 
+      chart.</p>
+      <div class="range-texts mt-5">
+        <h2 class="mb-5">What you need to bring to the medical?</h2>
+        <ul>
+          <li>Medical Form (specific to your company). We can provide standard forms</li>
+          <li>Photo ID</li>
+          <li>Your driving glasses/contact lenses & prescription</li>
+          <li>Details of any ongoing medical conditions plus any medication you are taking</li>
+          <li>Medical records where required</li>
+        </ul>
+        <h2 class="mt-5 mb-5">What to do after the medical?</h2>
+        <p class="text-break mt-5">Please send your completed application forms (D4 form and D2 form) 
+        to the DVLA using the return envelope provided.</p>
       </div>
+      
     </div>
+  </div>
+</div>
 
-    <div class="lowcost">
-      <div class="container">
-        <div class="comply-texts">
-          <h1>Motorsport Medicals</h1>
-          <p class="text-break mt-5 mb-5">You may require a Motorsport medical if you are applying for or 
-          renewing a National race or International competition licence. You must undertake a medical if 
-          you are over 60 or have previously declared a medical condition. We conduct these medicals in 
-          our clinics all over the UK.</p>
-          <h2 class="mt-5 mb-5">What will happen at the medical?</h2>
-          <p class="text-break fw-bold mt-5 mb-5">Our doctors will confirm your identity and conduct a full 
-          D4 medical during your appointment.</p>
-          <p class="text-break mt-5 mb-5">Your medical will include a thorough medical history and an 
-          assessment of your physical health. The doctor will take a blood pressure reading , conduct a 
-          colour perception test , a visual acuity test and a urine analysis. For international applicants, 
-          your doctor will also review your ECG during the assessment.</p>
-          <h2 class="mt-5 mb-5">What you need to bring to the medical?</h2>
-          <ul>
-            <li>Medical Form (specific to your company). We can provide standard forms</li>
-            <li>Photo ID</li>
-            <li>Your driving glasses/contact lenses & prescription</li>
-            <li>Details of any ongoing medical conditions plus any medication you are taking</li>
-            <li>Medical records where required</li>
-          </ul>
-          <h2 class="mt-5 mb-5">What to do after the medical?</h2>
-          <p class="text-break mt-5">Please submit your completed application forms.</p>
-        </div>
-      </div>
+<div class="arrange">
+  <div class="container">
+    <div class="lowcost-texts">
+        <h1>Forklift Medical</h1>
+        <p class="text-break">Operating a forklift is a quite strenuous and FLT medicals are necessary 
+        to ensure that the forklift operator is fit to carry our their duties safely. Forklift 
+        medicals include a thorough medical assessment conducted by a GMC registered medical doctor.</p>
     </div>
+    <div class="range-texts">
+        <h2 class="mt-5 mb-5">What will happen at the medical?</h2>
+        <p class="text-break fw-bold mt-5 mb-5">Our doctors will confirm your identity and conduct a full 
+        D4 medical during your appointment.</p>
+        <p class="text-break mt-5 mb-5">Your medical will include a thorough medical history and an 
+        assessment of your physical health.The doctor will take a blood pressure reading which 
+        complies with DVLA criteria and conduct a visual acuity test using a DVLA approved Snellen 
+        chart.</p>
+        <h2 class="mt-5 mb-5">What you need to bring to the medical?</h2>
+        <ul>
+          <li>Medical Form (specific to your company). We can provide standard forms</li>
+          <li>Photo ID</li>
+          <li>Your driving glasses/contact lenses & prescription</li>
+          <li>Details of any ongoing medical conditions plus any medication you are taking</li>
+          <li>Medical records where required</li>
+        </ul>
+        <h2 class="mt-5 mb-5">What to do after the medical?</h2>
+        <p class="text-break mt-5 mb-5">Please submit your completed application forms.</p>
+    </div>
+  </div>
+</div>
 
-    <div class="arrange">
-      <div class="container">
-        <div class="arrange-text">
-            <h1>Crane Operator Medical</h1>
-            <p class="text-break">Operating a crane is a quite strenuous and regular medicals are necessary 
-            to ensure that the crane operator is fit to carry our their duties safely. Crane operator 
-            medicals include a thorough medical assessment conducted by a GMC registered medical doctor.</p>
-        </div>
-        <div class="comply-texts">
-            <h2 class="mt-5 mb-5">What will happen at the medical?</h2>
-            <p class="text-break fw-bold mt-5 mb-5">Our doctors will confirm your identity and conduct a full 
-            D4 medical during your appointment.</p>
-            <p class="text-break mt-5 mb-5">Your medical will include a thorough medical history and an 
-            assessment of your physical health.The doctor will take a blood pressure reading which 
-            complies with DVLA criteria and conduct a visual acuity test using a DVLA approved Snellen 
-            chart.</p>
-            <h2 class="mt-5 mb-5">What you need to bring to the medical?</h2>
-            <ul>
-              <li>Medical Form (specific to your company). We can provide standard forms</li>
-              <li>Photo ID</li>
-              <li>Your driving glasses/contact lenses & prescription</li>
-              <li>Details of any ongoing medical conditions plus any medication you are taking</li>
-              <li>Medical records where required</li>
-            </ul>
-            <h2 class="mt-5 mb-5">What to do after the medical?</h2>
-            <p class="text-break mt-5">Please submit your completed application forms.</p>
-        </div>
+<div class="lowcost">
+  <div class="container">
+    <div class="lowcost-texts">
+      <h1>Motorsport Medicals</h1>
+      <p class="text-break mt-5 mb-5">You may require a Motorsport medical if you are applying for or 
+      renewing a National race or International competition licence. You must undertake a medical if 
+      you are over 60 or have previously declared a medical condition. We conduct these medicals in 
+      our clinics all over the UK.</p>
+      <div class="range-texts">
+        <h2 class="mt-5 mb-5">What will happen at the medical?</h2>
+        <p class="text-break fw-bold mt-5 mb-5">Our doctors will confirm your identity and conduct a full 
+        D4 medical during your appointment.</p>
+        <p class="text-break mt-5 mb-5">Medicals for drivers will include a thorough medical history and an assessment of your physical health.
+          The doctor will take a blood pressure reading , conduct a colour perception test , a visual acuity test and a urine analysis.
+          For international applicants, your doctor will also review your ECG during the assessment.</p>
+        <h2 class="mt-5 mb-5">What you need to bring to the medical?</h2>
+        <ul>
+          <li>Medical Form (specific to your company). We can provide standard forms</li>
+          <li>Photo ID</li>
+          <li>Your driving glasses/contact lenses & prescription</li>
+          <li>Details of any ongoing medical conditions plus any medication you are taking</li>
+          <li>Medical records where required</li>
+        </ul>
+        <h2 class="mt-5 mb-5">What to do after the medical?</h2>
+        <p class="text-break mt-5">Please submit your completed application forms.</p>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="end">
-      <div class="end-left">
-        <div class="hero7">
-          <img src="{%static 'display/img/hero7.jpg'%}" alt="">
-        </div>
-      </div>
-      <div class="end-right" style="background-color: #fff;">
-        <div class="end-texts">
-          <h1>Book Your Driver Medical Now</h1>
-          <p class="text-break">You can book your HGV/PCV medical easily by clicking the Book Now button 
-          below.</p>
-          <p class="text-break">Select your preferred date and time and we will send you an appointment 
-            confirmation after completing your booking. Your appointment confirmation will contain 
-            relevant information about your medical. Alternatively, you can call us on 020 3963 9083 to 
-            book your appointment.</p>
-          <div class="nav-end">
-              <a class="btn btn-lg" href="{%url 'display:booking'%}" role="button">Book Now</a>
-          </div>
-        </div>
+<div class="arrange">
+  <div class="container">
+    <div class="lowcost-texts">
+        <h1>Crane Operator Medical</h1>
+        <p class="text-break">Operating a crane is a quite strenuous and regular medicals are necessary 
+        to ensure that the crane operator is fit to carry our their duties safely. Crane operator 
+        medicals include a thorough medical assessment conducted by a GMC registered medical doctor.</p>
+    </div>
+    <div class="range-texts">
+        <h2 class="mt-5 mb-5">What will happen at the medical?</h2>
+        <p class="text-break fw-bold mt-5 mb-5">Our doctors will confirm your identity and conduct a full 
+        D4 medical during your appointment.</p>
+        <p class="text-break mt-5 mb-5">Your medical will include a thorough medical history and an 
+        assessment of your physical health.The doctor will take a blood pressure reading which 
+        complies with DVLA criteria and conduct a visual acuity test using a DVLA approved Snellen 
+        chart.</p>
+        <h2 class="mt-5 mb-5">What you need to bring to the medical?</h2>
+        <ul>
+          <li>Medical Form (specific to your company). We can provide standard forms</li>
+          <li>Photo ID</li>
+          <li>Your driving glasses/contact lenses & prescription</li>
+          <li>Details of any ongoing medical conditions plus any medication you are taking</li>
+          <li>Medical records where required</li>
+        </ul>
+        <h2 class="mt-5 mb-5">What to do after the medical?</h2>
+        <p class="text-break mt-5">Please submit your completed application forms.</p>
+    </div>
+  </div>
+</div>
+
+<div class="tend">
+  <div class="end-left">
+    <div class="hero7" style="background-image: url(static/display/img/hero7.jpg);">
+      <img src="{%static 'display/img/hero7.jpg'%}" alt="">
+    </div>
+  </div>
+  <div class="tend-right">
+    <div class="end-texts">
+      <h1>Book Your Driver Medical Now</h1>
+      <p class="text-break">You can book your driver medical easily by clicking the Book Now button below.</p>
+      <p class="text-break">Select your preferred date and time and we will send you an appointment confirmation after completing your booking. Your appointment confirmation will contain relevant information about your medical. Alternatively, you can call us on 020 3963 9083 to book your appointment.</p>
+      <div class="nav-end3">
+          <a class="btn btn-lg mt-5" href="{%url 'display:booking'%}" role="button">BOOK NOW</a>
       </div>
     </div>
+  </div>
+</div>
 
 {%endblock%}

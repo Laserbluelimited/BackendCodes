@@ -1,4 +1,3 @@
-import imp
 from django import forms
 from authentication.models import User
 from client_mgt.models import COMPANY_TYPE_CHOICES, GENDER_CHOICES, TITLE_CHOICES, CorporateClient, InternetClient
@@ -42,10 +41,12 @@ class CorporateClientRegistrationForm(forms.ModelForm):
     address = forms.CharField(required=True)
     pur_system = forms.ChoiceField(required=True,choices=[(True, 'Yes'), (False, 'No')])
     sub_newsletter = forms.ChoiceField(required=True,choices=[(True, 'Yes'), (False, 'No')])
+    postal_code = forms.CharField(required=False)
+    city = forms.CharField(required=False)
     #clientmodel
     class Meta:
         model = CorporateClient
-        exclude = ['id', 'user', 'slug','address', 'city', 'long', 'lat', 'country', 'sub_newsletter', 'pur_system', 'postal_code']
+        exclude = ['id', 'user', 'slug','address', 'long', 'lat', 'country', 'sub_newsletter', 'pur_system', ]
 
 
     def clean_email(self):
@@ -54,11 +55,4 @@ class CorporateClientRegistrationForm(forms.ModelForm):
             raise forms.ValidationError('Email already exists')
         return email
 
-    def clean_address(self):
-        address = self.cleaned_data['address']
-        if geo_data.get_geodata(address) is not None:
-            pass
-        else:
-            raise forms.ValidationError("Invalid Address")
-        return address
 

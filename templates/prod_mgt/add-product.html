@@ -40,7 +40,7 @@
                                                         <label style="color: red;">{{error}}</label>
                                                         {%endfor%}<br>
                                                         <label for="productname">Description</label>
-                                                        <textarea  required name="description" type="text" rows="2" class="form-control" placeholder="e.g. Taxi/Private Medical"></textarea>
+                                                        <textarea  name="description" type="text" rows="2" class="form-control" placeholder="e.g. Taxi/Private Medical"></textarea>
                                                     </div>
 
                                                     <div class="mb-3">
@@ -48,14 +48,14 @@
                                                         <label style="color: red;">{{error}}</label>
                                                         {%endfor%}<br>
                                                         <label for="productname">Meta Keywords</label>
-                                                        <input  required name="meta_keywords" type="text" class="form-control" placeholder="e.g. drivers,beach">
+                                                        <input   name="meta_keywords" type="text" class="form-control" placeholder="e.g. drivers,beach">
                                                     </div>
                                                     <div class="mb-3">
                                                         {%for error in form.meta_description.errors%}
                                                         <label style="color: red;">{{error}}</label>
                                                         {%endfor%}<br>
                                                         <label for="productname">Meta Description</label>
-                                                        <input  required name="meta_description" type="text" class="form-control" placeholder="">
+                                                        <input  name="meta_description" type="text" class="form-control" placeholder="">
                                                     </div>
                                                 </div>
         

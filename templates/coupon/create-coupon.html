@@ -1,0 +1,242 @@
+{% extends 'partials-actual/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <!-- select2 css -->
+    <link href="{% static 'libs/select2/dist/css/select2.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'%}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'libs/@chenfengyuan/datepicker/dist/datepicker.min.css'%}" type="text/css" />
+{% endblock %}
+{% block contents %}
+
+            <form method="post" action="{%url 'portal:create-coupon'%}">
+                    {%csrf_token%}
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+    
+                                    <h4 class="card-title">Create Coupon</h4>
+                                    <p class="card-title-desc"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+        
+                                        <h4 class="card-title">Allowed Users</h4>
+                                        <p class="card-title-desc"></p>
+        
+                                        {%if form.errors%}
+                                        <p><label style="color: red;">All Users: {{form.all_users.errors}}</label></p>
+                                        {%endif%}<br>
+                                            <div class="row">
+                                
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label for="productname">All Users</label>
+                                                        <p>If yes, all users will be legible to use this coupon </p>
+                                                        <select class="form-control select2" name="all_users">
+                                                            <option value="False" selected>No</option>
+                                                            <option value="True">Yes</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="productname">All Corporate Users</label>
+                                                        <p>If yes, all corporate users will be legible to use this coupon </p>
+                                                        <select class="form-control select2" name="all_cor_users">
+                                                            <option value="False" selected>No</option>
+                                                            <option value="True">Yes</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label for="productname">All Individual Users</label>
+                                                        <p>If yes, all indidvidual users will be legible to use this coupon </p>
+                                                        <select class="form-control select2" name="all_ind_users">
+                                                            <option value="False" selected>No</option>
+                                                            <option value="True" >Yes</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="productname">Users</label>
+                                                        <p>Select Users</p>
+                                                        <div class="mb-3">
+    
+                                                            <select class="select2 form-control select2-multiple"
+                                                                multiple="multiple" data-placeholder="Choose ..." name="users">
+                                                                {%for i in form.users.field.choices%}
+                                                                    <option value="{{i.0}}">{{i.1}}</option>
+                                                                {%endfor%}
+                                                            </select>
+    
+                                                        </div>
+                                                        </div>
+                                                </div> 
+                                                </div>       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+        
+                                        <h4 class="card-title">Max Uses</h4>
+                                        <p class="card-title-desc"></p>
+        
+                                        {%for error in form.errors%}
+                                        <p><label style="color: red;">{{error}}</label></p>
+                                        {%endfor%}<br>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label for="productname">Maximum Usage</label>
+                                                        <p>Total number of coupons available</p>
+                                                        <input class="form-control" name="max_uses" type="number">
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="productname">Infinite Usage</label>
+                                                        <p>If yes, number of coupons will be infinite</p>
+                                                        <select class="form-control select2" name="is_infinite">
+                                                            <option value="False" selected>No</option>
+                                                            <option value="True" >Yes</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label for="productname">Uses per user</label>
+                                                        <p>Number of uses per user</p>
+                                                        <input class="form-control" name="max_uses" type="number">
+                                                    </div>
+
+                                                </div>    
+                                            </div>    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+        
+                                        <h4 class="card-title">Validity Rule</h4>
+                                        <p class="card-title-desc"></p>
+        
+                                        {%for error in form.errors%}
+                                        <p><label style="color: red;">{{error}}</label></p>
+                                        {%endfor%}<br>
+                                        <div class="row">
+                                
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label>Expiration Date</label>
+                                                        <p>Date of expiration?</p>
+                                                            <input type="date" class="form-control" name="expiration_date" placeholder="Expiration" />
+                                                    </div>
+        
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label for="productname">Is active</label>
+                                                        <p>Should currently be active?</p>
+                                                        <select class="form-control select2" name="is_active">
+                                                            <option value="False" selected>No</option>
+                                                            <option value="True" >Yes</option>
+                                                        </select>
+                                                    </div>
+
+                                                </div> 
+                                            </div>       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+        
+                                        <h4 class="card-title">Coupon</h4>
+                                        <p class="card-title-desc"></p>
+        
+                                        {%for error in form.errors%}
+                                        <p><label style="color: red;">{{error}}</label></p>
+                                        {%endfor%}<br>
+                                            <div class="row">
+                                
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label>Coupon Code</label>
+                                                        <input type="text" class="form-control" name="code" />
+                                                        </div>
+                                                    </div>
+        
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label for="productname">Discount %</label>
+                                                        <input type="number" class="form-control" name="discount_per" />
+
+                                                    </div>
+
+                                                </div> 
+                                            </div>       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="d-flex flex-wrap gap-2">
+                            <button type="submit" class="btn btn-primary waves-effect waves-light" style="background-color:#015668; border-color: #015668;">Save Changes</button>
+                            <input type="reset" class="btn btn-secondary waves-effect waves-light" value="Cancel">
+                        </div>
+        </form>
+                        <!-- end row -->
+{% endblock %}
+
+{% block extra_javascript %}
+    <!-- select 2 plugin -->
+    <script src="{% static 'libs/select2/dist/js/select2.min.js' %}"></script>
+    <!-- <script src="{% static 'libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'%}"></script>
+    <script src="{% static 'libs/@chenfengyuan/datepicker/dist/datepicker.min.js'%}"></script> -->
+
+    <!-- form advanced init -->
+    <!-- <script src="{% static 'js/pages/form-advanced.init.js'%}"></script> -->
+    <script>
+        $(document).ready(function(){
+            $('.select2').select2()
+        })
+    </script>
+    <!-- dropzone plugin -->
+      
+
+{% endblock %}
+
+

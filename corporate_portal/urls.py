@@ -13,6 +13,8 @@ urlpatterns = [
     path('<slug>/booking', views.BookAppointmentView.as_view(), name='booking'),
     path('<slug>/appointment/ajax/filter-dates', views.getDates, name='filter-dates'),
     path('<slug>/appointment/ajax/filter-times', views.getTimes, name='filter-times'),
+    path('<slug>/appointment/ajax/redeem', views.redeem_coupon, name='redeem'),
+
     path('<slug>/checkout', views.CheckoutView.as_view(), name='checkout'),
     path('<slug>/success',stripe.PaymentSuccessView.as_view(), name='payment-sucess' ),
     path('<slug>/cancel',stripe.PaymentCancelView.as_view(), name='payment-sucess' ),

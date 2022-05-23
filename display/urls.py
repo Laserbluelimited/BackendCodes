@@ -6,7 +6,7 @@ from payment import stripe
 
 app_name='display'
 
-
+ 
 urlpatterns = [
     path('', views.HomePageView.as_view(), name='home-page'),
     path('about', views.AboutPageView.as_view(), name="about-page"),
@@ -16,7 +16,6 @@ urlpatterns = [
     path('taximedical', views.TaxiPageView.as_view(), name='taxi'),
     path('other-medical-services', views.OtherServicesPageView.as_view(), name='other'),
     path('omedicals', views.OmedicalsPageView.as_view(), name='omedicals'),
-    # path('contact-us', views.ContactUsPageView.as_view(), name='contact-us'),
     path('business/', views.BusinessClientsPageView.as_view(), name='business-clients'),
     path('faq', views.FAQPage.as_view(), name='faq'),
     path('contact', views.ContactPage.as_view(), name='contact'),
@@ -27,7 +26,9 @@ urlpatterns = [
     path('cancel', booking_views.BacktoBookingView.as_view(), name='cancel-booking'),
     path('booking/ajax/filter-dates', views.getDates, name='ajax-dates'),
     path('booking/ajax/filter-times', views.getTimes, name="ajax-times"),
+    path('booking/ajax/redeem', views.redeem_coupon, name="redeem"),
     path('business/application', client_mgt_views.CorporateClientRegistrationWebView.as_view(), name='bus-application'),
+    path('business/<slug>/message', client_mgt_views.FulfilCorporateRegistration.as_view(), name='message'),
     path('business/dashboard', views.CorporateDashboardView.as_view(), name='dashboard'),
     path('payment-success', stripe.PaymentSuccessView.as_view(), name='payment-success'),
     path('payment-cancel', stripe.PaymentCancelView.as_view(), name='payment-cancel'),

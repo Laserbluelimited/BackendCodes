@@ -1,81 +1,65 @@
 {%extends 'display/base.html'%}{%load static%}{%block content%}
     
-    <div class="body">
-            <div class="hero11">
-                <img src="{%static 'display/img/hero9.jpg'%}" alt="">
-            </div>
-            <div class="mbody-texts">
-                <div class="mtext-content">
-                  <h1>HGV/PCV & Bus Medicals</h1>
-                  <div class="nav-end">
-                    <a class="btn btn-lg" href="{%url 'display:booking'%}" role="button">Book Instantly</a>
-                  </div>
-                </div>
-            </div>
-    </div>
-
-    <div class="lowcost">
-        <div class="container">
-            <div class="comply-texts">
-                <h1>Low Cost Taxi & Private Hire Medicals</h1>
-                <p class="text-break fw-bold">Taxi and Private Hire drivers must pass a medical assessment before they receive a licence to operate.</p>
-                <p class="text-break">We have been approved by a number of councils to provide taxi medicals across the UK. Most councils require doctors
-                to have access to your full medical records in order to determine whether you meet the current group 2 DVLA standards. It is essential 
-                that your doctor has your full medical history in order to conduct a thorough medical assessment and determine your fitness to drive.</p>
-                <p class="text-break">Depending on your councils requirements we might be unable to carry out your taxi medical if you fail to provide
-                your full medical history on the day of your appointment.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="arrange">
-      <div class="container">
-          <div class="arrange-text">
-              <h1>How to arrange your medical?</h1>
-              <p class="text-break">HGV AND PCV drivers require medicals throughout their career.</p>
-          </div>
-          <div class="comply-texts">
-            <h2>How to arrange your medical?</h2>
-            <ul>
-              <li>Taxi Medical Form</li>
-              <li>Driving license or passport</li>
-              <li>Driving glasses and recent prescription from optician</li>
-              <li>List of current medication including dose and start date</li>
-              <li>Any relevant hospital notes and discharge summaries</li>
-              <li>Full Medical Records – Required by most Councils (Anyone can request from their GP)</li>
-            </ul>
-              <h2>What will happen at the medical?</h2>
-              <p class="text-break">Our doctors will confirm your identity and conduct a full D4 medical during your appointment.</p>
-              <p class="text-break">Your medical will include a thorough medical history and an assessment of your physical health.
-              The doctor will take a blood pressure reading which complies with DVLA criteria and conduct a visual acuity test using
-              a DVLA approved Snellen chart.</p>
-              <h2>What to do after the medical?</h2>
-              <p class="text-break">Please submit your completed application forms to your council. Kindly refer to your councils 
-              website for information on how to submit your application.</p>
-          </div>
-      </div>
-    </div>
-
-    <div class="end">
-      <div class="end-left">
-        <div class="hero10">
-          <img src="{%static 'display/img/hero10.jpg'%}" alt="">
+<div class="body pb-5">
+  <div class="hero9">
+  </div>
+  <div class="mbody-texts">
+      <div class="mtext-content">
+        <h1>Taxi Driver Medicals</h1>
+        <div class="nav-end2 mt-3">
+          <a class="btn btn-lg" href="{%url 'display:booking'%}" role="button">Book Instantly</a>
         </div>
       </div>
-      <div class="end-right" style="background-color: #fff;">
-        <div class="end-texts">
-          <h1>Book Your Driver Medical Now</h1>
-          <p class="text-break">You can book your HGV/PCV medical easily by clicking the Book Now button 
-          below.</p>
-          <p class="text-break">Select your preferred date and time and we will send you an appointment 
-            confirmation after completing your booking. Your appointment confirmation will contain 
-            relevant information about your medical. Alternatively, you can call us on 020 3963 9083 to 
-            book your appointment.</p>
-          <div class="nav-end">
-              <a class="btn btn-lg" href="{%url 'display:booking'%}" role="button">Book Now</a>
-          </div>
-        </div>
-      </div>
-    </div>
+  </div>
+</div>
+
+<div class="lowcost">
+<div class="container">
+  <div class="lowcost-texts">
+      <h1>Low Cost Taxi & Private Hire Medicals</h1>
+      <p class="text-break fw-bold mt-5">Taxi and Private Hire drivers must pass a taxi driver medical assessment before they receive a licence to operate.</p>
+      <p class="text-break mt-5 mb-5">We have been approved by a number of councils to provide taxi medicals across the UK. Most councils require doctors
+      to have access to your full medical records in order to determine whether you meet the current group 2 DVLA standards. It is essential 
+      that your doctor has your full medical history in order to conduct a thorough medical assessment and determine your fitness to drive.</p>
+      <p class="text-break">Depending on your councils requirements we might be unable to carry out your taxi medical if you fail to provide
+      your full medical history on the day of your appointment.</p>
+  </div>
+  <div class="range-texts mt-5">
+    <h2 class="mb-5">What you need to bring to the medical?</h2>
+    <ul class="pb-3">
+      <li class="mt-3">Taxi Medical Form</li>
+      <li class="mt-3">Driving license or passport</li>
+      <li class="mt-3">Proof of Address (Bank Statement or Utility Bill)</li>
+      <li class="mt-3">Driving glasses and recent prescription from optician</li>
+      <li class="mt-3">List of current medication including dose and start date</li>
+      <li class="mt-3">Any relevant hospital notes and discharge summaries</li>
+      <li class="mt-3">Full Medical Records - Required by most Councils (Anyone can request from their GP)</li>
+    </ul>
+      <h2 class="mt-5">What will happen at the medical?</h2>
+      <p class="text-break mt-5 fw-bold">Our doctors will confirm your identity and conduct a full D4 medical during your appointment.</p>
+      <p class="text-break mt-5">Taxi driver medicals will include a thorough medical history and an assessment of your physical health. The doctor will take a blood pressure reading which complies with DVLA criteria and conduct a visual acuity test using a DVLA approved Snellen chart.</p>
+      <h2 class="mt-5">What to do after the medical?</h2>
+      <p class="text-break mt-5">Please submit your completed application forms to your council. Kindly refer to your councils website for information on how to submit your application.</p>
+  </div>
+</div>
+</div>
+
+<div class="end">
+<div class="end-left">
+<div class="hero7" style="background-image: url(static/display/img/hero10.png);">
+<img src="{%static 'display/img/hero10.png'%}" alt="">
+</div>
+</div>
+<div class="end-right">
+<div class="end-texts">
+<h1>Book Your Taxi Medical Now</h1>
+<p class="text-break">You can book your Taxi driver medicals easily by clicking the Book Now button.</p>
+<p class="text-break">Select your preferred date and time and we will send you an appointment confirmation after completing your booking. Your appointment confirmation will contain relevant information about your medical. Alternatively, you can call us on 020 3963 9083 to book your appointment.</p>
+<div class="nav-end3">
+    <a class="btn btn-lg mt-5" href="{%url 'display:booking'%}" role="button">BOOK NOW</a>
+</div>
+</div>
+</div>
+</div>
 
 {%endblock%}

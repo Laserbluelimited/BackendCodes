@@ -32,9 +32,10 @@ GENDER_CHOICES = (
 )
 
 COMPANY_TYPE_CHOICES =(
-    ('miss', 'Miss'),
-    ('mr', 'Mr.'),
-    ('mrs', 'Mrs.'),
+    ('Sole Trader', 'Sole Trader'),
+    ('Limited Company', 'Limited Company'),
+    ('Partnership', 'Partnership'),
+    ('LLP', 'LLP')
 )
 PREFERRED_MODE_CHOICES =  (
     ('agender', 'Agender'),
@@ -122,6 +123,7 @@ class CorporateClient(models.Model):
     nature_of_business = models.CharField('nature_of_business', max_length=255, null=True)
     industry_sector = models.CharField('industry_sector', max_length=100)
     vat_reg_no = models.CharField('vat_reg_no', max_length=255)
+    main_contact_name = models.CharField('main_contact_name', max_length=100)
     main_contact_number = models.CharField('company_phone', max_length=20, unique=True)
     main_contact_email = models.EmailField('company_email', unique=True)
     no_of_employees = models.IntegerField('no_of_employees')
@@ -136,10 +138,10 @@ class CorporateClient(models.Model):
     avg_no_order = models.IntegerField('avg_no_order', null=True)
     pur_system = models.BooleanField('pur_order_sys')
     bill_name = models.CharField('billing_name', max_length=255, null=True)
-    bill_phone = models.IntegerField('billing_phone', null=True)
+    bill_phone = models.CharField('billing_phone', null=True, max_length=15)
     bill_email = models.EmailField('company_email', null=True)
     auth_prsnl_name = models.CharField('auth_personel_name', max_length=100, null=True)
-    preferred_mode = models.CharField('preferred_mode', max_length=100, choices=PREFERRED_MODE_CHOICES)
+    # preferred_mode = models.CharField('preferred_mode', max_length=100, choices=PREFERRED_MODE_CHOICES)
     sub_newsletter = models.BooleanField('sub_newsletter', default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

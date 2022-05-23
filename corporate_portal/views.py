@@ -9,8 +9,6 @@ from .forms import AddDriverFormSet, LoginForm,BaseBookingFormSet, LocationForm,
 from client_mgt.models import InternetClient, CorporateClient
 from clinic_mgt.managers import AddressRequest
 from django.forms import formset_factory
-from django import forms
-from prod_mgt.models import Product
 from django.http import JsonResponse, HttpResponseForbidden
 import datetime
 from schedules.models import ScheduleDates, TimeSlots
@@ -18,8 +16,8 @@ from booking.models import CCart, CorporateAppointment, increment_capp_no, CCInv
 from . import cart
 from client_mgt.forms import CorporateClientRegistrationForm, InternetClientRegistrationForm
 from payment import stripe
-from payment.models import Payment
-from skote.settings import DEFAULT_PASSWORD
+from coupon.models import Coupon
+from coupon.validations import validate_coupon
 
 
 
@@ -121,7 +119,7 @@ class AddDriverView(LoginRequiredMixin, GroupRequiredMixin, View):
             for i in instances:
                 i.cor_comp = company
                 i.save()
-            return redirect('corporate_portal:dashboard', slug=company.slug)
+            return redirect('corporate_portal:driver-list', slug=company.slug)
         return render(request, self.template_name, context={'company':company, 'form_set':formset, 'annoying':enumerate(formset)})
         
 
@@ -445,3 +443,23 @@ def del_driver(request, slug, driver):
         }
     return JsonResponse(response_data)
 
+def redeem_coupon(request, slug):
+    company = get_object_or_404(CorporateClient, slug=slug)
+    if 'cor_cart_id' in request.session:
+        cart = CCart.objects.get(cart_id=request.session['cor_cart_id'])
+        if cart.coupon_val >=1:
+            return JsonResponse({'message':'Used!','valid':False, 'new_price':cart.get_price()})
+
+        coupon_code = request.GET.get('coupon_code')
+        coupon = Coupon.objects.get(code=coupon_code)
+        new_price = round(coupon.get_discounted_value(cart.get_price()), 2)
+        user = company.user
+        val_message = validate_coupon(coupon_code=coupon_code, user=user)
+        response_data = {'message':val_message['message'], 'valid':val_message['valid'], 'new_price':new_price}
+
+        if val_message['valid']==True:
+            cart.coupon = coupon
+            cart.discounted_price = new_price
+            cart.coupon_val +=1
+            cart.save()
+        return JsonResponse(response_data)

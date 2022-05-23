@@ -1,4 +1,5 @@
 import stripe
+import json
 from skote.settings import STRIPE_API_KEY
 from django.shortcuts import redirect, render
 from booking.models import ICOrders, Cart, ICInvoice, CCOrders, CCart, CCInvoice, CorporateAppointment
@@ -13,8 +14,8 @@ from e_mail import send
 stripe.api_key = STRIPE_API_KEY
 
 
-# DOMAIN='http://127.0.0.1:8000' 
-DOMAIN='http://13.40.3.25'
+DOMAIN='http://127.0.0.1:8000' 
+# DOMAIN='http://13.40.3.25'
 
 
 
@@ -60,7 +61,7 @@ class PaymentSuccessView(View):
         if 'cart_id' in request.session:
             del request.session['cart_id']
             request.session.modified = True
-        if session['metadata']['corporate']:
+        if  'corporate' in session['metadata']:
             company = CorporateClient.objects.get(main_contact_email=email)
         if 'cor_cart_id' in request.session:
             del request.session['cor_cart_id']
@@ -114,7 +115,7 @@ def fulfill_order(session):
         #update appointment status, update client status, update time slot status
 
         cart = Cart.objects.get(cart_id=session_object['metadata']['cart_id'])
-        order_obj = ICOrders.objects.create(client=cart.client, appointment=cart.appointment, product=cart.product, total_price=session_object['amount_total'], payment_status=session_object['payment_status'], order_medium='website', payment_medium='stripe', cart=cart)
+        order_obj = ICOrders.objects.create(client=cart.client, appointment=cart.appointment, product=cart.product, total_price=session_object['amount_total'], payment_status=session_object['payment_status'], order_medium='website', payment_medium='stripe', cart=cart, coupon=cart.coupon)
         payment_obj = Payment.objects.create(order_id=order_obj.order_number, stripe_session_id=session_id, status=session_object['payment_status'], total_amount=session_object['amount_total'])
         invoice=ICInvoice.objects.create(order_id=order_obj.id, payment_id=payment_obj.id)
 
@@ -123,8 +124,17 @@ def fulfill_order(session):
             cart.client.update_status(1)
             cart.appointment.time_slot.update_status(2)
             cart.save()
-
+ 
             #send email
+            send_mail = send.SendgridClient(session_object['customer_email'])
+            send_mail.set_template_id('d-e9b30a0fdeea4643ab2ce254c6fdffe5')
+            send_mail.set_template_data({'order_number':order_obj.order_number, 'address':order_obj.appointment.time_slot.schedule.clinic.address, 
+            'city':order_obj.appointment.time_slot.schedule.clinic.city, 'postal_code':order_obj.appointment.time_slot.schedule.clinic.postal_code, 'first_name':order_obj.client.first_name,
+            'date':str(order_obj.appointment.get_date()), 'time':str(order_obj.appointment.get_start_time()), 'product':order_obj.get_product(),
+             'doctor_name':order_obj.appointment.get_doctor(), 'actual_price':str(order_obj.product.price), 'discount_value':str((order_obj.product.price*100)-session_object['amount_total']),
+             'price':(session_object['amount_total']/100)})
+            send_mail.send()
+
             #delete cart
         
         else:
@@ -159,7 +169,7 @@ def cccheckout_stripe(cart_id):
                 'product_data': {
                     'name':"Compliance Medical Appointments"
                 },
-                'unit_amount':int((cart_id.price*100)/(cart_id.get_quantity()))
+                'unit_amount':int((cart_id.get_price*100)/(cart_id.get_quantity()))
             },
             'quantity':cart_id.get_quantity(),
             
@@ -214,8 +224,7 @@ def fulfill_corporate_order(session):
         cart = CCart.objects.get(cart_id=session_object['metadata']['cart_id'])
         app_obj = CorporateAppointment.objects.filter(appointment_no=cart.appointment)
         order_no = increment_order_number()
-        for i in app_obj:
-            order_obj = CCOrders.objects.create(order_number=order_no, c_client=cart.client,d_client=i.client,quantity=cart.quantity, appointment=cart.appointment, total_price=session_object['amount_total'], payment_status=session_object['payment_status'], order_medium='website', payment_medium='stripe')
+        order_obj = CCOrders.objects.create(order_number=order_no, c_client=cart.client,d_client=i.client,quantity=cart.quantity, appointment=cart.appointment, total_price=session_object['amount_total'], payment_status=session_object['payment_status'], order_medium='website', payment_medium='stripe', coupon=cart.coupon)
         payment_obj = Payment.objects.create(order_id=order_no, stripe_session_id=session_id, status=session_object['payment_status'], total_amount=session_object['amount_total'])
         invoice=CCInvoice.objects.create(order=order_no, payment=payment_obj)
 

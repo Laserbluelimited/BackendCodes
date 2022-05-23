@@ -9,6 +9,8 @@ from clinic_mgt.managers import AddressRequest
 from authentication.models import User
 from skote.settings import DEFAULT_PASSWORD
 from django.contrib.auth.models import Group
+from e_mail import send
+from e_mail.models import E_mail
 
 # Create your views here.
 
@@ -25,6 +27,8 @@ def id_increment(model, initial):
     else:
         new_id = last_value.id + 1
     return new_id
+
+
 
 
 #to display list of internet clients
@@ -86,7 +90,7 @@ class InternetClientRegistrationView(LoginRequiredMixin,PermissionRequiredMixin,
             address_class = AddressRequest()
             geodata = address_class.get_geodata(address)
 
-            user_obj = User.objects.create_user(email=email, password=DEFAULT_PASSWORD)
+            user_obj = User.objects.create_user(email=email,is_activated=True, password=DEFAULT_PASSWORD)
 
             client_obj = form.save(commit=False)
             client_obj.id = id_increment(InternetClient, 1120000)
@@ -137,17 +141,18 @@ class CorporateClientRegistrationView(LoginRequiredMixin,PermissionRequiredMixin
             address_class = AddressRequest()
             geodata = address_class.get_geodata(address)
 
-            user_obj = User.objects.create_user(email=email, password=DEFAULT_PASSWORD)
+            user_obj = User.objects.create_user(email=email,is_activated=True, password=DEFAULT_PASSWORD)
 
             company_obj = form.save(commit=False)
             company_obj.user = user_obj
             company_obj.id = id_increment(CorporateClient, 1140000)
             company_obj.address = address
-            company_obj.long = geodata['longitude']
-            company_obj.lat = geodata['latitude']
-            company_obj.city = geodata['city']
-            company_obj.postal_code = geodata['postal_code']
-            company_obj.country=geodata['country']
+            if geodata is not None:
+                company_obj.long = geodata['longitude']
+                company_obj.lat = geodata['latitude']
+                company_obj.city = geodata['city']
+                company_obj.postal_code = geodata['postal_code']
+                company_obj.country=geodata['country']
             company_obj.sub_newsletter = form.cleaned_data['sub_newsletter']
             company_obj.pur_system = form.cleaned_data['pur_system']
 
@@ -184,8 +189,6 @@ class InternetDetailView(LoginRequiredMixin,PermissionRequiredMixin, View):
 
 #web views
 class CorporateClientRegistrationWebView(View):
-    login_url = '/auth/login'
-    redirect_field_name = 'redirect_to'
     form_class = CorporateClientRegistrationForm
 
     def get(self, request):
@@ -197,8 +200,7 @@ class CorporateClientRegistrationWebView(View):
         form = self.form_class(request.POST)
         group = Group.objects.get(name='Corporate group')
         clients = CorporateClient.objects.all()
-        for i in form.errors:
-            print(i)
+        print(form.errors)
 
         if form.is_valid():
             #if form is valid, do the following:
@@ -220,20 +222,28 @@ class CorporateClientRegistrationWebView(View):
             company_obj.user = user_obj
             company_obj.id = id_increment(CorporateClient, 1140000)
             company_obj.address = address
-            company_obj.long = geodata['longitude']
-            company_obj.lat = geodata['latitude']
-            company_obj.city = geodata['city']
-            company_obj.postal_code = geodata['postal_code']
-            company_obj.country=geodata['country']
+            if geodata is not None:
+                company_obj.long = geodata['longitude']
+                company_obj.lat = geodata['latitude']
+                company_obj.city = geodata['city']
+                company_obj.postal_code = geodata['postal_code']
+                company_obj.country=geodata['country']
             company_obj.sub_newsletter = form.cleaned_data['sub_newsletter']
             company_obj.pur_system = form.cleaned_data['pur_system']
 
             user_obj.save()
             company_obj.save()
             group.user_set.add(user_obj)
-            return redirect('display:home-page')
+            email_content = E_mail.objects.get(email_id='DMEMA0000001')
+            response = send.send_message_one(to=company_obj.main_contact_email, html_content=email_content.body_html,text_content=email_content.body_txt, subject=email_content.subject, context={'company':company_obj})
+            print(response.body)
+            return redirect('display:message', slug=company_obj.slug)
         return render(request, 'display/application.html', context={'clients':clients, 'form':form})
 
+class FulfilCorporateRegistration(View):
+    def get(self, request, slug):
+        company = get_object_or_404(CorporateClient, slug=slug)
+        return render(request, 'display/message.html', context={'company':company})
 
 class InternetClientEdit(LoginRequiredMixin,PermissionRequiredMixin,View):
     login_url = '/auth/login'

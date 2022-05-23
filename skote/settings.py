@@ -1,6 +1,7 @@
 
 
 import os
+import dotenv
 from pathlib import Path
 from decouple import config
 from django.contrib.messages import constants as messages
@@ -17,13 +18,14 @@ MESSAGE_TAGS = {
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+dotenv_file = os.path.join(BASE_DIR, '.env')
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'd!m50t)w$$&ff(*pn7%oqw-1yxo+eub*xcxd^8pzo=*2)ynq=w'
-
+SECRET_KEY= os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -53,6 +55,7 @@ INSTALLED_APPS = [
     'payment',
     'e_mail',
     'corporate_portal',
+    'coupon',
     # Third Party App
     'crispy_forms',
     'django.contrib.sites',
@@ -65,6 +68,7 @@ INSTALLED_APPS = [
     'stripe',
     'tinymce',
     'sendgrid',
+    
 ]
 
 AUTH_USER_MODEL = 'authentication.User'
@@ -223,10 +227,10 @@ ACCOUNT_EMAIL_REQUIRED = True
 # ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
-GEOAPIFY_API_KEY = "d4641924f0854b1bbd807ee57d602c8d"
+GEOAPIFY_API_KEY = os.environ['GEOAPIFY_API_KEY']
 
-DEFAULT_PASSWORD = "drivermedicals"
+DEFAULT_PASSWORD = os.environ['DEFAULT_PASSWORD']
 
-STRIPE_API_KEY = 'sk_test_51KfF8SHQiFLHp4SA2oHWts22RDTHCuPh2CGs5Ry4kqMpUbp4z3rVX4IBiwMyIe7GElxRjGNserGeTu8EpRDypF4V00aXtdXyKT'
+STRIPE_API_KEY = os.environ['STRIPE_API_KEY']
 
-SENDGRID_API = 'kk'
+SENDGRID_API = os.environ['SENDGRID_API']

@@ -1,3 +1,4 @@
+from genericpath import exists
 from django import views
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
@@ -7,11 +8,13 @@ from clinic_mgt.models import Clinic
 from schedules.models import ScheduleDates, TimeSlots
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import OrderForm, CartForm, CartWebForm
-from .models import Appointment, Cart, ICOrders
+from .models import Appointment, Cart, ICOrders, CorporateAppointment, CCOrders
 import datetime
 from client_mgt.models import InternetClient
 from booking import cart
 from payment import stripe
+from authentication.models import User
+from skote.settings import DEFAULT_PASSWORD
 # Create your views here.
 
 
@@ -52,7 +55,8 @@ def book_appointment(model, time_slot, client, status=0, notes=None):
 
 
 
-#views
+# PORTAL VIEWS
+#TABLE VIEWS
 
 class AppointmentCalendarView(LoginRequiredMixin, View):
     login_url = '/auth/login'
@@ -70,14 +74,34 @@ class AppointmentTableView(LoginRequiredMixin, View):
     redirect_field_name = 'redirect_to'
     template_name ='orders/appointment-table.html' 
     def get(self, request):
-        appntments = Appointment.objects.all()
+        appntments = Appointment.objects.filter(status=1)
         paginator = Paginator(appntments, 5)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
         return render(request, self.template_name, context={'appointments':appntments, 'page_obj':page_obj})
  
+class CorporateAppointmentTableView(LoginRequiredMixin, View):
+    login_url = '/auth/login'
+    redirect_field_name = 'redirect_to'
+    template_name ='orders/cor-appointment-table.html' 
+    def get(self, request):
+        appntments = CorporateAppointment.objects.filter(status=1).order_by('created_at')
+        paginator = Paginator(appntments, 5)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
 
+        return render(request, self.template_name, context={'appointments':appntments, 'page_obj':page_obj})
+
+
+class CCOrderTableView(LoginRequiredMixin, View):
+    login_url = '/auth/login'
+    redirect_field_name = 'redirect_to'
+    template_name ='orders/cor-order-list.html' 
+    def get(self, request):
+        orders = CCOrders.objects.all().order_by('-id')
+
+        return render(request, self.template_name, context={'orders':orders})
 
 
 class ICOrderTableView(LoginRequiredMixin, View):
@@ -86,11 +110,8 @@ class ICOrderTableView(LoginRequiredMixin, View):
     template_name ='orders/order-list.html' 
     def get(self, request):
         orders = ICOrders.objects.all().order_by('-id')
-        paginator = Paginator(orders, 5)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
 
-        return render(request, self.template_name, context={'orders':orders, 'page_obj':page_obj})
+        return render(request, self.template_name, context={'orders':orders})
 
 class ICInvoiceView(LoginRequiredMixin, View):
     login_url = '/auth/login'
@@ -103,6 +124,8 @@ class ICInvoiceView(LoginRequiredMixin, View):
         app = order.appointment
         total = float(invoice.payment.total_amount)/100
         return render(request, self.template_name, context={'order':order, 'client':client,'total':total, 'invoice':invoice, 'app':app})
+
+#PLACE ORDER ADMIN VIEWS
 
 class ICPlaceOrderAdminView(LoginRequiredMixin, views.View):
     login_url = '/auth/login'
@@ -144,6 +167,7 @@ class ICPlaceOrderAdminView(LoginRequiredMixin, views.View):
         return render(request, self.template_name, context={'form':form})
 
 
+# ORDER FOR NON-CLIENTS
 
 class ICPlaceOrderView(LoginRequiredMixin, View):
     login_url = '/auth/login'
@@ -230,70 +254,10 @@ class ICOrderCheckoutView(View):
 
 
 
+#<===============================================================================================================================================>
 
 
-
-
-
-
-
-#ajax request
-
-def getDates(request):
-
-    """
-    This ajax request function basically returns dates available based on a particular location.
-    """
-    def gen():
-        """
-        This generator puts the dates in the format accepted by the bootstrap datepicker
-        """
-        for i in new_dates:
-            if i>= datetime.date.today():
-                m = i.strftime("%#d-%#m-%Y")
-                yield m
-
-
-    location = request.GET.get('clinic')
-    dates = ScheduleDates.objects.filter(clinic=location)
-    for i in dates:
-        if TimeSlots.objects.filter(schedule=i, status=0).exists()==False:
-            dates = dates.exclude(id=i.id)
-    new_dates = dates.values_list('date', flat=True).distinct()
-    date_list = list(gen())
-    response_data = {
-        'dates':date_list
-    }
-    return JsonResponse(response_data)
-
-def getTimes(request):
-
-    """
-    This ajax request function basically returns times available based on a particular location and date.
-    """
-    def gen():
-        for i in ScheduleDates.objects.filter(date=date, clinic=location):
-            for p in TimeSlots.objects.filter(schedule=i, status=0):
-                l = p.id
-                k =p.start_time.strftime('%H:%M') + ' - ' + p.end_time.strftime('%H:%M')
-                yield {"id":l, "time":k}
-    
-    location = request.GET.get('clinic')
-    date = request.GET.get('date')
-    date = datetime.datetime.strptime(date, '%m/%d/%Y').strftime('%Y-%m-%d')
-
-    time_obj = list(gen())
-    response_data = {
-        'times':time_obj
-    }
-    return JsonResponse(response_data)
-
-
-
-
-
-
-#web views
+#WEB VIEWS FOR INDIVIDUAL BOOKING
 
 class ICPlaceOrderWebView(View):
     login_url = '/auth/login'
@@ -339,8 +303,11 @@ class ICPlaceOrderWebView(View):
                 if InternetClient.objects.filter(email=email).exists():
                     client_obj = InternetClient.objects.get(email=email)
                 else:
-                    client_obj = InternetClient.objects.create(id=id_increment(InternetClient, 1120000),status=0, first_name=first_name, phone=phone, last_name=last_name, email=email)
-
+                    if not User.objects.filter(email=email).exists():
+                        user_obj = User.objects.create_user(email=email, password=DEFAULT_PASSWORD)
+                    else:
+                        user_obj = None
+                    client_obj = InternetClient.objects.create(id=id_increment(InternetClient, 1120000),status=0, first_name=first_name, phone=phone, last_name=last_name, email=email, user=user_obj)
                 #3
                 sche_obj = TimeSlots.objects.get(id=time_slot)
                 app_obj = book_appointment(Appointment, time_slot=sche_obj, status=0, client=client_obj)
@@ -393,3 +360,56 @@ class ICOrderWebCheckoutView(View):
 
 
 
+
+#<=======================================================================================================================================>
+
+#ajax requests
+
+def getDates(request):
+
+    """
+    This ajax request function basically returns dates available based on a particular location.
+    """
+    def gen():
+        """
+        This generator puts the dates in the format accepted by the bootstrap datepicker
+        """
+        for i in new_dates:
+            if i>= datetime.date.today():
+                m = i.strftime("%#d-%#m-%Y")
+                yield m
+
+
+    location = request.GET.get('clinic')
+    dates = ScheduleDates.objects.filter(clinic=location)
+    for i in dates:
+        if TimeSlots.objects.filter(schedule=i, status=0).exists()==False:
+            dates = dates.exclude(id=i.id)
+    new_dates = dates.values_list('date', flat=True).distinct()
+    date_list = list(gen())
+    response_data = {
+        'dates':date_list
+    }
+    return JsonResponse(response_data)
+
+def getTimes(request):
+
+    """
+    This ajax request function basically returns times available based on a particular location and date.
+    """
+    def gen():
+        for i in ScheduleDates.objects.filter(date=date, clinic=location):
+            for p in TimeSlots.objects.filter(schedule=i, status=0):
+                l = p.id
+                k =p.start_time.strftime('%H:%M') + ' - ' + p.end_time.strftime('%H:%M')
+                yield {"id":l, "time":k}
+    
+    location = request.GET.get('clinic')
+    date = request.GET.get('date')
+    date = datetime.datetime.strptime(date, '%m/%d/%Y').strftime('%Y-%m-%d')
+
+    time_obj = list(gen())
+    response_data = {
+        'times':time_obj
+    }
+    return JsonResponse(response_data)

@@ -10,6 +10,7 @@ from client_mgt import views as client_views
 from booking import views as booking_views
 from payment import stripe as payment_views
 from e_mail import views as email_views
+from coupon import views as coup_views
 
 app_name='portal'
 
@@ -57,7 +58,9 @@ urlpatterns = [
     path('payment-success', payment_views.PaymentSuccessView.as_view(), name='payment-success'),
     path('payment-cancel', payment_views.PaymentCancelView.as_view(), name='payment-cancel'),
     path('icorder-list', booking_views.ICOrderTableView.as_view(), name='icorder-list'),
+    path('cor-corder-list', booking_views.CCOrderTableView.as_view(), name='ccorder-list'),
     path('appointment-table', booking_views.AppointmentTableView.as_view(), name='app-tab'),
+    path('corporate/appointment-table', booking_views.CorporateAppointmentTableView.as_view(), name='cor-app-tab'),
     path('invoice/<slug>', booking_views.ICInvoiceView.as_view(), name='invoice'),
     path('appointment-calendar', booking_views.AppointmentCalendarView.as_view(), name='app-cal'),
     path('appointment/ajax/filter-dates', booking_views.getDates, name='ajax-dates'),
@@ -66,7 +69,13 @@ urlpatterns = [
     #email
     path('email-home', email_views.EmailHomeView.as_view(), name='email-home'),
     path('email-create', email_views.CreateEmailView.as_view(), name='email-create'),
-    path('email-edit/<slug>', email_views.EditEmailView.as_view(), name='email-edit')
+    path('email-edit/<slug>', email_views.EditEmailView.as_view(), name='email-edit'),
+
+
+    #coupon
+    path('coupon/create', coup_views.CreateCouponView.as_view(), name='create-coupon'),
+    path('coupon/view-table', coup_views.CouponTableView.as_view(), name='coupon-list'),
+
 
 
 

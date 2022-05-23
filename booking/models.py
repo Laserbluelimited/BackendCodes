@@ -126,7 +126,7 @@ class Appointment(models.Model):
         return self.time_slot.schedule.date
 
     def get_doctor(self):
-        return self.time_slot.schedule.doctor
+        return 'Dr. '+self.time_slot.schedule.doctor.first_name+' '+self.time_slot.schedule.doctor.last_name
 
     def get_clinic(self):
         return self.time_slot.schedule.clinic
@@ -155,6 +155,7 @@ class ICOrders(models.Model):
     payment_medium = models.CharField('payment_medium', max_length=30, choices=[('stripe','stripe'),('transfer','transfer')])
     fulfilled = models.BooleanField('fulfilled', default=False)
     cart = models.OneToOneField('Cart', on_delete=models.CASCADE, null=True)
+    coupon = models.ForeignKey('coupon.Coupon', on_delete=models.SET_NULL, null=True)
 
 
     def save(self, *args, **kwargs):
@@ -174,7 +175,7 @@ class ICOrders(models.Model):
         return self.appointment
     
     def get_product(self):
-        return self.product
+        return self.product.name_of_prod
 
     def get_client(self):
         return self.client
@@ -208,6 +209,9 @@ class Cart(models.Model):
     appointment = models.ForeignKey('Appointment', on_delete=models.CASCADE)
     product = models.ForeignKey('prod_mgt.Product', on_delete=models.CASCADE)
     quantity = models.IntegerField('quantity', default=1)
+    coupon = models.ForeignKey('coupon.Coupon', on_delete=models.SET_NULL, null=True)
+    discounted_price = models.DecimalField('price', max_digits=9, decimal_places=2, default=-9999)
+    coupon_val = models.IntegerField('no_of_redeem', default=0)
 
     def __str__(self):
         return self.cart_id
@@ -231,7 +235,9 @@ class Cart(models.Model):
         return self.appointment.time_slot.schedule.clinic.city
 
     def get_price(self):
-        return self.product.price
+        if self.discounted_price <1:
+            return self.product.price
+        return self.discounted_price
 
     def get_email(self):
         return self.client.email
@@ -362,7 +368,6 @@ class CCOrders(models.Model):
     order_number = models.CharField('order_number', max_length=20)
     appointment = models.CharField('appointment_number', max_length=20)
     c_client = models.ForeignKey('client_mgt.CorporateClient', on_delete=models.CASCADE)
-    d_client = models.ForeignKey('client_mgt.InternetClient', on_delete=models.CASCADE)
     placed_at = models.DateTimeField(auto_now_add=True)
     quantity = models.IntegerField('quantity', default=1)
     total_price = models.IntegerField('total_price')
@@ -370,6 +375,7 @@ class CCOrders(models.Model):
     order_medium = models.CharField('order_medium', max_length=30, choices=[('portal','portal'),('website','website')])
     payment_medium = models.CharField('payment_medium', max_length=30, choices=[('stripe','stripe'),('transfer','transfer')])
     fulfilled = models.BooleanField('fulfilled', default=False)
+    coupon = models.ForeignKey('coupon.Coupon', on_delete=models.SET_NULL, null=True)
 
 
 
@@ -390,7 +396,8 @@ class CCOrders(models.Model):
     #     return self.product
 
     def get_client(self):
-        return self.d_client
+        return self.c_client
+
 
     def get_date_placed(self):
         return self.placed_at
@@ -421,6 +428,9 @@ class CCart(models.Model):
     appointment = models.CharField('appointment_no', max_length=20)
     quantity = models.IntegerField('quantity')
     price = models.IntegerField('total_price')
+    coupon = models.ForeignKey('coupon.Coupon', on_delete=models.SET_NULL, null=True)
+    discounted_price = models.DecimalField('price', max_digits=9, decimal_places=2, default=-9999)
+    coupon_val = models.IntegerField('no_of_redeem', default=0)
 
     def __str__(self):
         return self.cart_id
@@ -446,6 +456,8 @@ class CCart(models.Model):
     # def get_city(self):
     #     return self.appointment.time_slot.schedule.clinic.city
 
-    # def get_price(self):
-    #     return self.product.price
+    def get_price(self):
+        if self.discounted_price>=0:
+            return self.discounted_price
+        return self.price
 

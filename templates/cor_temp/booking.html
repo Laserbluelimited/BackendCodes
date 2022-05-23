@@ -3,7 +3,6 @@
 {% block css%}
 {% include 'cor_partials/css.html' %}
 {% endblock %}
-
 {% block contents %}
                         <div class="row">
                             <div class="col-12">
@@ -22,7 +21,7 @@
 
                                             <label class="col-md-2 col-form-label">Location</label>
                                             <div class="col-md-10">
-                                                <select class="form-select" name="location" id="location">
+                                                <select class=" select2 form-select" name="location" id="location">
                                                     <option>Select</option>
                                                     {%for choice in l_form.location.field.choices%}
                                                     <option value="{{choice.0}}">{{choice.1}}</option>
@@ -126,5 +125,13 @@
         <!-- Plugins js -->
         <script src="{%static 'libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'%}"></script>
 
+        <script src="{% static 'libs/select2/dist/js/select2.min.js' %}"></script>
+        <script>
+            $(document).ready(function(){
+                $('.select2').select2()
+            })
+        </script>
         <script src="{%static 'js/save-later.js'%}"></script>
-        {% endblock %}
+
+{% endblock %}
+

@@ -85,7 +85,7 @@
                                     function delete_form(e){
                                         console.log('k')
                                         if (window.confirm('Are you sure you want to delete?')){
-                                        m=e.parentNode.parentNode.parentNode.parentNode
+                                        m=e.parentNode.parentNode.parentNode
                                         m.remove()
                                         total.setAttribute('value', `${formnum-1}`)
                                         }

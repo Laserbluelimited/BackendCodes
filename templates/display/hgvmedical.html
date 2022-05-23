@@ -1,78 +1,74 @@
 {%extends 'display/base.html'%}{%load static%}{%block content%}
 
-    <div class="body">
-            <div class="hero11">
-                <img src="{%static 'display/img/hero8.jpeg'%}" alt="">
-            </div>
-            <div class="mbody-texts">
-                <div class="mtext-content">
-                  <h1>HGV/PCV & Bus Medicals</h1>
-                  <div class="nav-end">
-                    <a class="btn btn-lg" href="{% url 'display:booking'%}" role="button">Book Instantly</a>
-                  </div>
-                </div>
-            </div>
-    </div>
-
-    <div class="lowcost">
-        <div class="container">
-            <div class="comply-texts">
-                <h1>Low Cost HGV/PCV & Bus Medical including free Eye Test</h1>
-                <p class="text-break">HGV AND PCV drivers require medicals throughout their career.</p>
-                <h2>New Drivers</h2>
-                <p class="text-break">You need a medical to obtain your provisional license.</p>
-                <h2>45 years and older</h2>
-                <p class="text-break">You need a medical every 5 years until the age of 65.</p>
-                <h2>65 years and older</h2>
-                <p class="text-break">You need a medical annually from the the age of 65.</p>
-            </div>
+<div class="body pb-5">
+  <div class="hero8">
+  </div>
+  <div class="hgv-texts">
+      <div class="hgv-text">
+        <h1>HGV Medical/PCV Medical & Bus Medicals</h1>
+        <div class="nav-end2 mt-3">
+          <a class="btn btn-lg" href="{%url 'display:booking'%}" role="button">Book Instantly</a>
         </div>
-    </div>
+      </div>
+  </div>
+</div>
+  
 
-    <div class="arrange">
+  <div class="lowcost">
       <div class="container">
-          <div class="arrange-text">
-              <h1>How to arrange your medical?</h1>
-              <p class="text-break">HGV AND PCV drivers require medicals throughout their career.</p>
-          </div>
-          <div class="comply-texts">
-            <h2>What you need to bring to the medical?</h2>
-            <ul>
-              <li>D4 Medical form <a href="">(Click To Download Form)</a></li>
-              <li>Driving license or passport</li>
-              <li>Driving glasses and recent prescription from optician</li>
-              <li>List of current medication including dose and start date</li>
-              <li>Any relevant hospital notes and discharge summaries</li>
-            </ul>
-              <h2>What will happen at the medical?</h2>
-              <p class="text-break">Our doctors will confirm your identity and conduct a full D4 medical during your appointment.</p>
-              <p class="text-break">Your medical will include a thorough medical history and an assessment of your physical health. The doctor will take a blood pressure reading which complies with DVLA criteria and conduct a visual acuity test using a DVLA approved Snellen chart.</p>
-              <h2>What to do after the medical?</h2>
-              <p class="text-break">Please send your completed application forms (D4 form and D2 form) to the DVLA using the return envelope provided.</p>
+          <div class="lowcost-texts p-5">
+              <h1>Low Cost HGV/PCV & Bus Medical including free Eye Test</h1>
+              <p class="text-break mt-4 mb-4">HGV AND PCV drivers require HGV medical throughout their career.
+              <h2>New Drivers</h2>
+              <p class="text-break mt-4 mb-4">You need a medical to obtain your provisional license.</p>
+              <h2>45 years and older</h2>
+              <p class="text-break mt-4 mb-4">You need a medical every 5 years until the age of 65.</p>
+              <h2>65 years and older</h2>
+              <p class="text-break mt-4">You need a medical annually from the the age of 65.</p>
           </div>
       </div>
-    </div>
+  </div>
 
-    <div class="end">
-      <div class="end-left">
-        <div class="hero7">
-          <img src="{%static 'display/img/hero7.jpg'%}" alt="">
+  <div class="arrange">
+    <div class="container">
+        <div class="lowcost-texts">
+            <h1>How to arrange your HGV medical?</h1>
+            <p class="text-break mt-4">You can book your HGV/PCV medical easily by clicking the Book Now button.</p>
         </div>
+        <div class="range-texts mt-5">
+          <h2 class="mb-5">What you need to bring to the medical?</h2>
+          <ul class="pb-3">
+            <li class="mt-3">D4 Medical form - <a href=""> Download Here</a></li>
+            <li class="mt-3">Driving license or passport</li>
+            <li class="mt-3">Driving glasses and recent prescription from optician</li>
+            <li class="mt-3">List of current medication including dose and start date</li>
+            <li class="mt-3">Any relevant hospital notes and discharge summaries</li>
+          </ul>
+            <h2 class="mt-5">What will happen at the medical?</h2>
+            <p class="text-break mt-5">Our doctors will confirm your identity and conduct a full D4 medical during your appointment.</p>
+            <p class="text-break mt-5">Your medical will include a thorough medical history and an assessment of your physical health. The doctor will take a blood pressure reading which complies with DVLA criteria and conduct a visual acuity test using a DVLA approved Snellen chart.</p>
+            <h2 class="mt-5">What to do after the medical?</h2>
+            <p class="text-break mt-5">Please send your completed application forms (D4 form and D2 form) to the DVLA using the return envelope provided.</p>
+        </div>
+    </div>
+  </div>
+
+  <div class="end">
+    <div class="end-left">
+      <div class="hero7" style="background-image: url(static/display/img/hero7.jpg);">
+        <img src="{%static 'display/img/hero7.jpg'%}" alt="">
       </div>
-      <div class="end-right" style="background-color: #fff;">
-        <div class="end-texts">
-          <h1>Book Your Driver Medical Now</h1>
-          <p class="text-break">You can book your HGV/PCV medical easily by clicking the Book Now button 
-          below.</p>
-          <p class="text-break">Select your preferred date and time and we will send you an appointment 
-            confirmation after completing your booking. Your appointment confirmation will contain 
-            relevant information about your medical. Alternatively, you can call us on 020 3963 9083 to 
-            book your appointment.</p>
-          <div class="nav-end">
-              <a class="btn btn-lg" href="{%url 'display:booking'%}" role="button">Book Now</a>
-          </div>
+    </div>
+    <div class="end-right">
+      <div class="end-texts">
+        <h1>Book Your HGV Medical Now</h1>
+        <p class="text-break">You can book your HGV/PCV driver medicals easily by clicking the Book Now button.</p>
+        <p class="text-break">Select your preferred date and time and we will send you an appointment confirmation after completing your booking. Your appointment confirmation will contain relevant information about your medical. Alternatively, you can call us on 020 3963 9083 to book your appointment.</p>
+        <div class="nav-end3">
+            <a class="btn btn-lg mt-5" href="{%url 'display:booking'%}" role="button">BOOK NOW</a>
         </div>
       </div>
     </div>
+  </div>
 
 {%endblock%}

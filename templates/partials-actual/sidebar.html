@@ -72,7 +72,7 @@
           </a>
             <ul class="sub-menu" aria-expanded="false">
               <li><a href="{% url 'portal:icorder-list' %}" key="t-default" class="dash_text">Individual Orders</a></li>
-              <li><a key="t-default" class="dash_text">Corporate Orders</a></li>
+              <li><a href="{% url 'portal:ccorder-list' %}" key="t-default" class="dash_text">Corporate Orders</a></li>
             </ul>
         </li>
 
@@ -83,27 +83,28 @@
           </a>
             <ul class="sub-menu" aria-expanded="false">
             <li><a href="{% url 'portal:app-tab' %}" key="t-default" class="dash_text">Individual</a></li>
-            <li><a  key="t-default"class="dash_text" >Corporate</a></li>
+            <li><a  href="{% url 'portal:cor-app-tab' %}" key="t-default"class="dash_text" >Corporate</a></li>
             </ul>
         </li>
 
 
-        <li>
-          <a href="javascript: void(0);" class="waves-effect">
-            <i class="bx bx-home-circle"></i>
-            <span key="t-dashboards" class="dash_text">Invoice</span>
-          </a>
-            <ul class="sub-menu" aria-expanded="false">
-              <li><a href="{% url 'portal:icorder-list' %}" key="t-default" class="dash_text">Individual</a></li>
-              <li><a key="t-default" class="dash_text">Corporate </a></li>
-            </ul>
-        </li>
     
         
         <li>
           <a href="{%url 'portal:email-home'%}" class="waves-effect">
             <i class="bx bx-home-circle"></i>
            <span key="t-dashboards" class="dash_text">Emails</span>
+          </a>
+            <!-- <ul class="sub-menu" aria-expanded="false">
+              <li><a href="{% url 'portal:icorder-list' %}" key="t-default">Individual Orders</a></li>
+              <li><a key="t-default">Corporate Orders</a></li>
+            </ul> -->
+        </li>
+
+        <li>
+          <a href="{%url 'portal:create-coupon'%}" class="waves-effect">
+            <i class="bx bx-home-circle"></i>
+           <span key="t-dashboards" class="dash_text">Coupon</span>
           </a>
             <!-- <ul class="sub-menu" aria-expanded="false">
               <li><a href="{% url 'portal:icorder-list' %}" key="t-default">Individual Orders</a></li>

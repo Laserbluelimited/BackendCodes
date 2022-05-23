@@ -4,6 +4,9 @@ from schedules.models import ScheduleDates, TimeSlots
 import datetime
 from clinic_mgt.models import Clinic
 from django.http import JsonResponse
+from booking.models import Cart
+from coupon.validations import validate_coupon
+from coupon.models import Coupon
 # Create your views here.
 class HomePageView(View):
     def get(self, request):
@@ -123,3 +126,24 @@ def getTimes(request):
         'times':time_obj
     }
     return JsonResponse(response_data)
+
+def redeem_coupon(request):
+    if 'cart_id' in request.session:
+        cart = Cart.objects.get(cart_id=request.session['cart_id'])
+        if cart.coupon_val >=1:
+            return JsonResponse({'message':'Used!','valid':False, 'new_price':cart.get_price()})
+
+        coupon_code = request.GET.get('coupon_code')
+        coupon = Coupon.objects.get(code=coupon_code)
+        new_price = coupon.get_discounted_value(cart.get_price())
+        user = cart.client.user
+        val_message = validate_coupon(coupon_code=coupon_code, user=user)
+        response_data = {'message':val_message['message'], 'valid':val_message['valid'], 'new_price':new_price}
+
+        if val_message['valid']==True:
+            cart.coupon = coupon
+            cart.discounted_price = new_price
+            cart.coupon_val +=1
+            cart.save()
+        return JsonResponse(response_data)
+

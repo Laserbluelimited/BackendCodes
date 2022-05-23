@@ -5,7 +5,7 @@ from .models import Product
 
 
 class AddProductForm(forms.ModelForm):
-    descripton = forms.CharField(required=False)
+    description = forms.CharField(required=False)
     meta_keywords = forms.CharField(required=False)
     meta_description = forms.CharField(required=False)
 

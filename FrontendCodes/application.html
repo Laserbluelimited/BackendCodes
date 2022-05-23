@@ -83,8 +83,10 @@
                 <h2 class="mb-3">Section 1: Company Details</h2>
                 <div class="col-sm-6">
                   <label for="name" class="form-label">Company Name</label>
-                  <input type="text" class="form-control" id="name" placeholder="" value="" required>
-                  <div class="invalid-feedback">Valid Company name is required.</div>
+                  <input type="text" class="form-control" id="name" placeholder="" value="" name="company_name" required>
+                  {%for error in form.company_name.errors%}
+                  <div class="invalid-feedback" style="display: block;">{{error}}</div>
+                  {%endfor%}
                 </div>
               
                 <div class="col-sm-6">
@@ -283,7 +285,7 @@
                   appointments if you book by email/phone)</label>
                   <input type="text" class="form-control fs-4" id="text" placeholder="" value="" required>
                 </div>
-  
+   
               </div>
   
               <div class="row g-5">

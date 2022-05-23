@@ -50,8 +50,12 @@ assets
                                                                             {%endfor%}
                                                                             <tr>
                                                                                 <td colspan="3">
-                                                                                    <div class="bg-primary bg-soft p-3 rounded">
-                                                                                        <h5 class="font-size-14 text-primary mb-0"><i class="fas fa-shipping-fast me-2"></i> Shipping <span class="float-end">Free</span></h5>
+                                                                                    <div class="">
+                                                                                        <p id="message" style="color: #015668;"></p>
+                                                                                    </div>
+                                                                                    <div class="input-group mt-3">
+                                                                                        <input type="text" class="form-control" id="code" placeholder="Coupon">
+                                                                                        <button class="btn btn-success" id="redeem" type="button" style="background-color: #015668; border-color: #015668;">Redeem</button>
                                                                                     </div>
                                                                                 </td>
                                                                             </tr>
@@ -60,7 +64,7 @@ assets
                                                                                     <h6 class="m-0 text-end">Total:</h6>
                                                                                 </td>
                                                                                 <td>
-                                                                                    ${{basket.price}}
+                                                                                    <span id="price_container">${{basket.get_price}}</span>
                                                                                 </td>
                                                                             </tr>
                                                                         </tbody>
@@ -80,7 +84,7 @@ assets
                                             </div> <!-- end col -->
                                             <div class="col-sm-6">
                                                 <div class="text-end">
-                                                    <button type="submit" class="btn btn-success">
+                                                    <button type="submit" class="btn btn-success" style="background-color: #015668; border-color: #015668;">
                                                         <i class="mdi mdi-truck-fast me-1"></i> Proceed to Payment</button>
                                                 </div>
                                             </div> <!-- end col -->
@@ -95,8 +99,35 @@ assets
 
 
 {% block extra_javascript %}
-    <script src="{% static 'libs/select2/dist/js/select2.min.js' %}"></script>
+<script>
+    var redeem_btn = document.getElementById('redeem');
+    var code = document.getElementById('code');
+    redeem_btn.addEventListener('click', function(){
+        $.ajax({
+            type:'GET',
+            url:'appointment/ajax/redeem',
+            data:{
+                'coupon_code':code.value
+            },
+            dataType:'json',
+            success:function(response){
+                jQuery(function(){
+                    var message = response.message;
+                    var container = document.getElementById('message');
+                    container.innerHTML = message
+                    if (response.valid==true) {
+                        var price_container = document.getElementById('price_container');
+                        price_container.innerHTML = '£' + response.new_price;
+                    if(response.message=='Used!') {
+                        redeem_btn.disabled = true;
 
-    <!-- init js -->
-    <script src="{% static 'js/pages/ecommerce-select2.init.js' %}"></script>
+                    }
+                    }
+                })
+            }
+
+        })
+    })
+</script>
+    
 {% endblock %}

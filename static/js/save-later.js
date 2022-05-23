@@ -97,7 +97,7 @@ function filter_date(num){
 
             $(`#form-${num}-date`).datepicker({
               format:'mm/dd/yyyy',    beforeShowDay: function (date) {
-            var allDates = `${date.getDate()}`.padStart(2, 0) + '-' + `${date.getMonth() + 1}`.padStart(2,0)+ '-' + date.getFullYear();console.log(allDates)
+            var allDates = `${date.getDate()}`.padStart(2, 0) + '-' + `${date.getMonth() + 1}`.padStart(2,0)+ '-' + date.getFullYear();
             if(datesEnabled.indexOf(allDates) != -1)
             return true;
             else
@@ -168,7 +168,7 @@ function delete_form(e){
     }
     }
 
-document.getElementById('location').addEventListener("change", function (){
+        $('#location').on("change", function (){
             $('#repeater').load(window.location.href +" #repeater", function(){
                 filter_date(0);
                 $('input[name="form-0-date"]').on("change", function(){filter_time(0);})
