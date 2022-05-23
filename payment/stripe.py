@@ -1,5 +1,4 @@
 import stripe
-import json
 from skote.settings import STRIPE_API_KEY
 from django.shortcuts import redirect, render
 from booking.models import ICOrders, Cart, ICInvoice, CCOrders, CCart, CCInvoice, CorporateAppointment
@@ -14,8 +13,8 @@ from e_mail import send
 stripe.api_key = STRIPE_API_KEY
 
 
-DOMAIN='http://127.0.0.1:8000' 
-# DOMAIN='http://13.40.3.25'
+# DOMAIN='http://127.0.0.1:8000' 
+DOMAIN='http://13.40.3.25'
 
 
 
