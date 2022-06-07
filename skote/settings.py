@@ -218,7 +218,7 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 # login url
 LOGIN_URL = 'auth/login'
-SITE_ID = 3
+SITE_ID = 4
 
 # ACCOUNT_SIGNUP_REDIRECT_URL = "account_logout"
 ACCOUNT_LOGOUT_ON_GET= True
