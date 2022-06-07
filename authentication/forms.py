@@ -11,3 +11,5 @@ class LoginForm(forms.Form):
 
 
 
+class PasswordResetForm(forms.Form):
+    password = forms.CharField(required=True, max_length=50)

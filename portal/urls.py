@@ -52,7 +52,6 @@ urlpatterns = [
 
     #appointment
     path('place-icorder', booking_views.ICPlaceOrderAdminView.as_view(), name='place-order'),
-    path('test-order', booking_views.ICPlaceOrderView.as_view(), name='test-order'),
     path('test-checkout', csrf_exempt(booking_views.ICOrderCheckoutView.as_view()), name='test-checkout'),
     path('webhook', payment_views.my_webhook_view, name='stripe-webhook'),
     path('payment-success', payment_views.PaymentSuccessView.as_view(), name='payment-success'),

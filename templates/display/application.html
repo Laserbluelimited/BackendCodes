@@ -62,20 +62,10 @@
               </div>
               {%endfor%}
             </div>
-          
-            <div class="col-sm-6">
-              <label for="tel" class="form-label"> Main contact number </label>
-              <input type="tel" class="form-control" id="tel" placeholder="E.g. +1 300 400 5000" name="main_contact_number">
-              {%for error in form.main_contact_number.errors%}
-              <div class="invalid-feedback" style="display: block;">
-               {{error}}
-              </div>
-              {%endfor%}
-            </div>
-          
+                    
             <div class="col-sm-6">
               <label for="text" class="form-label">How many years has the business been trading</label>
-              <input type="text" class="form-control" id="text" placeholder="" name="no_of_years">
+              <input type="number" class="form-control" id="text" placeholder="" name="no_of_years">
               {%for error in form.no_of_years.errors%}
               <div class="invalid-feedback" style="display: block;">
                {{error}}
@@ -85,7 +75,7 @@
 
             <div class="col-sm-6">
               <label for="city" class="form-label">Number of employees</label>
-              <input type="city" class="form-control" id="city" placeholder="" name="no_of_employees">
+              <input type="number" class="form-control" id="city" placeholder="" name="no_of_employees">
               {%for error in form.no_of_employees.errors%}
               <div class="invalid-feedback" style="display: block;">
                {{error}}

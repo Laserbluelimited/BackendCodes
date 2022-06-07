@@ -33,7 +33,7 @@ def create_ruleset_obj(form):
     is_infinite = form.cleaned_data['is_infinite']
     uses_per_user = form.cleaned_data['uses_per_user']
 
-    if uses_per_user < 1:
+    if uses_per_user is None or uses_per_user<1:
         uses_per_user=1
 
 

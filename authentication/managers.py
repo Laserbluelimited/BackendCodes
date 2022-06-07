@@ -1,7 +1,4 @@
-from lib2to3.pytree import Base
 from django.contrib.auth.base_user import BaseUserManager
-from django.db.models import Manager
-import random
 from skote.settings import DEFAULT_PASSWORD
 
 class UserManager(BaseUserManager):
@@ -30,17 +27,3 @@ class UserManager(BaseUserManager):
 
 
 
-class GenerateUsername():
-
-    def __init__(self, seed, first_name):
-        self.seed = seed
-        self.first_name= first_name
-        random.seed(self.seed)
-
-    def generate_number(self):
-        self.number = random.randint(1111,9999)
-        return self.number
-    
-    def generate_username(self):
-        self.username = f'{self.first_name}{self.generate_number()}'
-        return self.username

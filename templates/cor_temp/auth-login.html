@@ -53,7 +53,11 @@
                             <div class="p-2">
                                 <form class="form-horizontal" method="post" action="{%url 'corporate_portal:login'%}">
                                     {% csrf_token %}
-    
+                                    {% for message in messages %}
+                                    <div class="alert {{ message.tags }} mb-4 text-center" role="alert">
+                                        <strong>{{message}}</strong>
+                                    </div>
+                                    {% endfor %} 
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Email</label>
                                         <input type="text" class="form-control" id="email" placeholder="Enter Email" name="email">

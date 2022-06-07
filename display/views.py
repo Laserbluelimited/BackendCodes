@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from booking.models import Cart
 from coupon.validations import validate_coupon
 from coupon.models import Coupon
+from authentication.models import User
 # Create your views here.
 class HomePageView(View):
     def get(self, request):
@@ -136,7 +137,7 @@ def redeem_coupon(request):
         coupon_code = request.GET.get('coupon_code')
         coupon = Coupon.objects.get(code=coupon_code)
         new_price = coupon.get_discounted_value(cart.get_price())
-        user = cart.client.user
+        user = User.objects.get(email=cart.client.email)
         val_message = validate_coupon(coupon_code=coupon_code, user=user)
         response_data = {'message':val_message['message'], 'valid':val_message['valid'], 'new_price':new_price}
 

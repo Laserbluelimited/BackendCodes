@@ -51,8 +51,9 @@ class CorporateClientRegistrationForm(forms.ModelForm):
 
     def clean_email(self):
         email = self.cleaned_data['main_contact_email']
-        if User.objects.filter(email=email).exists() or CorporateClient.object.filter(main_contact_email=email).exists():
+        if User.objects.filter(email=email).exists() or CorporateClient.objects.filter(main_contact_email=email).exists():
             raise forms.ValidationError('Email already exists')
         return email
+        
 
 

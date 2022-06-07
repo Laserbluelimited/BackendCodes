@@ -65,8 +65,9 @@ def validate_coupon(coupon_code, user):
 
     try:
         coupon_object = Coupon.objects.get(code=coupon_code)
-    except Coupon.DoesNotExist:
-        return assemble_invalid_message(message="Coupon does not exist!")
+    except:
+        if not Coupon.objects.get(code=coupon_code).exists():
+            return assemble_invalid_message(message="Coupon does not exist!")
 
     valid_allowed_users_rule = validate_allowed_users_rule(coupon_object=coupon_object, user=user)
     if not valid_allowed_users_rule:

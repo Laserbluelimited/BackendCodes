@@ -1,19 +1,16 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from django.urls import reverse_lazy
-from .forms import LoginForm
+from .forms import LoginForm, PasswordResetForm
 from django.contrib.auth import authenticate, login, logout
-
+from django.views.decorators.http import require_http_methods
+from .helpers import account_activation_token, generate_password
+from .models import User
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from django.utils.encoding import force_bytes, force_str
+from client_mgt.models import CorporateClient
+from django.contrib import messages
+from e_mail import send
 # Create your views here.
-
-def id_increment(model, initial):
-    last_value = model.objects.all().order_by('id').last()
-    if not last_value:
-        new_id = initial
-    else:
-        new_id = last_value.id + 1
-    return new_id
-
 
 # Authentication
 class AuthLoginView(View):
@@ -33,11 +30,43 @@ class AuthLoginView(View):
                 login(request, user)
                 return redirect('portal:dashboard')
             else:
-                print(form.errors)
+                messages.add_message(request, messages.WARNING, 'Email or password is invalid')
         return render(request, self.template_name, context={'form':form})
 
+@require_http_methods(["GET"])
+def activate_cor_user(request, uidb64, token):
+    """Check the activation token sent via mail."""
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist) as e:
+        messages.add_message(request, messages.WARNING, str(e))
+        user = None
+    if user is not None and account_activation_token.check_token(user, token):
+        if user.is_activated!=True:
+            user.is_activated = True  # now we're activating the user
+            user.save()
+            company = CorporateClient.objects.get(user=user)
+            return redirect('authentication:send-cor-pass-mail', slug=company.slug)
+        else:
+            messages.add_message(request, messages.SUCCESS, "Your account has been activated")
+            return redirect('corporate_portal:login')
+    else:
+        messages.add_message(request, messages.WARNING, "Having issues setting up your account? Contact support")
+        return redirect('corporate_portal:login')
 
-
+@require_http_methods(["GET"])
+def send_cor_password_mail(request, slug):
+    company = get_object_or_404(CorporateClient, slug=slug)
+    password = generate_password()
+    company.user.set_password(password)
+    company.user.save()
+    send_mail = send.SendgridClient(recipients=[company.user.email])
+    send_mail.set_template_id('d-16d58c90f9e742d6bb0f912342e960c8')
+    send_mail.set_template_data({'company_name':company.company_name, 'password':password})
+    send_mail.send()
+    messages.add_message(request, messages.SUCCESS, 'Your password has been sent to {}'.format(company.main_contact_email))
+    return redirect('corporate_portal:login')
 
 class AuthLogoutView(View):
     def get(self, request):

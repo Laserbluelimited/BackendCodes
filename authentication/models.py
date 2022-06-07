@@ -1,7 +1,6 @@
-from enum import unique
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from .managers import UserManager, GenerateUsername
+from .managers import UserManager
 
 
 
@@ -19,6 +18,7 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
+
 
 
 

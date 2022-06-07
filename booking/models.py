@@ -1,7 +1,4 @@
-from ast import mod
 from django.db import models
-
-# Create your models here.
 
 def increment_app_id():
     last_app = Appointment.objects.all().order_by('id').last()
@@ -14,7 +11,6 @@ def increment_app_id():
     formatted = (width - len(str(new_app_int))) * "0" + str(new_app_int)
     new_app_no = 'DMAPP' + str(formatted)
     return new_app_no  
-
 
 def increment_capp_id():
     last_app = CorporateAppointment.objects.all().order_by('id').last()
@@ -51,7 +47,6 @@ def increment_capp_no():
     formatted = (width - len(str(new_app_int))) * "0" + str(new_app_int)
     new_app_no = 'DMCPN' + str(formatted)
     return new_app_no
-
 
 def increment_invoice_number():
     last_invoice = ICInvoice.objects.all().order_by('id').last()
@@ -91,9 +86,16 @@ def increment_ico_id():
 
 
 
+#<===========================INDIVIDUAL CLIENT MODELS=======================================================================>
 
 
 class Appointment(models.Model):
+    """
+    client: individual client obj
+    notes: side notes
+    times_slot: timeslot obj
+    status: 0-not paid, 1-paid
+    """
     id = models.IntegerField('appointment_id', primary_key=True)
     appointment_id = models.CharField('appointment_id', max_length=20, default=increment_app_id)
     client = models.ForeignKey('client_mgt.InternetClient', on_delete=models.CASCADE)
@@ -110,15 +112,12 @@ class Appointment(models.Model):
         self.status = status
         self.save()
 
-
     def get_start_time(self):
         return self.time_slot.schedule.start_time
 
     def get_end_time(self):
         return self.time_slot.schedule.end_time
-    
 
-        
     def get_day_of_week(self):
         return self.time_slot.schedule.day_of_week
 
@@ -131,7 +130,6 @@ class Appointment(models.Model):
     def get_clinic(self):
         return self.time_slot.schedule.clinic
 
-
     def get_start_moment(self):
         return self.time_slot.schedule.start_time.isoformat()
 
@@ -142,6 +140,7 @@ class Appointment(models.Model):
 
 #internet client orders
 class ICOrders(models.Model):
+    
     id = models.AutoField('order_id', primary_key=True)
     order_number = models.CharField('order_number', max_length=20, default=increment_ico_id)
     client = models.ForeignKey('client_mgt.InternetClient', on_delete=models.CASCADE)

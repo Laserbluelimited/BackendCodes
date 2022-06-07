@@ -18,6 +18,7 @@ from client_mgt.forms import CorporateClientRegistrationForm, InternetClientRegi
 from payment import stripe
 from coupon.models import Coupon
 from coupon.validations import validate_coupon
+from django.contrib import messages
 
 
 
@@ -64,20 +65,22 @@ class AuthLoginView(View):
 
     def get(self , request):
         form = self.form_class()
+
         return render (request,self.template_name, context={'form':form})
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
+            print(email,password)
             user = authenticate(email=email, password=password)
-            if user is not None:
+            if user is not None and user.is_activated:
                 if user.groups.filter(name='Corporate group'):
                     login(request, user)
                     company = get_object_or_404(CorporateClient, user=user)
                     return redirect('corporate_portal:dashboard', slug = company.slug)
-            else:
-                print(form.errors)
+            elif user is None:
+                messages.add_message(request, messages.WARNING, 'Email or password is invalid')
         return render(request, self.template_name, context={'form':form})
 
 

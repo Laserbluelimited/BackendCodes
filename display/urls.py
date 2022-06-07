@@ -29,8 +29,10 @@ urlpatterns = [
     path('booking/ajax/redeem', views.redeem_coupon, name="redeem"),
     path('business/application', client_mgt_views.CorporateClientRegistrationWebView.as_view(), name='bus-application'),
     path('business/<slug>/message', client_mgt_views.FulfilCorporateRegistration.as_view(), name='message'),
+    path('business/<slug>/message/resend', client_mgt_views.ResendCorporateConfirmation.as_view(), name="resend-cor-confirm"),
     path('business/dashboard', views.CorporateDashboardView.as_view(), name='dashboard'),
     path('payment-success', stripe.PaymentSuccessView.as_view(), name='payment-success'),
     path('payment-cancel', stripe.PaymentCancelView.as_view(), name='payment-cancel'),
     path('webhook', stripe.my_webhook_view, name='stripe-webhook'),
+    path('payment/resend-email?session_id=<session_id>', stripe.resend_email, name='resend-email'),
 ]

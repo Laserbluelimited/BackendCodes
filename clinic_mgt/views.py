@@ -1,10 +1,7 @@
-from distutils.log import Log
-from webbrowser import get
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from django import forms
 from authentication.models import User
 from .models import Clinic, Doctor
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin

@@ -1,3 +1,7 @@
+#This cart module is for individual clients only!!
+
+
+
 import random
 from .models import Cart
 
@@ -33,6 +37,10 @@ def add_to_cart(request, client, appointment, product, quantity=1):
     return cart
 
 def delete_cart(request):
+    """
+    This will update the time slots and appointments to not paid
+    This will delete cart id from session
+    """
     if 'cart_id' in request.session:
         cart = Cart.objects.get(cart_id=request.session['cart_id'])
         cart.appointment.update_status(0)

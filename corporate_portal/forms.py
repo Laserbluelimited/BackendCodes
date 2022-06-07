@@ -3,6 +3,7 @@ from client_mgt.models import InternetClient
 from clinic_mgt.models import Clinic
 from prod_mgt.models import Product
 from django import forms
+from authentication.models import User
 
 AddDriverFormSet = modelformset_factory(InternetClient, fields=('first_name', 'last_name', 'email', 'phone'), extra=1)
 
@@ -10,6 +11,13 @@ AddDriverFormSet = modelformset_factory(InternetClient, fields=('first_name', 'l
 class LoginForm(forms.Form):
     email = forms.EmailField(required=True)
     password = forms.CharField(required=True, max_length=50)
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if not User.objects.filter(email=email).exists():
+            raise forms.ValidationError('This user does not exist')
+        return email
+
 
 class LocationForm(forms.Form):
     location = forms.ModelChoiceField(queryset=Clinic.objects.all())
