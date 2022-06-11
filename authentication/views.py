@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from .forms import LoginForm, PasswordResetForm
+from .forms import LoginForm, PasswordChangeForm
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.http import require_http_methods
 from .helpers import account_activation_token, generate_password
@@ -10,6 +10,8 @@ from django.utils.encoding import force_bytes, force_str
 from client_mgt.models import CorporateClient
 from django.contrib import messages
 from e_mail import send
+from django.contrib.auth.mixins import LoginRequiredMixin
+from corporate_portal.mixins import GroupRequiredMixin
 # Create your views here.
 
 # Authentication
@@ -73,3 +75,30 @@ class AuthLogoutView(View):
         logout(request)
         return redirect('display:home-page')
 
+class ChangeCorPassword(LoginRequiredMixin,GroupRequiredMixin, View):
+    login_url = '/business/login'
+    redirect_field_name = 'redirect_to'
+    group_required = [u'Corporate group']
+    form_class = PasswordChangeForm
+
+    def get(self, request, slug):
+        company = get_object_or_404(CorporateClient, slug=slug)
+        form = self.form_class()
+        return render(request, 'cor_temp/change-password.html', context={'form':form, 'company':company})
+
+    def post(self, request, slug):
+        company = get_object_or_404(CorporateClient, slug=slug)
+        form = self.form_class(request.POST)
+        print(form.errors)
+        if form.is_valid():
+            password = form.cleaned_data['password']
+
+            user = company.user
+            user.set_password(password)
+            user.save()
+            print('success')
+            messages.add_message(request, messages.SUCCESS, 'Your password has been changed')
+        else:
+            messages.add_message(request, messages.WARNING, 'Inputted passwords are not the same')
+            return render(request, 'cor_temp/change-password.html', context={'form':form, 'company':company})
+        return render(request, 'cor_temp/change-password.html', context={'form':form, 'company':company})
